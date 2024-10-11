@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/css/output.css" rel="stylesheet">
 </head>
 <body>
 <div class="header_seperator"></div>
