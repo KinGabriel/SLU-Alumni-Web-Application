@@ -39,7 +39,9 @@ nav a {
 }
 
 nav a:hover {
-    color: #3B82F6; 
+    text-decoration: underline;
+    text-decoration-color: #FBBF24;
+
 }
 
 .btn-login {
