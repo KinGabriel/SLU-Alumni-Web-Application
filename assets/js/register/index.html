@@ -1,0 +1,252 @@
+<style>
+    .registration-container {
+      background-color: #f4f6ff;
+      padding: 0 69px;
+      overflow: hidden;
+    }
+    .registration-content {
+      display: flex;
+      gap: 20px;
+    }
+    .left-column {
+      width: 50%;
+      position: relative;
+      min-height: 1080px;
+      color: #fff;
+      text-align: center;
+    }
+    .background-image {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    .overlay {
+      position: relative;
+      background-color: rgba(77, 87, 104, 0.45);
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      padding: 134px 80px;
+    }
+    .logo {
+      aspect-ratio: 1.06;
+      object-fit: contain;
+      width: 100%;
+      border-radius: 0;
+    }
+    .brand-container {
+      display: flex;
+      width: 431px;
+      max-width: 100%;
+      gap: 7px;
+      white-space: nowrap;
+      margin: 30px 0 0 45px;
+      font: 600 64px Trirong, sans-serif;
+    }
+    .brand-icon {
+      aspect-ratio: 2.22;
+      object-fit: contain;
+      width: 144px;
+      max-width: 100%;
+    }
+    .brand-name {
+      flex-grow: 1;
+      width: 251px;
+      margin: auto 0;
+    }
+    .brand-tagline {
+      margin: 0 0 -22px 96px;
+      font: 500 16px Ubuntu, sans-serif;
+    }
+    .right-column {
+      width: 50%;
+    }
+    .signup-form {
+      border-radius: 50px;
+      background-color: #fff;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: auto 0;
+      padding: 77px 80px;
+    }
+    .form-content {
+      width: 640px;
+      max-width: 100%;
+    }
+    .form-header {
+      font-family: Poppins, sans-serif;
+    }
+    .form-title {
+      color: #ffb200;
+      font-size: 40px;
+      font-weight: 600;
+    }
+    .form-subtitle {
+      color: #313131;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.75;
+      margin-top: 16px;
+    }
+    .form-row {
+      display: flex;
+      margin-top: 48px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .form-field {
+      border-radius: 4px;
+      min-width: 240px;
+      min-height: 56px;
+      flex: 1;
+      flex-basis: 0%;
+    }
+    .form-input {
+      border-radius: 4px;
+      background-color: #fff;
+      width: 100%;
+      border: 1px solid #79747e;
+      padding: 8px 16px;
+      font: 400 14px Poppins, sans-serif;
+    }
+    .form-button {
+      border-radius: 45px;
+      background-color: #003da5;
+      color: #f3f3f3;
+      width: 100%;
+      padding: 14px 16px;
+      font: 600 14px Poppins, sans-serif;
+      border: none;
+      cursor: pointer;
+    }
+    .login-link {
+      color: #eb8317;
+      text-align: center;
+      align-self: center;
+      margin-top: 16px;
+      font: 500 14px Montserrat, sans-serif;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (max-width: 991px) {
+      .registration-container {
+        padding: 0 20px;
+      }
+      .registration-content {
+        flex-direction: column;
+      }
+      .left-column,
+      .right-column {
+        width: 100%;
+      }
+      .left-column {
+        max-width: 100%;
+        margin-top: 40px;
+      }
+      .overlay {
+        max-width: 100%;
+        padding: 100px 20px;
+      }
+      .logo {
+        max-width: 100%;
+      }
+      .brand-container {
+        font-size: 40px;
+        white-space: initial;
+      }
+      .brand-name {
+        font-size: 40px;
+      }
+      .brand-tagline {
+        margin-bottom: 10px;
+      }
+      .signup-form {
+        max-width: 100%;
+        margin-top: 40px;
+        padding: 0 20px;
+      }
+      .form-row {
+        margin-top: 40px;
+      }
+    }
+  </style>
+  
+  <section class="registration-container">
+    <div class="registration-content">
+      <div class="left-column">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e93f41dbc07f2f0a5a5c2a0922f9d1e1e750c35816ecf5e79ef15cd47a8f768?placeholderIfAbsent=true&apiKey=efd8da6834d44e329a13199d3d147cd9" alt="" class="background-image" />
+        <div class="overlay">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/881bb4c3bb2aec8d1d195625b19cf7ad997527c3715f92173258b22e5e556eef?placeholderIfAbsent=true&apiKey=efd8da6834d44e329a13199d3d147cd9" alt="Company Logo" class="logo" />
+          <div class="brand-container">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6e806f5306c0c9b7f5719f30bb469a32270c1454e1630fe2483e42d800d99568?placeholderIfAbsent=true&apiKey=efd8da6834d44e329a13199d3d147cd9" alt="" class="brand-icon" />
+            <h1 class="brand-name">Alumina</h1>
+          </div>
+          <p class="brand-tagline">Shine bright like a diamond</p>
+        </div>
+      </div>
+      <div class="right-column">
+        <form class="signup-form">
+          <div class="form-content">
+            <header class="form-header">
+              <h2 class="form-title">Sign up</h2>
+              <p class="form-subtitle">Let's get you all set up so you can access your personal account.</p>
+            </header>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="firstName" class="visually-hidden">First Name</label>
+                <input type="text" id="firstName" class="form-input" placeholder="First Name" />
+              </div>
+              <div class="form-field">
+                <label for="lastName" class="visually-hidden">Last Name</label>
+                <input type="text" id="lastName" class="form-input" placeholder="Last Name" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="email" class="visually-hidden">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="Email" />
+              </div>
+              <div class="form-field">
+                <label for="idNumber" class="visually-hidden">ID Number</label>
+                <input type="text" id="idNumber" class="form-input" placeholder="ID Number" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="password" class="visually-hidden">Password</label>
+              <input type="password" id="password" class="form-input" placeholder="Password" />
+            </div>
+            <div class="form-field">
+              <label for="confirmPassword" class="visually-hidden">Confirm Password</label>
+              <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm Password" />
+            </div>
+            <div class="form-field">
+              <label for="jobStatus" class="visually-hidden">Job Status</label>
+              <input type="text" id="jobStatus" class="form-input" placeholder="Job Status" />
+            </div>
+            <div class="form-field">
+              <label for="transcript" class="visually-hidden">Transcript</label>
+              <input type="text" id="transcript" class="form-input" placeholder="Transcript" />
+            </div>
+            <button type="submit" class="form-button">Create account</button>
+            <p class="login-link">Already have an account? <a href="#login">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
