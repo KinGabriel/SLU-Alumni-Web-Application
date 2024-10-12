@@ -1,27 +1,60 @@
-
 * {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0.2vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-    float: left;
-}
-
-.header_items {
     display: flex;
-    justify-content: center;  
-    align-items: center;      
-    width: 100%;
+    align-items: center;
+    margin-left: 1.2vw;
+    font-size: 1.4vw;
+}
+header span{
+    margin-left: 0.3vw;
+}
+header img {
+    height: 2.5vw; 
+    width: 3.2vw; 
 }
 
 nav {
-    margin-left: 28%;
+    margin-left: 25%;
     margin-top: 0.2%;
 }
 
+nav a {
+    padding: 0.5vw;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
 
-.btn-login{
+nav a:hover {
+    color: #3B82F6; 
+}
+
+.btn-login {
+    background-color: #1D4ED8; 
+    color: white;
+    padding: 8px 16px; 
+    border-radius: 4px; 
     margin-left: 30vw;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: #3B82F6;
 }
 
 .hero {
@@ -31,9 +64,9 @@ nav {
 }
 
 .hero img {
-    width: 100%;          
-    height: 600px;   
-    filter: brightness(50%); 
+    width: 100%;
+    height: 600px;
+    filter: brightness(50%);
 }
 
 .fade {
@@ -45,6 +78,7 @@ nav {
     from {opacity: .4} 
     to {opacity: 1}
 }
+
 .text-overlay {
     position: absolute;
     top: 50%; 
@@ -55,10 +89,40 @@ nav {
     text-align: center; 
     z-index: 2; 
 }
-.text-overlay h1{
+
+.text-overlay h1 {
     font-size: 5vw;
 }
-.text-overlay p{
+
+.text-overlay p {
     font-size: 3vw;
     margin-top: 2vh;
+}
+
+.header-seperator {
+    background-color: #003DA5; 
+    padding-bottom: 2vw; 
+    width: 100%;
+    margin-top: -1vh;
+    margin-bottom: 0.5vh; 
+}
+
+.slides {
+    display: none; 
+}
+
+.slides:first-of-type {
+    display: block;
+}
+
+.btn-hero{
+    background-color: #FBBF24; 
+    color: white; 
+    margin-top: 1vw; 
+    padding: 0.7vw 1vw;
+    border-radius: 6px; 
+}
+
+.btn-hero:hover{
+    background-color: rgb(156, 156, 46);
 }
