@@ -60,7 +60,7 @@ $background_url = "assets/images/SLU front.png";
           </div>
           <button type="submit" class="login-button">Register</button>
           <div class="signup-wrapper">
-            <span class="signup-text">Already have an account? <a href="index.php" class="signup-link">Log in</a></span>
+            <span class="signup-text">Already have an account? <a href="login.php" class="signup-link">Log in</a></span>
           </div>
         </form>
       </div>

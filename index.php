@@ -20,7 +20,7 @@
         <a href="#">Alumni Stories</a>
         <a href="#">Career Opportunities</a>
     </nav>
-    <button class="btn-login" onclick="location.href='LogInAndRegister.php'">Log In</button>
+    <button class="btn-login" onclick="location.href='logIn.php'">Log In</button>
 </header>
 
 <div id="home" class="hero">
