@@ -8,6 +8,7 @@ html {
     scroll-behavior: smooth;
   }
 
+  /* Header section */
 header {
     display: flex;
     align-items: center;
@@ -22,9 +23,11 @@ header h1 {
     margin-left: 1.2vw;
     font-size: 1.4vw;
 }
+
 header span{
     margin-left: 0.3vw;
 }
+
 header img {
     height: 2.5vw; 
     width: 3.2vw; 
@@ -44,10 +47,12 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
-    text-decoration-color: #FBBF24;
+    text-decoration-color: rgba(255, 178, 0, 1);
+    text-decoration-thickness: 2.5px;
 
 }
 
+/* Log in button */
 .btn-login {
     background-color: #1D4ED8; 
     color: white;
@@ -63,6 +68,7 @@ nav a:hover {
     background-color: #3B82F6;
 }
 
+/* Hero section */
 .hero {
     position: relative;
     max-width: 100%;
@@ -71,7 +77,7 @@ nav a:hover {
 
 .hero img {
     width: 100%;
-    height: 600px;
+    height: 930px;
     filter: brightness(50%);
 }
 
@@ -122,15 +128,15 @@ nav a:hover {
 }
 
 .btn-hero{
-    background-color: #FBBF24; 
+    background-color: rgba(255, 178, 0, 1); 
     color: white; 
-    margin-top: 1vw; 
+    margin-top: 4vw; 
     padding: 0.7vw 1vw;
     border-radius: 6px; 
 }
 
 .btn-hero:hover{
-    background-color: rgb(156, 156, 46);
+    background-color:  #ff8e00;
 }
 
 /* Who Are We section */
@@ -145,8 +151,8 @@ nav a:hover {
     justify-content: flex-start; /* Align the content to the top */
     align-items: center;  /* Horizontally center the content */
     text-align: center; 
-    padding-top: 40px; 
-    padding-bottom: 40px; 
+    padding-top: 30px; 
+    padding-bottom: 10px; 
 }
 
 /* Content heading and paragraph */
@@ -178,7 +184,7 @@ nav a:hover {
     width: 80%;  
     max-width: 1200px;  /* Maximum width for the cards' container */
     gap: 10vh;
-    margin-top: 15vh;  /* Add space from the top to lower the cards */
+    margin-top: 20vh;  
 }
 
 /* Individual cards */
@@ -206,25 +212,97 @@ nav a:hover {
     z-index: -1;  
 }
 
-/* Flexbox Container for Scrollable News, Events & Job Oppurtunities*/
-.flex-container {
+/* Alumni Stories Section */
+.alumni-stories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1vw;
+    margin-top: 60px;  
+    width: 100%;
+}
+
+.alumni-content {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    height: 80vh; 
+    align-items: center;
+    width: 530%;  
+    max-width: 1600px; 
+    padding: 35px;  
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding-bottom: 30px;  
+}
+
+.alumni-image {
+    width: 55%;  
+    height: auto;
+    border-radius: 10px;
+}
+
+.alumni-messages {
+    width: 65%;  
+    padding-left: 3vw;  
+}
+
+.alumni-messages h2 {
+    font-size: 3em; 
+    color: #003DA5;
+    margin-bottom: 25px;  
+}
+
+.alumni-messages h4 {
+    font-size: 2em; 
+    color:black;
+    margin-bottom: 25px;  
+}
+
+.alumni-messages p {
+    font-size: 1.5em;  
+    color: #333;
+    margin-bottom: 25px; 
+    font-size: 1.4em;
+}
+
+.btn-read-story {
+    background-color: rgba(255, 178, 0, 1);
+    color: white;
+    padding: 15px 25px;  
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-read-story:hover {
+    background-color: #ff8e00;
+}
+
+/* Flexbox Container for Scrollable News, Events & Job Oppurtunities section*/
+.news_events_job {
+    display: flex;
+    justify-content: space-between;
+    padding: 3vh;  
+    height: 70vh;  
+    margin-top: 20vh;
+    gap: 1.5%;
 }
 
 /* Scrollable Columns */
 .scrollable {
-    width: 30%; 
-    height: 50%; 
-    overflow-y: scroll; /* Enable vertical scrolling */
+    width: 40%;  
+    height: 70%;  
+    overflow-y: scroll;  /* Enable vertical scrolling */
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
     background-color: #fafafa;
-    margin-right: 10px;
+    margin-right: 5px;
 }
+
 
 .scrollable:last-child {
     margin-right: 0; /* Remove margin from the last column */
@@ -232,13 +310,14 @@ nav a:hover {
 
 .scrollable h2 {
     text-align: center;
-    margin-bottom: 10px;
-    font-size: 1.5em;
+    margin-bottom: 3vh;
+    font-size: 2.5em;
     color: rgba(255, 178, 0, 1);
 }
 
 .scrollable p {
     margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .scrollable::-webkit-scrollbar {

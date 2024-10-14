@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SLU Alumina</title>
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -11,21 +11,21 @@
 <div class="header-seperator"></div>
 <header>
     <h1>
-        <img src="assets/images/logo.png" alt="Logo">
+        <img src="assets/images/logo.png" alt="SLU Alumina Logo">
         <span>SLU Alumina</span>
     </h1>
     <nav>
         <a href="#home">Home</a>
         <a href="#whoarewe">About Us</a>
-        <a href="#">Alumni Stories</a>
-        <a href="#">Career Opportunities</a>
+        <a href="#alumnistories">Alumni Stories</a>
+        <a href="#news_events_job">Career Opportunities</a>
     </nav>
     <button class="btn-login" onclick="location.href='logIn.html'">Log In</button>
 </header>
 
 <div id="home" class="hero">
     <div class="slides fade">
-        <img src="assets/images/SLUmain.png">  
+        <img src="assets/images/mainslu.png" alt="Main SLU">  
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
             <p>STORIES</p>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="slides fade">
-        <img src="assets/images/slu.jpg">  
+        <img src="assets/images/maryheights.jpg" alt="Maryheights Campus">  
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
             <p>STORIES</p>
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="slides fade">
-        <img src="assets/images/slu.png">
+        <img src="assets/images/slugym.jpg" alt ="SLU gym">
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
             <p>STORIES</p>
@@ -59,19 +59,32 @@
     </div>
     <div class="card-container">
         <div class="card">
-            <img src="assets/images/SLU_thumbnail.png" alt="SLU"> 
+            <img src="assets/images/SLU_thumbnail.png" alt="SLU Image"> 
         </div>
         <div class="card">
-            <img src="assets/images/navi.jpg" alt="SLU"> 
+            <img src="assets/images/navi.jpg" alt="Navi"> 
         </div>
         <div class="card">
-            <img src="assets/images/bakakeng.jpg" alt="SLU"> 
+            <img src="assets/images/bakakeng.jpg" alt="Bakakeng"> 
+        </div>
+    </div>
+</div>
+
+<!-- Alumni Stories Section -->
+<div id="alumnistories" class="alumni-stories">
+    <div class="alumni-content">
+        <img src="assets/images/alumni.jpg" alt="Alumni Image" class="alumni-image">
+        <div class="alumni-messages">
+            <h2>Alumni Stories</h2>
+            <h4> Hannah Jordan</h4>
+            <p>Read the inspiring stories of our alumni, their journey, and achievements.</p>
+            <button class="btn-read-story">Read Story</button>
         </div>
     </div>
 </div>
 
 <!-- Latest News, Events & Job Oppurtunities section -->
-<div class="flex-container">
+<div id="news_events_job" class="news_events_job">
     <!-- Scrollable News Column -->
     <div class="scrollable" id="news">
         <h2>News</h2>
@@ -123,4 +136,4 @@
 -->
 
 </body>
-</html>
+</html> 
