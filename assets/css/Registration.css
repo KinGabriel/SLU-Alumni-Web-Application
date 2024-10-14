@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh; 
+  }
+  
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+  }
+  
+  .form-container {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* Adjusted width to fit the right side only */
+    width: 90%; /* Reduced width for better mobile responsiveness */
+  }
+  
+  .right-side {
+    width: 100%; /* Takes full width since left side is removed */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .login-title {
+    color: #ffb200;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-text {
+    color: #525252;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+  }
+  
+  .input-field {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .login-button {
+    background-color: #0049b1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .signup-wrapper {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .signup-text {
+    color: #525252;
+    font-size: 1rem;
+  }
+  
+  .signup-link {
+    font-weight: 600;
+    color: #ffb200;
+    text-decoration: none;
+  }
+  .upload-button {
+    display: none; 
+  }
+  .custom-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .upload-icon {
+    width: 24px; 
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .upload-text {
+    font-size: 1rem;
+    color: #525252;
+  }
