@@ -35,7 +35,7 @@ $background_url = "assets/images/SLU front.png";
       <h1 class="logo-footer">SLU ALUMINA</h1>
       </div>
       <div class="right-side">
-        <h1 class="login-title">Log-In</h1>
+        <h1 class="login-title">Login</h1>
         <p class="welcome-text">Welcome back! Please enter your details.</p>
         <div class="input-wrapper">
           <img src="assets/images/VectorUsername.png" alt="Username Icon" class="input-icon" />
