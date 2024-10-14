@@ -1,7 +1,3 @@
-<?php
-$background_url = "assets/images/SLU front.png"; 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,23 +6,6 @@ $background_url = "assets/images/SLU front.png";
   <link rel="stylesheet" href="assets/css/Registration.css">
   <title>Registration Page</title>
 </head>
-<style>
-  /* Background setup */
-  .form-wrapper::before {
-    content: "";
-    background-image: url('<?php echo $background_url; ?>');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 100%;
-    position: absolute; 
-    top: 0;
-    left: 0;
-    opacity: 0.77; 
-    z-index: -1; 
-  }
-</style>
 <body>
 <body>
   <div class="form-wrapper">
@@ -60,7 +39,7 @@ $background_url = "assets/images/SLU front.png";
           </div>
           <button type="submit" class="login-button">Register</button>
           <div class="signup-wrapper">
-            <span class="signup-text">Already have an account? <a href="login.php" class="signup-link">Log in</a></span>
+            <span class="signup-text">Already have an account? <a href="login.html" class="signup-link">Log in</a></span>
           </div>
         </form>
       </div>

@@ -1,10 +1,6 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url('assets/images/Logo.png'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 100vh; 
 }
 
@@ -24,7 +20,20 @@ body {
   max-width: 1000px;
   width: 80%;
 }
-
+.form-wrapper::before {
+  content: "";
+  background-image: url('../images/SLUfront.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  opacity: 0.77; 
+  z-index: -1; 
+}
 .form-side {
   background-color: #0049b1;
   width: 50%;
