@@ -141,7 +141,7 @@ nav a:hover {
 
 /* Who Are We section */
 .whoarewe {
-    background-image: url('assets/images/slubuilding.png');
+    background-image: url('../images/slubuilding.png');
     background-size: cover;  
     background-position: center;  
     background-repeat: no-repeat; 
@@ -198,6 +198,7 @@ nav a:hover {
     min-height: 300px;  
     max-width: 360px; 
     overflow: hidden;  /* Prevent the image from overflowing */
+    z-index: 1;
 }
 
 /* Image inside the card */
