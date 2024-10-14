@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 header {
     display: flex;
     align-items: center;
@@ -32,7 +36,7 @@ nav {
 }
 
 nav a {
-    padding: 0.5vw;
+    padding: 0.3vw;
     text-decoration: none;
     color: inherit;
     transition: color 0.2s ease;
@@ -127,4 +131,125 @@ nav a:hover {
 
 .btn-hero:hover{
     background-color: rgb(156, 156, 46);
+}
+
+/* Who Are We section */
+.whoarewe {
+    background-image: url('assets/images/slubuilding.png');
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat; 
+    height: 100vh;  /* Make the section take up the full viewport height */
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; /* Align the content to the top */
+    align-items: center;  /* Horizontally center the content */
+    text-align: center; 
+    padding-top: 40px; 
+    padding-bottom: 40px; 
+}
+
+/* Content heading and paragraph */
+.whoarewe .content {
+    margin-bottom: 40px; 
+}
+
+.whoarewe h1 {
+    font-size: 4em;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    font-weight: bold;
+    color: rgba(0, 61, 165, 1);
+}
+
+.whoarewe p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;  /* Center the text */
+    color: black;
+}
+
+/* Container for the cards */
+.card-container {
+    display: flex;
+    justify-content: center;  /* Center the cards horizontally */
+    align-items: flex-start;  /* Align cards to the top of the container */
+    width: 80%;  
+    max-width: 1200px;  /* Maximum width for the cards' container */
+    gap: 10vh;
+    margin-top: 15vh;  /* Add space from the top to lower the cards */
+}
+
+/* Individual cards */
+.card {
+    position: relative;  
+    padding: 0;  
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    flex: 1 1 300px;  /* Cards grow and shrink but maintain a minimum width of 300px */
+    text-align: center;
+    min-height: 300px;  
+    max-width: 360px; 
+    overflow: hidden;  /* Prevent the image from overflowing */
+}
+
+/* Image inside the card */
+.card img {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;  /* Make the image take up the full width of the card */
+    height: 100%;  /* Ensure the image fills the entire height */
+    object-fit: cover; /* Make sure the image covers the entire area without stretching */
+    border-radius: 10px; 
+    z-index: -1;  
+}
+
+/* Flexbox Container for Scrollable News, Events & Job Oppurtunities*/
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 80vh; 
+}
+
+/* Scrollable Columns */
+.scrollable {
+    width: 30%; 
+    height: 50%; 
+    overflow-y: scroll; /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #fafafa;
+    margin-right: 10px;
+}
+
+.scrollable:last-child {
+    margin-right: 0; /* Remove margin from the last column */
+}
+
+.scrollable h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: rgba(255, 178, 0, 1);
+}
+
+.scrollable p {
+    margin-bottom: 10px;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
