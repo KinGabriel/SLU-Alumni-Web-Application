@@ -60,14 +60,35 @@ body {
   .input-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
   }
   
   .input-icon {
     width: 24px;
     height: 24px;
-    margin-right: 12px;
+    margin-right: 0.8vw;
   }
+
+  .input-inline-wrapper {
+    display: flex;
+    justify-content: space-between;
+   
+   
+  }
+  .input-inline-wrapper img{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.8vw;
+    
+  }
+  .half-width {
+    width: 48%;
+  }
+  
+  .input-field {
+    width: 98%;
+  }
+  
   
   .input-field {
     flex-grow: 1;
@@ -115,7 +136,7 @@ body {
     padding: 10px;
     cursor: pointer;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.1rem;
   }
 
   .upload-icon {

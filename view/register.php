@@ -7,13 +7,22 @@
   <title>Registration Page</title>
 </head>
 <body>
-<body>
   <div class="form-wrapper">
     <div class="form-container">
       <div class="right-side">
         <h1 class="login-title">Welcome Back Louisian!</h1>
         <p class="welcome-text">Please fill in your details to create an account.</p>
         <form action="registration_process.php" method="POST" enctype="multipart/form-data">
+          <div class="input-inline-wrapper">
+            <div class="input-wrapper half-width">
+              <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">
+              <input  type="text" name="first_name" class="input-field" placeholder="First Name" required />
+            </div>
+            <div class="input-wrapper half-width">
+              <img src="../assets/images/VectorUsername.png" alt="Last Name Icon"  class="input-icon">
+              <input type="text" name="last_name" class="input-field" placeholder="Last Name" required />
+            </div>
+          </div>
           <div class="input-wrapper">
             <img src="../assets/images/VectorUsername.png" alt="Email Icon" class="input-icon" />
             <input type="email" name="email" class="input-field" placeholder="Email" required />
