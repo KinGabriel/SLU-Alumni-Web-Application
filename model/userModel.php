@@ -21,5 +21,9 @@
         return false; 
     }
  }
+
+ public function register($email, $password,$firstName,$lastName,$schoolID,$imageID) {
+
 }
+ }
 ?>

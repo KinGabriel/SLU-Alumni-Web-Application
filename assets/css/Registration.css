@@ -140,12 +140,15 @@ body {
   }
 
   .upload-icon {
-    width: 24px; 
-    height: 24px;
-    margin-right: 8px;
+    width: 1.5vw; 
+    height: 2vw;
+    margin-right: 1vw;
   }
 
   .upload-text {
     font-size: 1rem;
     color: #525252;
   }
+
+
+  

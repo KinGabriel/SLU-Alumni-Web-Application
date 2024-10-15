@@ -39,7 +39,7 @@
       
 
         <div class="signup-wrapper">
-          <span class="signup-text">Don't have an account yet? <a href="register.html" class="signup-link">Sign up</a></span>
+          <span class="signup-text">Don't have an account yet? <a href="register.php" class="signup-link">Sign up</a></span>
         </div>
       </div>
     </div>
