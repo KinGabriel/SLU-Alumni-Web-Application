@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Board</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <section class="job-listings">
+        <aside class="job-filters">
+            <div class="filters-container">
+                <div class="filter-section">
+                    <div class="filter-header" onclick="toggleFilter(this)">
+                        <h3 class="filter-title">Type of Employment</h3>
+                        <img src="mdi--arrow-down-drop.png" alt="Toggle filter" class="filter-toggle" />
+                    </div>
+                    <div class="collapsible-content">
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Full-time (3)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Part-Time (5)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Remote (2)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Internship (24)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Contract (3)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <div class="filter-header" onclick="toggleFilter(this)">
+                        <h3 class="filter-title">Categories</h3>
+                        <img src="mdi--arrow-down-drop.png" alt="Toggle filter" class="filter-toggle" />
+                    </div>
+                    <div class="collapsible-content">
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Design (24)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Sales (3)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Marketing (3)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Business (3)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Human Resource (6)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Finance (4)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Engineering (4)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>Technology (5)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <div class="filter-header" onclick="toggleFilter(this)">
+                        <h3 class="filter-title">Salary Range</h3>
+                        <img src="mdi--arrow-down-drop.png" alt="Toggle filter" class="filter-toggle" />
+                    </div>
+                    <div class="collapsible-content">
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>300 - 499 (4)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>500 - 1500 (6)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>1500 - 2000 (10)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" onclick="this.parentNode.classList.toggle('checked')" />
+                            <span class="checkbox"></span>
+                            <span>3000 or above (4)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="jobs-column">
+            <section class="jobs-list">
+                <header class="jobs-header">
+                    <div class="jobs-title">
+                        <h2 class="jobs-title-text">All Jobs</h2>
+                        <p class="jobs-count">Showing 73 results</p>
+                    </div>
+                    <div class="divider"></div>
+                </header>
+
+                <div class="job-item-container">
+                    <article class="job-item">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5aebbd8d98d08ca88da3a609fc470a33a1a11938b4bf72ea205b671348e89b85?placeholderIfAbsent=true&apiKey=efd8da6834d44e329a13199d3d147cd9" alt="Nomad company logo" class="company-logo" />
+                        <div class="job-details">
+                            <h3 class="job-title">Social Media Assistant</h3>
+                            <div class="company-info">
+                                <span class="company-name">Nomad</span>
+                                <span class="job-location">Paris, France</span>
+                            </div>
+                            <div class="job-tags">
+                                <span class="tag tag-full-time">Full-Time</span>
+                                <span class="tag-divider"></span>
+                                <span class="tag tag-marketing">Marketing</span>
+                                <span class="tag tag-design">Design</span>
+                            </div>
+                        </div>
+                    </article>
+                    <div class="view-button-container">
+                        <button class="view-button">View</button>
+                    </div>
+                </div>
+
+                <!-- Add more job items here as needed -->
+                
+            </section>
+        </div>
+    </section>
+
+    <script src="javascript.js" defer></script>
+</body>
+</html>
