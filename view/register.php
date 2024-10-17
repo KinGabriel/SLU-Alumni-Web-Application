@@ -42,15 +42,14 @@
                         <img src="../assets/images/VectorLock.png" alt="Retype Password Icon" class="input-icon" />
                         <input type="password" name="retype_password" class="input-field" placeholder="Retype Password" required />
                     </div>
-                    <div class="input-wrapper">
+                   
                     <div class="input-wrapper">
                     <label for="school_id_file" class="custom-upload">
-                      <img src="../assets/images/upload file.jpg" alt="Upload Icon" class="upload-icon" />
+                      <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
                       <span class="upload-text">Upload your school ID</span>
                       <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" required onchange="handleFileUpload()" />
                       <img id="image-preview" class="image-preview"  >
                   </label>
-                    </div>
                     </div>
                     <button type="submit" class="login-button">Register</button>
                     <div class="signup-wrapper">
