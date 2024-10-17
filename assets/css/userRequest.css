@@ -57,6 +57,7 @@ header img {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    z-index: 100; 
 }
 
 .sidebar-container:hover {
@@ -143,3 +144,88 @@ header img {
     font-size: 1.9vh;  
     flex: 1;
 }
+
+/* User Request table */
+.user-content {
+    position: absolute;
+    left: 70px; 
+    padding: 20px;
+    transition: left 0.3s ease; 
+}
+
+/* Move user content when sidebar expands */
+.sidebar-container:hover ~ .user-content {
+    left: 260px; 
+}
+
+.user-content h1 {
+    margin-bottom: 20px;
+}
+
+.user-table {
+    width: 155%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.user-table td {
+    font-size: 16px;
+}
+
+.user-table .btn-accept {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.user-table .btn-decline {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.user-table .btn-accept:hover {
+    background-color: #45a049;
+}
+
+.user-table .btn-decline:hover {
+    background-color: #e60000;
+}
+  
+/* Side navigation bar */
+.sidenav {
+    position: fixed;
+    width: 200px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
+  
+  /* When sidenav is hovered */
+.sidenav:hover + .user-content {
+    left: 0; /* Move content to the right */
+}
+
+.user-content.shift-right {
+    left: 0; /* Move back to normal position (right) */
+}
+  
