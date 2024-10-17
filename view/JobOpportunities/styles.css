@@ -1,0 +1,210 @@
+/* General Styles */
+body {
+    font-family: Epilogue, sans-serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+/* Job Listings Container */
+.job-listings {
+    display: flex; /* Use flex to place filters and jobs side by side */
+    width: 78%;
+    margin: 0 auto; /* Center the container */
+}
+
+/* Job Filters */
+.job-filters {
+    display: flex;
+    flex-direction: column;
+    width: 21%; /* Fixed width for filter sidebar */
+    padding: 20px; /* Padding for filters */
+    background-color: #f9f9f9; /* Background color for filters */
+    border-right: 1px solid #ddd; /* Right border for separation */
+}
+
+/* Filters Container */
+.filters-container {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    flex-grow: 1;
+    padding: 12px 31px 49px;
+    color: #515b6f;
+    font-size: 16px;
+}
+
+/* Filter Section */
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between filter categories */
+}
+
+/* Filter Headers */
+.filter-header {
+    font-weight: bold;
+    font-size: 18px; /* Increase font size for readability */
+    color: #25324b; /* Dark text for category headers */
+    cursor: pointer; /* Indicating the sections are collapsible */
+    margin-bottom: 8px; /* Space below headers */
+}
+
+/* Toggle Icon */
+.filter-toggle {
+    aspect-ratio: 1;
+    width: 16px;
+    margin-left: auto; /* Position to the right */
+}
+
+/* Collapsible Content */
+.collapsible-content {
+    display: none; /* Initially hidden */
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* Active when visible */
+.filter-section.active .collapsible-content {
+    display: flex; /* Show when section is expanded */
+}
+
+/* Filter Options */
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between checkbox and label */
+    font-size: 14px; /* Smaller text for filter options */
+    line-height: 1.4;
+    color: #515b6f; /* Grayish color for options text */
+    margin-bottom: 8px; /* Space between each filter item */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Hide the default checkboxes */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* Custom Checkbox */
+.checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid #d6ddeb; /* Light border for checkbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+/* Checked state */
+.filter-option.checked .checkbox {
+    background-color: #1711c5; /* Background color when checked */
+    border-color: #4640de; /* Border color when checked */
+}
+
+/* Add checkmark for checked state */
+.filter-option.checked .checkbox::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: white; /* Checkmark color */
+    border-radius: 2px; /* Rounded corners for the checkmark */
+}
+
+/* Jobs Column */
+.jobs-column {
+    flex: 1; /* Allow jobs column to fill the remaining space */
+    padding: 20px; /* Padding for job listings */
+}
+
+/* Jobs Header */
+.jobs-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.jobs-title-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.jobs-count {
+    color: #888;
+}
+
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+/* Job Item Container */
+.job-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+/* Company Logo */
+.company-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+}
+
+/* Job Details */
+.job-details {
+    flex: 1; /* Allow job details to fill remaining space */
+}
+
+.job-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.company-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-tags {
+    display: flex;
+    margin-top: 5px;
+}
+
+/* Tag Styles */
+.tag {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.tag-divider {
+    width: 5px; /* Spacer between tags */
+}
+
+/* View Button Container */
+.view-button-container {
+    display: flex;
+    align-items: center;
+}
+
+/* View Button */
+.view-button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
