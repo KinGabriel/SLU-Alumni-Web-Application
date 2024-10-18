@@ -1,8 +1,8 @@
 <?php
-
 require_once '../model/userModel.php';
 require_once '../database/configuration.php';
 session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
     $db = new dbConnection();
@@ -26,5 +26,5 @@ session_start();
             header("Location: ../view/login.php"); // Redirect to the login page
             exit();
     }
-
+}
 ?>

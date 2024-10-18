@@ -1,3 +1,9 @@
+<?php
+session_start();
+$message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['confirmation_message']) : '';
+echo "<script>var message = '$message';</script>"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/Registration.css">
     <title>Registration Page</title>
-      
-    </script>
 </head>
 <body>
     <div class="form-wrapper">
@@ -15,7 +19,7 @@
                 <h1 class="login-title">Welcome Back Louisian!</h1>
                 <p class="welcome-text">Please fill in your details to create an account</p>
                 <div id="validation-message"></div>
-                <form action="registration_process.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
+                <form action="registrationController.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">
@@ -34,6 +38,37 @@
                         <img src="../assets/images/VectorUsername.png" alt="SLU ID Icon" class="input-icon" />
                         <input type="text" name="sluSchoolId" class="input-field" placeholder="SLU School ID" required />
                     </div>
+                    <div class="input-inline-wrapper">
+                        <div class="input-wrapper half-width">
+                            <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">
+                            <select name="graduationYear" class="input-field" required>
+                            <option value="" disabled selected> Graduation Year</option>
+                                <?php
+                                    $currentYear = date("Y");
+                                    for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
+                                        echo "<option value=\"$year\">$year</option>";
+                                    }
+                                ?>
+                                    </select>
+                        </div>
+                        <div class="input-wrapper half-width">
+                            <img src="../assets/images/VectorUsername.png" alt="Program Icon" class="input-icon">
+                            <select name="program" class="input-field" required> 
+                            <option value="" disabled selected> Programs</option>
+                                <?php
+                                $filePath = '../assets/programs.txt'; 
+                                if (file_exists($filePath)) {
+                                    $programs = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                    foreach ($programs as $program) {
+                                        echo "<option value=\"$program\">$program</option>";
+                                    }
+                                } else {
+                                    echo "<option value=\"\">N/A</option>"; 
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                     <div class="input-wrapper">
                         <img src="../assets/images/VectorLock.png" alt="Password Icon" class="input-icon" />
                         <input type="password" name="password" class="input-field" placeholder="Password" required />
@@ -42,23 +77,35 @@
                         <img src="../assets/images/VectorLock.png" alt="Retype Password Icon" class="input-icon" />
                         <input type="password" name="retype_password" class="input-field" placeholder="Retype Password" required />
                     </div>
-                   
                     <div class="input-wrapper">
-                    <label for="school_id_file" class="custom-upload">
-                      <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
-                      <span class="upload-text">Upload your school ID</span>
-                      <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" required onchange="handleFileUpload()" />
-                      <img id="image-preview" class="image-preview"  >
-                  </label>
+                        <label for="school_id_file" class="custom-upload">
+                            <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
+                            <span class="upload-text">Upload your school ID</span>
+                            <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" required onchange="handleFileUpload()" />
+                            <img id="image-preview" class="image-preview">
+                        </label>
                     </div>
                     <button type="submit" class="login-button">Register</button>
                     <div class="signup-wrapper">
-                        <span class="signup-text">Already have an account? <a href="login.html" class="signup-link">Log in</a></span>
+                        <span class="signup-text">Already have an account? <a href="login.php" class="signup-link">Log in</a></span>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
+<div class="modal-content" id="modal">
+    <img src="" alt="" />
+    <p>We use cookies for improving user experience, analytics and marketing.</p>
+    <button class="accept">That's fine!</button>
+  </div>
+</div>
+
+<script>
+
+</script>
     <script src="../assets/js/authentication.js"></script>
     <script src="../assets/js/utility.js"></script>
 </body>

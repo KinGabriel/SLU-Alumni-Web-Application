@@ -2,7 +2,9 @@
 session_start(); 
 $errorMessage = isset($_SESSION['error_message']) ? addslashes($_SESSION['error_message']) : '';
 unset($_SESSION['error_message']); 
+echo "<script> var errorMessage = '$errorMessage';</script>"
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,17 +37,12 @@ unset($_SESSION['error_message']);
           <a href="#" class="forgot-password">Forgot Password</a>
           <button type="submit" class="login-button">Login Now</button>
         </form>
-      
-
         <div class="signup-wrapper">
           <span class="signup-text">Don't have an account yet? <a href="register.php" class="signup-link">Sign up</a></span>
         </div>
       </div>
     </div>
   </div>
-  <script>
-        var errorMessage = "<?php echo $errorMessage; ?>";
-    </script>
     <script src="../assets/js/authentication.js" defer></script> 
 </head>
 </body>
