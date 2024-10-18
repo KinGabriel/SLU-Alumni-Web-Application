@@ -136,7 +136,7 @@ header img {
 }
 
 .sidebar-logout a:hover {
-    background-color:rgba(255, 178, 0, 1);;
+    background-color:rgba(255, 178, 0, 1);
 }
 
 .menu-item-logout {
@@ -166,13 +166,15 @@ header img {
 .user-table {
     width: 153%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
+/* Center the table headers and data cells */
 .user-table th, .user-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    text-align: center; /* Center all header and data cells */
+    vertical-align: middle; /* Center vertically */
+    padding: 15px; /* Set padding for all cells */
+    border-bottom: 1px solid #ddd; /* Add border back */
 }
 
 .user-table th {
@@ -209,7 +211,7 @@ header img {
 .user-table .btn-decline:hover {
     background-color: #e60000;
 }
-  
+
 /* Side navigation bar */
 .sidenav {
     position: fixed;
@@ -221,7 +223,7 @@ header img {
     transition: width 0.3s ease;
 }
   
-  /* When sidenav is hovered */
+/* When sidenav is hovered */
 .sidenav:hover + .user-content {
     left: 0; /* Move content to the right */
 }
@@ -254,8 +256,6 @@ header img {
 .search .search-icon:hover {
     opacity: 0.7;
 }
-
-
 
 /* Style for dropdowns inside table headers */
 .filter-dropdown {
@@ -309,11 +309,12 @@ th {
     content: '\25BC'; /* Down arrow */
 }
 
-/* Centering the Graduation Year column */
-.user-table th:nth-child(5), /* Targeting the Graduation Year header */
-.user-table td:nth-child(5) { /* Targeting the Graduation Year table cells */
-    text-align: center; /* Center horizontally */
-    vertical-align: middle; /* Center vertically */
+/* Centering the Graduation Year and Job Status columns */
+.user-table th:nth-child(4), /* Targeting the Graduation Year header */
+.user-table td:nth-child(4), /* Targeting the Graduation Year table cells */
+.user-table th:nth-child(5), /* Job Status */
+.user-table td:nth-child(5) { /* Job Status cells */
+    padding: 15px; /* Adjust padding to add more space */
 }
 
 .action-icon {

@@ -5,37 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
     <link href="../assets/css/accounts.css" rel="stylesheet">
-    <style>
-        /* Style for dropdowns inside table headers */
-        .filter-dropdown {
-            display: inline-block;
-            position: relative;
-        }
-
-        .filter-dropdown select {
-            padding-right: 20px; /* Space for the dropdown icon */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 1px solid #ccc;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        /* Dropdown arrow icon */
-        .filter-dropdown::after {
-            content: '\25BC'; /* Downward arrow */
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-        }
-
-        th {
-            vertical-align: middle;
-        }
-    </style>
 </head>
 <body>
     <!--Header separator-->
@@ -81,6 +50,9 @@
                     <th>Email</th>
                     <th>ID Number</th>
 
+                    <!-- Graduation Year Column -->
+                    <th>Graduation Year</th>
+
                     <!-- Job Status with Dropdown -->
                     <th>
                         <div class="filter-dropdown">
@@ -89,30 +61,6 @@
                                 <option value="all">All</option>
                                 <option value="employed">Employed</option>
                                 <option value="unemployed">Unemployed</option>
-                            </select>
-                        </div>
-                    </th>
-
-                    <!-- Graduation Year with Dropdown -->
-                    <th>
-                        <div class="filter-dropdown">
-                            Graduation Year
-                            <select id="graduationYearFilter">
-                                <option value="all">All</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                                <option value="2015">2015</option>
-                                <option value="2014">2014</option>
-                                <option value="2013">2013</option>
-                                <option value="2012">2012</option>
-                                <option value="2011">2011</option>
-                                <option value="2010">2010</option>
                             </select>
                         </div>
                     </th>
@@ -128,6 +76,7 @@
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
+                        <th>Action</th>
                     </th>
                 </tr>
             </thead>
@@ -136,8 +85,8 @@
                     <td>John Cruz Doe</td>
                     <td>john.doe@slu.edu.ph</td>
                     <td>2021001</td>
-                    <td>Employed</td>
                     <td>2022</td>
+                    <td>Employed</td>
                     <td>Alumni</td>
                     <td>
                         <button class="edit-button">
@@ -152,8 +101,8 @@
                     <td>Jane Mae Smith</td>
                     <td>jane.smith@slu.edu.ph</td>
                     <td>2021002</td>
-                    <td>Unemployed</td>
                     <td>2023</td>
+                    <td>Unemployed</td>
                     <td>Manager</td>
                     <td>
                         <button class="edit-button">
@@ -168,8 +117,8 @@
                     <td>Rovic James Will</td>
                     <td>rovic.will@slu.edu.ph</td>
                     <td>2021003</td>
-                    <td>Employed</td>
                     <td>2020</td>
+                    <td>Employed</td>
                     <td>Alumni</td>
                     <td>
                         <button class="edit-button">
@@ -184,8 +133,8 @@
                     <td>Anna Marie Lim</td>
                     <td>anna.lim@slu.edu.ph</td>
                     <td>2021004</td>
-                    <td>Unemployed</td>
                     <td>2019</td>
+                    <td>Unemployed</td>
                     <td>Admin</td>
                     <td>
                         <button class="edit-button">
@@ -197,7 +146,6 @@
                     </td>
                 </tr>
             </tbody>
-            
         </table>
     </div>
 
@@ -208,7 +156,6 @@
             <img src="../assets/images/search.png" alt="Search" class="search-icon">
         </form>
     </div>
-
     <script src="../assets/js/filter.js"></script>
 </body>
 </html>
