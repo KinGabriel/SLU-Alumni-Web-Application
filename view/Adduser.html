@@ -14,10 +14,6 @@
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <span>SLU Alumina</span>
         </h1>
-        <!-- <div class="header-profile">
-            <img src="/assets/images/profile.jpg" alt="Admin Profile" class="profile-pic">
-            <span class="user-name">Nichole Caparas</span>
-        </div> -->
     </header>
 
     <!-- Sidebar -->
@@ -50,38 +46,38 @@
             <form>
                 <!-- Name fields -->
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group" id="first-name">
                         <label for="first-name">First Name</label>
                         <input type="text" id="first-name" name="first-name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="middle-name">
                         <label for="middle-name">Middle Name</label>
                         <input type="text" id="middle-name" name="middle-name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="last-name">
                         <label for="last-name">Last Name</label>
                         <input type="text" id="last-name" name="last-name">
                     </div>
                 </div>
 
                 <!-- Email Address -->
-                <div class="form-group">
+                <div class="form-group email">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" required>
                 </div>
-
-                <!-- Info -->
+                
+                <!-- Alumni Information -->
                 <h3 class="section-title">Alumni Information:</h3>
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group" id="school-id">
                         <label for="school-id">School ID</label>
                         <input type="text" id="school-id" name="school-id">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="graduation-year">
                         <label for="graduation-year">Graduation Year</label>
                         <input type="text" id="graduation-year" name="graduation-year">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="degree">
                         <label for="degree">Degree</label>
                         <select id="degree" name="degree">
                             <option value="">Select Degree</option>
@@ -91,7 +87,7 @@
                             <option value="BSN">Bachelor of Science in Nursing (BSN)</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="job-status">
                         <label for="job-status">Job Status</label>
                         <select id="job-status" name="job-status">
                             <option value="">Select Job Status</option>
@@ -104,12 +100,12 @@
                 <!-- User Roles -->
                 <h3 class="section-title">User Roles:</h3>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="user-roles">User Roles</label>
+                    <div class="form-group" id="user-roles">
                         <select id="user-roles" name="user-roles">
                             <option value="">Select Role</option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
+                            <option value="manager">Manager</option>
                         </select>
                     </div>
                 </div>
