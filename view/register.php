@@ -1,7 +1,8 @@
 <?php
 session_start();
 $message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['confirmation_message']) : '';
-echo "<script>var message = '$message';</script>"
+echo "<script>var message = '$message';</script>";
+echo " `$message` "
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ echo "<script>var message = '$message';</script>"
                 <h1 class="login-title">Welcome Back Louisian!</h1>
                 <p class="welcome-text">Please fill in your details to create an account</p>
                 <div id="validation-message"></div>
-                <form action="registrationController.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
+                <form action="../controller/registrationController.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">

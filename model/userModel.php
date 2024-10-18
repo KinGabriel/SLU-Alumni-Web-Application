@@ -22,8 +22,16 @@
     }
  }
 
- public function register($email, $password,$firstName,$lastName,$schoolID,$program,$gradYear,$imageID) {
-
+ public function register($email, $password, $firstName, $lastName, $schoolID, $program, $gradYear, $imageID) {
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $query = "INSERT INTO applicants (school_id, email, first_name, last_name, password, program, gradyear, id_proof) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bind_param("ssssssss", $schoolID, $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $imageID);
+    if ($stmt->execute()) {
+        return true; 
+    } else {
+        return false; 
+    }
 }
  }
-?>
+

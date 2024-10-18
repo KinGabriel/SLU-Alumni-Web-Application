@@ -2,7 +2,7 @@
 session_start(); 
 $errorMessage = isset($_SESSION['error_message']) ? addslashes($_SESSION['error_message']) : '';
 unset($_SESSION['error_message']); 
-echo "<script> var errorMessage = '$errorMessage';</script>"
+echo "<script> var errorMessage = '$errorMessage';</script>";
 ?>
 
 <!DOCTYPE html>

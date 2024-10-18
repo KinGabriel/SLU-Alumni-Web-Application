@@ -1,7 +1,7 @@
 <?php
 class dbConnection {
     private $host = "localhost";     
-    private $db_name = "alumni_app"; 
+    private $db_name = "slu_alumina"; 
     private $username = "root";        
     private $password = "";          
     private $connection;
