@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Alumina</title>
+    <link href="../assets/css/accounts.css" rel="stylesheet">
+    <style>
+        /* Style for dropdowns inside table headers */
+        .filter-dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .filter-dropdown select {
+            padding-right: 20px; /* Space for the dropdown icon */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        /* Dropdown arrow icon */
+        .filter-dropdown::after {
+            content: '\25BC'; /* Downward arrow */
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        th {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <!--Header separator-->
+    <div class="header-seperator"></div>
+    <header>
+        <h1>
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo">
+            <span>SLU Alumina</span>
+        </h1>
+    </header>
+
+    <div class="sidebar-container">  
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="#dashboard"><img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon"><span class="menu-item-text">Dashboard</span></a></li>
+                <li><a href="#user-requests"><img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon"><span class="menu-item-text">User Requests</span></a></li>
+                <li><a href="#user-accounts"><img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon"><span class="menu-item-text">User Accounts</span></a></li>
+                <li><a href="#events"><img src="../assets/images/events.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">Events</span></a></li>
+                <li><a href="#news"><img src="../assets/images/news.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">News</span></a></li>
+                <li><a href="#job-opportunities"><img src="../assets/images/job.png" alt="Job" class="sidebar-icon"><span class="menu-item-text">Job Opportunities</span></a></li>
+            </ul>
+        </nav>
+    
+        <!-- Sticky Log Out Button -->
+        <div class="sidebar-logout">
+            <a href="#logout">
+                <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+                <span class="menu-item-logout">Log Out</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- User Requests table with Filters inside table headers -->
+    <div class="user-content" id="userContent">
+        <h1>User Requests List</h1>
+
+        <!-- User Table -->
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>ID Number</th>
+
+                    <!-- Job Status with Dropdown -->
+                    <th>
+                        <div class="filter-dropdown">
+                            Job Status
+                            <select id="jobStatusFilter">
+                                <option value="all">All</option>
+                                <option value="employed">Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                            </select>
+                        </div>
+                    </th>
+
+                    <!-- Graduation Year with Dropdown -->
+                    <th>
+                        <div class="filter-dropdown">
+                            Graduation Year
+                            <select id="graduationYearFilter">
+                                <option value="all">All</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                            </select>
+                        </div>
+                    </th>
+
+                    <!-- Role with Dropdown -->
+                    <th>
+                        <div class="filter-dropdown">
+                            Role
+                            <select id="roleFilter">
+                                <option value="all">All</option>
+                                <option value="alumni">Alumni</option>
+                                <option value="manager">Manager</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+                <tr>
+                    <td>John Cruz Doe</td>
+                    <td>john.doe@slu.edu.ph</td>
+                    <td>2021001</td>
+                    <td>Employed</td>
+                    <td>2022</td>
+                    <td>Alumni</td>
+                    <td>
+                        <button class="edit-button">
+                            <img src="../assets/images/edit.png" alt="Edit" class="action-icon">
+                        </button>
+                        <button class="delete-button">
+                            <img src="../assets/images/delete.png" alt="Delete" class="action-icon">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Mae Smith</td>
+                    <td>jane.smith@slu.edu.ph</td>
+                    <td>2021002</td>
+                    <td>Unemployed</td>
+                    <td>2023</td>
+                    <td>Manager</td>
+                    <td>
+                        <button class="edit-button">
+                            <img src="../assets/images/edit.png" alt="Edit" class="action-icon">
+                        </button>
+                        <button class="delete-button">
+                            <img src="../assets/images/delete.png" alt="Delete" class="action-icon">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Rovic James Will</td>
+                    <td>rovic.will@slu.edu.ph</td>
+                    <td>2021003</td>
+                    <td>Employed</td>
+                    <td>2020</td>
+                    <td>Alumni</td>
+                    <td>
+                        <button class="edit-button">
+                            <img src="../assets/images/edit.png" alt="Edit" class="action-icon">
+                        </button>
+                        <button class="delete-button">
+                            <img src="../assets/images/delete.png" alt="Delete" class="action-icon">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Anna Marie Lim</td>
+                    <td>anna.lim@slu.edu.ph</td>
+                    <td>2021004</td>
+                    <td>Unemployed</td>
+                    <td>2019</td>
+                    <td>Admin</td>
+                    <td>
+                        <button class="edit-button">
+                            <img src="../assets/images/edit.png" alt="Edit" class="action-icon">
+                        </button>
+                        <button class="delete-button">
+                            <img src="../assets/images/delete.png" alt="Delete" class="action-icon">
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+
+    <!-- Search bar -->
+    <div class="search">
+        <form>
+            <input type="text" placeholder="Search..">
+            <img src="../assets/images/search.png" alt="Search" class="search-icon">
+        </form>
+    </div>
+
+    <script src="../assets/js/filter.js"></script>
+</body>
+</html>
