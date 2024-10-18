@@ -37,7 +37,6 @@
             </a>
         </div>
     </div>
-    
     <!-- User Requests table with Filters inside table headers -->
     <div class="user-content" id="userContent">
         <h1>User Requests List</h1>
@@ -154,8 +153,29 @@
         <form>
             <input type="text" placeholder="Search..">
             <img src="../assets/images/search.png" alt="Search" class="search-icon">
-        </form>
+        </form>    
     </div>
+    <div class="button-container">
+        <button id="addUserButton">Add New User</button>
+    
+        <div class="dropdown">
+            <button id="dropdownButtonName">Sort By Name ▼</button>
+            <div class="dropdown-content" id="dropdownContentName">
+                <a href="#" class="sort-option">A - Z</a>
+                <a href="#" class="sort-option">Z - A</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button id="dropdownButtonDate">Sort By Year ▼</button>
+            <div class="dropdown-content" id="dropdownContentDate">
+                <a href="#" class="sort-option">Newest to Oldest</a>
+                <a href="#" class="sort-option">Oldest to Newest</a>
+            </div>
+        </div>
+    </div>
+    
+
     <script src="../assets/js/filter.js"></script>
 </body>
 </html>
