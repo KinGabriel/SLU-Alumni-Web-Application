@@ -164,7 +164,7 @@ header img {
 }
 
 .user-table {
-    width: 153%;
+    width: 148%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -208,6 +208,23 @@ header img {
 
 .user-table .btn-decline:hover {
     background-color: #e60000;
+}
+
+/* Style for the user name and profile pic */
+.user-name {
+    display: flex;
+    align-items: center; 
+}
+
+.profile-pic {
+    width: 35px; 
+    height: 35px; 
+    border-radius: 45%; 
+    margin-right: 10px; 
+}
+
+.profile-pic {
+    object-fit: cover; /* Keeps the image not stretched */
 }
   
 /* Side navigation bar */
