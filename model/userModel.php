@@ -22,7 +22,7 @@
     }
  }
 
- public function register($email, $password,$firstName,$lastName,$schoolID,$imageID) {
+ public function register($email, $password,$firstName,$lastName,$schoolID,$program,$gradYear,$imageID) {
 
 }
  }
