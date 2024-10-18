@@ -14,7 +14,7 @@
             <div class="right-side">
                 <h1 class="login-title">Welcome Back Louisian!</h1>
                 <p class="welcome-text">Please fill in your details to create an account</p>
-                <div class="validation-message"></div>
+                <div id="validation-message"></div>
                 <form action="registration_process.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">

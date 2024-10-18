@@ -1,3 +1,8 @@
+<?php
+session_start(); 
+$errorMessage = isset($_SESSION['error_message']) ? addslashes($_SESSION['error_message']) : '';
+unset($_SESSION['error_message']); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,14 +21,8 @@
       <div class="right-side">
         <h1 class="login-title">Login</h1>
         <p class="welcome-text">Welcome back! Please enter your details.</p>
-        <?php
-                session_start(); 
-                if (isset($_SESSION['error_message'])) {
-                    echo '<p class="error-message" style="color: red;">' . $_SESSION['error_message'] . '</p>';
-                    unset($_SESSION['error_message']); 
-                }
-                ?>
-     
+        <div id="validation-message"></div>
+
         <form action="../controller/logInController.php" method="POST">
           <div class="input-wrapper">
             <img src="../assets/images/VectorUsername.png" alt="email Icon" class="input-icon" />
@@ -44,6 +43,10 @@
       </div>
     </div>
   </div>
-
+  <script>
+        var errorMessage = "<?php echo $errorMessage; ?>";
+    </script>
+    <script src="../assets/js/authentication.js" defer></script> 
+</head>
 </body>
 </html>
