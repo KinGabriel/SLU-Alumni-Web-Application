@@ -191,22 +191,17 @@ h2.form-title, h3.section-title {
 
 /* First Name Field */
 .form-group#first-name input {
-    width: 50%; 
-}
-
-/* Middle Name Field */
-.form-group#middle-name input {
-    width: 50%; 
+    width: 35%; 
 }
 
 /* Last Name Field */
 .form-group#last-name input {
-    width: 50%; 
+    width: 35%; 
 }
 
 /* Email Address Field */
 .form-group.email input {
-    width: 22%; 
+    width: 15%; 
 }
 
 /* School ID Field */

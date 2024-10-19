@@ -21,12 +21,40 @@
         <!-- Navigation menu -->
         <nav class="sidebar-menu">
             <ul>
-                <li><a href="#dashboard"><img src="/assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon"><span class="menu-item-text">Dashboard</span></a></li>
-                <li><a href="#user-requests"><img src="/assets/images/userRequest.png" alt="User Requests" class="sidebar-icon"><span class="menu-item-text">User Requests</span></a></li>
-                <li><a href="#user-accounts"><img src="/assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon"><span class="menu-item-text">User Accounts</span></a></li>
-                <li><a href="#events"><img src="/assets/images/events.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">Events</span></a></li>
-                <li><a href="#news"><img src="/assets/images/news.png" alt="News" class="sidebar-icon"><span class="menu-item-text">News</span></a></li>
-                <li><a href="#job-opportunities"><img src="/assets/images/job.png" alt="Job" class="sidebar-icon"><span class="menu-item-text">Job Opportunities</span></a></li>
+                <li>
+                    <a href="index.php">
+                    <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
+                    <span class="menu-item-text">Dashboard</span>
+                    </a>
+             </li>
+                <li>
+                    <a href="/view/userRequest.php">
+                    <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
+                    <span class="menu-item-text">Account Requests</span>
+                </a>
+                </li>
+                <li>
+                    <a href="/view/account.php">
+                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                        <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <li><a href="#events">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+                <li>
+                    <a href="#news">
+                        <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
+                        <span class="menu-item-text">News</span>
+                    </a>
+                </li>
+                <li><a href="#job-opportunities">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
             </ul>
         </nav>
 
@@ -45,21 +73,18 @@
             <h2 class="form-title">Create New User</h2>
             <form>
                 <!-- Name fields -->
+               <!-- Name fields -->
                 <div class="form-row">
                     <div class="form-group" id="first-name">
                         <label for="first-name">First Name</label>
                         <input type="text" id="first-name" name="first-name">
-                    </div>
-                    <div class="form-group" id="middle-name">
-                        <label for="middle-name">Middle Name</label>
-                        <input type="text" id="middle-name" name="middle-name">
                     </div>
                     <div class="form-group" id="last-name">
                         <label for="last-name">Last Name</label>
                         <input type="text" id="last-name" name="last-name">
                     </div>
                 </div>
-
+                
                 <!-- Email Address -->
                 <div class="form-group email">
                     <label for="email">Email Address</label>
@@ -118,5 +143,9 @@
             </form>
         </div>
     </div>
+
+    <script src="../assets/js/filter.js"></script>
+    <script src="../assets/js/adduser.js"></script>
+    
 </body>
 </html>

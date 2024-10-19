@@ -52,7 +52,7 @@ header img {
     bottom: 0;
     height: 100%;
     width: 60px;
-    margin-top: 8.5vh;
+    margin-top: 9.5vh;
     transition: width 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -160,8 +160,10 @@ header img {
 }
 
 .user-content h1 {
-    margin-bottom: 0%;
-    margin-top: 3%;
+    margin-top: 6%;
+    margin-bottom: 20px;
+    color:#003DA5;
+    font-size: 5vh;
 }
 
 .user-table {
@@ -346,6 +348,7 @@ th {
     cursor: pointer; /* Change cursor on hover */
     margin: 0 5px; /* Spacing between buttons */
 }
+
 .button-container {
     display: flex;
     justify-content: flex-end; /* Align buttons to the right */
@@ -362,6 +365,8 @@ th {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
 .dropdown {
@@ -403,7 +408,3 @@ th {
     background-color: #f1f1f1; /* Hover effect for dropdown options */
 }
 
-#addUserButton {
-    position: relative;
-    z-index: 10;
-}
