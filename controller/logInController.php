@@ -10,8 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userModel = new UserModel($connection); 
     $login = $userModel->login($email, $password);
     if ($login) {
-        $_SESSION['user_id'] = $login['id']; 
-        $_SESSION['username'] = $login['username']; 
+        $_SESSION['user_id'] = $login['user_id']; 
+        $_SESSION['first_name'] = $login['fname']; 
+        $_SESSION['last_name'] = $login['lname'];
         if ($login['user_type'] == 'admin') {
             header("Location: ../view/adminDashboard.php");
         } elseif ($login['user_type'] == 'manager') { 

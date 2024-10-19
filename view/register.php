@@ -2,7 +2,7 @@
 session_start();
 $message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['confirmation_message']) : '';
 echo "<script>var message = '$message';</script>";
-echo " `$message` "
+unset($_SESSION['confirmation_message']);
 ?>
 
 <!DOCTYPE html>
@@ -41,21 +41,21 @@ echo " `$message` "
                     </div>
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
-                            <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">
+                            <img src="../assets/images/VectorUsername.png" alt="Graduation Year Icon" class="input-icon">
                             <select name="graduationYear" class="input-field" required>
-                            <option value="" disabled selected> Graduation Year</option>
+                                <option value="" disabled selected> Graduation Year</option>
                                 <?php
                                     $currentYear = date("Y");
                                     for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
                                         echo "<option value=\"$year\">$year</option>";
                                     }
                                 ?>
-                                    </select>
+                            </select>
                         </div>
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/VectorUsername.png" alt="Program Icon" class="input-icon">
                             <select name="program" class="input-field" required> 
-                            <option value="" disabled selected> Programs</option>
+                                <option value="" disabled selected> Programs</option>
                                 <?php
                                 $filePath = '../assets/programs.txt'; 
                                 if (file_exists($filePath)) {
@@ -95,18 +95,25 @@ echo " `$message` "
         </div>
     </div>
 
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <img src="" alt="" />
+            <p id="modal-message"></p>
+            <button class="accept" onclick="closeModal()">Thank you!</button>
+        </div>
+    </div>
 
+    <script>
+        if (message) {
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+        }
 
-<div class="modal-content" id="modal">
-    <img src="" alt="" />
-    <p>We use cookies for improving user experience, analytics and marketing.</p>
-    <button class="accept">That's fine!</button>
-  </div>
-</div>
-
-<script>
-
-</script>
+        function closeModal() {
+            message = null;
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
     <script src="../assets/js/authentication.js"></script>
     <script src="../assets/js/utility.js"></script>
 </body>
