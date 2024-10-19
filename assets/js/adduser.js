@@ -11,7 +11,7 @@ class adduser {
 
   
     redirectToAddUserPage() {
-        window.location.href = "../view/Adduser.html";
+        window.location.href = "../view/Adduser.php";
     }
 }
 // Create an instance of adduser for the button addUserButton
