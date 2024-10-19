@@ -34,5 +34,14 @@
         return false; 
     }
 }
- }
 
+public function getUser() {
+    $query = "SELECT CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.gradyear, a.is_employed, u.user_id  
+              FROM user u 
+              NATURAL JOIN alumni a";
+     $stmt = $this->connection->prepare($query);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     return $result->fetch_all(MYSQLI_ASSOC);
+ }
+}
