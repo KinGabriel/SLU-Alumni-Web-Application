@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
     <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        
+    </style>
 </head>
 <body>
 
@@ -49,7 +52,7 @@
         </div>
     </div>
 </div>
-<script src="assets/js/event-handler.js"> </script>
+<script src="assets/js/event-handler.js"></script>
 
 <!-- Who Are We section -->
 <div id="whoarewe" class="whoarewe hidden">
@@ -59,7 +62,7 @@
     </div>
     <div class="card-container">
         <div class="card">
-            <img src="assets\images\SLU_thumbnail.png" alt="SLU Image"> 
+            <img src="assets/images/SLU_thumbnail.png" alt="SLU Image"> 
         </div>
         <div class="card">
             <img src="assets/images/navi.jpg" alt="Navi"> 
@@ -76,14 +79,14 @@
         <img src="assets/images/alumni.jpg" alt="Alumni Image" class="alumni-image">
         <div class="alumni-messages">
             <h2>Alumni Stories</h2>
-            <h4> Hannah Jordan</h4>
+            <h4>Hannah Jordan</h4>
             <p>Read the inspiring stories of our alumni, their journey, and achievements.</p>
             <button class="btn-read-story">Read Story</button>
         </div>
     </div>
 </div>
 
-<!-- Latest News, Events & Job Oppurtunities section -->
+<!-- Latest News, Events & Job Opportunities section -->
 <div id="news_events_job" class="news_events_job hidden">
     <!-- Scrollable News Column -->
     <div class="scrollable" id="news">
@@ -109,10 +112,10 @@
         <p>Event 4: Duis finibus tortor vel velit ultrices, sed laoreet nulla fermentum.</p>
         <p>Event 5: Pellentesque eget ante eget erat blandit porttitor quis quis eros.</p>
         <p>Event 6: Nulla facilisi. Nam laoreet malesuada metus at consectetur.</p>
-        <p>Event 7: Proin congue tortor vitae ligula fermentum, id convallis metus aliquam.</p>
-        <p>Event 8: Etiam sit amet quam eget est rhoncus consectetur at in ante.</p>
-        <p>Event 9: Vivamus auctor ex nec massa blandit, in accumsan nulla pretium.</p>
-        <p>Event 10: Suspendisse potenti. Integer sed tortor et felis scelerisque blandit.</p>
+        <p>Event 7: Proin congue tortor vitae ligula fermentum, id convallis justo placerat.</p>
+        <p>Event 8: Suspendisse ut sapien vitae nisi hendrerit tincidunt.</p>
+        <p>Event 9: Integer eu sapien a turpis vestibulum varius.</p>
+        <p>Event 10: Fusce dictum urna id est pharetra feugiat.</p>
     </div>
 
     <!-- Scrollable Job Opportunities Column -->
@@ -130,80 +133,59 @@
         <p>Job 10: Nunc consequat dui sed orci aliquam, eget efficitur leo luctus.</p>
     </div>
 </div>
-
-	<!-- footer section start -->
-  <footer id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <a href="index.html"><img src="assets/images/Logo.png" alt="" class="img-fluid logo-footer"></a>
-                    <div class="footer-about">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="useful-link">
-                  <h2>University</h2>
-                  <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
-                  <div class="use-links">
-                    <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Students</a></li>
-                    <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> Events</a></li>
+<!-- footer section start -->
+<footer id="footer">
+    <div class="container footer-container">
+        <div class="footer-column">
+            <img src="assets/images/Logo.png" alt="Alumni Image" class="alumni-image">
+            <div class="footer-about">
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="useful-link">
+                <h2>Useful Links</h2>
+                <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                <div class="use-links">
+                    <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
                     <li><a href="gallery.html"><i class="fa-solid fa-angles-right"></i> Gallery</a></li>
-                    <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> News</a></li>
-                  </div>
+                    <li><a href="contact.html"><i class="fa-solid fa-angles-right"></i> Contact</a></li>
                 </div>
-              </div>    	
-            
-              <div class="col-md-3">
-                <div class="social-links">
-      <h2>Follow Us</h2>
-      <img src="assets/images/about/home_line.png" alt="">
-      <div class="social-icons">
-        <li><a href=""><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
-        <li><a href=""><i class="fa-brands fa-instagram"></i> Instagram</a></li>
-        <li><a href=""><i class="fa-brands fa-linkedin-in"></i> Linkedin</a></li>
-      </div>
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="social-links">
+                <h2>Follow Us</h2>
+                <img src="./assets/images/about/home_line.png" alt="">
+                <div class="social-icons">
+                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i> Twitter</a></li>
+                </div>
+            </div>
+        </div>
+        <div class="footer-column">
+            <div class="address">
+                <h2>Account</h2>
+                <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                <div class="address-links">
+                    <li class="address1"><i class="fa-solid fa-location-dot"></i> Profile</li>
+                    <li><a href=""><i class="fa-solid fa-phone"></i> Stories</a></li>
+                    <li><a href=""><i class="fa-solid fa-envelope"></i> Gallery</a></li>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-              <div class="col-md-3">
-                <div class="address">
-                  <h2>Account</h2>
-                  <img src="assets/images/about/home_line.png" alt="" class="img-fluid">
-                  <div class="address-links">
-                    <li class="address1"><i class="fa-solid fa-location-dot">
-                       <li><a href=""><i class="fa-solid fa-phone"></i> 123124412</a></li>
-                       <li><a href=""><i class="fa-solid fa-envelope"></i> mail@1234567.com</a></li>
-                  </div>
-                </div>
-              </div>
-            </footer>
+</footer>
+<!-- footer section end -->
 
-            <!-- footer copy right section start -->
-		<section id="copy-right">
-			<div class="copy-right-sec"><i class="fa-solid fa-copyright"></i>  
-				lorem ispum lorem ispum 2022 Powerd By <a href="#">lorem ispum</a> 
-
-
-			</div>
-
-		</section>
-
-
-    
-
-
-
-
-
-
-
-
-
-<!-- if ever lang na need ng js sa scrollable
-<script src="assets/js/scrollable.js"></script>
--->
+<!-- footer copy right section start -->
+<section id="copy-right">
+    <div class="copy-right-sec">
+        <i class="fa-solid fa-copyright"></i> Copyright 2024 Saint Louis Alumina All rights reserved <a href="#">Create Account</a>
+    </div>
+</section>
+<!-- footer copy right section end -->
 
 </body>
-</html> 
+</html>
