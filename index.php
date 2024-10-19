@@ -30,17 +30,17 @@
     <div class="slides fade">
         <img src="assets/images/mainslu.png" alt="Main SLU">  
         <div class="text-overlay ">  
-            <h1>SLU ALUMINA</h1> 
-            <p>STORIES</p>
-            <button class="btn-hero">READ STORY</button>
+            <h1>WELCOME TO</h1> 
+            <p>SLU ALUMINA</p>
+            <button class="btn-hero">CONTINUE</button>
         </div>
     </div>
     <div class="slides fade">
         <img src="assets/images/maryheights.jpg" alt="Maryheights Campus">  
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
-            <p>STORIES</p>
-            <button class="btn-hero">READ STORY</button>
+            <p>GALLERY</p>
+            <button class="btn-hero">VIEW GALLERY</button>
         </div>
     </div>
     <div class="slides fade">
