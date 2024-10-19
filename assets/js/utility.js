@@ -24,3 +24,11 @@ function handleFileUpload() {
       imagePreview.style.display = 'none';
   }
 }
+/* Modal */
+if (message) {
+    document.getElementById('modal-message').textContent = message;
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+}

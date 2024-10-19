@@ -40,6 +40,8 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
     }
     return false;
 }
+
+
  function passwordNotMatch(password,retypePassword){
     const messageContainer = document.getElementById('validation-message');
     if (password !== retypePassword) {
