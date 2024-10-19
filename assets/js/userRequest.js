@@ -8,3 +8,4 @@ sidenav.addEventListener('mouseenter', () => {
 sidenav.addEventListener('mouseleave', () => {
   mainContent.style.left = '100px'; // Move content back to original position
 });
+

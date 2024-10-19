@@ -10,10 +10,10 @@
     <!--Header separator-->
     <div class="header-seperator"></div>
     <header>
-    <h1>
-        <img src="../assets/images/logo.png" alt="SLU Alumina Logo">
-        <span>SLU Alumina</span>
-    </h1>
+        <h1>
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo">
+            <span>SLU Alumina</span>
+        </h1>
     </header>
 
     <div class="sidebar-container">  <!-- Container for the sidebar -->
@@ -21,21 +21,21 @@
         <nav class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="#dashboard">
+                    <a href="index.php">
                         <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
                         <span class="menu-item-text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#user-requests">
+                    <a href="/view/userRequest.html"> 
                         <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
-                        <span class="menu-item-text">User Requests</span>
-                    </a>
+                        <span class="menu-item-text">Account Requests</span>
+                    </a>                    
                 </li>
                 <li>
-                    <a href="#user-accounts">
+                    <a href="/view/account.html"> 
                         <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
-                        <span class="menu-item-text">User Accounts</span>
+                        <span class="menu-item-text">Accounts</span>
                     </a>
                 </li>
                 <li>
@@ -46,7 +46,7 @@
                 </li>
                 <li>
                     <a href="#news">
-                        <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
+                        <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                         <span class="menu-item-text">News</span>
                     </a>
                 </li>
@@ -70,7 +70,7 @@
       
     <!-- User Requests table -->
     <div class="user-content" id="userContent">
-        <h1>User Requests List</h1>
+        <h1>Account Requests List</h1>
         <table class="user-table">
             <thead>
                 <tr>
@@ -83,7 +83,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Sample ONLY, dapat dynamic -->
+                <!-- Sample ONLY, should be dynamic -->
                 <tr>
                     <td>
                         <div class="user-name">
@@ -123,7 +123,7 @@
                             Rovic James Will
                         </div>
                     </td>
-                    <td>rovic@will@slu.edu.ph</td>
+                    <td>rovic.will@slu.edu.ph</td>
                     <td>2021002</td>
                     <td>Employed</td>
                     <td>2020</td>
@@ -152,7 +152,7 @@
         </table>
     </div>
 
-   <!-- Search bar -->
+    <!-- Search bar -->
     <div class="search">
         <form>
         <input type="text" placeholder="Search..">
@@ -160,6 +160,25 @@
         </form>
     </div>
 
-
+     <!--Add User, Sort By Name, Sort by Year ---->
+     <div class="button-container">
+        <div class="dropdown">
+            <button id="dropdownButtonName">Sort By Name ▼</button>
+            <div class="dropdown-content" id="dropdownContentName">
+                <a href="#" class="sort-option">A - Z</a>
+                <a href="#" class="sort-option">Z - A</a>
+            </div>
+        </div>
+    
+        <div class="dropdown">
+            <button id="dropdownButtonDate">Sort By Year ▼</button>
+            <div class="dropdown-content" id="dropdownContentDate">
+                <a href="#" class="sort-option">Newest to Oldest</a>
+                <a href="#" class="sort-option">Oldest to Newest</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../assets/js/filter.js"></script>
 </body>
 </html>

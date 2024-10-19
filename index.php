@@ -21,7 +21,7 @@
         <a href="#home">Home</a>
         <a href="#whoarewe">About Us</a>
         <a href="#alumnistories">Alumni Stories</a>
-        <a href="#news_events_job">Career Opportunities</a>
+        <a href="#news_events_job">Others</a>
     </nav>
     <button class="btn-login" onclick="location.href='view/logIn.php'">Log In</button>
 </header>
