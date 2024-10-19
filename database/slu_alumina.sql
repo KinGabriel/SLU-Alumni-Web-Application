@@ -28,8 +28,8 @@ CREATE TABLE `alumni` (
   `user_id` int NOT NULL,
   `school_id` int NOT NULL,
   `gradyear` int NOT NULL,
-  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `courses` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `courses` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `is_employed` tinyint NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `program_idx` (`program`),
@@ -59,7 +59,7 @@ CREATE TABLE `applicants` (
   `fname` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
   `pword` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `gradyear` int NOT NULL,
   `school_id` int NOT NULL,
   `school_id_pic` blob NOT NULL,
@@ -87,9 +87,9 @@ DROP TABLE IF EXISTS `changelogs`;
 CREATE TABLE `changelogs` (
   `logid` int NOT NULL,
   `user_id` int NOT NULL,
-  `logact` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `logact` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `target_id` int NOT NULL,
-  `target_type` enum('post','user') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `target_type` enum('post','user') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `timedate` datetime NOT NULL,
   PRIMARY KEY (`logid`),
   KEY `user_id_idx` (`user_id`),
@@ -143,10 +143,10 @@ DROP TABLE IF EXISTS `event`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event` (
   `event_id` int NOT NULL,
-  `event_title` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `event_type` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `event_title` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `event_type` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `event_time` datetime NOT NULL,
-  `event_location` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `event_location` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`event_id`),
   CONSTRAINT `event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -225,8 +225,8 @@ DROP TABLE IF EXISTS `opportunity`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `opportunity` (
   `opportunity_id` int NOT NULL,
-  `company_name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `program_preference` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `company_name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `program_preference` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`opportunity_id`),
   KEY `program_preference_fk_idx` (`program_preference`) /*!80000 INVISIBLE */,
   CONSTRAINT `program_preference_fk` FOREIGN KEY (`program_preference`) REFERENCES `alumni` (`program`)
@@ -252,12 +252,12 @@ DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `post_id` int NOT NULL,
   `poster_id` int NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `banner` blob,
   `datetime` datetime NOT NULL,
   `is_deleted` tinyint NOT NULL,
-  `access_type` enum('public','private') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `post_type` enum('event','opportunities','normal') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `access_type` enum('public','private') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `post_type` enum('event','opportunities','normal') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `poster_id_idx` (`poster_id`),
   CONSTRAINT `poster_id` FOREIGN KEY (`poster_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -282,13 +282,13 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `pword` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `fname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `lname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `contactno` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `pword` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `fname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contactno` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `pfp` blob,
-  `user_type` enum('alumni','admin','manager') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `user_type` enum('alumni','admin','manager') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
