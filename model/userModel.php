@@ -44,4 +44,13 @@ public function getUser() {
      $result = $stmt->get_result();
      return $result->fetch_all(MYSQLI_ASSOC);
  }
+
+ public function getApplicants() {
+    $query = "SELECT CONCAT(fname, ' ', lname) as Name, email, school_id, gradyear FROM applicants";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 }

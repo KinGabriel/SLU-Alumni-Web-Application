@@ -1,3 +1,4 @@
+/* Base styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -20,6 +21,7 @@ body {
   max-width: 1000px;
   width: 80%;
 }
+
 .form-wrapper::before {
   content: "";
   background-image: url('../images/SLUfront.png');
@@ -34,6 +36,7 @@ body {
   opacity: 0.77; 
   z-index: -1; 
 }
+
 .form-side {
   background-color: #0049b1;
   width: 50%;
@@ -45,14 +48,12 @@ body {
 
 .logo-image {
   height: 55%;
- 
 }
 
 .logo-footer {
   text-align: center;  
   font-size: 2vw;     
-  color: #ffb200;         
-
+  color: #ffb200;
 }
 
 .right-side {
@@ -130,4 +131,37 @@ body {
   font-weight: 600;
   color: #ffb200;
   text-decoration: none;
+}
+
+
+/* Media query for Desktops and Large Screens (1025px - 1200px) */
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .form-container {
+    max-width: 80%;
+    width: 90%;
+  }
+
+  .logo-image {
+    height: 30vw; 
+  }
+
+  .logo-footer {
+    font-size: 2.5vw; 
+  }
+
+  .login-title {
+    font-size: 2.8rem; 
+  }
+
+  .welcome-text {
+    font-size: 1.1rem; 
+  }
+
+  .input-wrapper {
+    margin-bottom: 1rem; 
+  }
+
+  .login-button {
+    font-size: 1.2rem;
+  }
 }

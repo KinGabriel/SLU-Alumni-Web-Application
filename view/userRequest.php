@@ -81,69 +81,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Sample ONLY, should be dynamic -->
-                <tr>
-                    <td>
-                        <div class="user-name">
-                            <img src="../assets/images/candy.jpg" alt="John Cruz Doe" class="profile-pic">
-                            John Cruz Doe
-                        </div>
-                    </td>
-                    <td>john.doe@slu.edu.ph</td>
-                    <td>2021001</td>
-                    <td>2022</td>
-                    <td>
-                        <button class="btn-accept">Accept</button>
-                        <button class="btn-decline">Decline</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="user-name">
-                            <img src="../assets/images/candy.jpg" alt="Jane Mae Smith" class="profile-pic">
-                            Jane Mae Smith
-                        </div>
-                    </td>
-                    <td>jane.smith@slu.edu.ph</td>
-                    <td>2021002</td>
-                    <td>2023</td>
-                    <td>
-                        <button class="btn-accept">Accept</button>
-                        <button class="btn-decline">Decline</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="user-name">
-                            <img src="../assets/images/candy.jpg" alt="Rovic James Will" class="profile-pic">
-                            Rovic James Will
-                        </div>
-                    </td>
-                    <td>rovic.will@slu.edu.ph</td>
-                    <td>2021002</td>
-                    <td>2020</td>
-                    <td>
-                        <button class="btn-accept">Accept</button>
-                        <button class="btn-decline">Decline</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="user-name">
-                            <img src="../assets/images/candy.jpg" alt="Anna Marie Lim" class="profile-pic">
-                            Anna Marie Lim
-                        </div>
-                    </td>
-                    <td>anna.lim@slu.edu.ph</td>
-                    <td>2021002</td>
-                    <td>2019</td>
-                    <td>
-                        <button class="btn-accept">Accept</button>
-                        <button class="btn-decline">Decline</button>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="applicantTableBody"></tbody>
         </table>
     </div>
 
@@ -175,5 +113,6 @@
     </div>
     
     <script src="../assets/js/filter.js"></script>
+    <script src="../assets/js/applicantsTable.js"></script>
 </body>
 </html>
