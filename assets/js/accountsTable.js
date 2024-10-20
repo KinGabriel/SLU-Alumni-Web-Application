@@ -1,6 +1,7 @@
 function populateUserTable(userData) {
     const tableBody = document.getElementById('userTableBody');
     tableBody.innerHTML = ''; 
+    
     userData.forEach(user => {
         const row = `
             <tr>
@@ -29,8 +30,18 @@ function populateUserTable(userData) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('../controller/UserListController.php') 
+function fetchUserData() {
+    const search = document.querySelector('input[name="search"]').value;
+    const jobStatus = document.getElementById('jobStatusFilter').value;
+    const role = document.getElementById('roleFilter').value;
+    
+    const queryString = new URLSearchParams({
+        search,
+        jobStatus,
+        role
+    }).toString();
+
+    fetch(`../controller/UserListController.php?${queryString}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -41,8 +52,29 @@ document.addEventListener('DOMContentLoaded', function() {
             if (Array.isArray(data)) {
                 populateUserTable(data);
             } else {
-                console.error('Invalid data format received.');
+                console.error('Invalid data format received:', data);
             }
         })
         .catch(error => console.error('Error fetching user data:', error));
+}
+
+document.addEventListener('DOMContentLoaded', fetchUserData);
+
+document.querySelector('.search form').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    fetchUserData();
+});
+
+document.getElementById('jobStatusFilter').addEventListener('change', fetchUserData);
+document.getElementById('roleFilter').addEventListener('change', fetchUserData);
+
+// Sort functionality for dropdowns
+document.querySelectorAll('.sort-option').forEach(option => {
+    option.addEventListener('click', function(event) {
+        event.preventDefault();
+        const sortType = this.getAttribute('data-sort');
+        const queryString = new URLSearchParams(window.location.search);
+        queryString.set('sort', sortType);
+        fetchUserData(); 
+    });
 });

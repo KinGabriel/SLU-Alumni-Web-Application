@@ -2,13 +2,20 @@
 require_once '../model/userModel.php';
 require_once '../database/configuration.php';
 
-// Create a database connection
+
 $db = new dbConnection();
 $connection = $db->getConnection();
 $userModel = new userModel($connection);
 
-// Fetch user data from the model
-$users = $userModel->getUser();
+
+$searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
+$jobStatus = isset($_GET['jobStatus']) ? $_GET['jobStatus'] : 'all';
+$role = isset($_GET['role']) ? $_GET['role'] : 'all';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'name ASC'; 
+
+
+$users = $userModel->getUser($searchTerm, $jobStatus, $role, $sort);
+
 header('Content-Type: application/json');
 
 // Check if users data is not empty and is an array

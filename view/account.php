@@ -83,7 +83,7 @@
                     <th>
                         <div class="filter-dropdown">
                             Job Status
-                            <select id="jobStatusFilter">
+                            <select id="jobStatusFilter" name="jobStatus">
                                 <option value="all">All</option>
                                 <option value="employed">Employed</option>
                                 <option value="unemployed">Unemployed</option>
@@ -93,7 +93,7 @@
                     <th>
                         <div class="filter-dropdown">
                             Role
-                            <select id="roleFilter">
+                            <select id="roleFilter" name="role">
                                 <option value="all">All</option>
                                 <option value="alumni">Alumni</option>
                                 <option value="manager">Manager</option>
@@ -110,11 +110,13 @@
 
     <!-- Search bar -->
     <div class="search">
-        <form>
-            <input type="text" placeholder="Search..">
+    <form id="searchForm">
+        <input type="text" name="search" placeholder="Search..">
+        <button type="submit">
             <img src="../assets/images/search.png" alt="Search" class="search-icon">
-        </form>    
-    </div>
+        </button>
+    </form>    
+</div>
 
     <!--Add User, Sort By Name, Sort by Year ---->
     <div class="button-container">
@@ -122,18 +124,19 @@
         <div class="dropdown">
             <button id="dropdownButtonName">Sort By Name ▼</button>
             <div class="dropdown-content" id="dropdownContentName">
-                <a href="#" class="sort-option">A - Z</a>
-                <a href="#" class="sort-option">Z - A</a>
+                <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
+                <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
             </div>
         </div>
         <div class="dropdown">
             <button id="dropdownButtonDate">Sort By Year ▼</button>
             <div class="dropdown-content" id="dropdownContentDate">
-                <a href="#" class="sort-option">Newest to Oldest</a>
-                <a href="#" class="sort-option">Oldest to Newest</a>
+                <a href="#" class="sort-option" data-sort="year-newest">Newest to Oldest</a>
+                <a href="#" class="sort-option" data-sort="year-oldest">Oldest to Newest</a>
             </div>
         </div>
     </div>
+    
     <script src="../assets/js/filter.js"></script>
     <script src="../assets/js/accountsTable.js"></script>
 </body>

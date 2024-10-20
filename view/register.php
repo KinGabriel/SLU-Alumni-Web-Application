@@ -1,4 +1,5 @@
 <?php
+require_once '../model/userModel.php';
 session_start();
 $message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['confirmation_message']) : '';
 echo "<script>var message = '$message';</script>";
