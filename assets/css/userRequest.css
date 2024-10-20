@@ -322,25 +322,25 @@ header img {
     background-color: #f1f1f1; /* Hover effect for dropdown options */
 }
 
-/* Media query for desktop and larger screens */
-@media only screen and (min-width: 1025px) and (max-width: 1200px) {
-    /* Adjustments for larger screens */
-    
+/* Media query for all desktop and laptop screens */
+@media only screen and (min-width: 1024px) and (max-width: 2560px) {
+    /* General adjustments */
     body {
-        width: 130vw; 
+        width: 100%; /* Keep full width */
     }
+
     /* Header Section */
     header {
-        padding: 0.5vw;
+        padding: 0.5vw; /* Adjust padding for desktops */
     }
 
     header h1 {
-        font-size: 1.2vw; /* Smaller font size for larger screens */
+        font-size: 1.2vw; /* Adjust font size */
     }
 
     header img {
-        height: 3.2vw; 
-        width: 2.8vw; 
+        height: 2.2vw; /* Slightly adjust image size */
+        width: 2.7vw;
     }
 
     .header-seperator {
@@ -349,61 +349,60 @@ header img {
 
     /* Side Navigation Bar */
     .sidebar-container {
-        width: 20vw; /* Default width on larger screens */
+        width: 60px; /* Default sidebar width */
     }
 
     .sidebar-container:hover {
-        width: 300px; /* Expanded width on hover for larger screens */
+        width: 250px; /* Sidebar width on hover */
     }
 
     .sidebar-menu li a .menu-item-text {
-        font-size: 1.7vh; /* Slightly smaller font size for sidebar text */
+        font-size: 1.8vh; /* Adjust sidebar text size */
     }
 
     .sidebar-logout {
-        bottom: 10vh; /* Adjust logout section spacing for larger screens */
+        bottom: 12vh; /* Adjust logout button position */
     }
 
     /* User Request Table */
     .user-content {
-        left: 20vw; /* Adjust content spacing when sidebar is collapsed */
-        padding: 25px;
+        left: 70px; /* Adjust content position when sidebar collapsed */
+        padding: 20px;
     }
 
     .sidebar-container:hover ~ .user-content {
-        left: 320px; /* Adjust content spacing when sidebar expands */
+        left: 260px; /* Adjust content position when sidebar expanded */
     }
 
     .user-content h1 {
-        font-size: 4vh; /* Reduce font size for larger screens */
+        font-size: 4.5vh; /* Adjust heading size */
     }
 
     .user-table {
-        width: 150%; /* Reduce table width */
+        width: 140%; /* Adjust table width */
     }
 
     /* Search bar input */
     .search input[type="text"] {
-        right: -22vw; /* Adjust search bar positioning */
-        top: 12%;
+        right: 70px; /* Adjust search bar positioning */
+        top: 13.2%;
     }
 
     .search .search-icon {
-        right: -22vw; /* Adjust search icon positioning */
-        top: 12%;
+        right: 70px; /* Adjust search icon positioning */
+        top: 13.2%;
     }
 
     /* Button container and dropdown */
     .button-container {
-        margin-right: 300px; /* Adjust margin for buttons */
+        margin-right: 300px; /* Adjust button alignment */
     }
-    
+
     .dropdown button {
-        padding: 8px 14px; /* Slightly larger buttons */
+        padding: 6px 12px; /* Adjust button size */
     }
 
     .dropdown-content {
-        min-width: 180px; /* Increase dropdown width */
+        min-width: 160px; /* Adjust dropdown size */
     }
 }
-
