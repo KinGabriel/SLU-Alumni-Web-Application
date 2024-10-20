@@ -17,31 +17,30 @@ unset($_SESSION['confirmation_message']);
     <div class="form-wrapper">
         <div class="form-container">
             <div class="right-side">
-                <h1 class="login-title">Welcome Back Louisian!</h1>
+                <h1 class="login-title">Welcome back, Louisian!</h1>
                 <p class="welcome-text">Please fill in your details to create an account</p>
                 <div id="validation-message"></div>
                 <form action="../controller/registrationController.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
-                            <img src="../assets/images/VectorUsername.png" alt="First Name Icon" class="input-icon">
+                            <img src="../assets/images/user.png" alt="First Name Icon" class="input-icon">
                             <input type="text" name="firstName" class="input-field" placeholder="First Name" required />
                         </div>
                         <div class="input-wrapper half-width">
-                            <img src="../assets/images/VectorUsername.png" alt="Last Name Icon" class="input-icon">
                             <input type="text" name="lastName" class="input-field" placeholder="Last Name" required />
                         </div>
                     </div>
                     <div class="input-wrapper">
-                        <img src="../assets/images/VectorUsername.png" alt="Email Icon" class="input-icon" />
+                        <img src="../assets/images/email.png" alt="Email Icon" class="input-icon" />
                         <input type="email" name="email" class="input-field" placeholder="Email" required />
                     </div>
                     <div class="input-wrapper">
-                        <img src="../assets/images/VectorUsername.png" alt="SLU ID Icon" class="input-icon" />
+                        <img src="../assets/images/id.png" alt="SLU ID Icon" class="input-icon" />
                         <input type="text" name="sluSchoolId" class="input-field" placeholder="SLU School ID" required />
                     </div>
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
-                            <img src="../assets/images/VectorUsername.png" alt="Graduation Year Icon" class="input-icon">
+                            <img src="../assets/images/graduation.png" alt="Graduation Year Icon" class="input-icon">
                             <select name="graduationYear" class="input-field" required>
                                 <option value="" disabled selected> Graduation Year</option>
                                 <?php
@@ -53,7 +52,6 @@ unset($_SESSION['confirmation_message']);
                             </select>
                         </div>
                         <div class="input-wrapper half-width">
-                            <img src="../assets/images/VectorUsername.png" alt="Program Icon" class="input-icon">
                             <select name="program" class="input-field" required> 
                                 <option value="" disabled selected> Programs</option>
                                 <?php
@@ -71,11 +69,11 @@ unset($_SESSION['confirmation_message']);
                         </div>
                     </div>
                     <div class="input-wrapper">
-                        <img src="../assets/images/VectorLock.png" alt="Password Icon" class="input-icon" />
+                        <img src="../assets/images/password.png" alt="Password Icon" class="input-icon" />
                         <input type="password" name="password" class="input-field" placeholder="Password" required />
                     </div>
                     <div class="input-wrapper">
-                        <img src="../assets/images/VectorLock.png" alt="Retype Password Icon" class="input-icon" />
+                        <img src="../assets/images/password.png" alt="Retype Password Icon" class="input-icon" />
                         <input type="password" name="retype_password" class="input-field" placeholder="Retype Password" required />
                     </div>
                     <div class="input-wrapper">

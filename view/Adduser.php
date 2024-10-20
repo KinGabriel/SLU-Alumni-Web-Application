@@ -28,7 +28,7 @@
                     </a>
              </li>
                 <li>
-                    <a href="../view/userRequest.html">
+                    <a href="../view/userRequest.php">
                     <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                     <span class="menu-item-text">Account Requests</span>
                 </a>
@@ -61,7 +61,7 @@
         <!-- Sticky Log Out Button -->
         <div class="sidebar-logout">
             <a href="#logout">
-                <img src="/assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+                <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
                 <span class="menu-item-logout">Log Out</span>
             </a>
         </div>

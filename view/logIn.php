@@ -22,16 +22,16 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
       </div>
       <div class="right-side">
         <h1 class="login-title">Login</h1>
-        <p class="welcome-text">Welcome back! Please enter your details.</p>
+        <p class="welcome-text">Welcome! Please enter your details.</p>
         <div id="validation-message"></div>
 
         <form action="../controller/logInController.php" method="POST">
           <div class="input-wrapper">
-            <img src="../assets/images/VectorUsername.png" alt="email Icon" class="input-icon" />
+            <img src="../assets/images/user.png" alt="email Icon" class="input-icon" />
             <input type="text" name="email" class="input-field" placeholder="Email" required />
           </div>
           <div class="input-wrapper">
-            <img src="../assets/images/VectorLock.png" alt="Password Icon" class="input-icon" />
+            <img src="../assets/images/password.png" alt="Password Icon" class="input-icon" />
             <input type="password" name="password" class="input-field" placeholder="Password" required />
           </div>
           <a href="#" class="forgot-password">Forgot Password</a>
