@@ -133,6 +133,37 @@ body {
   text-decoration: none;
 }
 
+/* Media query for small screens, laptops (769px - 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .form-container {
+    max-width: 85%;
+    width: 95%;
+  }
+
+  .logo-image {
+    height: 35vw; 
+  }
+
+  .logo-footer {
+    font-size: 3vw; 
+  }
+
+  .login-title {
+    font-size: 2.5rem; 
+  }
+
+  .welcome-text {
+    font-size: 1rem; 
+  }
+
+  .input-wrapper {
+    margin-bottom: 0.9rem; 
+  }
+
+  .login-button {
+    font-size: 1.1rem;
+  }
+}
 
 /* Media query for Desktops and Large Screens (1025px - 1200px) */
 @media only screen and (min-width: 1025px) and (max-width: 1200px) {
