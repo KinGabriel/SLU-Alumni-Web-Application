@@ -77,7 +77,6 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>ID Number</th>
-                    <th>Job Status</th>
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>
@@ -93,7 +92,6 @@
                     </td>
                     <td>john.doe@slu.edu.ph</td>
                     <td>2021001</td>
-                    <td>Employed</td>
                     <td>2022</td>
                     <td>
                         <button class="btn-accept">Accept</button>
@@ -109,7 +107,6 @@
                     </td>
                     <td>jane.smith@slu.edu.ph</td>
                     <td>2021002</td>
-                    <td>Unemployed</td>
                     <td>2023</td>
                     <td>
                         <button class="btn-accept">Accept</button>
@@ -125,7 +122,6 @@
                     </td>
                     <td>rovic.will@slu.edu.ph</td>
                     <td>2021002</td>
-                    <td>Employed</td>
                     <td>2020</td>
                     <td>
                         <button class="btn-accept">Accept</button>
@@ -141,7 +137,6 @@
                     </td>
                     <td>anna.lim@slu.edu.ph</td>
                     <td>2021002</td>
-                    <td>Unemployed</td>
                     <td>2019</td>
                     <td>
                         <button class="btn-accept">Accept</button>
