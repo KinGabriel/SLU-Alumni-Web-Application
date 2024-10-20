@@ -321,8 +321,9 @@ header img {
 .dropdown-content a:hover {
     background-color: #f1f1f1; /* Hover effect for dropdown options */
 }
-/* Media query for screens smaller than 769px */
-@media only screen and (max-width: 769px) {
+
+/* Media query for screens between 769px and 800px */
+@media only screen and (min-width: 769px) and (max-width: 800px) {
     /* General adjustments */
     body {
         width: 100%;
@@ -414,7 +415,7 @@ header img {
     .button-container {
         display: flex;
         justify-content: flex-end;
-        margin-top: 10px;
+        margin-top: 30px;
         margin-right: 50px; /* Adjust button alignment */
     }
 
@@ -429,7 +430,228 @@ header img {
     .dropdown-content {
         min-width: 140px;
     }
-    /* Medium screens (e.g., tablets) */
+}
+
+/* Media query for screens between 800px and 1000px */
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+    /* General adjustments */
+    body {
+        width: 100%;
+    }
+
+    /* Header Section */
+    header {
+        padding: 1vw;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 4vw;
+        margin-left: 1vw;
+    }
+
+    header img {
+        height: 7vw;
+        width: 9vw;
+    }
+
+    .header-seperator {
+        padding-bottom: 2vw;
+        margin-top: 1vw;
+    }
+
+    /* Side Navigation Bar */
+    .sidebar-container {
+        width: 60px;
+    }
+
+    .sidebar-container:hover {
+        width: 220px;
+    }
+
+    .sidebar-menu li a .menu-item-text {
+        font-size: 2vh;
+    }
+
+    .sidebar-logout {
+        bottom: 10vh;
+    }
+
+    /* User Request Table */
+    .user-content {
+        left: 70px;
+        padding: 15px;
+        width: 100%; /* Ensure the content fits smaller screens */
+    }
+
+    .sidebar-container:hover ~ .user-content {
+        left: 250px;
+    }
+
+    .user-content h1 {
+        font-size: 4vh;
+        margin-top: 20px;
+    }
+
+    .user-table {
+        width: 100%;
+        font-size: 15px; /* Slightly larger font size */
+    }
+
+    .user-table th, .user-table td {
+        padding: 10px;
+    }
+
+    .user-table .btn-accept, .user-table .btn-decline {
+        padding: 8px 12px; /* Slightly larger buttons */
+    }
+
+    /* Search bar input */
+    .search input[type="text"] {
+        width: 160px; /* Slightly larger input width */
+        right: 30px; /* Adjust search bar position */
+        top: 10%;
+        padding: 5px;
+    }
+
+    .search .search-icon {
+        right: 30px;
+        top: 10%;
+        width: 25px;
+    }
+
+    /* Button container and dropdown */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 60px; /* Adjust button alignment */
+        margin-top: 30px; /* Adjust this value to move the buttons lower */
+    }
+
+    .dropdown {
+        margin-right: 10px;
+    }
+
+    .dropdown button {
+        padding: 6px 12px;
+    }
+
+    .dropdown-content {
+        min-width: 160px;
+    }
+}
+/* Media query for screens between 1000px and 1300px */
+@media only screen and (min-width: 1000px) and (max-width: 1500px) {
+    /* General adjustments */
+    body {
+        width: 100%;
+    }
+
+    /* Header Section */
+    header {
+        padding: 1vw;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        font-size: 4vw;
+        margin-left: 1vw;
+    }
+
+    header img {
+        height: 7vw;
+        width: 9vw;
+    }
+
+    .header-seperator {
+        padding-bottom: 2vw;
+        margin-top: 1vw;
+    }
+
+    /* Side Navigation Bar */
+    .sidebar-container {
+        width: 60px;
+    }
+
+    .sidebar-container:hover {
+        width: 220px;
+    }
+
+    .sidebar-menu li a .menu-item-text {
+        font-size: 2vh;
+    }
+
+    .sidebar-logout {
+        bottom: 10vh;
+    }
+
+    /* User Request Table */
+    .user-content {
+        left: 70px;
+        padding: 15px;
+        width: 100%; /* Ensure the content fits smaller screens */
+    }
+
+    .sidebar-container:hover ~ .user-content {
+        left: 250px;
+    }
+
+    .user-content h1 {
+        font-size: 4vh;
+        margin-top: 20px;
+    }
+
+    .user-table {
+        width: 100%;
+        font-size: 15px; /* Slightly larger font size */
+    }
+
+    .user-table th, .user-table td {
+        padding: 10px;
+    }
+
+    .user-table .btn-accept, .user-table .btn-decline {
+        padding: 8px 12px; /* Slightly larger buttons */
+    }
+
+    /* Search bar input */
+    .search input[type="text"] {
+        width: 160px; /* Slightly larger input width */
+        right: 30px; /* Adjust search bar position */
+        top: 10%;
+        padding: 5px;
+    }
+
+    .search .search-icon {
+        right: 30px;
+        top: 10%;
+        width: 25px;
+    }
+
+    /* Button container and dropdown */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 60px; /* Adjust button alignment */
+        margin-top: 30px; /* Adjust this value to move the buttons lower */
+    }
+
+    .dropdown {
+        margin-right: 10px;
+    }
+
+    .dropdown button {
+        padding: 6px 12px;
+    }
+
+    .dropdown-content {
+        min-width: 160px;
+    }
+}
+
+/* Medium screens (e.g., tablets) */
 @media (max-width: 1024px) {
     .user-content h1 {
         font-size: 4vh; /* Slightly smaller */
@@ -462,5 +684,4 @@ header img {
     .user-content h1 {
         font-size: 2.2vw; /* Smallest size */
     }
-}
 }
