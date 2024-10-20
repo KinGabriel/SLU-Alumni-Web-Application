@@ -411,6 +411,7 @@ th {
 .dropdown-content a:hover {
     background-color: #f1f1f1; /* Hover effect for dropdown options */
 }
+
 /* Media query for screens between 769px and 1300px */
 @media only screen and (min-width: 769px) and (max-width: 1300px) {
     /* General adjustments */
@@ -443,6 +444,7 @@ th {
     /* Side Navigation Bar */
     .sidebar-container {
         width: 60px;
+        margin-top: 12.5vw;
     }
 
     .sidebar-container:hover {
@@ -470,22 +472,22 @@ th {
 
     .user-content h1 {
         font-size: 4vh;
-        margin-top: 20px;
+        margin-top: 10%;
     }
 
     .user-table {
-        width: 100%; /* Ensure the table takes the full width */
-        font-size: 15px; /* Slightly larger font size */
-        overflow-x: auto; /* Enable horizontal scrolling if necessary */
+        width: 80%; 
+        font-size: 15px; 
+        overflow-x: auto; 
     }
 
     .user-table th, .user-table td {
         padding: 10px;
-        text-align: center; /* Center the text */
+        text-align: center; 
     }
 
     .user-table .btn-accept, .user-table .btn-decline {
-        padding: 8px 12px; /* Slightly larger buttons */
+        padding: 8px 12px; 
     }
 
     /* Search bar input */
@@ -506,7 +508,7 @@ th {
     .button-container {
         display: flex;
         justify-content: flex-end; /* Align buttons to the right */
-        margin-top: 30px; /* Add space above the buttons */
+        margin-top: 0px; /* Add space above the buttons */
         margin-right: 30px; /* Adjust right margin for positioning */
     }
 
