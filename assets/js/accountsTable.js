@@ -1,7 +1,7 @@
 function populateUserTable(userData) {
     const tableBody = document.getElementById('userTableBody');
     tableBody.innerHTML = ''; 
-    
+
     userData.forEach(user => {
         const row = `
             <tr>
@@ -34,11 +34,11 @@ function fetchUserData() {
     const search = document.querySelector('input[name="search"]').value;
     const jobStatus = document.getElementById('jobStatusFilter').value;
     const role = document.getElementById('roleFilter').value;
-    
     const queryString = new URLSearchParams({
         search,
         jobStatus,
-        role
+        role,
+        sort: new URLSearchParams(window.location.search).get('sort') || 'name ASC' 
     }).toString();
 
     fetch(`../controller/UserListController.php?${queryString}`)
@@ -52,29 +52,43 @@ function fetchUserData() {
             if (Array.isArray(data)) {
                 populateUserTable(data);
             } else {
-                console.error('Invalid data format received:', data);
+                console.error('Invalid data format received.');
             }
         })
         .catch(error => console.error('Error fetching user data:', error));
+    window.history.replaceState({}, '', `?${queryString}`);
 }
 
-document.addEventListener('DOMContentLoaded', fetchUserData);
 
-document.querySelector('.search form').addEventListener('submit', function(event) {
-    event.preventDefault(); 
+document.addEventListener('DOMContentLoaded', () => {
     fetchUserData();
-});
-
-document.getElementById('jobStatusFilter').addEventListener('change', fetchUserData);
-document.getElementById('roleFilter').addEventListener('change', fetchUserData);
-
-// Sort functionality for dropdowns
-document.querySelectorAll('.sort-option').forEach(option => {
-    option.addEventListener('click', function(event) {
-        event.preventDefault();
-        const sortType = this.getAttribute('data-sort');
-        const queryString = new URLSearchParams(window.location.search);
-        queryString.set('sort', sortType);
+    document.querySelector('.search form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
         fetchUserData(); 
+    });
+
+
+    document.getElementById('jobStatusFilter').addEventListener('change', function() {
+        fetchUserData(); 
+    });
+    document.getElementById('roleFilter').addEventListener('change', function() {
+        fetchUserData(); 
+    });
+    document.querySelectorAll('.sort-option').forEach(option => {
+        option.addEventListener('click', function(event) {
+            event.preventDefault();
+            const sortType = this.getAttribute('data-sort');
+            const queryString = new URLSearchParams(window.location.search);
+            if (sortType === 'name-asc') {
+                queryString.set('sort', 'name ASC');
+            } else if (sortType === 'name-desc') {
+                queryString.set('sort', 'name DESC');
+            } else if (sortType === 'year-newest') {
+                queryString.set('sort', 'year DESC');
+            } else if (sortType === 'year-oldest') {
+                queryString.set('sort', 'year ASC');
+            }
+            window.location.search = queryString.toString();
+        });
     });
 });
