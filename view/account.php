@@ -21,19 +21,19 @@
         <nav class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="index.php">
+                    <a href="../index.php">
                     <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
                     <span class="menu-item-text">Dashboard</span>
                     </a>
              </li>
                 <li>
-                    <a href="/view/userRequest.php">
+                    <a href="../view/userRequest.html">
                     <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                     <span class="menu-item-text">Account Requests</span>
                 </a>
                 </li>
                 <li>
-                    <a href="/view/account.php">
+                    <a href="../view/account.php">
                         <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
                         <span class="menu-item-text">Accounts</span>
                     </a>
