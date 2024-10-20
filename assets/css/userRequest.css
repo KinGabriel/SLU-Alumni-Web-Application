@@ -322,118 +322,8 @@ header img {
     background-color: #f1f1f1; /* Hover effect for dropdown options */
 }
 
-/* Media query for screens between 769px and 800px */
-@media only screen and (min-width: 769px) and (max-width: 800px) {
-    /* General adjustments */
-    body {
-        width: 100%;
-    }
-
-    /* Header Section */
-    header {
-        padding: 1vw;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header h1 {
-        font-size: 4vw;
-        margin-left: 1vw;
-    }
-
-    header img {
-        height: 7vw;
-        width: 9vw;
-    }
-
-    .header-seperator {
-        padding-bottom: 2vw;
-        margin-top: 1vw;
-    }
-
-    /* Side Navigation Bar */
-    .sidebar-container {
-        width: 50px;
-    }
-
-    .sidebar-container:hover {
-        width: 180px;
-    }
-
-    .sidebar-menu li a .menu-item-text {
-        font-size: 2vh;
-    }
-
-    .sidebar-logout {
-        bottom: 10vh;
-    }
-
-    /* User Request Table */
-    .user-content {
-        left: 60px;
-        padding: 10px;
-        width: 100%; /* Ensure the content fits smaller screens */
-    }
-
-    .sidebar-container:hover ~ .user-content {
-        left: 200px;
-    }
-
-    .user-content h1 {
-        font-size: 4vw;
-        margin-top: 20px;
-    }
-
-    .user-table {
-        width: 100%;
-        font-size: 14px;
-    }
-
-    .user-table th, .user-table td {
-        padding: 8px;
-    }
-
-    .user-table .btn-accept, .user-table .btn-decline {
-        padding: 6px 10px;
-    }
-
-    /* Search bar input */
-    .search input[type="text"] {
-        width: 130px; /* Smaller input width */
-        right: 20px; /* Adjust search bar position */
-        top: 10%;
-        padding: 4px;
-    }
-
-    .search .search-icon {
-        right: 20px;
-        top: 10%;
-        width: 20px;
-    }
-
-    /* Button container and dropdown */
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 30px;
-        margin-right: 50px; /* Adjust button alignment */
-    }
-
-    .dropdown {
-        margin-right: 5px;
-    }
-
-    .dropdown button {
-        padding: 4px 8px;
-    }
-
-    .dropdown-content {
-        min-width: 140px;
-    }
-}
-
-/* Media query for screens between 800px and 1000px */
-@media only screen and (min-width: 800px) and (max-width: 1000px) {
+/* Media query for screens between 769px and 1300px */
+@media only screen and (min-width: 769px) and (max-width: 1300px) {
     /* General adjustments */
     body {
         width: 100%;
@@ -464,6 +354,7 @@ header img {
     /* Side Navigation Bar */
     .sidebar-container {
         width: 60px;
+        margin-top: 12.5vw;
     }
 
     .sidebar-container:hover {
@@ -482,7 +373,7 @@ header img {
     .user-content {
         left: 70px;
         padding: 15px;
-        width: 100%; /* Ensure the content fits smaller screens */
+        width: calc(100% - 70px); /* Ensure the content fits smaller screens */
     }
 
     .sidebar-container:hover ~ .user-content {
@@ -491,16 +382,18 @@ header img {
 
     .user-content h1 {
         font-size: 4vh;
-        margin-top: 20px;
+        margin-top: 10%;
     }
 
     .user-table {
-        width: 100%;
+        width: 80%; /* Ensure the table takes the full width */
         font-size: 15px; /* Slightly larger font size */
+        overflow-x: auto; /* Enable horizontal scrolling if necessary */
     }
 
     .user-table th, .user-table td {
         padding: 10px;
+        text-align: center; /* Center the text */
     }
 
     .user-table .btn-accept, .user-table .btn-decline {
@@ -509,7 +402,7 @@ header img {
 
     /* Search bar input */
     .search input[type="text"] {
-        width: 160px; /* Slightly larger input width */
+        width: 160px; /* Adjust input width */
         right: 30px; /* Adjust search bar position */
         top: 10%;
         padding: 5px;
@@ -524,9 +417,9 @@ header img {
     /* Button container and dropdown */
     .button-container {
         display: flex;
-        justify-content: flex-end;
-        margin-right: 60px; /* Adjust button alignment */
-        margin-top: 30px; /* Adjust this value to move the buttons lower */
+        justify-content: flex-end; /* Align buttons to the right */
+        margin-top: 30px; /* Add space above the buttons */
+        margin-right: 30px; /* Adjust right margin for positioning */
     }
 
     .dropdown {
@@ -539,149 +432,5 @@ header img {
 
     .dropdown-content {
         min-width: 160px;
-    }
-}
-/* Media query for screens between 1000px and 1300px */
-@media only screen and (min-width: 1000px) and (max-width: 1500px) {
-    /* General adjustments */
-    body {
-        width: 100%;
-    }
-
-    /* Header Section */
-    header {
-        padding: 1vw;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header h1 {
-        font-size: 4vw;
-        margin-left: 1vw;
-    }
-
-    header img {
-        height: 7vw;
-        width: 9vw;
-    }
-
-    .header-seperator {
-        padding-bottom: 2vw;
-        margin-top: 1vw;
-    }
-
-    /* Side Navigation Bar */
-    .sidebar-container {
-        width: 60px;
-    }
-
-    .sidebar-container:hover {
-        width: 220px;
-    }
-
-    .sidebar-menu li a .menu-item-text {
-        font-size: 2vh;
-    }
-
-    .sidebar-logout {
-        bottom: 10vh;
-    }
-
-    /* User Request Table */
-    .user-content {
-        left: 70px;
-        padding: 15px;
-        width: 100%; /* Ensure the content fits smaller screens */
-    }
-
-    .sidebar-container:hover ~ .user-content {
-        left: 250px;
-    }
-
-    .user-content h1 {
-        font-size: 4vh;
-        margin-top: 20px;
-    }
-
-    .user-table {
-        width: 100%;
-        font-size: 15px; /* Slightly larger font size */
-    }
-
-    .user-table th, .user-table td {
-        padding: 10px;
-    }
-
-    .user-table .btn-accept, .user-table .btn-decline {
-        padding: 8px 12px; /* Slightly larger buttons */
-    }
-
-    /* Search bar input */
-    .search input[type="text"] {
-        width: 160px; /* Slightly larger input width */
-        right: 30px; /* Adjust search bar position */
-        top: 10%;
-        padding: 5px;
-    }
-
-    .search .search-icon {
-        right: 30px;
-        top: 10%;
-        width: 25px;
-    }
-
-    /* Button container and dropdown */
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-right: 60px; /* Adjust button alignment */
-        margin-top: 30px; /* Adjust this value to move the buttons lower */
-    }
-
-    .dropdown {
-        margin-right: 10px;
-    }
-
-    .dropdown button {
-        padding: 6px 12px;
-    }
-
-    .dropdown-content {
-        min-width: 160px;
-    }
-}
-
-/* Medium screens (e.g., tablets) */
-@media (max-width: 1024px) {
-    .user-content h1 {
-        font-size: 4vh; /* Slightly smaller */
-    }
-}
-
-/* Small screens (e.g., large phones) */
-@media (max-width: 820px) {
-    .user-content h1 {
-        font-size: 3.6vw; /* Even smaller for medium-small devices */
-    }
-}
-
-/* Extra small screens (e.g., phones) */
-@media (max-width: 769px) {
-    .user-content h1 {
-        font-size: 3vw; /* For smaller screens */
-    }
-}
-
-/* For very small screens (e.g., small phones) */
-@media (max-width: 600px) {
-    .user-content h1 {
-        font-size: 2.5vw; /* Further reduce size for small phones */
-    }
-}
-
-/* Extremely small devices (e.g., below 500px) */
-@media (max-width: 500px) {
-    .user-content h1 {
-        font-size: 2.2vw; /* Smallest size */
     }
 }
