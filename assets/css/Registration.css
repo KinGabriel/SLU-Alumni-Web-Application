@@ -96,9 +96,12 @@ body {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  color: gray;
+  color: black;
 }
 
+select.input-field {
+  color: gray;
+}
 .login-button {
   background-color: #0049b1;
   color: white;
@@ -208,4 +211,74 @@ button.accept {
   box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
 }
 
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  header h1 {
+      font-size: 1.6vw;
+  }
+  
+  header img {
+      height: 2.8vw;
+      width: 3.5vw;
+  }
+  
+  .sidebar-container {
+      width: 65px;
+  }
+  
+  .sidebar-container:hover {
+      width: 220px;
+  }
+  
+  .sidebar-menu li a {
+      padding: 8px;
+      font-size: 1.8vh;
+  }
 
+  .user-content {
+      left: 75px;
+  }
+
+  .sidebar-container:hover ~ .user-content {
+      left: 225px;
+  }
+
+  .user-content h1 {
+      font-size: 4.5vh;
+  }
+
+  .user-table {
+      width: 150%;
+  }
+
+  .user-table th, .user-table td {
+      padding: 10px;
+  }
+
+  .user-table .btn-accept, 
+  .user-table .btn-decline {
+      padding: 7px 14px;
+  }
+
+  .profile-pic {
+      width: 32px;
+      height: 32px;
+  }
+
+  .search input[type="text"] {
+      right: 65px;
+      width: 180px;
+  }
+
+  .search .search-icon {
+      right: 65px;
+      width: 22px;
+  }
+
+  .button-container {
+      margin-right: 300px;
+  }
+
+  .dropdown button {
+      padding: 5px 10px;
+  }
+}
