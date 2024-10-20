@@ -1,314 +1,342 @@
-CREATE DATABASE  IF NOT EXISTS `slu_alumina` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `slu_alumina`;
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: slu_alumina
--- ------------------------------------------------------
--- Server version	8.3.0
+-- Host: 127.0.0.1
+-- Generation Time: Oct 20, 2024 at 11:49 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `slu_alumina`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `alumni`
 --
 
-DROP TABLE IF EXISTS `alumni`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alumni` (
-  `user_id` int NOT NULL,
-  `school_id` int NOT NULL,
-  `gradyear` int NOT NULL,
-  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `courses` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `is_employed` tinyint NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `program_idx` (`program`),
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `user_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `gradyear` int(11) NOT NULL,
+  `program` varchar(80) NOT NULL,
+  `courses` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `alumni`
 --
 
-LOCK TABLES `alumni` WRITE;
-/*!40000 ALTER TABLE `alumni` DISABLE KEYS */;
-/*!40000 ALTER TABLE `alumni` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `alumni` (`user_id`, `school_id`, `gradyear`, `program`, `courses`) VALUES
+(1, 2235008, 2024, 'BSIT', 'null');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `applicants`
 --
 
-DROP TABLE IF EXISTS `applicants`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `applicants` (
-  `app_id` int NOT NULL AUTO_INCREMENT,
-  `lname` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
-  `fname` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(70) COLLATE utf8mb4_general_ci NOT NULL,
-  `pword` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `program` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `gradyear` int NOT NULL,
-  `school_id` int NOT NULL,
+  `app_id` int(11) NOT NULL,
+  `lname` varchar(70) NOT NULL,
+  `fname` varchar(70) NOT NULL,
+  `email` varchar(70) NOT NULL,
+  `pword` varchar(45) NOT NULL,
+  `program` varchar(80) NOT NULL,
+  `gradyear` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
   `school_id_pic` blob NOT NULL,
-  `is_verified` tinyint NOT NULL,
-  PRIMARY KEY (`app_id`)
+  `is_verified` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `applicants`
 --
 
-LOCK TABLES `applicants` WRITE;
-/*!40000 ALTER TABLE `applicants` DISABLE KEYS */;
-/*!40000 ALTER TABLE `applicants` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `applicants` (`app_id`, `lname`, `fname`, `email`, `pword`, `program`, `gradyear`, `school_id`, `school_id_pic`, `is_verified`) VALUES
+(1, 'a', 'a', '2235008@slu.edu.ph', '$2y$10$n7HoJcFhriN9WivEI1FTke0aPtLOHFSdj/Ahr.', 'Bachelor of Science in Computer Science', 2011, 12, '', 0),
+(2, 'Escano', 'Nichole Jhoy', 'nic@gmail.com', '$2y$10$vCkPwLiM8zlfDdC/2bFzSuoX6XWKNYfEBASxiS', 'Bachelor of Science in Information Technology', 2024, 2203455, '', 0),
+(3, 'DeMesa', 'Rovic Louie', 'rvic@yahoo.com', '$2y$10$q8jDD6qkkZA5acnYEK81Qe3/uiSMwmueFlqIq2', 'Bachelor of Science in Information Technology', 2011, 201789, '', 0),
+(4, 'Cerezo', 'Albeth', 'albeth@gmail.com', '$2y$10$xI9dYE4jkxzFCToOefjXbO5LnQTO3/RwNVL2wp', 'Bachelor of Arts in Business Administration', 2023, 2193123, '', 0),
+(5, 'Mandac', 'Minette Victoria', 'shiminette@gmail.com', '$2y$10$jmks5Pq6ebjeHrEvkKx0j.Oz67MVpBzisNJZUp', 'Bachelor of Science in Computer Science', 2022, 218031, '', 0),
+(6, 'Vergara', 'Carlos Miguel', 'carcar@yahoo.com', '$2y$10$rNl0yAzZGGxzlGP/HAd8Je25E73Gtoac6EfOxD', 'Bachelor of Science in Information Technology', 2004, 2003233, '', 0);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `changelogs`
 --
 
-DROP TABLE IF EXISTS `changelogs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `changelogs` (
-  `logid` int NOT NULL,
-  `user_id` int NOT NULL,
-  `logact` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `target_id` int NOT NULL,
-  `target_type` enum('post','user') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `timedate` datetime NOT NULL,
-  PRIMARY KEY (`logid`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  `logid` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `logact` text NOT NULL,
+  `target_id` int(11) NOT NULL,
+  `target_type` enum('post','user') NOT NULL,
+  `timedate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `changelogs`
---
-
-LOCK TABLES `changelogs` WRITE;
-/*!40000 ALTER TABLE `changelogs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `changelogs` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comments`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comments` (
-  `comm_id` int NOT NULL,
-  `post_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`comm_id`),
-  KEY `post_id_fk_idx` (`post_id`),
-  KEY `user_id_fkey_idx` (`user_id`),
-  CONSTRAINT `post_id_fk` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `comm_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `comments`
---
-
-LOCK TABLES `comments` WRITE;
-/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `event`
 --
 
-DROP TABLE IF EXISTS `event`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `event` (
-  `event_id` int NOT NULL,
-  `event_title` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `event_type` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `event_title` varchar(80) NOT NULL,
+  `event_type` varchar(80) NOT NULL,
   `event_time` datetime NOT NULL,
-  `event_location` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`event_id`),
-  CONSTRAINT `event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `event_location` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `event`
---
-
-LOCK TABLES `event` WRITE;
-/*!40000 ALTER TABLE `event` DISABLE KEYS */;
-/*!40000 ALTER TABLE `event` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `follows`
 --
 
-DROP TABLE IF EXISTS `follows`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `follows` (
-  `follower_id` int NOT NULL,
-  `followed_id` int NOT NULL,
-  `date_followed` datetime NOT NULL,
-  PRIMARY KEY (`follower_id`,`followed_id`),
-  KEY `followed_id_fk_idx` (`followed_id`),
-  CONSTRAINT `followed_id_fk` FOREIGN KEY (`followed_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `follower_id_fk` FOREIGN KEY (`follower_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `follower_id` int(11) NOT NULL,
+  `followed_id` int(11) NOT NULL,
+  `date_followed` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `follows`
---
-
-LOCK TABLES `follows` WRITE;
-/*!40000 ALTER TABLE `follows` DISABLE KEYS */;
-/*!40000 ALTER TABLE `follows` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `likes`
 --
 
-DROP TABLE IF EXISTS `likes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `likes` (
-  `like_id` int NOT NULL,
-  `post_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  PRIMARY KEY (`like_id`),
-  KEY `post_id_fkey_idx` (`post_id`),
-  KEY `user_id_fkey2_idx` (`user_id`),
-  CONSTRAINT `post_id_fkey` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `user_id_fkey2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `like_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `likes`
---
-
-LOCK TABLES `likes` WRITE;
-/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `opportunity`
 --
 
-DROP TABLE IF EXISTS `opportunity`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `opportunity` (
-  `opportunity_id` int NOT NULL,
-  `company_name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `program_preference` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`opportunity_id`),
-  KEY `program_preference_fk_idx` (`program_preference`) /*!80000 INVISIBLE */,
-  CONSTRAINT `program_preference_fk` FOREIGN KEY (`program_preference`) REFERENCES `alumni` (`program`)
+  `opportunity_id` int(11) NOT NULL,
+  `company_name` varchar(60) NOT NULL,
+  `program_preference` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `opportunity`
---
-
-LOCK TABLES `opportunity` WRITE;
-/*!40000 ALTER TABLE `opportunity` DISABLE KEYS */;
-/*!40000 ALTER TABLE `opportunity` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `posts` (
-  `post_id` int NOT NULL,
-  `poster_id` int NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `banner` blob,
+  `post_id` int(11) NOT NULL,
+  `poster_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `banner` blob DEFAULT NULL,
   `datetime` datetime NOT NULL,
-  `is_deleted` tinyint NOT NULL,
-  `access_type` enum('public','private') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `post_type` enum('event','opportunities','normal') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`post_id`),
-  KEY `poster_id_idx` (`poster_id`),
-  CONSTRAINT `poster_id` FOREIGN KEY (`poster_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  `is_deleted` tinyint(4) NOT NULL,
+  `access_type` enum('public','private') NOT NULL,
+  `post_type` enum('event','opportunities','normal') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `posts`
---
-
-LOCK TABLES `posts` WRITE;
-/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
-UNLOCK TABLES;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `pword` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `fname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `lname` varchar(70) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `contactno` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `pfp` blob,
-  `user_type` enum('alumni','admin','manager') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`user_id`)
+  `user_id` int(11) NOT NULL,
+  `email` varchar(70) NOT NULL,
+  `pword` varchar(45) NOT NULL,
+  `fname` varchar(70) NOT NULL,
+  `lname` varchar(70) NOT NULL,
+  `contactno` varchar(45) NOT NULL,
+  `pfp` blob DEFAULT NULL,
+  `user_type` enum('alumni','admin','manager') NOT NULL,
+  `is_employed` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `user` (`user_id`, `email`, `pword`, `fname`, `lname`, `contactno`, `pfp`, `user_type`, `is_employed`) VALUES
+(1, '2235008@slu.edu.ph', '123456', 'Joaquin Gabriel', 'Caparas', '09821289', '', 'admin', 0);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `alumni`
+--
+ALTER TABLE `alumni`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `program_idx` (`program`);
+
+--
+-- Indexes for table `applicants`
+--
+ALTER TABLE `applicants`
+  ADD PRIMARY KEY (`app_id`);
+
+--
+-- Indexes for table `changelogs`
+--
+ALTER TABLE `changelogs`
+  ADD PRIMARY KEY (`logid`),
+  ADD KEY `user_id_idx` (`user_id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`comm_id`),
+  ADD KEY `post_id_fk_idx` (`post_id`),
+  ADD KEY `user_id_fkey_idx` (`user_id`);
+
+--
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`event_id`);
+
+--
+-- Indexes for table `follows`
+--
+ALTER TABLE `follows`
+  ADD PRIMARY KEY (`follower_id`,`followed_id`),
+  ADD KEY `followed_id_fk_idx` (`followed_id`);
+
+--
+-- Indexes for table `likes`
+--
+ALTER TABLE `likes`
+  ADD PRIMARY KEY (`like_id`),
+  ADD KEY `post_id_fkey_idx` (`post_id`),
+  ADD KEY `user_id_fkey2_idx` (`user_id`);
+
+--
+-- Indexes for table `opportunity`
+--
+ALTER TABLE `opportunity`
+  ADD PRIMARY KEY (`opportunity_id`),
+  ADD KEY `program_preference_fk_idx` (`program_preference`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `poster_id_idx` (`poster_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `applicants`
+--
+ALTER TABLE `applicants`
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `alumni`
+--
+ALTER TABLE `alumni`
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `changelogs`
+--
+ALTER TABLE `changelogs`
+  ADD CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `post_id_fk` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event_id_fk` FOREIGN KEY (`event_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `follows`
+--
+ALTER TABLE `follows`
+  ADD CONSTRAINT `followed_id_fk` FOREIGN KEY (`followed_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `follower_id_fk` FOREIGN KEY (`follower_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `post_id_fkey` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_id_fkey2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `opportunity`
+--
+ALTER TABLE `opportunity`
+  ADD CONSTRAINT `program_preference_fk` FOREIGN KEY (`program_preference`) REFERENCES `alumni` (`program`);
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `poster_id` FOREIGN KEY (`poster_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-10-20  2:04:52

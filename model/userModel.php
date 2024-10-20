@@ -36,12 +36,28 @@
 }
 
 public function getUser() {
-    $query = "SELECT CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.gradyear, a.is_employed, u.user_id  
-              FROM user u 
-              NATURAL JOIN alumni a";
-     $stmt = $this->connection->prepare($query);
-     $stmt->execute();
-     $result = $stmt->get_result();
-     return $result->fetch_all(MYSQLI_ASSOC);
- }
+    $users = []; 
+    $query = "
+        SELECT 
+            CONCAT(u.fname, ' ', u.lname) as Name, 
+            u.email, 
+            a.school_id, 
+            u.is_employed, 
+            u.user_type 
+        FROM user u 
+        INNER JOIN alumni a ON u.user_id = a.user_id
+    "; 
+    if ($result = $this->connection->query($query)) {
+
+        while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+        }
+        $result->free(); 
+    } else {
+        error_log("Database query error: " . $this->connection->error);
+    }
+    
+    return $users; 
 }
+
+ }
