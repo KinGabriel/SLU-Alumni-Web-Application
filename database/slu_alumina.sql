@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2024 at 11:49 AM
+-- Generation Time: Oct 20, 2024 at 07:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,16 +31,18 @@ CREATE TABLE `alumni` (
   `user_id` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
   `gradyear` int(11) NOT NULL,
-  `program` varchar(80) NOT NULL,
-  `courses` varchar(80) NOT NULL
+  `program` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `alumni`
 --
 
-INSERT INTO `alumni` (`user_id`, `school_id`, `gradyear`, `program`, `courses`) VALUES
-(1, 2235008, 2024, 'BSIT', 'null');
+INSERT INTO `alumni` (`user_id`, `school_id`, `gradyear`, `program`) VALUES
+(1, 2235008, 2024, 'BSIT'),
+(2, 2000, 2004, ''),
+(3, 0, 0, ''),
+(4, 203971, 0, '2008');
 
 -- --------------------------------------------------------
 
@@ -71,7 +73,13 @@ INSERT INTO `applicants` (`app_id`, `lname`, `fname`, `email`, `pword`, `program
 (3, 'DeMesa', 'Rovic Louie', 'rvic@yahoo.com', '$2y$10$q8jDD6qkkZA5acnYEK81Qe3/uiSMwmueFlqIq2', 'Bachelor of Science in Information Technology', 2011, 201789, '', 0),
 (4, 'Cerezo', 'Albeth', 'albeth@gmail.com', '$2y$10$xI9dYE4jkxzFCToOefjXbO5LnQTO3/RwNVL2wp', 'Bachelor of Arts in Business Administration', 2023, 2193123, '', 0),
 (5, 'Mandac', 'Minette Victoria', 'shiminette@gmail.com', '$2y$10$jmks5Pq6ebjeHrEvkKx0j.Oz67MVpBzisNJZUp', 'Bachelor of Science in Computer Science', 2022, 218031, '', 0),
-(6, 'Vergara', 'Carlos Miguel', 'carcar@yahoo.com', '$2y$10$rNl0yAzZGGxzlGP/HAd8Je25E73Gtoac6EfOxD', 'Bachelor of Science in Information Technology', 2004, 2003233, '', 0);
+(6, 'Vergara', 'Carlos Miguel', 'carcar@yahoo.com', '$2y$10$rNl0yAzZGGxzlGP/HAd8Je25E73Gtoac6EfOxD', 'Bachelor of Science in Information Technology', 2004, 2003233, '', 0),
+(7, 'Carino', 'Mark Lorenz', 'makmak@gmail.com', '$2y$10$/IC6c.v2USxZU.z9RhAcCewEHWLD7sqHHcNWrQ', 'Bachelor of Science in Information Technology', 2024, 231231, '', 0),
+(8, 'Razo', 'Ma. Lourdes Shaine', 'shaine@gmail.com', '$2y$10$8Wg8oPOeq.ND/tOHXFNByOUQv5rkFDcuDFgjyR', 'Bachelor of Science in Nursing', 2007, 234212, '', 0),
+(9, '', '', 'tay@yahoo.com', '$2y$10$yiDMBkci1rSaZcAXpT0gB.YuD4ceYabsfdxvBu', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
+(10, '', '', 'tay@yahoo.com', '$2y$10$47tzzwGJ/rPpTD2YrBiMsOy6M63nuqvbymJ7nl', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
+(11, '', '', 'tay@yahoo.com', '$2y$10$yLHU5UsoaXr7DA9VV1Gi4ulheUfIIRAqfAhBhJ', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
+(12, '', '', 'tay@yahoo.com', '$2y$10$8tsUc5jm./hahCSN4HvPIOo1j1pOuspFnCK6ky', 'Bachelor of Arts in Business Administration', 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -176,10 +184,10 @@ CREATE TABLE `posts` (
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `pword` varchar(45) NOT NULL,
+  `pword` varchar(100) NOT NULL,
   `fname` varchar(70) NOT NULL,
   `lname` varchar(70) NOT NULL,
-  `contactno` varchar(45) NOT NULL,
+  `contactno` varchar(45) DEFAULT NULL,
   `pfp` blob DEFAULT NULL,
   `user_type` enum('alumni','admin','manager') NOT NULL,
   `is_employed` tinyint(2) NOT NULL
@@ -190,7 +198,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `pword`, `fname`, `lname`, `contactno`, `pfp`, `user_type`, `is_employed`) VALUES
-(1, '2235008@slu.edu.ph', '123456', 'Joaquin Gabriel', 'Caparas', '09821289', '', 'admin', 0);
+(1, '2235008@slu.edu.ph', '$2y$10$o4PV2eLiVkbMgSTPqrTGueokIi60z57YDSM24bYkA4B7Swm8/gSuC', 'Joaquin Gabriel', 'Caparas', '09821289', '', 'admin', 0),
+(2, 'tay@yahoo.com', '$2y$10$4QhPz12CSvIHgPAkKmj3z.IqOdsZVthB7VbbuZ', 'Taylor', 'Swift', NULL, '', 'alumni', 0),
+(3, 'nic@gmail.com', '$2y$10$BhOyo1ATeOIICylHUgXDZOT.hjxSx5wCvr/mW4', 'Patrick Laurence', 'Versoza', NULL, '', 'alumni', 0),
+(4, 'king@gmail.com', '$2y$10$o8nM6yDkMvnDFPHy6FAtqevQMyZa6OrHUUNOpP', 'Lebron', 'James', NULL, '', 'alumni', 0),
+(5, 'joaquingabriel803@gmail.com', '$2y$10$vAuOxApbRLqR9JwlVRVMw.I0bRS1vcs5/DtaK7', 'Kin', 'Gabriel', NULL, '', 'admin', 0),
+(6, 'joaquingabriel@gmail.com', '$2y$10$lp5AvmaO4AuQx7pUfgWKP.x3wXy6cEAS0mCLcl', 'Kin', 'Matias', NULL, '', 'admin', 0),
+(7, '1@1', '$2y$10$aRrtGcmwfuc7pe/mALHb.uRuB2ve7khDyjdgFp', '1', '1', NULL, '', 'admin', 0),
+(8, 'joaquin@gmail.com', '$2y$10$hjSZYKVAwmpn1Pd30VEMy.7.VOoLYfn7Gx1sPs', 'Gab', 'Caparas', NULL, '', 'admin', 0),
+(9, 'mj@gmail.com', '$2y$10$o4PV2eLiVkbMgSTPqrTGueokIi60z57YDSM24bYkA4B7Swm8/gSuC', 'Michael', 'Jordan', NULL, '', 'admin', 0);
 
 --
 -- Indexes for dumped tables
@@ -273,13 +289,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

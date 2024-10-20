@@ -118,5 +118,41 @@ class userModel {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function addUser($email , $password, $firstName, $lastName,$schoolID,$idImage,$program,$userType,$gradYear ) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $query = "INSERT INTO user (email, pword, fname, lname, pfp, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("ssssss",$email,  $hashedPassword,$firstName,$lastName,$idImage,$userType );
+        $stmt->execute();
+        if($userType == "alumni") {
+            $id = $this->getID($email);
+            if ($id !== null) {
+                $this->addAlumni($id, $schoolID, $program, $gradYear);
+            }
+        } 
+        return true;
+    }
+
+    public function getID($email){
+        $query = "SELECT * from user where email = ?";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            return $row['user_id']; 
+        } else {
+            return null;
+        }
+    }
+
+    public function addAlumni($id,$schoolID,$program,$gradYear){
+        $query = "INSERT INTO alumni (user_id,	school_id,gradyear,program) VALUES(?,?,?,?)";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bind_param("iiis", $id,$schoolID,$gradYear,$program);
+        $stmt->execute();
+        return true;
+    }
 }
 ?>

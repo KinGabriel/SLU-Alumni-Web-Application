@@ -1,3 +1,9 @@
+<?php
+session_start();
+$message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
+echo "<script>var message = '$message';</script>";
+unset($_SESSION['confirmationMessage']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,9 +77,10 @@
     <div class="main-content">
         <div class="form-container">
             <h2 class="form-title">Create New User</h2>
-            <form>
+            <form action="../controller/addUserController.php" method="POST" enctype="multipart/form-data" onsubmit="validateFormAdmin(event)">
                 <!-- Name fields -->
                <!-- Name fields -->
+           
                 <div class="form-row">
                     <div class="form-group" id="first-name">
                         <label for="first-name">First Name</label>
@@ -103,19 +110,26 @@
                         <input type="text" id="graduation-year" name="graduation-year">
                     </div>
                     <div class="form-group" id="degree">
-                        <label for="degree">Degree</label>
-                        <select id="degree" name="degree">
-                            <option value="">Select Degree</option>
-                            <option value="BSCS">Bachelor of Science in Computer Science (BSCS)</option>
-                            <option value="BSIT">Bachelor of Science in Information Technology (BSIT)</option>
-                            <option value="PolSci">Bachelor of Arts in Political Science (PolSci)</option>
-                            <option value="BSN">Bachelor of Science in Nursing (BSN)</option>
-                        </select>
+                        <label for="program">Program</label>
+                        <select name="program" class="input-field" required> 
+                                <option value="" disabled selected> Select Program</option>
+                                <?php
+                                $filePath = '../assets/programs.txt'; 
+                                if (file_exists($filePath)) {
+                                    $programs = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                    foreach ($programs as $program) {
+                                        echo "<option value=\"$program\">$program</option>";
+                                    }
+                                } else {
+                                    echo "<option value=\"\">N/A</option>"; 
+                                }
+                                ?>
+                            </select>
                     </div>
                     <div class="form-group" id="job-status">
                         <label for="job-status">Job Status</label>
                         <select id="job-status" name="job-status">
-                            <option value="">Select Job Status</option>
+                        <option value="" disabled selected> Select Job Status</option>
                             <option value="employed">Employed</option>
                             <option value="unemployed">Unemployed</option>
                         </select>
@@ -127,9 +141,9 @@
                 <div class="form-row">
                     <div class="form-group" id="user-roles">
                         <select id="user-roles" name="user-roles">
-                            <option value="">Select Role</option>
+                        <option value="" disabled selected> Select Role</option>
+                        <option value="alumni">Alumni</option>
                             <option value="admin">Admin</option>
-                            <option value="user">User</option>
                             <option value="manager">Manager</option>
                         </select>
                     </div>

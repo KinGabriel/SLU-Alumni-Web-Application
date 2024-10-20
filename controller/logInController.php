@@ -3,8 +3,8 @@ require_once '../model/userModel.php';
 require_once '../database/configuration.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST["password"]);
     $db = new dbConnection();
     $connection = $db->getConnection(); 
     $userModel = new UserModel($connection); 
