@@ -182,7 +182,7 @@
 <!-- footer copy right section start -->
 <section id="copy-right">
     <div class="copy-right-sec">
-        <i class="fa-solid fa-copyright"></i> Copyright 2024 Saint Louis Alumina All rights reserved <a href="#">Create Account</a>
+        <i class="fa-solid fa-copyright"></i> Copyright 2024 Saint Louis Alumina All rights reserved.
     </div>
 </section>
 <!-- footer copy right section end -->
