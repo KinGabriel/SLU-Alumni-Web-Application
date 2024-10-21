@@ -1,7 +1,4 @@
 <?php
-
-require_once '../database/configuration.php';
-
 class userModel {
     private $connection;
 
@@ -155,4 +152,3 @@ class userModel {
         return true;
     }
 }
-?>

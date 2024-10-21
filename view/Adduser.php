@@ -34,13 +34,13 @@ unset($_SESSION['confirmationMessage']);
                     </a>
              </li>
                 <li>
-                    <a href="../view/userRequest.php">
+                    <a href="../view/UserRequest.php">
                     <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                     <span class="menu-item-text">Account Requests</span>
                 </a>
                 </li>
                 <li>
-                    <a href="../view/account.php">
+                    <a href="../view/Account.php">
                         <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
                         <span class="menu-item-text">Accounts</span>
                     </a>
@@ -77,7 +77,7 @@ unset($_SESSION['confirmationMessage']);
     <div class="main-content">
         <div class="form-container">
             <h2 class="form-title">Create New User</h2>
-            <form action="../controller/addUserController.php" method="POST" enctype="multipart/form-data" onsubmit="validateFormAdmin(event)">
+            <form action="../controller/ProcessAddUser.php" method="POST" enctype="multipart/form-data" onsubmit="validateFormAdmin(event)">
                 <!-- Name fields -->
                <!-- Name fields -->
            

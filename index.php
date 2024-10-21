@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
     <link href="assets/css/style.css" rel="stylesheet">
-    <style>
-        
-    </style>
 </head>
 <body>
 
@@ -23,7 +20,7 @@
         <a href="#alumnistories">Alumni Stories</a>
         <a href="#news_events_job">Others</a>
     </nav>
-    <button class="btn-login" onclick="location.href='view/logIn.php'">Log In</button>
+    <button class="btn-login" onclick="location.href='view/Login.php'">Log In</button>
 </header>
 
 <div id="home" class="hero">
@@ -52,7 +49,6 @@
         </div>
     </div>
 </div>
-<script src="assets/js/event-handler.js"></script>
 
 <!-- Who Are We section -->
 <div id="whoarewe" class="whoarewe hidden">
@@ -186,6 +182,6 @@
     </div>
 </section>
 <!-- footer copy right section end -->
-
+<script src="assets/js/LandingPageAnimations.js"></script>
 </body>
 </html>

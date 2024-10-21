@@ -1,6 +1,6 @@
 <?php
-require_once '../model/userModel.php';
-require_once '../database/configuration.php';
+require_once '../database/Configuration.php';
+require_once '../database/DriverManager.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : ''; 

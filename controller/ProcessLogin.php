@@ -1,6 +1,6 @@
 <?php
-require_once '../model/userModel.php';
-require_once '../database/configuration.php';
+require_once '../database/Configuration.php';
+require_once '../database/DriverManager.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
             // Set an error message in the session
             $_SESSION['error_message'] = "Invalid username or password.";
-            header("Location: ../view/login.php"); // Redirect to the login page
+            header("Location: ../view/Login.php"); // Redirect to the login page
             exit();
     }
 }

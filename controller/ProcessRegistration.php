@@ -1,6 +1,6 @@
 <?php
-require_once '../model/userModel.php';
-require_once '../database/configuration.php';
+require_once '../database/Configuration.php';
+require_once '../database/DriverManager.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $_SESSION['confirmation_message'] = "Error occurred! Please try again later...";
     }
-    header("Location: ../view/register.php");
+    header("Location: ../view/Register.php");
     exit();
 }
 ?>

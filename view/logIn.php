@@ -26,7 +26,7 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
         <p class="welcome-text">Welcome! Please enter your details.</p>
         <div id="validation-message"></div>
 
-        <form action="../controller/logInController.php" method="POST">
+        <form action="../controller/ProcessLogin.php" method="POST">
           <div class="input-wrapper">
             <img src="../assets/images/user.png" alt="email Icon" class="input-icon" />
             <input type="text" name="email" class="input-field" placeholder="Email" required />
@@ -39,12 +39,12 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
           <button type="submit" class="login-button">Login Now</button>
         </form>
         <div class="signup-wrapper">
-          <span class="signup-text">Don't have an account yet? <a href="register.php" class="signup-link">Sign up</a></span>
+          <span class="signup-text">Don't have an account yet? <a href="Register.php" class="signup-link">Sign up</a></span>
         </div>
       </div>
     </div>
   </div>
-    <script src="../assets/js/authentication.js" defer></script> 
+    <script src="../assets/js/HandleAuthentication.js" defer></script> 
 </head>
 </body>
 </html>

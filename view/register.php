@@ -20,7 +20,7 @@ unset($_SESSION['confirmation_message']);
                 <h1 class="login-title">Welcome back, Louisian!</h1>
                 <p class="welcome-text">Please fill in your details to create an account</p>
                 <div id="validation-message"></div>
-                <form action="../controller/registrationController.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
+                <form action="../controller/ProcessRegistration.php" method="POST" enctype="multipart/form-data" onsubmit="validateForm(event)">
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/user.png" alt="First Name Icon" class="input-icon">
@@ -86,7 +86,7 @@ unset($_SESSION['confirmation_message']);
                     </div>
                     <button type="submit" class="login-button">Register</button>
                     <div class="signup-wrapper">
-                        <span class="signup-text">Already have an account? <a href="login.php" class="signup-link">Log in</a></span>
+                        <span class="signup-text">Already have an account? <a href="Login.php" class="signup-link">Log in</a></span>
                     </div>
                 </form>
             </div>
@@ -112,7 +112,6 @@ unset($_SESSION['confirmation_message']);
             document.getElementById('modal').style.display = 'none';
         }
     </script>
-    <script src="../assets/js/authentication.js"></script>
-    <script src="../assets/js/utility.js"></script>
+    <script src="../assets/js/HandleAuthentication.js"></script>
 </body>
 </html>

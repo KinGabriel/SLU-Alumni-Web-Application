@@ -27,13 +27,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../view/userRequest.php"> 
+                    <a href="../view/UserRequest.php"> 
                         <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                         <span class="menu-item-text">Account Requests</span>
                     </a>                    
                 </li>
                 <li>
-                    <a href="../view/account.php"> 
+                    <a href="../view/Account.php"> 
                         <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
                         <span class="menu-item-text">Accounts</span>
                     </a>
@@ -112,7 +112,6 @@
         </div>
     </div>
     
-    <script src="../assets/js/filter.js"></script>
-    <script src="../assets/js/applicantsTable.js"></script>
+    <script src="../assets/js/HandleApplicantsTable.js"></script>
 </body>
 </html>

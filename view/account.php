@@ -27,13 +27,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../view/userRequest.php">
+                    <a href="../view/UserRequest.php">
                         <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                         <span class="menu-item-text">Account Requests</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../view/account.php">
+                    <a href="../view/Account.php">
                         <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
                         <span class="menu-item-text">Accounts</span>
                     </a>
@@ -120,7 +120,7 @@
 
     <!--Add User, Sort By Name, Sort by Year ---->
     <div class="button-container">
-        <button id="addUserButton">Add New User</button>
+        <button id="addUserButton"  onclick="location.href='AddUser.php'">Add New User</button>
         <div class="dropdown">
             <button id="dropdownButtonName">Sort By Name ▼</button>
             <div class="dropdown-content" id="dropdownContentName">
@@ -136,8 +136,7 @@
             </div>
         </div>
     </div>
-    
-    <script src="../assets/js/filter.js"></script>
-    <script src="../assets/js/accountsTable.js"></script>
+
+    <script src="../assets/js/HandleAccounts.js"></script>
 </body>
 </html>

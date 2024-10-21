@@ -1,6 +1,6 @@
 <?php
-require_once '../model/userModel.php';
-require_once '../database/configuration.php';
+require_once '../database/Configuration.php';
+require_once '../database/DriverManager.php';
 
 // Create a database connection
 $db = new dbConnection();
