@@ -78,6 +78,16 @@
                     <th>Email</th>
                     <th>ID Number</th>
                     <th>Graduation Year</th>
+                    <th>
+                        <div class="filter-dropdown">
+                            Job Status
+                            <select id="jobStatusFilter" name="jobStatus">
+                                <option value="all">All</option>
+                                <option value="employed">Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                            </select>
+                        </div>
+                    </th>
                     <th>Action</th>
                 </tr>
             </thead>
