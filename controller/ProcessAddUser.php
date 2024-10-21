@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
     $db = new dbConnection();
     $connection = $db->getConnection(); 
-    $userModel = new UserModel($connection); 
-    $addUSer = $userModel->addUser($email , $password, $firstName, $lastName,$schoolID,$idImage,$program,$userType,$gradYear );
+    $DriverManager = new DriverManager($connection); 
+    $addUSer = $DriverManager->addUser($email , $password, $firstName, $lastName,$schoolID,$idImage,$program,$userType,$gradYear );
     if($addUSer){
         $_SESSION['confirmationMessage'] = "Successfully added an account!";
     } else {

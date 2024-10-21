@@ -3,7 +3,7 @@ require_once '../database/Configuration.php';
 require_once '../database/DriverManager.php';
 $db = new dbConnection();
 $connection = $db->getConnection();
-$userModel = new userModel($connection);
+$DriverManager = new DriverManager($connection);
 
 
 $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -12,7 +12,7 @@ $role = isset($_GET['role']) ? $_GET['role'] : 'all';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'name ASC'; 
 
 
-$users = $userModel->getUser($searchTerm, $jobStatus, $role, $sort);
+$users = $DriverManager->getUser($searchTerm, $jobStatus, $role, $sort);
 
 header('Content-Type: application/json');
 

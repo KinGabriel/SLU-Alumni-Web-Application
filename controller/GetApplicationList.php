@@ -5,9 +5,9 @@ require_once '../database/DriverManager.php';
 // Create a database connection
 $db = new dbConnection();
 $connection = $db->getConnection();
-$userModel = new userModel($connection);
+$DriverManager = new DriverManager($connection);
 
-$applicants = $userModel->getApplicants();
+$applicants = $DriverManager->getApplicants();
 header('Content-Type: application/json');
 
 if (!empty($applicants) && is_array($applicants)) {

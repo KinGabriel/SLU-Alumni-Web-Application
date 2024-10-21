@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : '';
     $db = new dbConnection();
     $connection = $db->getConnection(); 
-    $userModel = new UserModel($connection); 
-    $register = $userModel->register($email, $password, $firstName, $lastName, $schoolID, $program, $gradYear, $idImage);
+    $DriverManager = new DriverManager($connection); 
+    $register = $DriverManager->register($email, $password, $firstName, $lastName, $schoolID, $program, $gradYear, $idImage);
     if ($register) {
         $_SESSION['confirmation_message'] = "Successfully sent your request! Please wait for the admin reviewal.";
     } else {

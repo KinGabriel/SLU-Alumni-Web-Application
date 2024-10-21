@@ -1,5 +1,5 @@
 <?php
-class userModel {
+class DriverManager {
     private $connection;
 
 

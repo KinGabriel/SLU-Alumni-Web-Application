@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST["password"]);
     $db = new dbConnection();
     $connection = $db->getConnection(); 
-    $userModel = new UserModel($connection); 
-    $login = $userModel->login($email, $password);
+    $DriverManager = new DriverManager($connection); 
+    $login = $DriverManager->login($email, $password);
     if ($login) {
         $_SESSION['user_id'] = $login['user_id']; 
         $_SESSION['first_name'] = $login['fname']; 

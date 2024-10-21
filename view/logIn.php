@@ -1,5 +1,4 @@
 <?php
-require_once '../model/userModel.php';
 session_start(); 
 $errorMessage = isset($_SESSION['error_message']) ? addslashes($_SESSION['error_message']) : '';
 unset($_SESSION['error_message']); 
