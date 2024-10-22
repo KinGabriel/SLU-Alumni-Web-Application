@@ -97,6 +97,13 @@ unset($_SESSION['confirmationMessage']);
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required>
                 </div>
+
+                <!-- Password field -->
+<div class="form-group password">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+</div>
+
                 
                 <!-- Alumni Information -->
                 <h3 class="section-title">Alumni Information:</h3>
