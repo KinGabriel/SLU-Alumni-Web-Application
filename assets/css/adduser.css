@@ -185,9 +185,9 @@ h2.form-title, h3.section-title {
 .form-row {
     display: flex;
     justify-content: space-between;
-    gap: 5px; 
+    gap: 10px; /* Reduce the gap between fields */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
-
 
 /* First Name Field */
 .form-group#first-name input {
@@ -311,4 +311,7 @@ h2.form-title, h3.section-title {
     color: #ffb200;
     box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
   }
-  
+  /* Password Field */
+.form-group.password input {
+    width: 15%; 
+}
