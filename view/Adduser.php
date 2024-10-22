@@ -95,7 +95,12 @@ unset($_SESSION['confirmationMessage']);
                 <!-- Email Address -->
                 <div class="form-group email">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required />
+                </div>
+
+                <div class="form-group email">  
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
                 </div>
                 
                 <!-- Alumni Information -->
@@ -107,7 +112,15 @@ unset($_SESSION['confirmationMessage']);
                     </div>
                     <div class="form-group" id="graduation-year">
                         <label for="graduation-year">Graduation Year</label>
-                        <input type="text" id="graduation-year" name="graduation-year">
+                        <select id="graduation-year" name="graduation-year" class="input-field" required>
+                                <option value="" disabled selected> Select Your Graduation Year</option>
+                                <?php
+                                    $currentYear = date("Y");
+                                    for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
+                                        echo "<option value=\"$year\">$year</option>";
+                                    }
+                                ?>
+                            </select>
                     </div>
                     <div class="form-group" id="degree">
                         <label for="program">Program</label>
@@ -164,17 +177,17 @@ unset($_SESSION['confirmationMessage']);
             <button class="accept" onclick="closeModal()">Okay!</button>
         </div>
     </div>  
+    <script src="../assets/js/HandleAuthentication.js"></script>
     <script>
         if (message) {
             document.getElementById('modal-message').textContent = message;
             document.getElementById('modal').style.display = 'block';
         }
-
         function closeModal() {
             message = null;
             document.getElementById('modal').style.display = 'none';
         }
     </script>
-    <script src="../assets/js/HandleAuthentication.js"></script>
+  
 </body>
 </html>

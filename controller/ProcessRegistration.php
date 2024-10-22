@@ -14,6 +14,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : '';
     $db = new dbConnection();
     $connection = $db->getConnection(); 
+      // Check if email exist
+      if(isEmailExist($connection, $email)) {
+        $_SESSION['confirmation_message'] = "Account already exist";
+        header("Location: ../view/Register.php");
+        exit();
+    }
+    // Check if their is already an existing application
+    if(checkApplicant( $connection, $email )) {
+        $_SESSION['confirmation_message'] = "Already have an existing application!";
+        header("Location: ../view/Register.php");
+        exit();
+    }
+  // Check if their is already an existing application
+    if(checkApplicantById( $connection, $schoolID )) {
+        $_SESSION['confirmation_message'] = "Already have an existing application!";
+        header("Location: ../view/Register.php");
+        exit();
+    }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO applicants (school_id, email, fname, lname, pword, program, gradyear, school_id_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
@@ -34,4 +52,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../view/Register.php");
     exit();
 }
+
+function isEmailExist($connection, $email) {
+    $query = "SELECT * FROM user WHERE email = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0; 
+}
+function checkApplicant($connection, $email) {
+    $query = "SELECT * FROM applicants WHERE email = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        return true; 
+    }
+    $row = $result->fetch_assoc(); 
+        if ($row['is_verified']) {
+            return true;
+        }
+        return false;
+}
+
+function checkApplicantById($connection, $email) {
+    $query = "SELECT * FROM applicants WHERE school_id = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        return true; 
+    }
+    $row = $result->fetch_assoc(); 
+        if ($row['is_verified']) {
+            return true;
+        }
+        return false;
+}
+
 ?>

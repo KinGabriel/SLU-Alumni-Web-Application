@@ -93,3 +93,33 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
     }
   }
 
+  function validateFormAdmin(event) {
+    event.preventDefault(); 
+    const firstName = document.querySelector('input[name="first-name"]').value.trim();
+    const lastName = document.querySelector('input[name="last-name"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const password = document.querySelector('input[name="password"]').value.trim();
+    const schoolId = document.querySelector('input[name="school-id"]').value.trim();
+    const role = document.querySelector('input[name="role"]').value.trim();
+
+    if (!firstName || !lastName || !email || !password) {
+      
+        return; 
+    }
+ 
+    if (password.length < 6) {
+  
+        return; 
+    }
+
+    
+
+   // event.target.submit();
+}
+
+
+
+
+    
+  
+

@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : ''; 
-    $password = "user123"; 
+    $password = isset($_POST["[password]"]) ? $_POST["password"] : '';
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : ''; 
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : ''; 
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
@@ -16,6 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $db = new dbConnection();
     $connection = $db->getConnection(); 
+    // Check if email exist
+    if(isEmailExist($connection, $email)) {
+        $_SESSION['confirmationMessage'] = "The email already exist";
+        header("Location: ../view/AddUser.php");
+        exit();
+    }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO user (email, pword, fname, lname, pfp, user_type) VALUES (?, ?, ?, ?, ?, ?)";
     
@@ -66,4 +72,14 @@ function addAlumni($connection, $id, $schoolID, $program, $gradYear) {
     $stmt->execute();
     return true;
 }
+
+function isEmailExist($connection, $email) {
+    $query = "SELECT * FROM user WHERE email = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0; 
+}
+
 ?>
