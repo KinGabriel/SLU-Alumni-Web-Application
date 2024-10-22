@@ -1,6 +1,5 @@
 <?php
 require_once '../database/Configuration.php';
-require_once '../database/DriverManager.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,13 +14,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : '';
     $db = new dbConnection();
     $connection = $db->getConnection(); 
-    $DriverManager = new DriverManager($connection); 
-    $register = $DriverManager->register($email, $password, $firstName, $lastName, $schoolID, $program, $gradYear, $idImage);
-    if ($register) {
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $query = "INSERT INTO applicants (school_id, email, fname, lname, pword, program, gradyear, school_id_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = $connection->prepare($query);
+    if ($stmt === false) {
+        $_SESSION['confirmation_message'] = "Error preparing statement: " . $connection->error;
+        header("Location: ../view/Register.php");
+        exit();
+    }
+
+    $stmt->bind_param("ssssssss", $schoolID, $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
+    if ($stmt->execute()) {
         $_SESSION['confirmation_message'] = "Successfully sent your request! Please wait for the admin reviewal.";
     } else {
-        $_SESSION['confirmation_message'] = "Error occurred! Please try again later...";
+        $_SESSION['confirmation_message'] = "Error occurred! Please try again later... " . $stmt->error;
     }
+    $stmt->close();
     header("Location: ../view/Register.php");
     exit();
 }

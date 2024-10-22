@@ -1,15 +1,16 @@
 <?php
 require_once '../database/Configuration.php';
-require_once '../database/DriverManager.php';
-
-// Create a database connection
+// set db
 $db = new dbConnection();
 $connection = $db->getConnection();
-$DriverManager = new DriverManager($connection);
-
-$applicants = $DriverManager->getApplicants();
+// prepare query
+$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, school_id, gradyear FROM applicants";
+$stmt = $connection->prepare($query); 
+$stmt->execute();
+$result = $stmt->get_result();
+// store results
+$applicants = $result->fetch_all(MYSQLI_ASSOC);
 header('Content-Type: application/json');
-
 if (!empty($applicants) && is_array($applicants)) {
     $applicantData = array_map(function($applicant) {
         return [

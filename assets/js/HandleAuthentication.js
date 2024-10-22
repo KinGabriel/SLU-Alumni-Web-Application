@@ -92,20 +92,4 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
         imagePreview.style.display = 'none';
     }
   }
-  /* Modal */
-  if (message) {
-      document.getElementById('modal-message').textContent = message;
-  }
-  
-  function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-  }
 
-/* Log in print error handler */
-document.addEventListener('DOMContentLoaded', function() {
-    if (errorMessage) {
-        var errorMessageElement = document.getElementById('validation-message');
-        errorMessageElement.innerText = errorMessage;
-        errorMessageElement.style.color = 'red'; 
-    }
-});

@@ -84,11 +84,11 @@ unset($_SESSION['confirmationMessage']);
                 <div class="form-row">
                     <div class="form-group" id="first-name">
                         <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" name="first-name">
+                        <input type="text" id="first-name" name="first-name" required>
                     </div>
                     <div class="form-group" id="last-name">
                         <label for="last-name">Last Name</label>
-                        <input type="text" id="last-name" name="last-name">
+                        <input type="text" id="last-name" name="last-name" required>
                     </div>
                 </div>
                 
@@ -157,9 +157,24 @@ unset($_SESSION['confirmationMessage']);
             </form>
         </div>
     </div>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <img src="" alt="" />
+            <p id="modal-message"></p>
+            <button class="accept" onclick="closeModal()">Okay!</button>
+        </div>
+    </div>  
+    <script>
+        if (message) {
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+        }
 
-    <script src="../assets/js/filter.js"></script>
-    <script src="../assets/js/adduser.js"></script>
-    
+        function closeModal() {
+            message = null;
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+    <script src="../assets/js/HandleAuthentication.js"></script>
 </body>
 </html>

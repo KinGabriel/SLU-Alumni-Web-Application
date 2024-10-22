@@ -43,7 +43,16 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
       </div>
     </div>
   </div>
-    <script src="../assets/js/HandleAuthentication.js" defer></script> 
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    if (errorMessage) {
+        var errorMessageElement = document.getElementById('validation-message');
+        errorMessageElement.innerText = errorMessage;
+        errorMessageElement.style.color = 'red'; 
+    }
+});
+  </script>
 </head>
 </body>
 </html>
