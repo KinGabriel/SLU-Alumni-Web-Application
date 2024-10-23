@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return;
         }
          // check if the school id length is 7
-        if($schoolID != 7) {
+         if (strlen($schoolID) != 7) {
             $_SESSION['confirmationMessage'] = "School ID number should be 7 digits long... ";
             header("Location: ../view/AddUser.php");
             return;
