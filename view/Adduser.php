@@ -98,8 +98,6 @@ unset($_SESSION['confirmationMessage']);
                     <input type="email" id="email" name="email" required />
                 </div>
 
-
-
                 <!-- Password field -->
                 <div class="form-group password">
                     <label for="password">Password</label>

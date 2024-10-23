@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : ''; 
-    $password = isset($_POST["[password]"]) ? $_POST["password"] : '';
+    $password = isset($_POST["password"]) ? $_POST["password"] : '';
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : ''; 
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : ''; 
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 

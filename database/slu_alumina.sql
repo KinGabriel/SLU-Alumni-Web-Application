@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2024 at 07:28 PM
+-- Generation Time: Oct 23, 2024 at 05:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,10 +39,12 @@ CREATE TABLE `alumni` (
 --
 
 INSERT INTO `alumni` (`user_id`, `school_id`, `gradyear`, `program`) VALUES
-(1, 2235008, 2024, 'BSIT'),
-(2, 2000, 2004, ''),
-(3, 0, 0, ''),
-(4, 203971, 0, '2008');
+(29, 2078911, 2012, 'Bachelor of Science in Mechanical Engineering'),
+(30, 2193612, 2023, 'Bachelor of Science in Computer Science'),
+(31, 2201239, 2024, 'Bachelor of Science in Information Technology'),
+(32, 2202131, 2024, 'Bachelor of Arts in Business Administration'),
+(33, 2168931, 2020, 'Bachelor of Science in Information Technology'),
+(34, 2167123, 2020, 'Bachelor of Science in Computer Science');
 
 -- --------------------------------------------------------
 
@@ -55,7 +57,7 @@ CREATE TABLE `applicants` (
   `lname` varchar(70) NOT NULL,
   `fname` varchar(70) NOT NULL,
   `email` varchar(70) NOT NULL,
-  `pword` varchar(45) NOT NULL,
+  `pword` varchar(100) NOT NULL,
   `program` varchar(80) NOT NULL,
   `gradyear` int(11) NOT NULL,
   `school_id` int(11) NOT NULL,
@@ -68,18 +70,15 @@ CREATE TABLE `applicants` (
 --
 
 INSERT INTO `applicants` (`app_id`, `lname`, `fname`, `email`, `pword`, `program`, `gradyear`, `school_id`, `school_id_pic`, `is_verified`) VALUES
-(1, 'a', 'a', '2235008@slu.edu.ph', '$2y$10$n7HoJcFhriN9WivEI1FTke0aPtLOHFSdj/Ahr.', 'Bachelor of Science in Computer Science', 2011, 12, '', 0),
-(2, 'Escano', 'Nichole Jhoy', 'nic@gmail.com', '$2y$10$vCkPwLiM8zlfDdC/2bFzSuoX6XWKNYfEBASxiS', 'Bachelor of Science in Information Technology', 2024, 2203455, '', 0),
-(3, 'DeMesa', 'Rovic Louie', 'rvic@yahoo.com', '$2y$10$q8jDD6qkkZA5acnYEK81Qe3/uiSMwmueFlqIq2', 'Bachelor of Science in Information Technology', 2011, 201789, '', 0),
-(4, 'Cerezo', 'Albeth', 'albeth@gmail.com', '$2y$10$xI9dYE4jkxzFCToOefjXbO5LnQTO3/RwNVL2wp', 'Bachelor of Arts in Business Administration', 2023, 2193123, '', 0),
-(5, 'Mandac', 'Minette Victoria', 'shiminette@gmail.com', '$2y$10$jmks5Pq6ebjeHrEvkKx0j.Oz67MVpBzisNJZUp', 'Bachelor of Science in Computer Science', 2022, 218031, '', 0),
-(6, 'Vergara', 'Carlos Miguel', 'carcar@yahoo.com', '$2y$10$rNl0yAzZGGxzlGP/HAd8Je25E73Gtoac6EfOxD', 'Bachelor of Science in Information Technology', 2004, 2003233, '', 0),
-(7, 'Carino', 'Mark Lorenz', 'makmak@gmail.com', '$2y$10$/IC6c.v2USxZU.z9RhAcCewEHWLD7sqHHcNWrQ', 'Bachelor of Science in Information Technology', 2024, 231231, '', 0),
-(8, 'Razo', 'Ma. Lourdes Shaine', 'shaine@gmail.com', '$2y$10$8Wg8oPOeq.ND/tOHXFNByOUQv5rkFDcuDFgjyR', 'Bachelor of Science in Nursing', 2007, 234212, '', 0),
-(9, '', '', 'tay@yahoo.com', '$2y$10$yiDMBkci1rSaZcAXpT0gB.YuD4ceYabsfdxvBu', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
-(10, '', '', 'tay@yahoo.com', '$2y$10$47tzzwGJ/rPpTD2YrBiMsOy6M63nuqvbymJ7nl', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
-(11, '', '', 'tay@yahoo.com', '$2y$10$yLHU5UsoaXr7DA9VV1Gi4ulheUfIIRAqfAhBhJ', 'Bachelor of Arts in Psychology', 0, 0, '', 0),
-(12, '', '', 'tay@yahoo.com', '$2y$10$8tsUc5jm./hahCSN4HvPIOo1j1pOuspFnCK6ky', 'Bachelor of Arts in Business Administration', 0, 0, '', 0);
+(22, 'Aquino', 'Juan', 'ajuan@yahoo.com', '$2y$10$mLKhmGhO7AmJQNf/JOcPYeZZrVB9TzrvDRTLFm5g5HXMihOD8NLZ2', 'Bachelor of Arts in Psychology', 1974, 1701827, '', 0),
+(23, 'Cablaida', 'Jeremy Reuben', 'reuben@gmail.com', '$2y$10$/HES9XkIyyruNorYO83tqeVm3YWq06CwB/Q8uqPXRYVGbYI/95X9C', 'Bachelor of Science in Information Technology', 2009, 2134672, '', 0),
+(24, 'Cerezo', 'Albeth', 'beth@yahoo.com', '$2y$10$rmgUxWjdqX91MZqWmgRXmOKFj0uU7kCdhAXb5hCBfLexj8J84PLjm', 'Bachelor of Science in Information Technology', 2018, 2146721, '', 0),
+(25, 'Davis', 'Anthony', 'ADominant@yahoo.com', '$2y$10$2zwViKKuYtesXOoQVJnPq.vYm0Ffq6WDDTdBsJdgfOdM5D0FmMTd.', 'Bachelor of Science in Computer Science', 2019, 2157812, '', 0),
+(26, 'Matias', 'Gabriel', 'gab@yahoo.com', '$2y$10$gv809.mV/NfBVoUdEivBj.dTVfiCwMUdnaSrOqQnC4O9erXpofCEa', 'Bachelor of Science in Information Technology', 2022, 2187311, '', 0),
+(27, 'Cruz', 'Amira', 'amcruz@gmail.com', '$2y$10$WiEl40TFd7.NFW0/3RMRieoYZ0Gbtk6.iC6Fwzs.oxW2AxUTpqiF6', 'Bachelor of Arts in Business Administration', 2022, 2173411, '', 0),
+(28, 'Lee', 'Charlez', 'charz@gmail.com', '$2y$10$qwq6YcryLb00X9/whbXWd.4KwYzKDdp2ERwTpEW4pcowTYV3NYJN.', 'Bachelor of Science in Nursing', 2002, 1980912, '', 0),
+(29, ' Lictag', ' Bryan Harry', 'bry@yahoo.com', '$2y$10$dYt1rIUK0fOjwttJ8L8ACePt8O5a9hYkH5eMpfw8CCK/ptPC6QWce', 'Bachelor of Science in Information Technology', 2019, 2156941, '', 0),
+(30, 'Curry', 'Stephen', 'sc@gmail.com', '$2y$10$0dslvEuwFaE0nKkBc.6Yc.vX3DnW29V4goRnjiwcXhDNTE5wVc2Ka', 'Bachelor of Science in Electrical Engineering', 1993, 1891231, '', 0);
 
 -- --------------------------------------------------------
 
@@ -198,15 +197,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `pword`, `fname`, `lname`, `contactno`, `pfp`, `user_type`, `is_employed`) VALUES
-(1, '2235008@slu.edu.ph', '$2y$10$o4PV2eLiVkbMgSTPqrTGueokIi60z57YDSM24bYkA4B7Swm8/gSuC', 'Joaquin Gabriel', 'Caparas', '09821289', '', 'admin', 0),
-(2, 'tay@yahoo.com', '$2y$10$4QhPz12CSvIHgPAkKmj3z.IqOdsZVthB7VbbuZ', 'Taylor', 'Swift', NULL, '', 'alumni', 0),
-(3, 'nic@gmail.com', '$2y$10$BhOyo1ATeOIICylHUgXDZOT.hjxSx5wCvr/mW4', 'Patrick Laurence', 'Versoza', NULL, '', 'alumni', 0),
-(4, 'king@gmail.com', '$2y$10$o8nM6yDkMvnDFPHy6FAtqevQMyZa6OrHUUNOpP', 'Lebron', 'James', NULL, '', 'alumni', 0),
-(5, 'joaquingabriel803@gmail.com', '$2y$10$vAuOxApbRLqR9JwlVRVMw.I0bRS1vcs5/DtaK7', 'Kin', 'Gabriel', NULL, '', 'admin', 0),
-(6, 'joaquingabriel@gmail.com', '$2y$10$lp5AvmaO4AuQx7pUfgWKP.x3wXy6cEAS0mCLcl', 'Kin', 'Matias', NULL, '', 'admin', 0),
-(7, '1@1', '$2y$10$aRrtGcmwfuc7pe/mALHb.uRuB2ve7khDyjdgFp', '1', '1', NULL, '', 'admin', 0),
-(8, 'joaquin@gmail.com', '$2y$10$hjSZYKVAwmpn1Pd30VEMy.7.VOoLYfn7Gx1sPs', 'Gab', 'Caparas', NULL, '', 'admin', 0),
-(9, 'mj@gmail.com', '$2y$10$o4PV2eLiVkbMgSTPqrTGueokIi60z57YDSM24bYkA4B7Swm8/gSuC', 'Michael', 'Jordan', NULL, '', 'admin', 0);
+(23, '2235008@slu.edu.ph', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Joaquin Gabriel', 'Caparas', NULL, '', 'admin', 1),
+(24, 'nic@gmail.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Nichole Jhoy', 'Escano', NULL, '', 'admin', 1),
+(25, 'mcarino@gmail.com', '$2y$10$7NJePCmZCh85ZBHQzIQWyO.21iyCb881xhSrMnrGOIs18xg6vh6XC', 'Mark Lorenz', 'Carino', NULL, '', 'admin', 1),
+(26, 'shiminette@gmail.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Minette Victoria', 'Mandac', NULL, '', 'admin', 1),
+(27, 'shaine@gmail.com', '$2y$10$tKHzkVXJESOdxNhrFdS.BOh9PTleVTmYhbiumSeY5/ylXsNWnSrYO', 'Ma. Loures Shaine ', 'Razo', NULL, '', 'admin', 1),
+(28, 'miguel@gmail.com', '$2y$10$yr.ll27F8XWjA7D3ZR8PIOBIpXhBaUyp3M1PgjS5mwGgppvaS/0eK', 'Carlos Miguel', 'Vergara', NULL, '', 'admin', 1),
+(29, 'KD@gmail.com', '$2y$10$3dCQ/2pE3WThcg8T.yT4oey5Z9u4DeOjyuePo/DWvC3y6X6JJrYL6', 'Kevin', 'Durant', NULL, '', 'alumni', 0),
+(30, 'lbj@gmail.com', '$2y$10$NpSuW5zuXYfyRbPWYYf7K.NfScPVuXNmVxtJMhS/xhw1FgCeblG.O', 'Lebron ', 'James', NULL, '', 'alumni', 0),
+(31, 'mjordan@yahoo.com', '$2y$10$mstXYnipW7/Rf711Kaqe9eoyn6p7.1YrobDxy0C6JyWJ.n3UOcCKi', 'Michael', 'Jordan', NULL, '', 'alumni', 0),
+(32, 'patpat@gmail.com', '$2y$10$7NJePCmZCh85ZBHQzIQWyO.21iyCb881xhSrMnrGOIs18xg6vh6XC', 'Patrick Laurence', 'Versoza', NULL, '', 'alumni', 1),
+(33, 'dolbus@yahoo.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Jan Dolby ', 'Aquino', NULL, '', 'alumni', 1),
+(34, 'KG@yahoo.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Kevin', 'Garnett', NULL, '', 'alumni', 1);
 
 --
 -- Indexes for dumped tables
@@ -289,13 +291,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `applicants`
 --
 ALTER TABLE `applicants`
-  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `app_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
