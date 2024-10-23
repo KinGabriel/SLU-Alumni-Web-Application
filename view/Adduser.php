@@ -28,7 +28,7 @@ unset($_SESSION['confirmationMessage']);
         <nav class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="../index.php">
+                    <a href="../view/adminDashboard.php">
                     <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
                     <span class="menu-item-text">Dashboard</span>
                     </a>
