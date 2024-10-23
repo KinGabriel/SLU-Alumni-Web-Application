@@ -13,6 +13,9 @@ function validateForm(event) {
     if(emptyField(firstName, lastName, email, schoolID, password, retypePassword,schoolIdFile)){
             return
     } 
+    if(isValidSchoolID(schoolID)){
+        return
+    }
     if (invalidPasswordLength(password)) {
         return;
     }
@@ -53,6 +56,18 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
     }
     return false;
  }
+
+ function isValidSchoolID(schoolID) {
+    const messageContainer = document.getElementById('validation-message');
+    if (schoolID.length !== 7) { 
+        var createMessage = document.createElement('p');
+        createMessage.innerHTML = 'School ID should be 7 digits long';
+        createMessage.style.color = 'red';
+        messageContainer.appendChild(createMessage);
+        return true; 
+    }
+    return false;
+}
 
  function invalidPasswordLength(password){
     const messageContainer = document.getElementById('validation-message');
@@ -102,7 +117,7 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
       const password = document.querySelector('input[name="password"]').value.trim();
       const schoolId = document.querySelector('input[name="school-id"]').value.trim();
       let errorMessage = '';
-      
+
       if (!firstName || !lastName || !email || !password) {
           errorMessage = 'Please fill out all required fields.';
       } else if (password.length < 6) {

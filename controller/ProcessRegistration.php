@@ -26,7 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../view/Register.php");
         exit();
     }
-  // Check if their is already an existing application
+    // check if their is an existing school id
+    if(isAlumniExist($connection,$schoolID)) {
+        $_SESSION['confirmation_message'] = "Alumni already exist... ";
+        header("Location: ../view/Register.php");
+        return;
+    }
+  // Check if their is already an existing application by school ID
     if(checkApplicantById( $connection, $schoolID )) {
         $_SESSION['confirmation_message'] = "Already have an existing application!";
         header("Location: ../view/Register.php");
@@ -92,5 +98,12 @@ function checkApplicantById($connection, $email) {
         }
         return false;
 }
-
+function isAlumniExist($connection, $schoolID) {
+    $query = "SELECT * FROM alumni WHERE school_id = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $schoolID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0; 
+}
 ?>

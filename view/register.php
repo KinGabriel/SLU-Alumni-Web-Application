@@ -80,7 +80,7 @@ unset($_SESSION['confirmation_message']);
                         <label for="school_id_file" class="custom-upload">
                             <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
                             <span class="upload-text">Upload your school ID</span>
-                            <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" required onchange="handleFileUpload()" />
+                            <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" onchange="handleFileUpload()" />
                             <img id="image-preview" class="image-preview">
                         </label>
                     </div>
