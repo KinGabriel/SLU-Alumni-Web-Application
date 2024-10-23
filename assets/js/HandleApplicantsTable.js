@@ -31,9 +31,13 @@ function populateApplicantsTable(applicantData) {
         const declineButton = document.createElement('button');
         declineButton.classList.add('btn-decline');
         declineButton.textContent = 'Decline';
+        const viewButton = document.createElement('button');
+        viewButton.classList.add('btn-view-profile');
+        viewButton.textContent = 'View Image';
         // Append buttons
         actionCell.appendChild(acceptButton);
         actionCell.appendChild(declineButton);
+        actionCell.appendChild(viewButton);
         // Append all 
         row.appendChild(nameCell);
         row.appendChild(emailCell);

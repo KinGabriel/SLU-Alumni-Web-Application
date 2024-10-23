@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link href="../assets/css/userRequest.css" rel="stylesheet">
+    <link href="../assets/css/UserRequest.css" rel="stylesheet">
 </head>
 <body>
     <!--Header separator-->
@@ -21,7 +21,7 @@
         <nav class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="../index.php">
+                    <a href="../AdminDashboard.php">
                         <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
                         <span class="menu-item-text">Dashboard</span>
                     </a>
@@ -78,20 +78,17 @@
                     <th>Email</th>
                     <th>ID Number</th>
                     <th>Graduation Year</th>
-                    <th>
-                        <div class="filter-dropdown">
-                            Job Status
-                            <select id="jobStatusFilter" name="jobStatus">
-                                <option value="all">All</option>
-                                <option value="employed">Employed</option>
-                                <option value="unemployed">Unemployed</option>
-                            </select>
-                        </div>
-                    </th>
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="applicantTableBody"></tbody>
+
+            <tbody id="applicantTableBody">
+                 <td>
+                 <button class="btn-accept">Accept</button>
+                <button class="btn-decline">Decline</button>
+                <button class="btn-view-profile">View Profile</button>
+                </td>
+            </tbody>
         </table>
     </div>
 
@@ -103,7 +100,7 @@
         </form>
     </div>
 
-     <!--Add User, Sort By Name, Sort by Year ---->
+     <!--Sort By Name, Sort by Year ---->
      <div class="button-container">
         <div class="dropdown">
             <button id="dropdownButtonName">Sort By Name ▼</button>

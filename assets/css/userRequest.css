@@ -5,39 +5,49 @@
     font-family: Arial, sans-serif;
 }
 
+body {
+    overflow-x: hidden; 
+}
+
 /* Header Section */
 header {
     display: flex;
     align-items: center;
     background-color: white;
-    padding: 0.2vw;
+    padding: 0.1vw; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    height: 4vw; 
 }
 
 header h1 {
     display: flex;
     align-items: center;
-    margin-left: 1.2vw;
-    font-size: 1.4vw;
+    margin-left: 0.8vw; 
+    font-size: 1.2vw; 
 }
 
-header span{
-    margin-left: 0.3vw;
+header span {
+    margin-left: 0.2vw; 
 }
 
 header img {
-    height: 2.5vw; 
-    width: 3.2vw; 
+    height: 2vw; 
+    width: 2.5vw; 
 }
 
+/* Header separator */
 .header-seperator {
-    background-color: #003DA5; 
-    padding-bottom: 2vw; 
+    background-color: #003DA5;
+    padding-bottom: 1.5vw; 
     width: 100%;
-    margin-top: -1vh;
-    margin-bottom: 0.5vh; 
+    margin-top: -0.5vh; 
+    margin-bottom: 0.2vh; 
 }
 
+/* Container for page content */
 .container {
     display: flex;
     min-height: 100vh;
@@ -48,11 +58,10 @@ header img {
     background: rgba(244, 244, 244, 1);
     border-right: 1px solid #e5e5e5;
     position: fixed;
-    top: 0;
+    top: 3vw; 
     bottom: 0;
     height: 100%;
     width: 60px;
-    margin-top: 9.3vh;
     transition: width 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -61,13 +70,27 @@ header img {
 }
 
 .sidebar-container:hover {
-    width: 250px;
+    width: 250px; 
+}
+
+.user-content {
+    position: relative; 
+    left: 70px; 
+    padding: 20px;
+    transition: left 0.3s ease; 
+    z-index: 0; 
+}
+
+/* Move the user-content to the right when the sidebar is hovered */
+.sidebar-container:hover + .user-content {
+    left: 250px; 
 }
 
 .sidebar-menu {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-top: 25px;
 }
 
 .sidebar-menu ul {
@@ -79,6 +102,7 @@ header img {
 
 .sidebar-menu li {
     display: block;
+    margin-top: 10px; 
 }
 
 .sidebar-menu li a {
@@ -115,7 +139,7 @@ header img {
     background-color: rgba(0, 61, 165, 0.4);
 }
 
-/* Sticky Log Out Section  */
+/* Sticky Log Out Section */
 .sidebar-logout {
     position: absolute;
     bottom: 15vh;
@@ -146,28 +170,24 @@ header img {
     font-weight: bold;
 }
 
-/* User Request table */
+/* User Content Table */
 .user-content {
-    position: absolute;
-    left: 70px; 
+    position: relative; 
+    left: 80px; 
     padding: 20px;
     transition: left 0.3s ease; 
-}
-
-/* Move user content when sidebar expands */
-.sidebar-container:hover ~ .user-content {
-    left: 260px; 
+    z-index: 0; 
 }
 
 .user-content h1 {
-    margin-top: 8%;
+    margin-top: 8vw;
     margin-bottom: 20px;
     color:#003DA5;
-    font-size: 4vh;
+    font-size: 5vh;
 }
 
 .user-table {
-    width: 165%;
+    width: 85%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -187,22 +207,23 @@ header img {
     font-size: 16px;
 }
 
-.user-table .btn-accept {
-    background-color: #4CAF50;
-    color: white;
+.user-table .btn-accept, .user-table .btn-decline, .user-table .btn-view-profile {
     padding: 8px 16px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    margin-right: 10px; 
+}
+
+.user-table .btn-accept {
+    background-color: #4CAF50;
+    color: white;
 }
 
 .user-table .btn-decline {
     background-color: #f44336;
     color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
+    margin-right: 1;
 }
 
 .user-table .btn-accept:hover {
@@ -211,6 +232,20 @@ header img {
 
 .user-table .btn-decline:hover {
     background-color: #e60000;
+}
+
+.user-table .btn-view-profile {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px; 
+    background-color: #2196F3; 
+    color: white;
+}
+
+.user-table .btn-view-profile:hover {
+    background-color: #1E88E5; 
 }
 
 /* Style for the user name and profile pic */
@@ -251,36 +286,44 @@ header img {
 }
 
 /* Search bar input */
-.search input[type="text"] {
+.search {
     position: absolute;
-    right: 70px; 
-    top: 13.2%; 
-    transform: translateY(-50%); 
-    padding: 6px;
+    right: 70px;
+    top: 13.2%; /* Align vertically */
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search input[type="text"] {
+    padding: 6px 30px 6px 10px; /* Adjust padding to leave space for the search icon */
     border: 1px solid #ccc;
     font-size: 15px;
-    width: 200px; 
+    width: 200px;
+    position: relative;
 }
 
 .search .search-icon {
     position: absolute;
-    right: 70px; 
-    top: 13.2%; 
-    transform: translateY(-50%); 
-    width: 25px; 
-    cursor: pointer; 
+    top: 13.2%;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .search .search-icon:hover {
     opacity: 0.7;
 }
 
+/* Button container */
 .button-container {
     display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    align-items: center; /* Center the buttons vertically */
-    margin-top: 20px; /* Optional: Add some space from the top */
-    margin-right: 340px; /* Adjust this value to move buttons left */
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 13.2%; /* Same top value as the search bar */
+    right: 320px; /* Move the buttons slightly to the left */
 }
 
 .dropdown {
@@ -308,7 +351,7 @@ header img {
 }
 
 .dropdown:hover .dropdown-content {
-    display: block; /* Show dropdown on hover */
+    display: block;
 }
 
 .dropdown-content a {
@@ -319,8 +362,11 @@ header img {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1; /* Hover effect for dropdown options */
+    background-color: #f1f1f1;
 }
+
+
+
 
 /* Media query for screens between 769px and 1300px */
 @media only screen and (min-width: 769px) and (max-width: 1300px) {
