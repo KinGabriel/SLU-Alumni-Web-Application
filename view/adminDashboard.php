@@ -25,17 +25,45 @@
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar-container">
+   <!-- Sidebar -->
+   <div class="sidebar-container">
         <!-- Navigation menu -->
         <nav class="sidebar-menu">
             <ul>
-                <li><a href="/view\adminDashboard.php"><img src="/assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon"><span class="menu-item-text">Dashboard</span></a></li>
-                <li><a href="/view\adminUserRequest.html"><img src="/assets/images/userRequest.png" alt="User Requests" class="sidebar-icon"><span class="menu-item-text">User Requests</span></a></li>
-                <li><a href="#user-accounts"><img src="/assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon"><span class="menu-item-text">User Accounts</span></a></li>
-                <li><a href="/view\adminEvent.html"><img src="/assets/images/events.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">Events</span></a></li>
-                <li><a href="#news"><img src="/assets/images/news.png" alt="News" class="sidebar-icon"><span class="menu-item-text">News</span></a></li>
-                <li><a href="#job-opportunities"><img src="/assets/images/job.png" alt="Job" class="sidebar-icon"><span class="menu-item-text">Job Opportunities</span></a></li>
+                <li>
+                    <a href="../view/adminDashboard.php">
+                    <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
+                    <span class="menu-item-text">Dashboard</span>
+                    </a>
+             </li>
+                <li>
+                    <a href="../view/UserRequest.php">
+                    <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
+                    <span class="menu-item-text">Account Requests</span>
+                </a>
+                </li>
+                <li>
+                    <a href="../view/Account.php">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <li><a href="#events">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+                <li>
+                    <a href="#news">
+                        <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
+                        <span class="menu-item-text">News</span>
+                    </a>
+                </li>
+                <li><a href="#job-opportunities">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
             </ul>
         </nav>
 
@@ -52,35 +80,35 @@
         <div class="card">
             <h3>Total Member</h3>
             <div class="card-content">
-                <img src="/assets/images/totalmember.svg" alt="Total Members">
+                <img src="../assets/images/totalmember.svg" alt="Total Members">
                 <p>857</p>
             </div>
         </div>
         <div class="card">
             <h3>Total Request</h3>
             <div class="card-content">
-                <img src="/assets\images\totalrequest.svg" alt="Total Requests">
+                <img src="../assets/images/totalrequest.svg" alt="Total Requests">
                 <p>87</p>
             </div>
         </div>
         <div class="card">
             <h3>Number of Events</h3>
             <div class="card-content">
-                <img src="/assets\images\numberofevents.svg" alt="Number of Events">
+                <img src="../assets/images/numberofevents.svg" alt="Number of Events">
                 <p>52</p>
             </div>
         </div>
         <div class="card">
             <h3>Job Opportunities Available</h3>
             <div class="card-content">
-                <img src="/assets\images\jobopportunities.svg" alt="Available Job Opportunities">
+                <img src="../assets/images/jobopportunities.svg" alt="Available Job Opportunities">
                 <p>17</p>
             </div>
         </div>
         <div class="card">
             <h3>Added News</h3>
             <div class="card-content">
-                <img src="/assets\images\addednews.svg" alt="Added News">
+                <img src="../assets/images/addednews.svg" alt="Added News">
                 <p>5</p>
             </div>
         </div>
