@@ -93,29 +93,30 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
     }
   }
 
+
   function validateFormAdmin(event) {
-    event.preventDefault(); 
-    const firstName = document.querySelector('input[name="first-name"]').value.trim();
-    const lastName = document.querySelector('input[name="last-name"]').value.trim();
-    const email = document.querySelector('input[name="email"]').value.trim();
-    const password = document.querySelector('input[name="password"]').value.trim();
-    const schoolId = document.querySelector('input[name="school-id"]').value.trim();
-    const role = document.querySelector('input[name="role"]').value.trim();
-
-    if (!firstName || !lastName || !email || !password) {
+      event.preventDefault(); 
+      const firstName = document.querySelector('input[name="first-name"]').value.trim();
+      const lastName = document.querySelector('input[name="last-name"]').value.trim();
+      const email = document.querySelector('input[name="email"]').value.trim();
+      const password = document.querySelector('input[name="password"]').value.trim();
+      const schoolId = document.querySelector('input[name="school-id"]').value.trim();
+      let errorMessage = '';
       
-        return; 
-    }
- 
-    if (password.length < 6) {
-  
-        return; 
-    }
+      if (!firstName || !lastName || !email || !password) {
+          errorMessage = 'Please fill out all required fields.';
+      } else if (password.length < 6) {
+          errorMessage = 'Password must be at least 6 characters long.';
+      }
 
-    
+      if (errorMessage) {
+          document.getElementById('modal-message').textContent = errorMessage;
+          document.getElementById('modal').style.display = 'block';
+          return;
+      }
 
-   // event.target.submit();
-}
+      event.target.submit();
+  }
 
 
 
