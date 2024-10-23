@@ -13,14 +13,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gradYear = isset($_POST["graduation-year"]) ? $_POST["graduation-year"] : ''; 
     $jobStatus = isset($_POST["job-status"]) ? $_POST["job-status"] : '';
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
+    $db = new dbConnection();
+    $connection = $db->getConnection();
    
-    // check if important fields are not entered for alumni accounts
     if($userType == 'alumni') {
+         // check if important fields are not entered for alumni accounts
         if (empty($schoolID) || empty($gradYear) || empty($jobStatus)) {
             $_SESSION['confirmationMessage'] = "Please insert all fields... ";
             header("Location: ../view/AddUser.php");
             return;
         }    
+        // check if their is an existing school id
+        if(isAlumniExist($connection,$schoolID)) {
+            $_SESSION['confirmationMessage'] = "Alumni already exist... ";
+            header("Location: ../view/AddUser.php");
+            return;
+        }
+         // check if the school id length is 7
+        if($schoolID != 7) {
+            $_SESSION['confirmationMessage'] = "School ID number should be 7 digits long... ";
+            header("Location: ../view/AddUser.php");
+            return;
+        }
     }
     // set the admin automatically into employed and also set the employed and unemployed to 1 as employed and 0 as unemployed
     if($jobStatus == 'employed' || $userType == 'admin' ) {
@@ -29,8 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jobStatus = '0';
     }
 
-    $db = new dbConnection();
-    $connection = $db->getConnection(); 
+    
     // Check if email exist
     if(isEmailExist($connection, $email)) {
         $_SESSION['confirmationMessage'] = "The email already exist";
@@ -93,6 +106,15 @@ function isEmailExist($connection, $email) {
     $query = "SELECT * FROM user WHERE email = ?"; 
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0; 
+}
+
+function isAlumniExist($connection, $schoolID) {
+    $query = "SELECT * FROM alumni WHERE school_id = ?"; 
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("s", $schoolID);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->num_rows > 0; 
