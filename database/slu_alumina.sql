@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2024 at 05:16 PM
+-- Generation Time: Oct 23, 2024 at 05:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,8 @@ INSERT INTO `alumni` (`user_id`, `school_id`, `gradyear`, `program`) VALUES
 (30, 2193612, 2023, 'Bachelor of Science in Computer Science'),
 (31, 2201239, 2024, 'Bachelor of Science in Information Technology'),
 (32, 2202131, 2024, 'Bachelor of Arts in Business Administration'),
-(33, 2168931, 2020, 'Bachelor of Science in Information Technology');
+(33, 2168931, 2020, 'Bachelor of Science in Information Technology'),
+(34, 2167123, 2020, 'Bachelor of Science in Computer Science');
 
 -- --------------------------------------------------------
 
@@ -196,17 +197,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `email`, `pword`, `fname`, `lname`, `contactno`, `pfp`, `user_type`, `is_employed`) VALUES
-(23, '2235008@slu.edu.ph', '$2y$10$h.qOAXckW2ZRXSlWxeuo1uS8Bu2gZKgAQUW9dr6pm.LSS8AmSSNUa', 'Joaquin Gabriel', 'Caparas', NULL, '', 'admin', 1),
-(24, 'nic@gmail.com', '$2y$10$mjBl/NJKUNQrNpjHqEMCl.BvGwMHdSaSoMLaggeuOysWfIxbSRX1C', 'Nichole Jhoy', 'Escano', NULL, '', 'admin', 1),
-(25, 'mcarino@gmail.com', '$2y$10$5QWR6v6iJkZnd7phAAi.cOrzQsRg9BLtshdESpgreR3w1WJT94hNC', 'Mark Lorenz', 'Carino', NULL, '', 'admin', 1),
-(26, 'shiminette@gmail.com', '$2y$10$llywAG4FctnRPcZWhgveUuSEfaPzOl2nFKOSbFv4baMQr6qoXg1UC', 'Minette Victoria', 'Mandac', NULL, '', 'admin', 1),
+(23, '2235008@slu.edu.ph', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Joaquin Gabriel', 'Caparas', NULL, '', 'admin', 1),
+(24, 'nic@gmail.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Nichole Jhoy', 'Escano', NULL, '', 'admin', 1),
+(25, 'mcarino@gmail.com', '$2y$10$7NJePCmZCh85ZBHQzIQWyO.21iyCb881xhSrMnrGOIs18xg6vh6XC', 'Mark Lorenz', 'Carino', NULL, '', 'admin', 1),
+(26, 'shiminette@gmail.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Minette Victoria', 'Mandac', NULL, '', 'admin', 1),
 (27, 'shaine@gmail.com', '$2y$10$tKHzkVXJESOdxNhrFdS.BOh9PTleVTmYhbiumSeY5/ylXsNWnSrYO', 'Ma. Loures Shaine ', 'Razo', NULL, '', 'admin', 1),
 (28, 'miguel@gmail.com', '$2y$10$yr.ll27F8XWjA7D3ZR8PIOBIpXhBaUyp3M1PgjS5mwGgppvaS/0eK', 'Carlos Miguel', 'Vergara', NULL, '', 'admin', 1),
 (29, 'KD@gmail.com', '$2y$10$3dCQ/2pE3WThcg8T.yT4oey5Z9u4DeOjyuePo/DWvC3y6X6JJrYL6', 'Kevin', 'Durant', NULL, '', 'alumni', 0),
 (30, 'lbj@gmail.com', '$2y$10$NpSuW5zuXYfyRbPWYYf7K.NfScPVuXNmVxtJMhS/xhw1FgCeblG.O', 'Lebron ', 'James', NULL, '', 'alumni', 0),
 (31, 'mjordan@yahoo.com', '$2y$10$mstXYnipW7/Rf711Kaqe9eoyn6p7.1YrobDxy0C6JyWJ.n3UOcCKi', 'Michael', 'Jordan', NULL, '', 'alumni', 0),
 (32, 'patpat@gmail.com', '$2y$10$7NJePCmZCh85ZBHQzIQWyO.21iyCb881xhSrMnrGOIs18xg6vh6XC', 'Patrick Laurence', 'Versoza', NULL, '', 'alumni', 1),
-(33, 'dolbus@yahoo.com', '$2y$10$3nUDPIk5rM0ehmMbA5lFT.UN9iEXujoSInc/EiBKZzeb3Vfs5CQOe', 'Jan Dolby ', 'Aquino', NULL, '', 'alumni', 1);
+(33, 'dolbus@yahoo.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Jan Dolby ', 'Aquino', NULL, '', 'alumni', 1),
+(34, 'KG@yahoo.com', '$2y$10$0R0uVrxk6w9tThL9e4AKT.cbcBV9ebgao9bcQE.UGqIfB5399lyCG', 'Kevin', 'Garnett', NULL, '', 'alumni', 1);
 
 --
 -- Indexes for dumped tables
@@ -295,7 +297,7 @@ ALTER TABLE `applicants`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
