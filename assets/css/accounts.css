@@ -367,18 +367,11 @@ th {
     margin: 0 5px; /* Spacing between buttons */
 }
 
-.button-container {
-    display: flex;
-    justify-content: flex-end; /* Align buttons to the right */
-    align-items: center; /* Center the buttons vertically */
-    margin-top: 0px; /* Adjust this value for space above the buttons */
-    margin-right: 340px; /* Adjust this value to move buttons left */
-}
 
 #addUserButton {
     padding: 6px 12px;
     margin-right: 10px; /* Space between the buttons */
-    margin-top: 20px; /* Add top margin */
+    margin-top: 4px; /* Add top margin */
     background-color: #1100ff;
     color: white;
     border: none;
@@ -386,6 +379,16 @@ th {
     cursor: pointer;
     position: relative;
     z-index: 10;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 13.2%; /* Same top value as the search bar */
+    right: 320px; /* Move the buttons slightly to the left */
 }
 
 .dropdown {
@@ -396,7 +399,6 @@ th {
 
 .dropdown button {
     padding: 6px 12px;
-    margin-top: 20px; /* Add top margin to dropdown button */
     background-color: #008CBA;
     color: white;
     border: none;
@@ -414,7 +416,7 @@ th {
 }
 
 .dropdown:hover .dropdown-content {
-    display: block; /* Show dropdown on hover */
+    display: block;
 }
 
 .dropdown-content a {
@@ -425,8 +427,9 @@ th {
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1; /* Hover effect for dropdown options */
+    background-color: #f1f1f1;
 }
+
 
 /* Media query for screens between 769px and 1300px */
 @media only screen and (min-width: 769px) and (max-width: 1300px) {
