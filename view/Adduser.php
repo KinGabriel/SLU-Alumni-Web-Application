@@ -116,7 +116,7 @@ unset($_SESSION['confirmationMessage']);
                     </div>
                     <div class="form-group" id="graduation-year">
                         <label for="graduation-year">Graduation Year</label>
-                        <select id="graduation-year" name="graduation-year" class="input-field" required>
+                        <select id="graduation-year" name="graduation-year" class="input-field">
                                 <option value="" disabled selected> Select Your Graduation Year</option>
                                 <?php
                                     $currentYear = date("Y");
@@ -128,7 +128,7 @@ unset($_SESSION['confirmationMessage']);
                     </div>
                     <div class="form-group" id="degree">
                         <label for="program">Program</label>
-                        <select name="program" class="input-field" required> 
+                        <select name="program" class="input-field"> 
                                 <option value="" disabled selected> Select Program</option>
                                 <?php
                                 $filePath = '../assets/programs.txt'; 
