@@ -97,7 +97,7 @@ unset($_SESSION['confirmation_message']);
         <div class="modal-content">
             <img src="" alt="" />
             <p id="modal-message"></p>
-            <button class="accept" onclick="closeModal()">Thank you!</button>
+            <button class="accept" onclick="closeModal()">Okay</button>
         </div>
     </div>
 
