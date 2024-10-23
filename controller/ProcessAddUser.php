@@ -13,6 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gradYear = isset($_POST["graduation-year"]) ? $_POST["graduation-year"] : ''; 
     $jobStatus = isset($_POST["job-status"]) ? $_POST["job-status"] : '';
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
+   
+    // check if important fields are not entered for alumni accounts
+    if($userType == 'alumni') {
+        if (empty($schoolID) || empty($gradYear) || empty($jobStatus)) {
+            $_SESSION['confirmationMessage'] = "Please insert all fields... ";
+            header("Location: ../view/AddUser.php");
+            return;
+        }    
+    }
+    // set the admin automatically into employed and also set the employed and unemployed to 1 as employed and 0 as unemployed
+    if($jobStatus == 'employed' || $userType == 'admin' ) {
+        $jobStatus = '1';
+    }else if($jobStatus == 'unemployed') {
+    $jobStatus = '0';
+    }
 
     $db = new dbConnection();
     $connection = $db->getConnection(); 
@@ -23,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO user (email, pword, fname, lname, pfp, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO user (email, pword, fname, lname, pfp, user_type,is_employed) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
     if ($stmt === false) {
@@ -32,10 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("ssssss", $email, $hashedPassword, $firstName, $lastName, $idImage, $userType);
+    $stmt->bind_param("ssssssi", $email, $hashedPassword, $firstName, $lastName, $idImage, $userType,$jobStatus);
     
     if ($stmt->execute()) {
         $_SESSION['confirmationMessage'] = "Successfully added an account!";
+
 
         // Check if user type is alumni and add to alumni table
         if ($userType == "alumni") {

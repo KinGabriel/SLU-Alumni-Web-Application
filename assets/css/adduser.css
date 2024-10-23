@@ -210,8 +210,8 @@ h2.form-title, h3.section-title {
 }
 
 /* Graduation Year Field */
-.form-group#graduation-year input {
-    width: 50%; 
+.form-group#graduation-year select {
+    width: 55%; 
 }
 
 /* Degree Select Field */
@@ -256,7 +256,7 @@ h2.form-title, h3.section-title {
 }
 
 .add-button {
-    background-color: #f39c12;
+    background-color: #FFB200;
     color: #fff;
     font-weight: bold;
     width: 5%;
@@ -308,7 +308,7 @@ h2.form-title, h3.section-title {
     width: 200px;
     padding: 14px;
     font-size: 16px;
-    color: #ffb200;
+    color: #FFB200;
     box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
   }
   /* Password Field */
