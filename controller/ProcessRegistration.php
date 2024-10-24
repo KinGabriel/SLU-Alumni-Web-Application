@@ -16,24 +16,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connection = $db->getConnection(); 
       // Check if email exist
       if(isEmailExist($connection, $email)) {
+        $_SESSION['formData'] = $_POST;
         $_SESSION['confirmation_message'] = "Account already exist";
         header("Location: ../view/Register.php");
         exit();
     }
     // Check if their is already an existing application
     if(checkApplicant( $connection, $email )) {
+        $_SESSION['formData'] = $_POST;
         $_SESSION['confirmation_message'] = "Already have an existing application!";
         header("Location: ../view/Register.php");
         exit();
     }
     // check if their is an existing school id
     if(isAlumniExist($connection,$schoolID)) {
+        $_SESSION['formData'] = $_POST;
         $_SESSION['confirmation_message'] = "Alumni already exist... ";
         header("Location: ../view/Register.php");
         return;
     }
   // Check if their is already an existing application by school ID
     if(checkApplicantById( $connection, $schoolID )) {
+        $_SESSION['formData'] = $_POST;
         $_SESSION['confirmation_message'] = "Already have an existing application!";
         header("Location: ../view/Register.php");
         exit();
