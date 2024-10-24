@@ -19,18 +19,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($userType == 'alumni') {
          // check if important fields are not entered for alumni accounts
         if (empty($schoolID) || empty($gradYear) || empty($jobStatus)) {
+            $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "Please insert all fields... ";
             header("Location: ../view/AddUser.php");
             return;
         }    
         // check if their is an existing school id
         if(isAlumniExist($connection,$schoolID)) {
+            $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "Alumni already exist... ";
             header("Location: ../view/AddUser.php");
             return;
         }
          // check if the school id length is 7
          if (strlen($schoolID) != 7) {
+            $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "School ID number should be 7 digits long... ";
             header("Location: ../view/AddUser.php");
             return;
@@ -46,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Check if email exist
     if(isEmailExist($connection, $email)) {
+        $_SESSION['formData'] = $_POST;
         $_SESSION['confirmationMessage'] = "The email already exist";
         header("Location: ../view/AddUser.php");
         exit();
