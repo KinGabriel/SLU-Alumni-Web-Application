@@ -83,41 +83,40 @@
             </thead>
 
             <tbody id="applicantTableBody">
-                 <td>
-                 <button class="btn-accept">Accept</button>
-                <button class="btn-decline">Decline</button>
-                <button class="btn-view-profile">View Profile</button>
-                </td>
+               
             </tbody>
         </table>
     </div>
 
-    <!-- Search bar -->
-    <div class="search">
-        <form>
-        <input type="text" placeholder="Search..">
-        <img src="../assets/images/search.png" alt="Search" class="search-icon">
-        </form>
+  <!-- Search bar -->
+<div class="search">
+    <form id="searchForm">
+        <input type="text" name="search" placeholder="Search..">
+        <button type="submit">
+            <img src="../assets/images/search.png" alt="Search" class="search-icon">
+        </button>
+    </form>
+</div>
+
+<!-- Sort By Name, Sort by Year -->
+<div class="button-container">
+    <div class="dropdown">
+        <button id="dropdownButtonName">Sort By Name ▼</button>
+        <div class="dropdown-content" id="dropdownContentName">
+            <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
+            <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
+        </div>
     </div>
 
-     <!--Sort By Name, Sort by Year ---->
-     <div class="button-container">
-        <div class="dropdown">
-            <button id="dropdownButtonName">Sort By Name ▼</button>
-            <div class="dropdown-content" id="dropdownContentName">
-                <a href="#" class="sort-option">A - Z</a>
-                <a href="#" class="sort-option">Z - A</a>
-            </div>
-        </div>
-    
-        <div class="dropdown">
-            <button id="dropdownButtonDate">Sort By Year ▼</button>
-            <div class="dropdown-content" id="dropdownContentDate">
-                <a href="#" class="sort-option">Newest to Oldest</a>
-                <a href="#" class="sort-option">Oldest to Newest</a>
-            </div>
+    <div class="dropdown">
+        <button id="dropdownButtonDate">Sort By Year ▼</button>
+        <div class="dropdown-content" id="dropdownContentDate">
+            <a href="#" class="sort-option" data-sort="year-newest">Newest to Oldest</a>
+            <a href="#" class="sort-option" data-sort="year-oldest">Oldest to Newest</a>
         </div>
     </div>
+</div>
+
     
     <script src="../assets/js/HandleApplicantsTable.js"></script>
 </body>

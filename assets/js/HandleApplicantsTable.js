@@ -49,20 +49,54 @@ function populateApplicantsTable(applicantData) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('../controller/GetApplicationList.php')
+function fetchUserData() {
+    const search = document.querySelector('input[name="search"]').value;
+    const queryString = new URLSearchParams({
+        search,
+        sort: new URLSearchParams(window.location.search).get('sort') || 'name ASC' 
+    }).toString();
+
+    fetch(`../controller/GetApplicationList.php?${queryString}`)
         .then(response => {
-            if(!response.ok) {
+            if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(data => {
-            if(Array.isArray(data)) {
+            if (Array.isArray(data)) {
                 populateApplicantsTable(data);
             } else {
                 console.error('Invalid data format received.');
             }
         })
-        .catch(error => console.error('Error fetching applicant data:', error));
+        .catch(error => console.error('Error fetching user data:', error));
+    window.history.replaceState({}, '', `?${queryString}`);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUserData();
+    document.querySelector('.search form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        fetchUserData(); 
+    });
+
+
+    document.querySelectorAll('.sort-option').forEach(option => {
+        option.addEventListener('click', function(event) {
+            event.preventDefault();
+            const sortType = this.getAttribute('data-sort');
+            const queryString = new URLSearchParams(window.location.search);
+            if (sortType === 'name-asc') {
+                queryString.set('sort', 'name ASC');
+            } else if (sortType === 'name-desc') {
+                queryString.set('sort', 'name DESC');
+            } else if (sortType === 'year-newest') {
+                queryString.set('sort', 'year DESC');
+            } else if (sortType === 'year-oldest') {
+                queryString.set('sort', 'year ASC');
+            }
+            window.location.search = queryString.toString();
+        });
+    });
 });
