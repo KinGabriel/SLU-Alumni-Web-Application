@@ -40,7 +40,9 @@ header img.slu-logo {
     margin-top: -1vh;
     margin-bottom: 0.5vh;
 }
-
+.notif-bell {
+    margin-right: 10px; /* Adjust the value as needed */
+}
 .profile-pic {
     border-radius: 40px;
     height: 40px;
