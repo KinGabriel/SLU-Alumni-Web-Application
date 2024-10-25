@@ -29,6 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['first_name'] = $user['fname'];
         $_SESSION['last_name'] = $user['lname'];
+        $_SESSION['user_type'] = $user['user_type']; // Store user type
+
+        // Fetch additional user details for the dashboard
+        $_SESSION['user_name'] = $user['fname'] . ' ' . $user['lname']; // Full name
 
         // Redirect based on user type
         if ($user['user_type'] == 'admin') {

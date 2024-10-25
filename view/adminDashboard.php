@@ -1,4 +1,5 @@
 <?php
+require_once '../database/Configuration.php'; 
 session_start();
 $message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
@@ -96,8 +97,8 @@ $conn->close();
             <i class="fa-regular fa-bell"></i>
             <img src="/assets\images\alumni.jpg" alt="Admin Profile" class="profile-pic">
             <div class="account-details">
-                <span class="user-name">Nichole Caparas</span>
-                <span class="account-type">Admin</span>
+                <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
             </div>
         </div>
     </header>
