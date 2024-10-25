@@ -95,7 +95,7 @@ $conn->close();
         </h1>
         <div class="header-profile">
             <i class="fa-regular fa-bell"></i>
-            <img src="/assets\images\alumni.jpg" alt="Admin Profile" class="profile-pic">
+            <img src="<?php echo $_SESSION['pfp'] ?: '../assets\images\alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
             <div class="account-details">
                 <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
                 <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>

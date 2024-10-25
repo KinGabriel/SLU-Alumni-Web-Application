@@ -30,10 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['first_name'] = $user['fname'];
         $_SESSION['last_name'] = $user['lname'];
         $_SESSION['user_type'] = $user['user_type']; // Store user type
-
-        // Fetch additional user details for the dashboard
         $_SESSION['user_name'] = $user['fname'] . ' ' . $user['lname']; // Full name
-
+        // Convert BLOB to base64
+        if (!empty($user['pfp'])) {
+            // Ensure that the 'pfp' is a BLOB and can be base64 encoded
+            $_SESSION['pfp'] = 'data:image/jpeg;base64,' . base64_encode($user['pfp']);
+        } else {
+            // Use a default placeholder image or leave it empty
+            $_SESSION['pfp'] = '..assets\images\alumni.jpg'; // Adjust this path to your default image
+        }
+        
+        
         // Redirect based on user type
         if ($user['user_type'] == 'admin') {
             header("Location: ../view/adminDashboard.php");

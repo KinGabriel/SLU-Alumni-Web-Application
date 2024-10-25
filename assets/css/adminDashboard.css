@@ -46,6 +46,8 @@ header img.slu-logo {
     height: 40px;
     width: 40px;
     margin-right: 0.8rem;
+    display: inline-block; /* Ensure the image is displayed as a block */
+    border: 1px solid #ccc; /* Add a border to visualize it */
 }
 .header-profile {
     display: flex;
