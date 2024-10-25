@@ -92,16 +92,6 @@ header img.slu-logo {
     z-index: 100;
 }
 
-/* .sidebar-container:hover {
-    width: 250px;
-} */
-
-/* .sidebar-menu {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-} */
-
 .sidebar-menu ul {
     margin: 0;
     padding: 0;
@@ -172,7 +162,7 @@ header img.slu-logo {
 
 .card-container {
     padding-top: 1rem;
-    padding-left: 16.7rem;
+    padding-left: 18vw;
     padding-right: 1rem;
     display: flex; /* Use flexbox for alignment */
     gap: 10px; /* Space between cards */
@@ -184,7 +174,7 @@ header img.slu-logo {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
     padding: 22px; /* Inner padding for the card content */
-    width: 200px; /* Set width for each card */
+    width: 16vw; /* Set width for each card */
     text-align: center; /* Center align text inside cards */
     transition: transform 0.3s ease; /* Transition for hover effect */
 }
@@ -199,25 +189,12 @@ header img.slu-logo {
     align-items: center; /* Vertically aligns the image and text */
     justify-content: center; /* Aligns content horizontally if needed */
     gap: 10px; /* Adds space between the image and the text */
-    padding-top: 48px; /* Default padding-top for all cards */
+    padding-top: 2vw; /* Default padding-top for all cards */
 }
 
 .card-content img {
     width: 30px; /* Adjust image size as needed */
     height: auto;
-}
-
-.card:nth-child(2) .card-content,
-.card:nth-child(5) .card-content {
-    padding-top: 43px; /* Default padding-top for all cards */
-}
-
-.card:nth-child(3) .card-content {
-    padding-top: 20px; /* Default padding-top for all cards */
-}
-/* Specific style for the Job Opportunities card */
-.card:nth-child(4) .card-content { /* Adjust based on the position of your Job Opportunities card */
-    padding-top: 0; /* No padding-top for Job Opportunities card */
 }
 
 h3 {
@@ -231,7 +208,7 @@ p {
 
 .second-row {
     padding-top: 1rem;
-    padding-left: 16.7rem;
+    padding-left: 18vw;
     padding-right: 1rem;
     display: flex; /* Use flexbox for alignment */
     gap: 10px; /* Space between cards */
@@ -242,33 +219,40 @@ p {
     background-color: #fff; /* Background color of each card */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    height: 390px; /* Inner padding for the card content */
-    width: 620px; /* Set width for each card */
+    height: 40vw; /* Inner padding for the card content */
+    width: 48.45vw; /* Set width for each card */
     text-align: center; /* Center align text inside cards */
     transition: transform 0.3s ease; /* Transition for hover effect */
 }
+.first-div h3 {
+    padding-top: 2vw;
+    padding-left: 2vw; 
+}
+
 .second-div {
     background-color: #fff; /* Background color of each card */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    height: 285px; /* Inner padding for the card content */
-    width: 410px; /* Set width for each card */
-    text-align: center; /* Center align text inside cards */
+    height: 30vw; /* Inner padding for the card content */
+    width: 32.45vw; /* Set width for each card */
+    text-align: left; /* Center align text inside cards */
     transition: transform 0.3s ease; /* Transition for hover effect */
 }
 .second-div h3 {
-    padding-top: 1rem; 
+    padding-top: 2vw;
+    padding-left: 2vw; 
 }
 
 .chart-container {
+    padding-top: 2vw;
     display: flex;
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
-    height: 200px; /* Set a height for the container */
+    /* height: 10vw; Set a height for the container */
 }
 
 canvas {
     width: 60% !important;
-    height: 200px !important; /* Set your desired height */
+    height: 20vw !important; /* Set your desired height */
     
 }

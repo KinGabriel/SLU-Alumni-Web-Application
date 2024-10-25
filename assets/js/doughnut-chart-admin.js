@@ -37,13 +37,16 @@ window.onload = function() {
                                     fillStyle: data.datasets[0].backgroundColor[index],
                                     strokeStyle: 'rgba(0, 0, 0, 0)', // Optional: add a border
                                     lineWidth: 0,
-                                    // hidden: !chart.getDatasetMeta(0).data[index].hidden,
                                     index: index
                                 };
                             });
                         },
                         usePointStyle: true, // Use point style to make legend items circular
-                        padding: 10, // Adjust padding to add space between the labels and the chart
+                        padding: 20, // Adjust padding to add space between the labels and the chart
+                        font: {
+                            size: 16 // Set the font size for the legend labels here
+                        }
+
                     }
                 },
                 tooltip: {

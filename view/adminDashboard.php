@@ -1,3 +1,80 @@
+<?php
+session_start();
+$message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
+$formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
+echo "<script>var message = '$message';</script>";
+unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+?>
+<?php
+// Connect to your database
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "slu_alumina-mid";
+
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to get the count of members
+$sql = "SELECT COUNT(*) AS total_members FROM alumni"; 
+$result = $conn->query($sql);
+
+// Fetch the count
+$totalMembers = 0;
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalMembers = $row['total_members'];
+}
+
+// Query to get the count of applicants
+$sql = "SELECT COUNT(*) AS total_applicants FROM applicants"; 
+$result = $conn->query($sql);
+
+// Fetch the count
+$totalApplicants = 0;
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalApplicants = $row['total_applicants'];
+}
+
+// // Query to get the count of events
+// $sql = "SELECT COUNT(*) AS total_events FROM event"; 
+
+// // Fetch the count
+// $totalEvents = 0;
+// if ($result->num_rows > 0) {
+//     $row = $result->fetch_assoc();
+//     $totalEvents = $row['total_events'];
+// }
+
+// Query to get the count of  job opporunity
+$sql = "SELECT COUNT(*) AS total_job_opportunity FROM opportunity"; 
+$result = $conn->query($sql);
+
+// Fetch the count
+$totalJobOpportunity = 0;
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalJobOpportunity = $row['total_job_opportunity'];
+}
+
+// // Query to get the count of news
+// $sql = "SELECT COUNT(*) AS total_news FROM news"; 
+// $result = $conn->query($sql);
+
+// // Fetch the count
+// $totalNews = 0;
+// if ($result->num_rows > 0) {
+//     $row = $result->fetch_assoc();
+//     $totalNews = $row['total_news'];
+// }
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,11 +82,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../assets/css/adminDashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  -->
 </head>
 <body>
     <!-- Header separator -->
-    <div class="header-separator"></div>
+    <div class="header-separator"> </div>
     <header>
         <h1>
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
@@ -81,41 +158,41 @@
             <h3>Total Member</h3>
             <div class="card-content">
                 <img src="../assets/images/totalmember.svg" alt="Total Members">
-                <p>857</p>
+                <p><?php echo $totalMembers; ?></p>
             </div>
         </div>
         <div class="card">
             <h3>Total Request</h3>
             <div class="card-content">
                 <img src="../assets/images/totalrequest.svg" alt="Total Requests">
-                <p>87</p>
+                <p><?php echo $totalApplicants; ?></p>
             </div>
         </div>
         <div class="card">
             <h3>Number of Events</h3>
             <div class="card-content">
                 <img src="../assets/images/numberofevents.svg" alt="Number of Events">
-                <p>52</p>
+                <p>0</p>
             </div>
         </div>
         <div class="card">
             <h3>Job Opportunities Available</h3>
             <div class="card-content">
                 <img src="../assets/images/jobopportunities.svg" alt="Available Job Opportunities">
-                <p>17</p>
+                <p><?php echo $totalJobOpportunity; ?></p>
             </div>
         </div>
         <div class="card">
             <h3>Added News</h3>
             <div class="card-content">
                 <img src="../assets/images/addednews.svg" alt="Added News">
-                <p>5</p>
+                <p>0</p>
             </div>
         </div>
     </div>
     <div class="second-row">
         <div class="first-div">
-
+            <h3>Announcements</h3>
         </div>
         <div class="second-div">
             <h3>Employee Composition</h3>
@@ -125,6 +202,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/assets\js\doughnut-chart-admin.js"></script>
+    <script src="../assets\js\doughnut-chart-admin.js"></script>
 </body>
 </html>
