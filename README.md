@@ -3,5 +3,5 @@
 - Caparas, Joaquin Gabriel
 - Carino, Mark Lorenz
 - Escano, Nichole Jhoy
-- Razo, Ma. Lourdes Shiane
+- Razo, Ma. Lourdes Shaine
 - Vergara, Carlos Miguel
