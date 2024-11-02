@@ -17,7 +17,7 @@ if ($result->num_rows > 0) {
 }
 
 // Query and fetch the count of applicants
-$sql = "SELECT COUNT(*) AS total_applicants FROM applicants";
+$sql = "SELECT COUNT(*) AS total_applicants FROM applicants WHERE is_verified = '0' ";
 $result = $connection->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
