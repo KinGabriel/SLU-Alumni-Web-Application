@@ -51,8 +51,8 @@ header span {
 }
 
 header img {
-  height: 2.5vw;
-  width: 3.2vw;
+  height: 50px;
+  width: auto; 
 }
 
 nav {

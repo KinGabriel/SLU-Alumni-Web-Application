@@ -34,8 +34,8 @@ header span {
 }
 
 header img {
-    height: 2vw; 
-    width: 2.5vw; 
+    height: 50px;
+    width: auto; 
 }
 
 /* Header separator */
