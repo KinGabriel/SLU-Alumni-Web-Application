@@ -1,3 +1,24 @@
+// To fetch the information from the php file
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("../controller/GetDashboardInformation.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.querySelector("#totalMembers").textContent = data.total_members;
+            document.querySelector("#totalApplicants").textContent = data.total_applicants;
+            document.querySelector("#totalJobOpportunity").textContent = data.total_job_opportunity;
+            document.querySelector("#totalEvents").textContent = data.total_events;
+            document.querySelector("#totalNews").textContent = data.total_news;
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+});
+
 // Ensure the script runs after the DOM is fully loaded
 window.onload = function() {
     // Get the context of the canvas element we want to render the chart on
