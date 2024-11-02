@@ -20,6 +20,7 @@ function populateApplicantsTable(applicantData) {
         userNameDiv.appendChild(profilePic);
         userNameDiv.appendChild(document.createTextNode(applicant.name));
         nameCell.appendChild(userNameDiv);
+        
         // Populate the table with the data from the server
         emailCell.textContent = applicant.email;
         idNumberCell.textContent = applicant.id_number;
@@ -28,12 +29,17 @@ function populateApplicantsTable(applicantData) {
         const acceptButton = document.createElement('button');
         acceptButton.classList.add('btn-accept');
         acceptButton.textContent = 'Accept';
+        acceptButton.addEventListener('click', () => acceptUser(applicant.id_number));
+
         const declineButton = document.createElement('button');
         declineButton.classList.add('btn-decline');
         declineButton.textContent = 'Decline';
+        declineButton.addEventListener('click', () => declineUser(applicant.id_number));
+
         const viewButton = document.createElement('button');
         viewButton.classList.add('btn-view-profile');
         viewButton.textContent = 'View Image';
+
         // Append buttons
         actionCell.appendChild(acceptButton);
         actionCell.appendChild(declineButton);
@@ -100,3 +106,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+async function acceptUser(schoolID) {
+    try {
+        const response = await fetch(`../controller/ProcessApplicants.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ schoolID, action: 'accept' }), 
+        });
+        if (!response.ok) throw new Error('Failed to accept user');
+        fetchUserData(); 
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+async function declineUser(schoolID) {
+    try {
+        const response = await fetch(`../controller/ProcessApplicants.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ schoolID, action: 'decline' }), 
+        });
+        if (!response.ok) throw new Error('Failed to decline user');
+        fetchUserData(); 
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+

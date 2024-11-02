@@ -4,7 +4,7 @@ session_start();
 $applicant = []; 
 $params = [];
 $types = ''; 
-$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, school_id, gradyear FROM applicants WHERE 1=1"; 
+$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, school_id, gradyear FROM applicants WHERE is_verified = '0'"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
