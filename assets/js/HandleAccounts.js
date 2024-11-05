@@ -16,7 +16,7 @@ function populateUserTable(userData) {
         const userNameDiv = document.createElement('div');
         userNameDiv.classList.add('user-name');
         const profilePic = document.createElement('img');
-        profilePic.src = '../assets/images/candy.jpg';
+       profilePic.src = user.pfp || '../assets/images/default-avatar-icon.jpg';
         profilePic.alt = user.name;
         profilePic.classList.add('profile-pic');
         userNameDiv.appendChild(profilePic);

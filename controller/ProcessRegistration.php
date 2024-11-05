@@ -1,5 +1,5 @@
 <?php
-require_once '../database/Configuration.php';
+require '../database/Configuration.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : '';

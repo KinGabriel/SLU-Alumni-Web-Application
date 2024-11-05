@@ -1,10 +1,10 @@
 <?php
-require_once '../database/Configuration.php'; 
+require '../database/Configuration.php'; 
 require("../controller/HandleSession.php");
 $users = []; 
 $params = [];
 $types = ''; 
-$query = " SELECT CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.school_id, a.gradyear, u.is_employed, u.user_type 
+$query = " SELECT CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.school_id, a.gradyear, u.is_employed, u.user_type, u.pfp 
     FROM user u  LEFT JOIN alumni a ON u.user_id = a.user_id WHERE 1=1 ";
 $db = new dbConnection();
 $connection = $db->getConnection();
@@ -73,7 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 'id_number' => $user['school_id'] ?? "N/A", 
                 'gradyear' => $user['gradyear'] ?? "N/A", 
                 'status' => $user['is_employed'] ? 'employed' : 'unemployed', 
-                'role' => $user['user_type'] 
+                'role' => $user['user_type'],
+                'pfp' => !empty($user['pfp']) ? 'data:image/jpeg;base64,' . base64_encode($user['pfp']) : null
             ];
         }, $users);
         echo json_encode($userData);
