@@ -125,7 +125,7 @@ require("../controller/HandleSession.php");
     <!-- Confirmation Modal -->
 <div class="confirm-modal" id="confirmModal">
     <div class="confirm-modal-content">
-    <img src="../assets/images/addedUser.png"  alt="Infomation message" />
+    <img src="../assets/images/addedUser.png"  alt="Information message" />
         <p id="confirmMessage"></p>
         <button class="confirm-yes" id="confirmYes">Yes</button>
         <button class="confirm-no" id="confirmNo">No</button>
