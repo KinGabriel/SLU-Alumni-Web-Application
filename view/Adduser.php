@@ -158,7 +158,6 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     <div class="form-group" id="user-roles">
                         <select id="user-roles" name="user-roles">
                         <option value="" disabled selected> Select Role</option>
-                        <option value="alumni">Alumni</option>
                         <option value="alumni" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'alumni' ? 'selected' : '' ?>>Alumni</option>
                         <option value="admin" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                         <option value="manager" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'manager' ? 'selected' : '' ?>>Manager</option>

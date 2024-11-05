@@ -27,12 +27,14 @@ function populateApplicantsTable(applicantData) {
         const acceptButton = document.createElement('button');
         acceptButton.classList.add('btn-accept');
         acceptButton.textContent = 'Accept';
-        acceptButton.addEventListener('click', () => acceptUser(applicant.id_number));
+        acceptButton.addEventListener('click', () => showConfirmationModal(applicant));
+
 
         const declineButton = document.createElement('button');
         declineButton.classList.add('btn-decline');
         declineButton.textContent = 'Decline';
-        declineButton.addEventListener('click', () => declineUser(applicant.id_number));
+        declineButton.addEventListener('click',  () => declineUser(applicant.id_number));
+
 
         const viewButton = document.createElement('button');
         viewButton.classList.add('btn-view-profile');
@@ -207,6 +209,25 @@ function viewImage(imageUrl) {
     modal.appendChild(closeButton);
 
     document.body.appendChild(modal); 
+}
+
+function showConfirmationModal(applicant) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to accept ${applicant.name}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+
+    document.getElementById('confirmYes').onclick = function() {
+        acceptUser(applicant.id_number);
+        closeConfirmationModal();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
 }
 
 

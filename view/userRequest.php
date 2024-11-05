@@ -120,8 +120,29 @@ require("../controller/HandleSession.php");
         </div>
     </div>
 </div>
-
-    
     <script src="../assets/js/HandleApplicantsTable.js"></script>
+
+    <!-- Confirmation Modal -->
+<div class="confirm-modal" id="confirmModal">
+    <div class="confirm-modal-content">
+    <img src="../assets/images/addedUser.png"  alt="Infomation message" />
+        <p id="confirmMessage"></p>
+        <button class="confirm-yes" id="confirmYes">Yes</button>
+        <button class="confirm-no" id="confirmNo">No</button>
+    </div>
+</div>
+    <script src="../assets/js/HandleApplicantsTable.js"></script>
+
+    <script>
+        if (message) {
+            document.getElementById('confirmMessage').textContent = message;
+            document.getElementById('confirm-modal').style.display = 'block';
+        }
+        function closeModal() {
+            message = null;
+            document.getElementById('confirm-modal').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>

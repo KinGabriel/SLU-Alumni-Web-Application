@@ -69,7 +69,7 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
     const regex = /^\d+$/; 
     if (!regex.test(schoolID)) {
         const createMessage = document.createElement('p');
-        createMessage.innerHTML = 'Invalid schoolID! ID only consists of digits.';
+        createMessage.innerHTML = 'Invalid School ID! School ID should only consists of digits.';
         createMessage.style.color = 'red';
         messageContainer.appendChild(createMessage);
         return true;
