@@ -2,7 +2,7 @@
 require_once '../database/Configuration.php'; 
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
+    $email = filter_var(trim($_POST["email"]), filter: FILTER_SANITIZE_EMAIL);
     $password = trim($_POST["password"]);
 
     // Create a database connection

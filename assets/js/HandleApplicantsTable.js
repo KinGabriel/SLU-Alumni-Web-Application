@@ -4,20 +4,17 @@ function populateApplicantsTable(applicantData) {
 
     applicantData.forEach(applicant => {
         const row = document.createElement('tr');
+        
         // Create row  
         const nameCell = document.createElement('td');
         const emailCell = document.createElement('td');
         const idNumberCell = document.createElement('td');
         const gradYearCell = document.createElement('td');
         const actionCell = document.createElement('td');
-         // Populate by name and pfp
+
+        // Populate by name and profile picture
         const userNameDiv = document.createElement('div');
         userNameDiv.classList.add('user-name');
-        const profilePic = document.createElement('img');
-        profilePic.src = '../assets/images/candy.jpg';
-        profilePic.alt = applicant.name;
-        profilePic.classList.add('profile-pic');
-        userNameDiv.appendChild(profilePic);
         userNameDiv.appendChild(document.createTextNode(applicant.name));
         nameCell.appendChild(userNameDiv);
         
@@ -25,6 +22,7 @@ function populateApplicantsTable(applicantData) {
         emailCell.textContent = applicant.email;
         idNumberCell.textContent = applicant.id_number;
         gradYearCell.textContent = applicant.gradyear;
+
         // Create Accept and Decline buttons
         const acceptButton = document.createElement('button');
         acceptButton.classList.add('btn-accept');
@@ -39,11 +37,13 @@ function populateApplicantsTable(applicantData) {
         const viewButton = document.createElement('button');
         viewButton.classList.add('btn-view-profile');
         viewButton.textContent = 'View Image';
+        viewButton.addEventListener('click', () => viewImage(applicant.school_id_pic));
 
         // Append buttons
         actionCell.appendChild(acceptButton);
         actionCell.appendChild(declineButton);
         actionCell.appendChild(viewButton);
+        
         // Append all 
         row.appendChild(nameCell);
         row.appendChild(emailCell);
@@ -53,7 +53,6 @@ function populateApplicantsTable(applicantData) {
         appTableBody.appendChild(row);
     });
 }
-
 
 function fetchUserData() {
     const search = document.querySelector('input[name="search"]').value;
@@ -141,6 +140,73 @@ async function declineUser(schoolID) {
     }
 }
 
+function viewImage(imageUrl) {
+    // Css for the show image or its modal
+    const style = document.createElement('style');
+    style.textContent = `
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+      .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0; 
+        }
+
+        .close-button img {
+            width: 30px; 
+            height: 30px;
+            filter: brightness(0) invert(1);
+        }
+    `;
+    // Append the style element to the head
+    document.head.appendChild(style);
+
+    // Create an image element to display the school ID picture
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUrl; 
+    imgElement.alt = 'School ID Picture';
+    imgElement.style.width = '100%'; 
+
+    // Create a modal to display the image
+    const modal = document.createElement('div');
+    modal.classList.add('modal'); 
+    modal.appendChild(imgElement);
+
+    // Create a close button for the modal using an image
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button'); // Add a class for styling
+    const closeIcon = document.createElement('img');
+    closeIcon.src = '../assets/images/closeButton.png'; 
+    closeIcon.alt = 'Close';
+    closeButton.appendChild(closeIcon);
+    
+    closeButton.addEventListener('click', () => {
+        document.body.removeChild(modal); 
+        document.head.removeChild(style); 
+    });
+    modal.appendChild(closeButton);
+
+    document.body.appendChild(modal); 
+}
 
 

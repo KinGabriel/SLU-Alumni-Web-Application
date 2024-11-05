@@ -41,21 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-      // Check if a file was uploaded
-      $idImage = '';
-      if (isset($_FILES['schoolIdFile']) && $_FILES['schoolIdFile']['error'] === UPLOAD_ERR_OK) { 
-          $fileTmpPath = $_FILES['schoolIdFile']['tmp_name'];
-          $fileName = uniqid() . '-' . basename($_FILES['schoolIdFile']['name']);
-          // construct the file path for the image which where it will be stored to fetch by the db in the query
-          $idImage = '../assets/uploads/' . $fileName; 
-          // Move the picture to the directory
-          if (!move_uploaded_file($fileTmpPath, $idImage)) {
-              $_SESSION['formData'] = $_POST;
-              $_SESSION['confirmation_message'] = "File upload failed.";
-              header("Location: ../view/Register.php");
-              exit();
-          }
+    $idImage = '';
+    if (isset($_FILES['schoolIdFile']) && $_FILES['schoolIdFile']['error'] === UPLOAD_ERR_OK) { 
+        $fileTmpPath = $_FILES['schoolIdFile']['tmp_name'];
+        $idImage = file_get_contents($fileTmpPath);
+        if ($idImage === false) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['confirmation_message'] = "Failed to read the uploaded file.";
+            header("Location: ../view/Register.php");
+            exit();
         }
+    }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO applicants (school_id, email, fname, lname, pword, program, gradyear, school_id_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

@@ -66,6 +66,15 @@ function emptyField(firstName, lastName, email, schoolID, password, retypePasswo
         messageContainer.appendChild(createMessage);
         return true; 
     }
+    const regex = /^\d+$/; 
+    if (!regex.test(schoolID)) {
+        const createMessage = document.createElement('p');
+        createMessage.innerHTML = 'Invalid schoolID! ID only consists of digits.';
+        createMessage.style.color = 'red';
+        messageContainer.appendChild(createMessage);
+        return true;
+    }
+
     return false;
 }
 
