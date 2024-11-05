@@ -241,6 +241,8 @@ h2.form-title, h3.section-title {
     border-radius: 5px;
     font-size: 15px; 
     cursor: pointer;
+    margin-top: 65px; 
+    margin-right: 35px; 
 }
 
 .clear-button {

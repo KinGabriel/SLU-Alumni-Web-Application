@@ -79,7 +79,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         <div class="form-container">
             <h2 class="form-title">Create New User</h2>
             <form action="../controller/ProcessAddUser.php" method="POST" enctype="multipart/form-data" onsubmit="validateFormAdmin(event)">
-               <!-- Name fields -->
+        
                 <div class="form-row">
                     <div class="form-group" id="first-name">
                         <label for="first-name">First Name</label>
