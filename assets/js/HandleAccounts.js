@@ -60,11 +60,11 @@ function populateUserTable(userData) {
 
 
 function fetchUserData() {
-    const search = document.querySelector('input[name="search"]').value;
+    const urlParams = new URLSearchParams(window.location.search);
     const jobStatus = document.getElementById('jobStatusFilter').value;
     const role = document.getElementById('roleFilter').value;
     const queryString = new URLSearchParams({
-        search,
+        search: urlParams.get('search') || '', 
         jobStatus,
         role,
         sort: new URLSearchParams(window.location.search).get('sort') || 'name ASC' 
@@ -85,7 +85,6 @@ function fetchUserData() {
             }
         })
         .catch(error => console.error('Error fetching user data:', error));
-    window.history.replaceState({}, '', `?${queryString}`);
 }
 
 
@@ -93,16 +92,29 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchUserData();
     document.querySelector('.search form').addEventListener('submit', function(event) {
         event.preventDefault(); 
-        fetchUserData(); 
+        const searchValue = document.querySelector('input[name="search"]').value;
+        const queryString = new URLSearchParams(window.location.search);
+        queryString.set('search', searchValue);
+        window.history.pushState({}, '', `${window.location.pathname}?${queryString.toString()}`);
+        fetchUserData();
     });
+
 
 
     document.getElementById('jobStatusFilter').addEventListener('change', function() {
-        fetchUserData(); 
+        const queryString = new URLSearchParams(window.location.search);
+        queryString.set('jobStatusFilter', this.value);
+        window.history.pushState({}, '', `${window.location.pathname}?${queryString.toString()}`); 
+        fetchUserData();
     });
+
     document.getElementById('roleFilter').addEventListener('change', function() {
+        const queryString = new URLSearchParams(window.location.search);
+        queryString.set('roleFilter', this.value); 
+        window.history.pushState({}, '', `${window.location.pathname}?${queryString.toString()}`);
         fetchUserData(); 
     });
+    
     document.querySelectorAll('.sort-option').forEach(option => {
         option.addEventListener('click', function(event) {
             event.preventDefault();

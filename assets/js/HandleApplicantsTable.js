@@ -57,12 +57,11 @@ function populateApplicantsTable(applicantData) {
 }
 
 function fetchUserData() {
-    const search = document.querySelector('input[name="search"]').value;
+    const urlParams = new URLSearchParams(window.location.search);
     const queryString = new URLSearchParams({
-        search,
-        sort: new URLSearchParams(window.location.search).get('sort') || 'name ASC' 
+        search: urlParams.get('search') || '', 
+        sort: urlParams.get('sort') || 'name ASC' 
     }).toString();
-
     fetch(`../controller/GetApplicationList.php?${queryString}`)
         .then(response => {
             if (!response.ok) {
@@ -78,16 +77,20 @@ function fetchUserData() {
             }
         })
         .catch(error => console.error('Error fetching user data:', error));
-    window.history.replaceState({}, '', `?${queryString}`);
+        window.history.replaceState({}, '', `?${queryString}`);
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchUserData();
     document.querySelector('.search form').addEventListener('submit', function(event) {
         event.preventDefault(); 
-        fetchUserData(); 
+        const searchValue = document.querySelector('input[name="search"]').value;
+        const queryString = new URLSearchParams(window.location.search);
+        queryString.set('search', searchValue);
+        window.history.pushState({}, '', `${window.location.pathname}?${queryString.toString()}`);
+        fetchUserData();
     });
-
 
     document.querySelectorAll('.sort-option').forEach(option => {
         option.addEventListener('click', function(event) {
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.search = queryString.toString();
         });
     });
+  
 });
 
 
