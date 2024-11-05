@@ -100,7 +100,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
         <div class="modal-content">
             <img src="../assets/images/addedUser.png" alt="Added Information" />
             <p id="modal-message"></p>
-            <button class="accept" onclick="closeModal()">Okay</button>
+            <button class="accept" onclick="closeModal()">Got it</button>
         </div>
     </div>
 
