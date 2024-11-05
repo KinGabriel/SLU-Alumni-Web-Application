@@ -1,6 +1,6 @@
 <?php
 require_once '../database/Configuration.php'; 
-
+require("../controller/HandleSession.php");
 session_start();
 $users = []; 
 $params = [];

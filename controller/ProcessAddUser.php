@@ -1,7 +1,6 @@
 <?php
 require_once '../database/Configuration.php';
-session_start();
-
+require("../controller/HandleSession.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : ''; 
     $password = isset($_POST["password"]) ? $_POST["password"] : '';

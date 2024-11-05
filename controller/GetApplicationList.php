@@ -1,6 +1,6 @@
 <?php
 require_once '../database/Configuration.php';
-session_start();
+require("../controller/HandleSession.php");
 $applicant = []; 
 $params = [];
 $types = ''; 

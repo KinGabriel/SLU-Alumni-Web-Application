@@ -1,3 +1,7 @@
+<?php
+require("../controller/HandleSession.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +65,7 @@
     
        <!-- Sticky Log Out Button -->
         <div class="sidebar-logout">
-            <a href="#logout">
+         <a href="../controller/ProcessLogOut.php">
             <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
             <span class="menu-item-logout">Log Out</span>
             </a>

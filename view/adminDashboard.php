@@ -1,12 +1,10 @@
 <?php
-require_once '../database/Configuration.php'; 
-session_start();
+require("../controller/HandleSession.php");
 $message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
 echo "<script>var message = '$message';</script>";
 unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +77,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 
         <!-- Sticky Log Out Button -->
         <div class="sidebar-logout">
-            <a href="#logout">
+            <a href="../controller/ProcessLogOut.php">
                 <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
                 <span class="menu-item-logout">Log Out</span>
             </a>

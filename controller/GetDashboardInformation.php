@@ -1,7 +1,7 @@
 <?php
 require_once '../database/Configuration.php';
+require("../controller/HandleSession.php");
 header('Content-Type: application/json');
-session_start();
 $db = new dbConnection();
 $connection = $db->getConnection();
 $data = [];
