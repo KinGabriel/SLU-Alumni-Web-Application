@@ -77,7 +77,6 @@ function fetchUserData() {
             }
         })
         .catch(error => console.error('Error fetching user data:', error));
-        window.history.replaceState({}, '', `?${queryString}`);
 }
 
 
