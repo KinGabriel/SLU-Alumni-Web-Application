@@ -4,6 +4,9 @@ $message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['conf
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
 
 $uploadedImagePath = '';
+$idImage = '';  // Variable to hold image binary data
+
+// Check if the file is uploaded and not empty
 if (isset($formData['schoolIdFile']) && !empty($formData['schoolIdFile'])) {
     // Assuming the file is stored in the 'uploads' directory
     $uploadDir = '../uploads/';
@@ -11,7 +14,8 @@ if (isset($formData['schoolIdFile']) && !empty($formData['schoolIdFile'])) {
     
     // Move the uploaded file to the directory
     if (move_uploaded_file($formData['schoolIdFile']['tmp_name'], $uploadFile)) {
-        $uploadedImagePath = $uploadFile; // Set path if upload is successful
+        // Read the file contents as binary data
+        $imageData = file_get_contents($uploadFile);
     }
 }
 
