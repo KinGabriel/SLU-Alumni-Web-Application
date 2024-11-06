@@ -3,7 +3,14 @@ body {
     font-family: Epilogue, sans-serif;
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
+    font-family: Readex_Pro;
 }
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+    
 
 /* Job Listings Container */
 .job-listings {

@@ -1,9 +1,14 @@
 /* Base styles */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
   height: 100vh; 
+  font-family: Readex_Pro;
 }
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
 
 .form-wrapper {
   display: flex;
