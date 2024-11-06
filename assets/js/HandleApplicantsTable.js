@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 async function acceptUser(schoolID) {
-    console.log(schoolID);
     try {
         const response = await fetch(`../controller/ProcessApplicants.php`, {
             method: 'POST',
@@ -247,5 +246,6 @@ function showDeclineConfirmationModal(applicant) {
 function closeConfirmationModal() {
     document.getElementById('confirmModal').style.display = 'none';
 }
+
 
 

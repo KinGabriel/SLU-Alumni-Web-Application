@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['first_name'] = $user['fname'];
         $_SESSION['last_name'] = $user['lname'];
+        $_SESSION['email'] = $user['email'];
         $_SESSION['user_type'] = $user['user_type']; // Store user type
         $_SESSION['user_name'] = $user['fname'] . ' ' . $user['lname']; // Full name
         // Convert BLOB to base64
