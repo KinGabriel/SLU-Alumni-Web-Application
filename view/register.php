@@ -2,6 +2,19 @@
 session_start();
 $message = isset($_SESSION['confirmation_message']) ? addslashes($_SESSION['confirmation_message']) : '';
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
+
+$uploadedImagePath = '';
+if (isset($formData['schoolIdFile']) && !empty($formData['schoolIdFile'])) {
+    // Assuming the file is stored in the 'uploads' directory
+    $uploadDir = '../uploads/';
+    $uploadFile = $uploadDir . basename($formData['schoolIdFile']['name']);
+    
+    // Move the uploaded file to the directory
+    if (move_uploaded_file($formData['schoolIdFile']['tmp_name'], $uploadFile)) {
+        $uploadedImagePath = $uploadFile; // Set path if upload is successful
+    }
+}
+
 echo "<script>var message = '$message';</script>";
 unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
 ?>
@@ -84,7 +97,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                             <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
                             <span class="upload-text">Upload your school ID</span>
                             <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" onchange="handleFileUpload()" />
-                            <img id="image-preview" class="image-preview" style="display: <?php echo $uploadedImagePath ? 'block' : 'none'; ?>;" src="<?php echo $uploadedImagePath; ?>" />
+                            <img id="image-preview" class="image-preview">
                         </label>
                     </div>
                     <button type="submit" class="login-button">Register</button>
