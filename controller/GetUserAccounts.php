@@ -4,7 +4,7 @@ require("../controller/HandleSession.php");
 $users = []; 
 $params = [];
 $types = ''; 
-$query = " SELECT CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.school_id, a.gradyear, u.is_employed, u.user_type, u.pfp 
+$query = " SELECT u.user_id, CONCAT(u.fname, ' ', u.lname) as Name, u.email, a.school_id, a.gradyear, u.is_employed, u.user_type, u.pfp 
     FROM user u  LEFT JOIN alumni a ON u.user_id = a.user_id WHERE 1=1 ";
 $db = new dbConnection();
 $connection = $db->getConnection();
@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (!empty($users) && is_array($users)) { 
         $userData = array_map(function($user) {
             return [ 
+                'user_id'=> $user['user_id'],
                 'name' => $user['Name'], 
                 'email' => $user['email'], 
                 'id_number' => $user['school_id'] ?? "N/A", 
