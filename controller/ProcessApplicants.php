@@ -44,19 +44,18 @@ function acceptUser($schoolID, $connection) {
 function addUser($schoolID, $connection, $applicantData) {
     // check if the data is not empty
     if ($applicantData) {
-        $query = "INSERT INTO user (email,lname, fname, pword, pfp, user_type, is_employed)
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO user (email,lname, fname, pword, user_type, is_employed)
+                  VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $connection->prepare($query);
         // default values
         $userType = 'alumni';
         $isEmployed = 0;     
         $stmt->bind_param(
-            'ssssssi',
+            'sssssi',
             $applicantData['email'],
             $applicantData['lname'],
             $applicantData['fname'],
             $applicantData['pword'],
-            $applicantData['school_id_pic'],
             $userType,
             $isEmployed
         );
