@@ -125,7 +125,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 
     <div class="second-row">
         <div class="first-div">
-            <h3>Announcements</h3>
+            <h2>Announcements</h2>
         </div>
         <div class="second-div">
             <h3>Employee Composition</h3>
@@ -134,6 +134,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
             </div>
         </div>
     </div>
+    
     <!-- commented this because it is a bootstrap -->
  <!--   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> 
     <script src="../assets\js\HandleAdminDashboard.js"></script>
