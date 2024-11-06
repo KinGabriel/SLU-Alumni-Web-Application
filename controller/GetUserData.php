@@ -1,7 +1,6 @@
 <?php
 function getUserDetailsById($userId) {
     require '../database/Configuration.php';
-    require("../controller/HandleSession.php");
     $db = new dbConnection();
     $connection = $db->getConnection();
     $query = "SELECT CONCAT(u.fname, ' ', u.lname) AS Name, u.email, a.school_id, a.gradyear, u.is_employed, u.user_type, u.pfp, a.program, u.fname, u.lname

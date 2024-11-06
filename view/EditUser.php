@@ -1,3 +1,9 @@
+<?php
+require("../controller/HandleSession.php");
+$message = isset($_SESSION['confirmation-message']) ? $_SESSION['confirmation-message'] : '';
+echo "<script>var message = '$message';</script>";
+unset($_SESSION['confirmation-message']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,9 +76,9 @@
     <div class="main-content">
         <div class="form-container">
             <h2 class="form-title">Edit User Details</h2>
-         
             <?php
-            require_once '../controller/GetUserData.php';
+           
+                require_once '../controller/GetUserData.php';
                 $userId = $_GET['user_id'] ?? null;
                 if ($userId) {
                     $userDetails = getUserDetailsById($userId);
@@ -83,19 +89,17 @@
                         $schoolId = $userDetails['school_id'] ?? 'N/A';
                         $graduationYear = $userDetails['gradyear'] ?? 'N/A';
                         $program = $userDetails['program'] ?? 'N/A';
-                        $status = $userDetails['status'] ?? 'N/A';
-                        if (!empty($userDetails['pfp'])) {
-                           $pfp = $userDetails['pfp'] = 'data:image/jpeg;base64,' . base64_encode($userDetails['pfp']);
-                        } else {
-                            $pfp = $userDetails['pfp'] = '../assets/images/default-avatar-icon.jpg'; 
-                        }
-                    } else {
-                        echo "No user found with the given ID.";
+                        $user_type = $userDetails['user_type'] ?? '';
+                        $status = $userDetails['is_employed'] ?? '';
+                        $pfp = !empty($userDetails['pfp']) ? 'data:image/jpeg;base64,' . base64_encode($userDetails['pfp']) : '../assets/images/default-avatar-icon.jpg';
                     }
                 }
+            
             ?>
 
-            <form action="../controller/ProcessUpdate.php" method="POST">
+            <form action="../controller/ProcessUpdateUser.php" enctype="multipart/form-data" method="POST" onsubmit="validateEdit(event)">
+            <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($userId); ?>">
+            <input type="hidden" name="user_type" value="<?php echo htmlspecialchars($user_type); ?>">
                 <div class="form-row">
                     <!-- Name fields -->
                     <div class="form-group" id="first-name">
@@ -108,17 +112,18 @@
                         <input type="text" id="last-name" name="last-name" value="<?php echo htmlspecialchars($lastName); ?>">
                     </div>
 
-                     <!-- Upload Photo -->
-                     <div class="form-group upload-photo-container">
+                  <!-- Upload Photo -->
+                    <div class="form-group upload-photo-container">
                         <label for="upload-photo">
                             <div class="upload-photo">
-                                <!-- Display the fetched image or default one -->
-                                <img id="profile-photo" src="<?php echo htmlspecialchars($pfp); ?>" alt="Profile Photo">
+
+                                <img id="profile-photo" src="<?php echo htmlspecialchars($pfp); ?>" alt="Profile Photo" class="profile-photo">
                             </div>
                             <span>Upload Photo</span>
                         </label>
-                        <input type="file" id="upload-photo" name="photo" accept="image/*">
+                        <input type="file" id="upload-photo" name="pfp" accept="image/*">
                     </div>
+
                 </div>
 
 
@@ -143,7 +148,7 @@
 
                     <div class="form-group" id="degree">
                         <label for="degree">Degree</label>
-                        <select id="degree" name="degree">
+                        <select id="degree" name="program">
                             <option value="">Program</option>
                             <?php
                                 $filePath = '../assets/programs.txt'; 
@@ -162,11 +167,12 @@
 
                     <div class="form-group" id="current-occupation">
                         <label for="current-occupation">Current Occupation</label>
-                        <select id="current-occupation" name="current-occupation">
-                            <option value="employed" <?php echo ($status === 'employed' ? 'selected' : ''); ?>>Employed</option>
-                            <option value="unemployed" <?php echo ($status === 'unemployed' ? 'selected' : ''); ?>>Unemployed</option>
+                        <select id="current-occupation" name="status">
+                            <option value="employed" <?= isset($userDetails['is_employed']) && $userDetails['is_employed'] == '1' ? 'selected' : '' ?>>Employed</option>
+                            <option value="unemployed" <?= isset($userDetails['is_employed']) && $userDetails['is_employed'] == '0' ? 'selected' : '' ?>>Unemployed</option>
                         </select>
                     </div>
+
                 </div>
 
                 <div class="form-actions">
@@ -177,19 +183,16 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal" id="modal">
+   <!-- Modal -->
+   <div class="modal" id="modal">
         <div class="modal-content">
-            <img src="../assets/images/editDetails.png" alt="Information message" />
+            <img src="../assets/images/editDetails.png" alt="Added Information" />
             <p id="modal-message"></p>
-            <button class="accept" onclick="closeModal()">Okay!</button>
+            <button class="accept" onclick="closeModal()">Got it</button>
         </div>
-    </div>  
-    
-    <script src="../assets/js/addphoto.js"></script>
-    <script src="../assets/js/HandleAuthentication.js"></script>
+    </div>
+
     <script>
-        let message = "<?php echo $_GET['message'] ?? ''; ?>";
         if (message) {
             document.getElementById('modal-message').textContent = message;
             document.getElementById('modal').style.display = 'block';
@@ -199,5 +202,8 @@
             document.getElementById('modal').style.display = 'none';
         }
     </script>
+
+    <script src="../assets/js/addphoto.js"></script>
+    <script src="../assets/js/HandleAuthentication.js"></script>
 </body>
 </html>
