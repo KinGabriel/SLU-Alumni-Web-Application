@@ -122,15 +122,17 @@ require("../controller/HandleSession.php");
 </div>
     <script src="../assets/js/HandleApplicantsTable.js"></script>
 
-    <!-- Confirmation Modal -->
+<!-- Confirmation Modal -->
 <div class="confirm-modal" id="confirmModal">
     <div class="confirm-modal-content">
-    <img src="../assets/images/addedUser.png"  alt="Information message" />
+        <img id="modalImage" src="../assets/images/addedUser.png" alt="Information message" />
         <p id="confirmMessage"></p>
         <button class="confirm-yes" id="confirmYes">Yes</button>
         <button class="confirm-no" id="confirmNo">No</button>
     </div>
 </div>
+
+
     <script src="../assets/js/HandleApplicantsTable.js"></script>
 
     <script>

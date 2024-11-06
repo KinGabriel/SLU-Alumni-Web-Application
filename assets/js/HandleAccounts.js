@@ -173,6 +173,8 @@ function showConfirmationModal(user) {
 
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/declineUser.png"; 
 
     document.getElementById('confirmYes').onclick = function() {
         deleteUser(user.email,user.name);

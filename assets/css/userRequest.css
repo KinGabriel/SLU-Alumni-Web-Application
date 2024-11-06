@@ -4,21 +4,15 @@
     box-sizing: border-box;
     font-family: Readex_Pro;
 }
-html, body {
+
+body {
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100vw; /* Constrain width to viewport */
 }
+
 @font-face {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
   }
-
-body {
-    overflow-x: hidden; 
-}
-
 /* Header Section */
 header {
     display: flex;
@@ -48,7 +42,6 @@ header img {
     width: auto; 
 }
 
-/* Header separator */
 .header-seperator {
     background-color: #003DA5;
     padding-bottom: 2vw;
@@ -59,7 +52,6 @@ header img {
     z-index: 2000;
 }
 
-/* Container for page content */
 .container {
     display: flex;
     min-height: 100vh;
@@ -199,7 +191,7 @@ header img {
 }
 
 .user-table {
-    width: 95%;
+    width: 85%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -293,25 +285,6 @@ header img {
     object-fit: cover; /* Keeps the image not stretched */
 }
   
-/* Side navigation bar */
-.sidenav {
-    position: fixed;
-    width: 200px;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    background-color: #333;
-    transition: width 0.3s ease;
-}
-  
-  /* When sidenav is hovered */
-.sidenav:hover + .user-content {
-    left: 0; /* Move content to the right */
-}
-
-.user-content.shift-right {
-    left: 0; /* Move back to normal position (right) */
-}
 
 /* Search bar input */
 .search {

@@ -4,15 +4,10 @@
     box-sizing: border-box;
     font-family: Readex_Pro;
 }
-html, body {
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100vw; /* Constrain width to viewport */
-}
+
 body {
     overflow-x: hidden;
-    font-family: Readex_Pro; 
+
 }
 @font-face {
     font-family: Readex_Pro;

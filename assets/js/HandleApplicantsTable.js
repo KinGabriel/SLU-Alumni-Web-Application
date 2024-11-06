@@ -218,6 +218,9 @@ function showConfirmationModal(applicant) {
     confirmMessage.textContent = `Are you sure you want to accept ${applicant.name}?`;
 
     const confirmModal = document.getElementById('confirmModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/addedUser.png"; 
+
     confirmModal.style.display = 'flex';
 
     document.getElementById('confirmYes').onclick = function() {
@@ -233,6 +236,9 @@ function showDeclineConfirmationModal(applicant) {
     confirmMessage.textContent = `Are you sure you want to decline ${applicant.name}?`;
 
     const confirmModal = document.getElementById('confirmModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/declineUser.png"; 
+
     confirmModal.style.display = 'flex';
 
     document.getElementById('confirmYes').onclick = function() {

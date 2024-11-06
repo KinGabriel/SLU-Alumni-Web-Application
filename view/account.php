@@ -143,7 +143,7 @@ require("../controller/HandleSession.php");
   <!-- Confirmation Modal -->
   <div class="confirm-modal" id="confirmModal">
     <div class="confirm-modal-content">
-    <img src="../assets/images/addedUser.png"  alt="Information message" />
+    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
         <p id="confirmMessage"></p>
         <button class="confirm-yes" id="confirmYes">Yes</button>
         <button class="confirm-no" id="confirmNo">No</button>
@@ -153,7 +153,7 @@ require("../controller/HandleSession.php");
   <!-- feed back Modal -->
 <div id="feedbackModal" class="feedback-modal">
     <div class="feedback-modal-content">
-    <img src="../assets/images/addedUser.png"  alt="Information message" />
+    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
         <p id="feedbackMessage"></p>
         <button id="closeFeedback" onclick="closeFeedbackModal()">Close</button>
     </div>
