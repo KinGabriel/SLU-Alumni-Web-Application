@@ -114,15 +114,14 @@ unset($_SESSION['confirmation-message']);
 
                   <!-- Upload Photo -->
                     <div class="form-group upload-photo-container">
-                        <label for="upload-photo">
-                            <div class="upload-photo">
-
-                                <img id="profile-photo" src="<?php echo htmlspecialchars($pfp); ?>" alt="Profile Photo" class="profile-photo">
-                            </div>
-                            <span>Upload Photo</span>
-                        </label>
-                        <input type="file" id="upload-photo" name="pfp" accept="image/*">
-                    </div>
+                    <label for="upload-photo">
+                        <div class="upload-photo">
+                            <img id="profile-photo" src="<?php echo htmlspecialchars($pfp); ?>" alt="Profile Photo" class="profile-photo">
+                        </div>
+                        <span>Upload Photo</span>
+                    </label>
+                    <input type="file" id="upload-photo" name="pfp" accept="image/*">
+                </div>
 
                 </div>
 
@@ -200,6 +199,9 @@ unset($_SESSION['confirmation-message']);
 
         function closeModal() {
             document.getElementById('modal').style.display = 'none';
+            if(message == "User updated successfully!"){
+                window.location.href = "../view/account.php";
+            }
         }
     </script>
 

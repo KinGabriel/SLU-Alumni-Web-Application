@@ -19,3 +19,5 @@ document.querySelector('.clear-button').addEventListener('click', function() {
 
     document.getElementById('upload-photo').value = ''; 
 }); 
+
+
