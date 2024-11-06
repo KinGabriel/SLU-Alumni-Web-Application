@@ -84,7 +84,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                             <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
                             <span class="upload-text">Upload your school ID</span>
                             <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" onchange="handleFileUpload()" />
-                            <img id="image-preview" class="image-preview" style="display: <?php echo $uploadedImagePath ? 'block' : 'none'; ?>;" src="<?php echo $uploadedImagePath; ?>" />
+                            <img id="image-preview" class="image-preview">
                         </label>
                     </div>
                     <button type="submit" class="login-button">Register</button>
