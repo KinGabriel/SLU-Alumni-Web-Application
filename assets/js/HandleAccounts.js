@@ -36,6 +36,14 @@ function populateUserTable(userData) {
         editIcon.alt = 'Edit';
         editIcon.classList.add('action-icon');
         editButton.appendChild(editIcon);
+        editButton.addEventListener('click', () => {
+            const editUrl = new URL('SLU-Alumni-Web-Application/view/EditUser.php', window.location.origin);
+            editUrl.searchParams.append('user_id', user.user_id);  
+            console.log("Redirecting to:", editUrl.toString()); 
+            window.location.href = editUrl.toString();
+        });
+        
+        
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-button');
         const deleteIcon = document.createElement('img');
