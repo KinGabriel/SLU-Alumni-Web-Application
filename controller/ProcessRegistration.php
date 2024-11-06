@@ -88,14 +88,16 @@ function checkApplicant($connection, $email) {
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
+    // Check if any rows were returned
     if ($result->num_rows > 0) {
-        return true; 
-    }
-    $row = $result->fetch_assoc(); 
+        $row = $result->fetch_assoc(); // Now safe to call fetch_assoc() since we have rows
         if ($row['is_verified']) {
-            return true;
+            return true; 
         }
         return false;
+    }
+    
+    return false; // Return false if no rows were found
 }
 
 function checkApplicantById($connection, $email) {
