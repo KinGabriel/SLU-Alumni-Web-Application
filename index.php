@@ -54,7 +54,7 @@
 <div id="whoarewe" class="whoarewe hidden">
     <div class="content">
         <h1>WHO ARE WE</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+        <p>Welcome to <span> SLU ALUMINA</span>, a dedicated platform designed to reconnect, inform, and engage the vibrant alumni community of Saint Louis University. SLU ALUMINA offers a social network where alumni, current students, and university staff can stay connected, share experiences, and keep up-to-date with events, school news, and opportunities.</p>
     </div>
     <div class="card-container">
         <div class="card">

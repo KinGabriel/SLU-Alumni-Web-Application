@@ -2,8 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Readex_Pro;
 }
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
 
 /* Header */
 header {
@@ -154,8 +159,8 @@ header img.slu-logo {
 
 h2.form-title, h3.section-title {
     color: #003DA5;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .form-group {
@@ -189,45 +194,62 @@ h2.form-title, h3.section-title {
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-/* First Name Field */
 .form-group#first-name input {
     width: 35%; 
 }
 
-/* Last Name Field */
 .form-group#last-name input {
-    width: 35%; 
+    width: 35%;
+    margin-left: -280px;
 }
 
-/* Email Address Field */
-.form-group.email input {
-    width: 15%; 
+.form-group#last-name label {
+    margin-left: -280px;
 }
 
-/* School ID Field */
+.form-group#email input  {
+    width: 17%;
+}
+
 .form-group#school-id input {
-    width: 50%; 
-}
-
-/* Graduation Year Field */
-.form-group#graduation-year select {
     width: 55%; 
 }
 
-/* Degree Select Field */
+.form-group#graduation-year select {
+    width: 60%; 
+    margin-left: -90px;
+}
+
+.form-group#graduation-year label {
+    margin-left: -90px;
+}
+
 .form-group#degree select {
-    width: 75%; 
+    width: 110%; 
+    margin-left: -185px;
 }
 
-/* Job Status Select Field */
+.form-group#degree label {
+    margin-left: -185px;
+}
+
 .form-group#job-status select {
-    width: 53%; 
+    width: 50%; 
+    margin-left: -90px;
 }
 
-/* User Roles Select Field */
+.form-group#job-status label {
+    margin-left: -90px;
+}
+
 .form-group#user-roles select {
     width: 15%; 
 }
+
+.form-group.password input {
+    width: 17%; 
+}
+
 
 /* Action buttons */
 .form-actions {
@@ -236,13 +258,14 @@ h2.form-title, h3.section-title {
 }
 
 .clear-button, .add-button {
-    padding: 8px 18px; 
+    padding: 9px 20px;
     border: none;
     border-radius: 5px;
     font-size: 15px; 
     cursor: pointer;
     margin-top: 65px; 
     margin-right: 35px; 
+    width: 6.%;
 }
 
 .clear-button {
@@ -250,7 +273,6 @@ h2.form-title, h3.section-title {
     color: #fff;
     margin-right: 10px;
     font-weight: bold;
-    width: 5%;
 }
 
 .clear-button:hover {
@@ -261,7 +283,6 @@ h2.form-title, h3.section-title {
     background-color: #FFB200;
     color: #fff;
     font-weight: bold;
-    width: 5%;
 }
 
 .add-button:hover {
@@ -313,7 +334,3 @@ h2.form-title, h3.section-title {
     color: #FFB200;
     box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
   }
-  /* Password Field */
-.form-group.password input {
-    width: 15%; 
-}

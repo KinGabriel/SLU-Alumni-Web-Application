@@ -92,7 +92,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                 </div>
                 
                 <!-- Email Address -->
-                <div class="form-group email">
+                <div class="form-group email" id="email">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" value="<?= isset($formData['email']) ? htmlspecialchars($formData['email']) : '' ?>" required />
                 </div>
@@ -114,7 +114,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     <div class="form-group" id="graduation-year">
                         <label for="graduation-year">Graduation Year</label>
                         <select id="graduation-year" name="graduation-year" class="input-field">
-                                <option value="" disabled selected> Select Your Graduation Year</option>
+                                <option value="" disabled selected> Select Graduation Year</option>
                                 <?php
                                     $currentYear = date("Y");
                                     for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
@@ -125,7 +125,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                             </select>
                     </div>
                     <div class="form-group" id="degree">
-                        <label for="program">Program</label>
+                        <label for="program">Degree</label>
                         <select name="program" class="input-field"> 
                                 <option value="" disabled selected> Select Program</option>
                                 <?php
@@ -168,7 +168,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                 <!-- Form buttons -->
                 <div class="form-actions">
                     <button type="reset" class="clear-button">Clear</button>
-                    <button type="submit" class="add-button">Add</button>
+                    <button type="submit" class="add-button">Add User</button>
                 </div>
             </form>
         </div>

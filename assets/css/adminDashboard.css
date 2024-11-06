@@ -2,8 +2,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Readex_Pro;
 }
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
 
 /* Header */
 header {
@@ -11,8 +16,8 @@ header {
     justify-content: space-between; /* Space between the logo and profile */
     align-items: center; /* Center items vertically */
     background-color: white;
-    padding: 0.2vw;
-    padding-right: 3vw;
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -247,6 +252,13 @@ h3 {
     margin-bottom: 20px; /* Space below header */
 }
 
+h2 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; 
+    margin-top: 30px;
+}
+
+
 p {
     color: #666; /* Paragraph color */
 }
@@ -264,7 +276,7 @@ p {
     background-color: #fff; /* Background color of each card */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-    height: 35vw; /* Inner padding for the card content */
+    height: 30vw; /* Inner padding for the card content */
     width: 48.45vw; /* Set width for each card */
     text-align: center; /* Center align text inside cards */
     transition: transform 0.3s ease; /* Transition for hover effect */
