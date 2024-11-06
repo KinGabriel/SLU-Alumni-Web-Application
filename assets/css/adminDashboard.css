@@ -28,8 +28,8 @@ header {
 header h1 {
     display: flex;
     align-items: center;
-    margin-left: 1.2vw;
-    font-size: 1.4vw;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
 }
 
 header span {
