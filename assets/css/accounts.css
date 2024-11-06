@@ -4,7 +4,12 @@
     box-sizing: border-box;
     font-family: Readex_Pro;
 }
-
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* Constrain width to viewport */
+}
 body {
     overflow-x: hidden;
     font-family: Readex_Pro; 
@@ -45,10 +50,12 @@ header img {
 
 .header-seperator {
     background-color: #003DA5;
-    padding-bottom: 1.5vw; 
+    padding-bottom: 2vw;
     width: 100%;
-    margin-top: -0.5vh; 
-    margin-bottom: 0.2vh; 
+    margin-top: -1vh;
+    /* margin-bottom: 0.5vh; */
+    position: relative;
+    z-index: 2000;
 }
 
 .container {
@@ -61,7 +68,7 @@ header img {
     background: rgba(244, 244, 244, 1);
     border-right: 1px solid #e5e5e5;
     position: fixed;
-    top: 3vw; 
+    /* top: 3vw;  */
     bottom: 0;
     height: 100%;
     width: 60px;
@@ -93,7 +100,7 @@ header img {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding-top: 25px;
+    padding-top: 5vw;
 }
 
 .sidebar-menu ul {
@@ -145,12 +152,12 @@ header img {
 /* Sticky Log Out Section */
 .sidebar-logout {
     position: absolute;
-    bottom: 15vh;
+    bottom: 5vh;
     width: 100%;
     display: flex;
     justify-content: flex-start;  
     align-items: center;
-    padding: 10px;
+    padding: 3px;
 }
 
 .sidebar-logout a {
