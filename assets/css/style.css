@@ -188,13 +188,21 @@ nav a:hover {
 }
 
 .whoarewe p {
-  font-size: 1.2em;
+  font-size: 1.4em;
   line-height: 1.5;
   max-width: 800px;
   margin: 0 auto;  /* Center the text */
   color: black;
+  text-align: justify ;
 }
 
+.whoarewe span {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0 auto;  /* Center the text */
+  color: #FFB200;
+  text-align: justify ;
+}
 /* Container for the cards */
 .card-container {
   display: flex;

@@ -200,6 +200,11 @@ h2.form-title, h3.section-title {
 
 .form-group#last-name input {
     width: 50%; 
+    margin-left: -90px;
+}
+
+.form-group#last-name label {
+    margin-left: -90px;
 }
 
 .form-group#email input  {
@@ -217,20 +222,43 @@ h2.form-title, h3.section-title {
 
 .form-group#graduation-year input {
     width: 55%; 
+    margin-left: -90px;
+}
+
+.form-group#graduation-year label {
+    width: 55%; 
+    margin-left: -90px;
 }
 
 .form-group#degree select {
+    width: 110%; 
+    margin-left: -185px;
+}
+
+.form-group#degree label {
     width: 60%; 
+    margin-left: -185px;
 }
 
 .form-group#current-occupation select {
     width: 50%; 
+    margin-left: -90px;
+}
+
+.form-group#current-occupation label {
+    width: 50%; 
+    margin-left: -90px;
 }
 
 .form-group#user-roles select {
     width: 25%; 
+    margin-left: -90px;
 }
 
+.form-group#user-roles label {
+    width: 25%; 
+    margin-left: -90px;
+}
 
 /* Upload Photo */
 .upload-photo-container {
@@ -238,12 +266,13 @@ h2.form-title, h3.section-title {
     flex-direction: column;
     align-items: center;
     margin-top: -20px;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    margin-right: 165px;
 }
 
 .upload-photo {
-    height: 150px;
-    width: 150px;
+    height: 180px;
+    width: 180px;
     border-radius: 50%;
     background-color: #ddd;
     border: 2px solid #1457cc;

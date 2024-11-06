@@ -161,8 +161,9 @@
                     </div>
 
                     <div class="form-group" id="current-occupation">
-                        <label for="current-occupation">Current Occupation</label>
+                        <label for="current-occupation">Job Status</label>
                         <select id="current-occupation" name="current-occupation">
+                            <option value="" disabled selected> Select Job Status</option>
                             <option value="employed" <?php echo ($status === 'employed' ? 'selected' : ''); ?>>Employed</option>
                             <option value="unemployed" <?php echo ($status === 'unemployed' ? 'selected' : ''); ?>>Unemployed</option>
                         </select>
