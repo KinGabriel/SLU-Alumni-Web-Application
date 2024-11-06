@@ -42,6 +42,7 @@ function populateUserTable(userData) {
         deleteIcon.src = '../assets/images/delete.png';
         deleteIcon.alt = 'Delete';
         deleteIcon.classList.add('action-icon');
+        deleteButton.addEventListener('click',  () =>  showConfirmationModal(user));
         deleteButton.appendChild(deleteIcon);
         // Append as a row
         row.appendChild(nameCell);
@@ -129,7 +130,62 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (sortType === 'year-oldest') {
                 queryString.set('sort', 'year ASC');
             }
-            window.location.search = queryString.toString();
+            window.location.search = queryString.toString();9
         });
     });
 });
+
+async function deleteUser(email,name) {
+    console.log("Deleting user:", email);
+    try {
+        const response = await fetch(`../controller/ProcessDeleteUser.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }), 
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${name} deleted successfully.`);
+            await fetchUserData(); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting user:", error);
+        showFeedbackModal("An error occurred while deleting the user.");
+    }
+}
+
+function showConfirmationModal(user) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete ${user.name}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteUser(user.email,user.name);
+        closeConfirmationModal();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}
