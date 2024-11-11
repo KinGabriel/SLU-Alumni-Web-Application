@@ -13,12 +13,14 @@ body {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
   }
-/* Header Section */
+/* Header */
 header {
     display: flex;
-    align-items: center;
+    justify-content: space-between; /* Space between the logo and profile */
+    align-items: center; /* Center items vertically */
     background-color: white;
-    padding: 0.1vw; 
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -29,32 +31,71 @@ header {
 header h1 {
     display: flex;
     align-items: center;
-    margin-left: 0.8vw; 
-    font-size: 1.2vw; 
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
 }
 
 header span {
     margin-left: 0.2vw; 
 }
 
-header img {
+header img.slu-logo {
     height: 50px;
     width: auto; 
+    margin-right: 10px;
 }
 
-.header-seperator {
+.header-separator {
+    position: relative;
     background-color: #003DA5;
     padding-bottom: 2vw;
     width: 100%;
     margin-top: -1vh;
+    z-index: 101;
     /* margin-bottom: 0.5vh; */
-    position: relative;
-    z-index: 2000;
 }
 
-.container {
+.notif-bell {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+.profile-pic {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block; /* Ensure the image is displayed as a block */
+    border: 1px solid #ccc; /* Add a border to visualize it */
+}
+
+.header-profile {
     display: flex;
-    min-height: 100vh;
+    /* flex-direction: column;  */
+    align-items: center; /* Align items to the left */
+}
+
+.header-profile i {
+    margin-right: 1vw;
+}
+
+.header-profile .user-name {
+    margin: 0; /* Reset any default margin */
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem; /* Optional: space between user name and account type */
+    font-size: 0.9rem; /* Adjust font size if needed */
+    color: gray; /* Optional: Change the text color */
+    display: block; /* Ensure account type appears below username */
+    font-size: small;
+}
+
+.account-details {
+    display: flex; /* Enable flexbox for the details */
+    flex-direction: column; /* Stack username and account type vertically */
+    align-items: left; /* Align items to the left */
 }
 
 /* Side Navigation Bar */
@@ -65,7 +106,7 @@ header img {
     /* top: 3vw;  */
     bottom: 0;
     height: 100%;
-    width: 60px;
+    width: 250px;
     transition: width 0.3s ease;
     overflow: hidden;
     display: flex;
@@ -73,11 +114,12 @@ header img {
     z-index: 100; 
 }
 
-.sidebar-container:hover {
+/* .sidebar-container:hover {
     width: 250px; 
-}
+} */
 
 .user-content {
+    margin-left: 250px;
     position: relative; 
     left: 70px; 
     padding: 20px;
@@ -86,9 +128,9 @@ header img {
 }
 
 /* Move the user-content to the right when the sidebar is hovered */
-.sidebar-container:hover + .user-content {
+/* .sidebar-container:hover + .user-content {
     left: 250px; 
-}
+} */
 
 .sidebar-menu {
     flex: 1;
@@ -115,7 +157,7 @@ header img {
     padding: 10px;
     color: #999;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
 .sidebar-menu li a {
@@ -138,10 +180,10 @@ header img {
 }
 
 /* Hover effect on sidebar items */
-.sidebar-menu li:hover a {
+/* .sidebar-menu li:hover a {
     color: #fff;
     background-color: rgba(0, 61, 165, 0.4);
-}
+} */
 
 /* Sticky Log Out Section */
 .sidebar-logout {
@@ -160,12 +202,12 @@ header img {
     text-decoration: none;
     width: 100%; 
     padding: 10px; 
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
-.sidebar-logout a:hover {
+/* .sidebar-logout a:hover {
     background-color:rgba(255, 178, 0, 1);;
-}
+} */
 
 .menu-item-logout {
     color: black;
@@ -177,23 +219,23 @@ header img {
 /* User Content Table */
 .user-content {
     position: relative; 
-    left: 80px; 
-    padding: 20px;
+    left: 1px; 
+    padding: 15px;
     transition: left 0.3s ease; 
     z-index: 0; 
 }
 
 .user-content h1 {
-    margin-top: 8vw;
-    margin-bottom: 20px;
+    margin-top: 3vw;
+    margin-bottom: 10px;
     color:#003DA5;
-    font-size: 5vh;
+    font-size: 3vh;
 }
 
 .user-table {
-    width: 85%;
+    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 1vw;
 }
 
 .user-table th, .user-table td {
@@ -302,6 +344,7 @@ header img {
     font-size: 15px;
     width: 200px;
     position: relative;
+    border-radius: 5px;
 }
 
 .search .search-icon {
@@ -488,9 +531,9 @@ header img {
         width: calc(100% - 70px); /* Ensure the content fits smaller screens */
     }
 
-    .sidebar-container:hover ~ .user-content {
+    /* .sidebar-container:hover ~ .user-content {
         left: 250px;
-    }
+    } */
 
     .user-content h1 {
         font-size: 4vh;
@@ -498,7 +541,7 @@ header img {
     }
 
     .user-table {
-        width: 80%; /* Ensure the table takes the full width */
+        width: 100%; /* Ensure the table takes the full width */
         font-size: 15px; /* Slightly larger font size */
         overflow-x: auto; /* Enable horizontal scrolling if necessary */
     }

@@ -11,13 +11,22 @@ require("../controller/HandleSession.php");
     <link href="../assets/css/userRequest.css" rel="stylesheet">
 </head>
 <body>
-    <!--Header separator-->
-    <div class="header-seperator"></div>
+    <!-- Header separator -->
+    <div class="header-separator"> </div>
     <header>
         <h1>
-            <img src="../assets/images/logo.png" alt="SLU Alumina Logo">
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <span>SLU Alumina</span>
         </h1>
+        <div class="header-profile">
+            <!-- <i class="fa-regular fa-bell"></i> -->
+            <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" >
+            <img src="<?php echo $_SESSION['pfp'] ?: '../assets\images\alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
+            <div class="account-details">
+                <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
+            </div>
+        </div>
     </header>
 
     <div class="sidebar-container">  <!-- Container for the sidebar -->
@@ -134,6 +143,7 @@ require("../controller/HandleSession.php");
 
 
     <script src="../assets/js/HandleApplicantsTable.js"></script>
+    <script src="../assets\js\HandleAdminDashboard.js"></script>
 
     <script>
         if (message) {

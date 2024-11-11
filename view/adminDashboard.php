@@ -11,7 +11,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link rel="stylesheet" href="../assets/css/adminDashboard.css">
+    <link rel="stylesheet" href="../assets\css\adminDashboard.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  -->
 </head>
 <body>
@@ -56,7 +56,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     <span class="menu-item-text">Accounts</span>
                     </a>
                 </li>
-                <li><a href="#events">
+                <li><a href="../view\adminEvent.php">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
                     <span class="menu-item-text">Events</span>
                 </a>

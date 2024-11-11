@@ -47,7 +47,7 @@ header img.slu-logo {
     padding-bottom: 2vw;
     width: 100%;
     margin-top: -1vh;
-    margin-bottom: 0.5vh;
+    /* margin-bottom: 0.5vh; */
 }
 
 .notif-bell {
@@ -109,7 +109,7 @@ header img.slu-logo {
     z-index: 100; 
 }
 
-.sidebar-container:hover {
+.sidebar-container {
     width: 250px; 
 }
 
@@ -122,9 +122,9 @@ header img.slu-logo {
 }
 
 /* Move the user-content to the right when the sidebar is hovered */
-.sidebar-container:hover + .user-content {
+/* .sidebar-container:hover + .user-content {
     left: 250px; 
-}
+} */
 
 .sidebar-menu {
     flex: 1;
@@ -151,7 +151,7 @@ header img.slu-logo {
     padding: 10px;
     color: #999;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
 .sidebar-menu li a {
@@ -174,10 +174,10 @@ header img.slu-logo {
 }
 
 /* Hover effect on sidebar items */
-.sidebar-menu li:hover a {
+/* .sidebar-menu li:hover a {
     color: #fff;
     background-color: rgba(0, 61, 165, 0.4);
-}
+} */
 
 /* Sticky Log Out Section */
 .sidebar-logout {
@@ -196,12 +196,12 @@ header img.slu-logo {
     text-decoration: none;
     width: 100%; 
     padding: 10px; 
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
-.sidebar-logout a:hover {
+/* .sidebar-logout a:hover {
     background-color:rgba(255, 178, 0, 1);;
-}
+} */
 
 .menu-item-logout {
     color: black;
