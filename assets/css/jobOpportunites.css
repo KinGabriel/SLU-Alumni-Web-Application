@@ -262,30 +262,12 @@ header img.slu-logo {
     cursor: pointer;
 }
 
-/* Custom Checkbox */
+/* Hide checkboxes */
 .checkbox {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1px solid #d6ddeb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.2s ease;
-}
-
-.filter-option.checked .checkbox {
-    background-color: #1711c5;
-    border-color: #4640de;
-}
-
-/* Checked state */
-.filter-option.checked .checkbox::after {
-    content: "";
-    width: 8px;
-    height: 8px;
-    background-color: white;
-    border-radius: 2px;
+    width: 0;
+    height: 0;
+    border: none;
+    visibility: hidden;
 }
 
 /* Jobs Column */
