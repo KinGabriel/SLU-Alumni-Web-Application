@@ -85,14 +85,14 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     </div>
     <!-- stats -->
     <div class="card-container">
-    <div class="card">
+    <div class="card" id="totalMembersCard">
         <h3>Total Members</h3>
         <div class="card-content">
             <img src="../assets/images/totalmember.svg" alt="Total Members">
             <p id="totalMembers">Loading...</p>
         </div>
     </div>
-    <div class="card">
+    <div class="card" id="totalApplicantsCard">
         <h3>Total Applicants</h3>
         <div class="card-content">
             <img src="../assets/images/totalrequest.svg" alt="Total Requests">
@@ -137,7 +137,6 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     
     <!-- commented this because it is a bootstrap -->
  <!--   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> 
-    <script src="../assets\js\HandleAdminDashboard.js"></script>
-
+    <script src="../assets\js\HandleAdminDashboard.js?v=1"></script>
 </body>
 </html>
