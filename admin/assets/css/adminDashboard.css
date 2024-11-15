@@ -1,0 +1,315 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
+}
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between; /* Space between the logo and profile */
+    align-items: center; /* Center items vertically */
+    background-color: white;
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    height: 4vw; 
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
+}
+
+header span {
+    margin-left: 0.2vw; 
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto; 
+    margin-right: 10px;
+}
+
+.header-separator {
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    margin-top: -1vh;
+    /* margin-bottom: 0.5vh; */
+}
+
+.notif-bell {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+.profile-pic {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block; /* Ensure the image is displayed as a block */
+    border: 1px solid #ccc; /* Add a border to visualize it */
+}
+
+.header-profile {
+    display: flex;
+    /* flex-direction: column;  */
+    align-items: center; /* Align items to the left */
+}
+
+.header-profile i {
+    margin-right: 1vw;
+}
+
+.header-profile .user-name {
+    margin: 0; /* Reset any default margin */
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem; /* Optional: space between user name and account type */
+    font-size: 0.9rem; /* Adjust font size if needed */
+    color: gray; /* Optional: Change the text color */
+    display: block; /* Ensure account type appears below username */
+    font-size: small;
+}
+
+.account-details {
+    display: flex; /* Enable flexbox for the details */
+    flex-direction: column; /* Stack username and account type vertically */
+    align-items: left; /* Align items to the left */
+}
+
+/* Side Navigation Bar */
+.sidebar-container {
+    background: rgba(244, 244, 244, 1);
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    top: 3.9vw; 
+    bottom: 0;
+    height: 100%;
+    width: 60px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 100; 
+}
+
+.sidebar-container {
+    width: 250px; 
+}
+
+.user-content {
+    position: relative; 
+    left: 70px; 
+    padding: 20px;
+    transition: left 0.3s ease; 
+    z-index: 0; 
+}
+
+/* Move the user-content to the right when the sidebar is hovered */
+/* .sidebar-container:hover + .user-content {
+    left: 250px; 
+} */
+
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+}
+
+.sidebar-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    display: block;
+    margin-top: 10px; 
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #999;
+    text-decoration: none;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
+}
+
+.sidebar-menu li a {
+    min-width: 60px;
+    text-align: center;
+}
+
+.sidebar-menu li a .menu-item-text {
+    flex: 1;
+    font-size: 1.9vh;
+    color: #000;
+}
+
+/* Sidebar Icon */
+.sidebar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
+    margin-left: 5px;
+}
+
+/* Hover effect on sidebar items */
+/* .sidebar-menu li:hover a {
+    color: #fff;
+    background-color: rgba(0, 61, 165, 0.4);
+} */
+
+/* Sticky Log Out Section */
+.sidebar-logout {
+    position: absolute;
+    bottom: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;  
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar-logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 100%; 
+    padding: 10px; 
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
+}
+
+/* .sidebar-logout a:hover {
+    background-color:rgba(255, 178, 0, 1);;
+} */
+
+.menu-item-logout {
+    color: black;
+    font-size: 1.9vh;  
+    flex: 1;
+    font-weight: bold;
+}
+
+.card-container {
+    padding-top: 1rem;
+    padding-left: 18vw;
+    padding-right: 1rem;
+    display: flex; /* Use flexbox for alignment */
+    gap: 10px; /* Space between cards */
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+}
+
+.card {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 22px; /* Inner padding for the card content */
+    width: 16vw; /* Set width for each card */
+    text-align: center; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+}
+
+/* Align image and text in card-content */
+.card-content {
+    display: flex;
+    align-items: center; /* Vertically aligns the image and text */
+    justify-content: center; /* Aligns content horizontally if needed */
+    gap: 10px; /* Adds space between the image and the text */
+    padding-top: 2vw; /* Default padding-top for all cards */
+}
+
+.card-content img {
+    width: 30px; /* Adjust image size as needed */
+    height: auto;
+}
+
+h3 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; /* Space below header */
+}
+
+h2 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; 
+    margin-top: 30px;
+}
+
+
+p {
+    color: #666; /* Paragraph color */
+}
+
+.second-row {
+    padding-top: 1rem;
+    padding-left: 18vw;
+    padding-right: 1rem;
+    display: flex; /* Use flexbox for alignment */
+    gap: 10px; /* Space between cards */
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+}
+
+.first-div {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    height: 30vw; /* Inner padding for the card content */
+    width: 48.45vw; /* Set width for each card */
+    text-align: center; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+.first-div h3 {
+    padding-top: 2vw;
+    padding-left: 2vw; 
+}
+
+.second-div {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    height: 30vw; /* Inner padding for the card content */
+    width: 32.45vw; /* Set width for each card */
+    text-align: left; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+.second-div h3 {
+    padding-top: 2vw;
+    padding-left: 2vw; 
+}
+
+.chart-container {
+    padding-top: 2vw;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    /* height: 10vw; Set a height for the container */
+}
+
+canvas {
+    width: 60% !important;
+    height: 20vw !important; /* Set your desired height */
+    
+}

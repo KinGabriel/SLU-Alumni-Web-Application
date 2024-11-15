@@ -1,0 +1,203 @@
+/* Base styles */
+body {
+  margin: 0;
+  height: 100vh; 
+  font-family: Readex_Pro;
+}
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; 
+}
+
+.form-container {
+  display: flex;
+  background-color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 1000px;
+  width: 80%;
+}
+
+.form-wrapper::before {
+  content: "";
+  background-image: url('../images/SLUfront.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  opacity: 0.77; 
+  z-index: -1; 
+}
+
+.form-side {
+  background-color: #0049b1;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-image {
+  height: 55%;
+}
+
+.logo-footer {
+  text-align: center;  
+  font-size: 2vw;     
+  color: #ffb200;
+}
+
+.right-side {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-title {
+  color: #ffb200;
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.welcome-text {
+  color: #525252;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.input-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.input-field {
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.forgot-password {
+  color: #0049b1;
+  font-size: 0.9rem;
+  text-align: right;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.login-button {
+  background-color: #0049b1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signup-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.signup-text {
+  color: #525252;
+  font-size: 1rem;
+}
+
+.signup-link {
+  font-weight: 600;
+  color: #ffb200;
+  text-decoration: none;
+}
+
+/* Media query for small screens, laptops (769px - 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .form-container {
+    max-width: 85%;
+    width: 95%;
+  }
+
+  .logo-image {
+    height: 35vw; 
+  }
+
+  .logo-footer {
+    font-size: 3vw; 
+  }
+
+  .login-title {
+    font-size: 2.5rem; 
+  }
+
+  .welcome-text {
+    font-size: 1rem; 
+  }
+
+  .input-wrapper {
+    margin-bottom: 0.9rem; 
+  }
+
+  .login-button {
+    font-size: 1.1rem;
+  }
+}
+
+/* Media query for Desktops and Large Screens (1025px - 1200px) */
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+  .form-container {
+    max-width: 80%;
+    width: 90%;
+  }
+
+  .logo-image {
+    height: 30vw; 
+  }
+
+  .logo-footer {
+    font-size: 2.5vw; 
+  }
+
+  .login-title {
+    font-size: 2.8rem; 
+  }
+
+  .welcome-text {
+    font-size: 1.1rem; 
+  }
+
+  .input-wrapper {
+    margin-bottom: 1rem; 
+  }
+
+  .login-button {
+    font-size: 1.2rem;
+  }
+}

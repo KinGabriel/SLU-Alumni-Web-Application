@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="header-seperator"></div>
 <header>
     <h1>
-        <img src="assets/images/logo.png" alt="SLU Alumina Logo">
+        <img src="images/logo.png" alt="SLU Alumina Logo">
         <span>SLU Alumina</span>
     </h1>
     <nav>
@@ -20,12 +20,12 @@
         <a href="#alumnistories">Alumni Stories</a>
         <a href="#news_events_job">Others</a>
     </nav>
-    <a href="view/Login.php" target="_blank" class="btn-login">Log In</a>
+    <a href="LogInAndRegister/view/Login.php" target="_blank" class="btn-login">Log In</a>
 </header>
 
 <div id="home" class="hero">
     <div class="slides fade">
-        <img src="assets/images/mainslu.png" alt="Main SLU">  
+        <img src="images/mainslu.png" alt="Main SLU">  
         <div class="text-overlay ">  
             <h1>WELCOME TO</h1> 
             <p>SLU ALUMINA</p>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="slides fade">
-        <img src="assets/images/maryheights.jpg" alt="Maryheights Campus">  
+        <img src="images/maryheights.jpg" alt="Maryheights Campus">  
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
             <p>GALLERY</p>
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="slides fade">
-        <img src="assets/images/slugym.jpg" alt ="SLU gym">
+        <img src="images/slugym.jpg" alt ="SLU gym">
         <div class="text-overlay ">  
             <h1>SLU ALUMINA</h1> 
             <p>STORIES</p>
@@ -58,13 +58,13 @@
     </div>
     <div class="card-container">
         <div class="card">
-            <img src="assets/images/SLU_thumbnail.png" alt="SLU Image"> 
+            <img src="images/SLU_thumbnail.png" alt="SLU Image"> 
         </div>
         <div class="card">
-            <img src="assets/images/navi.jpg" alt="Navi"> 
+            <img src="images/navi.jpg" alt="Navi"> 
         </div>
         <div class="card">
-            <img src="assets/images/bakakeng.jpg" alt="Bakakeng"> 
+            <img src="images/bakakeng.jpg" alt="Bakakeng"> 
         </div>
     </div>
 </div>
@@ -72,7 +72,7 @@
 <!-- Alumni Stories Section -->
 <div id="alumnistories" class="alumni-stories hidden">
     <div class="alumni-content">
-        <img src="assets/images/alumni.jpg" alt="Alumni Image" class="alumni-image">
+        <img src="images/alumni.jpg" alt="Alumni Image" class="alumni-image">
         <div class="alumni-messages">
             <h2>Alumni Stories</h2>
             <h4>Hannah Jordan</h4>
@@ -133,14 +133,14 @@
 <footer id="footer">
     <div class="container footer-container">
         <div class="footer-column">
-            <img src="assets/images/Logo.png" alt="Alumni Image" class="alumni-image">
+            <img src="images/Logo.png" alt="Alumni Image" class="alumni-image">
             <div class="footer-about">
             </div>
         </div>
         <div class="footer-column">
             <div class="useful-link">
                 <h2>Useful Links</h2>
-                <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                <img src="images/about/home_line.png" alt="" class="img-fluid">
                 <div class="use-links">
                     <li><a href="index.html"><i class="fa-solid fa-angles-right"></i> Home</a></li>
                     <li><a href="about.html"><i class="fa-solid fa-angles-right"></i> About Us</a></li>
@@ -152,7 +152,7 @@
         <div class="footer-column">
             <div class="social-links">
                 <h2>Follow Us</h2>
-                <img src="./assets/images/about/home_line.png" alt="">
+                <img src="images/about/home_line.png" alt="">
                 <div class="social-icons">
                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i> Facebook</a></li>
                     <li><a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a></li>
@@ -163,7 +163,7 @@
         <div class="footer-column">
             <div class="address">
                 <h2>Account</h2>
-                <img src="./assets/images/about/home_line.png" alt="" class="img-fluid">
+                <img src="images/about/home_line.png" alt="" class="img-fluid">
                 <div class="address-links">
                     <li class="address1"><i class="fa-solid fa-location-dot"></i> Profile</li>
                     <li><a href=""><i class="fa-solid fa-phone"></i> Stories</a></li>
@@ -182,6 +182,6 @@
     </div>
 </section>
 <!-- footer copy right section end -->
-<script src="assets/js/LandingPageAnimations.js"></script>
+<script src="LandingPageAnimations.js"></script>
 </body>
 </html>
