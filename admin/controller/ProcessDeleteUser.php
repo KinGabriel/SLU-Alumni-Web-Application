@@ -1,5 +1,5 @@
 <?php
-require '../database/Configuration.php';
+require '../../database/Configuration.php'; 
 session_start();
 $db = new dbConnection();
 $connection = $db->getConnection();

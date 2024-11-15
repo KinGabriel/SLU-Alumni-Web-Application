@@ -1,5 +1,5 @@
 <?php
-require '../database/Configuration.php';
+require '../../database/Configuration.php'; 
 require("../controller/HandleSession.php");
 header('Content-Type: application/json');
 $db = new dbConnection();

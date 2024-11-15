@@ -1,5 +1,5 @@
 <?php
-require '../database/Configuration.php'; 
+require '../../database/Configuration.php'; 
 $db = new dbConnection();
 $connection = $db->getConnection();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

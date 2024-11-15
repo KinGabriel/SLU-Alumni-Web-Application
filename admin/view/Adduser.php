@@ -180,7 +180,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
             <button class="accept" onclick="closeModal()">Okay!</button>
         </div>
     </div>  
-    <script src="../assets/js/HandleAuthentication.js"></script>
+    <script src="../assets/js/HandleAdminAuthentication.js"></script>
     <script>
         if (message) {
             document.getElementById('modal-message').textContent = message;

@@ -206,6 +206,6 @@ unset($_SESSION['confirmation-message']);
     </script>
 
     <script src="../assets/js/addphoto.js"></script>
-    <script src="../assets/js/HandleAuthentication.js"></script>
+    <script src="../assets/js/HandleAdminAuthentication.js"></script>
 </body>
 </html>

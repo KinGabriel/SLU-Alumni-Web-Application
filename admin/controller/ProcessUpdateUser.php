@@ -1,5 +1,5 @@
 <?php
-require '../database/Configuration.php';
+require '../../database/Configuration.php';
 require '../controller/HandleSession.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data with proper handling for potential empty fields

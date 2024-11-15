@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Redirect based on user type
         if ($user['user_type'] == 'admin') {
-            header("Location: ../view/adminDashboard.php");
+            header("Location: ../../admin/view/adminDashboard.php");
         } elseif ($user['user_type'] == 'manager') {
             header("Location: ../view/homeManager.php");
         } else {
