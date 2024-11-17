@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
+}
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4vw;
+    width: 100%;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* Header Separator */
+.header-separator {
+    position: relative;
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    z-index: 101;
+}
+
+/* Search bar */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input[type="text"] {
+    padding: 6px 30px 6px 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 200px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.search .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15vw;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.search .search-icon:hover {
+    opacity: 0.7;
+}
+
+/* Sidebar Styling */
+.main-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    width: 350px; 
+    position: relative; 
+    top: 0;
+    left: 0;
+    background-color: #f4f4f4;
+    padding: 1vw;
+    height: 50vw; 
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.profile {
+    margin-bottom: 2vw;
+    background-color: #fff;
+    padding: 1vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-bg img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.profile-info {
+    text-align: center;
+    margin-top: -1vw;
+}
+
+.profile-pic {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin-bottom: 1vw;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+/* Sidebar Icon */
+.sidebar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
+    margin-left: 5px;
+}
+
+.name {
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.bio {
+    font-size: 1vw;
+    color: #777;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+}
+
+.stat-item {
+    font-size: 1.2vw;
+    text-align: center;
+}
+
+/* Sidebar Navigation */
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    display: flex;
+    align-items: center; 
+    margin: 1.5vw 0;
+    padding: 0.5vw;
+    transition: background-color 0.3s;
+}
+
+.nav li:hover {
+    background-color: #f0f0f0; 
+    border-radius: 5px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2vw;
+    font-weight: bold;
+    margin-left: 0.5vw; 
+    text-align: center;
+}
+
+.nav a:hover {
+    color: #003DA5;
+}
+
+/* Icon styling */
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
