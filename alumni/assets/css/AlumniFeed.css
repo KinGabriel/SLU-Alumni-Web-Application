@@ -31,6 +31,7 @@ header {
     z-index: 1000;
     height: 4vw;
     width: 100%;
+    transition: top 0.1s ease;
 }
 
 header h1 {
@@ -49,7 +50,7 @@ header img.slu-logo {
 .header-separator {
     position: relative;
     background-color: #003DA5;
-    padding-bottom: 2vw;
+    padding-bottom: 1.3vw;
     width: 100%;
     z-index: 101;
 }
@@ -90,27 +91,29 @@ header img.slu-logo {
     height: 100vh; 
 }
 
-.sidebar {
-    width: 350px; 
-    position: sticky; 
-    top: 0; 
+aside {
+    width: 350px;
+    position: fixed;
+    top: 3.7vw;
     background-color: #f4f4f4;
     padding: 1vw;
-    height: 100vh;
+    height: calc(100vh - 4vw); 
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Add scrolling for the sidebar if content overflows */
+    overflow-y: auto;
 }
+
 
 /* Content Area */
 .content {
     flex: 1;
+    margin-left: 350px; 
     padding: 20px;
-    height: calc(100vh - 6vw); /* Adjust height dynamically */
-    margin-left: 30px;
+    height: calc(100vh - 4vw); 
     background-color: #f9f9f9;
 }
 
 .profile {
+    margin-top: 1.13vw;
     margin-bottom: 0.1vw;
     background-color: #fff;
     padding: 1vw;
@@ -170,13 +173,13 @@ header img.slu-logo {
 }
 
 /* Sidebar Navigation */
-.nav ul {
+nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.nav li {
+nav li {
     display: flex;
     align-items: center;
     margin: 1.2vw 0; 
@@ -184,12 +187,12 @@ header img.slu-logo {
     transition: background-color 0.3s;
 }
 
-.nav li:hover {
+nav li:hover {
     background-color: #f0f0f0; 
     border-radius: 5px;
 }
 
-.nav a {
+nav a {
     text-decoration: none;
     color: #333;
     font-size: 1.0vw; 
@@ -198,7 +201,7 @@ header img.slu-logo {
     text-align: center;
 }
 
-.nav a:hover {
+nav a:hover {
     color: #003DA5;
 }
 
@@ -319,13 +322,3 @@ header img.slu-logo {
     margin: 10px 0;
     font-size: 14px;
 }
-
-.post-image,
-.post-video {
-    width: 50%;
-    border-radius: 8px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-

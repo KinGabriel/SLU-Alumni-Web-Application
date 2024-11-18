@@ -31,7 +31,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside>
             <div class="profile">
                 <div class="profile-bg">
                     <img src="../assets/images/slu.jpg" alt="Background Image">
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Navigation -->
-            <nav class="nav">
+            <nav>
                 <ul>
                     <li>
                         <img src="../assets/images/feed.png" alt="Feed Icon" class="nav-icon">
@@ -175,6 +175,27 @@
         </div>
     </div>
 </div>
-
+<script>
+    window.onscroll = function() {
+      var scrollPostion = window.pageYOffset;
+      var headerSeparator = document.getElementsByClassName("header-separator")[0];
+      var header = document.getElementsByTagName("header")[0];
+      if (scrollPostion === 0) {
+        headerSeparator.style.top = "0";
+        header.style.top = "30px";  
+      } else {
+        headerSeparator.style.top = "-10px";
+        header.style.top = "0";  
+      }
+    
+      if(scrollPostion > 100){
+        header.style.position ="fixed";
+      }
+    
+    
+    
+    };
+    
+    </script>
 </body>
 </html>
