@@ -5,9 +5,13 @@
     font-family: Readex_Pro;
 }
 
+
 body {
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;  /* Allow vertical scrolling if needed */
+    scroll-behavior: smooth;
 }
+
 
 @font-face {
     font-family: Readex_Pro;
@@ -69,7 +73,7 @@ header img.slu-logo {
 .search .search-icon {
     position: absolute;
     top: 50%;
-    left: 15vw;
+    left: 13vw;
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
@@ -83,23 +87,31 @@ header img.slu-logo {
 /* Sidebar Styling */
 .main-content {
     display: flex;
-    flex-direction: column;
+    height: 100vh; 
 }
 
 .sidebar {
     width: 350px; 
-    position: relative; 
-    top: 0;
-    left: 0;
+    position: sticky; 
+    top: 0; 
     background-color: #f4f4f4;
     padding: 1vw;
-    height: 50vw; 
+    height: 100vh;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-    z-index: 999;
+    overflow-y: auto; /* Add scrolling for the sidebar if content overflows */
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 20px;
+    height: calc(100vh - 6vw); /* Adjust height dynamically */
+    margin-left: 30px;
+    background-color: #f9f9f9;
 }
 
 .profile {
-    margin-bottom: 2vw;
+    margin-bottom: 0.1vw;
     background-color: #fff;
     padding: 1vw;
     border-radius: 10px;
@@ -110,7 +122,7 @@ header img.slu-logo {
     width: 100%;
     height: 120px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .profile-info {
@@ -137,7 +149,7 @@ header img.slu-logo {
 }
 
 .name {
-    font-size: 1.5vw;
+    font-size: 1.2vw;
     font-weight: bold;
 }
 
@@ -153,7 +165,7 @@ header img.slu-logo {
 }
 
 .stat-item {
-    font-size: 1.2vw;
+    font-size: 1.0vw;
     text-align: center;
 }
 
@@ -166,9 +178,9 @@ header img.slu-logo {
 
 .nav li {
     display: flex;
-    align-items: center; 
-    margin: 1.5vw 0;
-    padding: 0.5vw;
+    align-items: center;
+    margin: 1.2vw 0; 
+    padding: 0.2vw; 
     transition: background-color 0.3s;
 }
 
@@ -180,9 +192,9 @@ header img.slu-logo {
 .nav a {
     text-decoration: none;
     color: #333;
-    font-size: 1.2vw;
+    font-size: 1.0vw; 
     font-weight: bold;
-    margin-left: 0.5vw; 
+    margin-left: 0.4vw; 
     text-align: center;
 }
 
@@ -190,10 +202,130 @@ header img.slu-logo {
     color: #003DA5;
 }
 
-/* Icon styling */
+/* Icon Styling */
 .nav-icon {
-    width: 24px;
-    height: 24px;
+    width: 25px; 
+    height: 25px;
     object-fit: contain;
+}
+
+/* Post Box */
+.post-box {
+    display: flex; 
+    align-items: flex-start; 
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px; 
+}
+
+.user-profile {
+    flex-shrink: 0; 
+}
+
+.user-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px; 
+}
+
+.post-content {
+    flex-grow: 1; 
+}
+
+.post-box textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px; 
+}
+
+.post-actions button {
+    display: flex;
+    align-items: center;
+    background-color: #E0E0E0;
+    color: #333333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 5px; 
+}
+
+
+.post-actions button:hover {
+    background-color: #002E7C;
+}
+
+/* Feed */
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Post */
+.post {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.post-time {
+    font-size: 12px;
+    color: #777;
+}
+
+.post-content p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.post-image,
+.post-video {
+    width: 50%;
+    border-radius: 8px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
