@@ -45,7 +45,11 @@ header img.slu-logo {
     width: auto;
     margin-right: 10px;
 }
-
+/* Remove sticky positioning to avoid conflict */
+header.sticky {
+    position: fixed;
+    top: 0;
+}
 /* Header Separator */
 .header-separator {
     position: relative;

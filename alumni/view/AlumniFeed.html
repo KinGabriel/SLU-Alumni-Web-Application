@@ -176,26 +176,22 @@
     </div>
 </div>
 <script>
-    window.onscroll = function() {
-      var scrollPostion = window.pageYOffset;
-      var headerSeparator = document.getElementsByClassName("header-separator")[0];
-      var header = document.getElementsByTagName("header")[0];
-      if (scrollPostion === 0) {
+   window.onscroll = function() {
+    var scrollPosition = window.pageYOffset;
+    var headerSeparator = document.getElementsByClassName("header-separator")[0];
+    var header = document.getElementsByTagName("header")[0];
+    if (scrollPosition === 0) {
         headerSeparator.style.top = "0";
         header.style.top = "30px";  
-      } else {
+        header.classList.remove("sticky");  
+    } else {
         headerSeparator.style.top = "-10px";
-        header.style.top = "0";  
-      }
-    
-      if(scrollPostion > 100){
-        header.style.position ="fixed";
-      }
-    
-    
-    
-    };
-    
+        header.style.top = "0";
+        if (scrollPosition > 100) {
+            header.classList.add("sticky");  
+        }
+    }
+};
     </script>
 </body>
 </html>
