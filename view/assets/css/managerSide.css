@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Readex_Pro;
+  }
+  
+  @font-face {
+      font-family: Readex_Pro;
+      src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+    }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .hidden {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-in;
+  }
+  
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .header-seperator {
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    margin-top: -1vh;
+    margin-bottom: 0.5vh;
+  }
+  
+  header {
+    position: sticky;
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
+    padding: 0.3vw;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.1s ease;
+  }
+  
+  header h1 {
+    display: flex;
+    align-items: center;
+    margin-left: 1.2vw;
+    font-size: 1.4vw;
+  }
+  
+  header span {
+    margin-left: 0.3vw;
+  }
+  
+  header img {
+    height: 50px;
+    width: auto; 
+  }
+  
+  nav {
+    margin-left: 27%;
+    margin-top: 0.2%;
+  }
+  
+  nav a {
+    padding: 0.3vw;
+    text-decoration: none;
+    color: inherit;
+    margin-left: 1vw; /* Adds spacing between links */
+    margin-right: 1vw; /* Adds spacing between links */
+    transition: color 0.2s ease;
+    font-size: 20px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 178, 0, 1);
+    text-decoration-thickness: 2.5px;
+  }
+  
+  /* Log in button */
+  .btn-logout {
+    background-color: #1D4ED8;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-left: 25vw;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+  }
+  
+  .btn-logout:hover {
+    background-color: #3B82F6;
+  }
+  
