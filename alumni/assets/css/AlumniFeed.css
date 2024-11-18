@@ -184,16 +184,23 @@ nav ul {
 }
 
 nav li {
+    position: relative; 
     display: flex;
     align-items: center;
-    margin: 1.2vw 0; 
-    padding: 0.2vw; 
+    margin: 1.05vw 0;
+    padding: 0.1vw;
     transition: background-color 0.3s;
+    padding-left: 1.5vw;
 }
 
-nav li:hover {
-    background-color: #f0f0f0; 
-    border-radius: 5px;
+nav li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px; 
+    height: 100%;
+    background-color: #FFB200;
 }
 
 nav a {
@@ -279,7 +286,7 @@ nav a:hover {
 
 
 .post-actions button:hover {
-    background-color: #002E7C;
+    background-color: #e7e9ed;
 }
 
 /* Feed */
@@ -326,3 +333,5 @@ nav a:hover {
     margin: 10px 0;
     font-size: 14px;
 }
+
+

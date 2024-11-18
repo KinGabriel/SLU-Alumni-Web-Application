@@ -83,6 +83,16 @@
                     </li>
                 </ul>
             </nav>
+            <script>
+                document.querySelectorAll('nav li a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        document.querySelectorAll('nav li').forEach(item => {
+                            item.classList.remove('active'); // Remove active class from all items
+                        });
+                        link.parentElement.classList.add('active'); // Add active class to the clicked item
+                    });
+                });
+            </script>
         </aside>
 
         <!-- Feed Content -->
@@ -106,7 +116,6 @@
                 </div>
             </div>
         </div>
-        
         <!-- Feed -->
         <div class="feed">
             <!-- Post 1 -->
@@ -175,6 +184,7 @@
         </div>
     </div>
 </div>
+
 <script>
    window.onscroll = function() {
     var scrollPosition = window.pageYOffset;
@@ -193,5 +203,6 @@
     }
 };
     </script>
+
 </body>
 </html>
