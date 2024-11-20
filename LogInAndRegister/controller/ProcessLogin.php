@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     // No email is found
     if ($result->num_rows === 0) {
-        $_SESSION['error_message'] = "Invalid username or password.";
+        $_SESSION['error_message'] = "Invalid email or password.";
         header("Location: ../view/Login.php");
         exit();
     }
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     } else {
         // Invalid password
-        $_SESSION['error_message'] = "Invalid username or password.";
+        $_SESSION['error_message'] = "Invalid email or password.";
         header("Location: ../view/Login.php");
         exit();
     }
