@@ -334,4 +334,18 @@ nav a:hover {
     font-size: 14px;
 }
 
+/* Create post modal */
+.modal-footer .btn-primary {
+    background-color: #D6F8E8; 
+    border-radius: 5px; 
+    width: 100%;
+    opacity: 1; 
+    color: #035630;
+    border-color:#D6F8E8;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #0fa863; /* Darker shade on hover */
+    color: white;
+}
 
