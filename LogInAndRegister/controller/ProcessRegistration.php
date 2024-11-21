@@ -1,5 +1,5 @@
 <?php
-require '../database/Configuration.php';
+require '../../database/Configuration.php';
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : '';
@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $retypePassword = isset($_POST["retypePassword"]) ? $_POST["retypePassword"] : '';
     $firstName = isset($_POST["firstName"]) ? $_POST["firstName"] : '';
     $lastName = isset($_POST["lastName"]) ? $_POST["lastName"] : '';
-    $schoolID = isset($_POST["sluSchoolId"]) ? $_POST["sluSchoolId"] : '';
     $program = isset($_POST["program"]) ? $_POST["program"] : '';
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : '';
     $db = new dbConnection();
@@ -26,20 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../view/Register.php");
         exit();
     }
-    // check if their is an existing school id
-    if(isAlumniExist($connection,$schoolID)) {
-        $_SESSION['formData'] = $_POST;
-        $_SESSION['confirmation_message'] = "Alumni already exist... ";
-        header("Location: ../view/Register.php");
-        return;
-    }
-  // Check if their is already an existing application by school ID
-    if(checkApplicantById( $connection, $schoolID )) {
-        $_SESSION['formData'] = $_POST;
-        $_SESSION['confirmation_message'] = "Already have an existing application!";
-        header("Location: ../view/Register.php");
-        exit();
-    }
+
 
     $idImage = '';
     if (isset($_FILES['schoolIdFile']) && $_FILES['schoolIdFile']['error'] === UPLOAD_ERR_OK) { 
@@ -54,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO applicants (school_id, email, fname, lname, pword, program, gradyear, school_id_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO applicants ( email, fname, lname, pword, program, gradyear, school_id_pic) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
     if ($stmt === false) {
@@ -63,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("ssssssss", $schoolID, $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
+    $stmt->bind_param("sssssss",  $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
     if ($stmt->execute()) {
         $_SESSION['confirmation_message'] = "Successfully sent your request! Please wait for the admin reviewal.";
     } else {
@@ -115,12 +101,5 @@ function checkApplicantById($connection, $email) {
         }
         return false;
 }
-function isAlumniExist($connection, $schoolID) {
-    $query = "SELECT * FROM alumni WHERE school_id = ?"; 
-    $stmt = $connection->prepare($query);
-    $stmt->bind_param("s", $schoolID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->num_rows > 0; 
-}
+
 ?>

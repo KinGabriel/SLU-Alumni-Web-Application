@@ -52,10 +52,6 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                         <img src="../assets/images/email.png" alt="Email Icon" class="input-icon" />
                         <input type="email" name="email" class="input-field" placeholder="Email" value="<?= isset($formData['email']) ? htmlspecialchars($formData['email']) : '' ?>"   required />
                     </div>
-                    <div class="input-wrapper">
-                        <img src="../assets/images/id.png" alt="SLU ID Icon" class="input-icon" />
-                        <input type="text" name="sluSchoolId" class="input-field" placeholder="SLU School ID"  value="<?= isset($formData['sluSchoolId']) ? htmlspecialchars($formData['sluSchoolId']) : '' ?>" required />
-                    </div>
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/graduation.png" alt="Graduation Year Icon" class="input-icon">
