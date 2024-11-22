@@ -245,25 +245,81 @@ nav a:hover {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 1200px; 
-    width: 50%; 
-}
-
-.card-body .btn-primary {
-    background-color: #ffffff; 
-    border-radius: 5px; 
-    width: 100%;
-    opacity: 1; 
-    color: #003DA5;
-    border-color:#003DA5;
+    max-width: calc(96vw - 400px); 
+    margin-left: 400px; 
 }
 
 .card {
-    display: flex;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.card .card-img-top {
-    display: flex;
-    width: 15%;
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
 }
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #003DA5;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card-footer .btn-interested {
+    width: 100%; 
+    background-color: #ffffff; 
+    color: #003DA5;
+    border-color: #003DA5;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.btn-interested:hover {
+    background-color: #003DA5; 
+}
+
+.card-footer {
+    background-color: #f9f9f9; 
+    padding: 10px;
+    border-top: 1px solid #ddd; 
+    text-align: center;
+}
+
+/* Interested button */
+.interested-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #003DA5; 
+    color: white; 
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .interested-btn:hover {
+    background-color: #4a6fdf; 
+  }
+  
+.interested-icon {
+    width: 20px; 
+    height: 20px;
+    object-fit: contain;
+}
+  
+
+
 
