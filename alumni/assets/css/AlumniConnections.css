@@ -349,3 +349,111 @@ nav a:hover {
     color: white;
 }
 
+/* Connection Table */
+
+.connections-title {
+    font-size: 3vw;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px; 
+    color: #003DA5; 
+}
+
+.connections-table {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%; 
+}
+
+.connections-container {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1200px; 
+    width: 50%; 
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#sortDropdown {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#searchBar {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.connection-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+.connection-item:hover {
+    background-color: #f1f1f1;
+}
+
+.connection-item .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.connection-item .name {
+    font-size: 16px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.connection-item .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.message-btn,
+.remove-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.message-btn {
+    background-color: #CCDFFF;
+    color: #003DA5;
+}
+
+.message-btn:hover {
+    background-color: #0056b3;
+}
+
+.remove-btn {
+    background-color: #f7c6c6;
+    color: #E21111;
+}
+
+.remove-btn:hover {
+    background-color: #a71d2a;
+}
