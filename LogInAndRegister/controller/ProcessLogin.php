@@ -47,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($user['user_type'] == 'manager') {
             header("Location: ../view/homeManager.php");
         } else {
-            header("Location: ../view/home.php");
+            setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", false, true); 
+            header("Location: http://localhost:8080/alumni");
         }
         exit();
     } else {

@@ -2,7 +2,8 @@
   "name": "slu-alumni-web-application",
   "version": "1.0.0",
   "description": "- Caparas, Joaquin Gabriel\r - Cariño, Mark Lorenz\r - Escaño, Nichole Jhoy\r - Razo, Ma. Lourdes Shaine\r - Vergara, Carlos Miguel",
-  "main": "index.js",
+  "main": "alumni/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
     "mysql2": "^3.11.4"
   }
