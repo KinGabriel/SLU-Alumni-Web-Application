@@ -4,6 +4,58 @@
   font-family: Readex_Pro;
 }
 
+.card {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .edit-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .edit-icon:hover {
+      color: #007bff; /* Hover color */
+    }
+
+    .bubble {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .has-multiple-icon {
+      display: none;
+    }
+
+    .card-body a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .card-body a:hover {
+      text-decoration: underline;
+    }
+
+    .cover-image {
+      width: 100%;
+      height: auto;
+    }
+
+    .categories a.active {
+      font-weight: bold;
+    }
+
 @font-face {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
