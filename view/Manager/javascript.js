@@ -126,33 +126,60 @@ const renderCards = (cardsContainer, cards) => {
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         tags: ["category 1", "category 2"],
         cover: [
-          "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
+          "https://via.placeholder.com/550x225/7D7D7D/969696?text=Card+1"
         ],
         date: "October 18, 2024"
       },
       {
         title: "Card Title 2",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        description: "Quisquam ab quibusdam eligendi magni dolorem sunt.",
         tags: ["category 3"],
         cover: [
-          "https://via.placeholder.com/550x225/C7B15B/D5C481?text=Placeholder",
+          "https://via.placeholder.com/550x225/C7B15B/D5C481?text=Card+2"
         ],
-        date: "October 16, 2024"
+        date: "October 19, 2024"
       },
       {
         title: "Card Title 3",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        description: "Iste veritatis explicabo nostrum impedit reprehenderit.",
         tags: ["category 1", "category 3"],
         cover: [
-          "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
+          "https://via.placeholder.com/550x225/4A90E2/8D98A1?text=Card+3"
         ],
-        date: "October 18, 2024"
+        date: "October 20, 2024"
+      },
+      {
+        title: "Card Title 4",
+        description: "Explicabo velit architecto ipsum officiis at.",
+        tags: ["category 2", "category 3"],
+        cover: [
+          "https://via.placeholder.com/550x225/EFB6B6/F2A9A9?text=Card+4"
+        ],
+        date: "October 21, 2024"
+      },
+      {
+        title: "Card Title 5",
+        description: "Velit officiis ad architecto iusto rem alias.",
+        tags: ["category 1"],
+        cover: [
+          "https://via.placeholder.com/550x225/FCAC0A/F6A705?text=Card+5"
+        ],
+        date: "October 22, 2024"
+      },
+      {
+        title: "Card Title 6",
+        description: "Est eligendi mollitia recusandae quas.",
+        tags: ["category 2", "category 1"],
+        cover: [
+          "https://via.placeholder.com/550x225/8D6E63/F1D0A2?text=Card+6"
+        ],
+        date: "October 23, 2024"
       }
     ]
   };
+  
+  
 
-  
-  
   const cardsContainer = document.getElementById("cards-container");
   const searchInput = document.querySelector('input[type="search"]');
   const categoryLinks = document.querySelectorAll(".categories a");
