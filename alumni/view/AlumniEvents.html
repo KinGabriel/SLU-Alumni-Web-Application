@@ -97,60 +97,190 @@
 
     <!-- Events -->
     <div class = event-container> 
-    <div class="event-table">
-        <h2 class="event-title">Discover SLU Events</h2> 
-        
+        <div class="event-header">
+            <p>Upcoming event: <strong>University Week on Nov 28, 2024</strong></p>
+            <button class="view-event-button">View Event</button>
+        </div>
+        <h2 class="event-title">Discover SLU Events</h2>
+       
+        <div class="filter-buttons">
+            <button class="filter-button active" onclick="filterEvents('all')">All</button>
+            <button class="filter-button" onclick="filterEvents('upcoming')">Upcoming</button>
+            <button class="filter-button" onclick="filterEvents('ended')">Ended</button>
+        </div>
+            
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
-              <div class="card h-100">
-                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
-                <div class="card-body">
-                  <h5 class="card-title">Lantern Parade 2024</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-interested">Interested
-                        <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
-                    </button>
-                </div>
-              </div>
             </div>
+            
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
 
             <div class="col">
-              <div class="card h-100">
-                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
-                <div class="card-body">
-                  <h5 class="card-title">Lantern Parade 2024</h5>
-                  <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-interested">Interested
-                        <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
-                    </button>
-                </div>
-              </div>
             </div>
-
+        
             <div class="col">
-              <div class="card h-100">
-                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
-                <div class="card-body">
-                  <h5 class="card-title">Lantern Parade 2024</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-interested">Interested
-                        <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
-                    </button>
-                </div>
-              </div>
             </div>
-          </div>  <!--end of row row-cols-1 row-cols-md-3 g-4-->  
-    </div>
-    </div>
+            
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card h-100">
+                    <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- Event Date -->
+                        <div class="event-date-container me-3">
+                            <div class="event-date">
+                                <span class="month">NOV</span>
+                                <span class="day">28</span>
+                            </div>
+                        </div>
+                        <!-- Event Info -->
+                        <div class="event-info">
+                            <h5 class="card-title">Lantern Parade 2024</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-interested">
+                            Interested
+                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> <!--end of row row-cols-1 row-cols-md-3 g-4-->  
+    </div> <!--end of event-container-->  
+</div> <!--end of main-container-->  
 
 </body>
 </html>
