@@ -3,6 +3,6 @@ import { getAlumni } from '../controller/alumniController.js';
 
 const router = express.Router();
 
-router.get('/', getAlumni);
+router.get('/homefeed', getAlumni);
 
 export default router;
