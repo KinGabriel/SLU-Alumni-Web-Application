@@ -4,20 +4,19 @@ require ("../controller/HandleSession.php");
 $applicant = []; 
 $params = [];
 $types = ''; 
-$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, school_id, gradyear,school_id_pic FROM applicants WHERE is_verified = '0'"; 
+$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, gradyear,school_id_pic FROM applicants WHERE is_verified = '0'"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
     $sort = isset($_GET['sort']) ? $_GET['sort'] : 'name ASC';
 
     if (!empty($searchTerm)) {
-        $query .= " AND (fname LIKE ? OR lname LIKE ? OR email LIKE ? OR school_id LIKE ?)";
+        $query .= " AND (fname LIKE ? OR lname LIKE ? OR email LIKE ?)";
         $searchTerm = "%$searchTerm%";  
         $params[] = $searchTerm;
         $params[] = $searchTerm;
         $params[] = $searchTerm;
-        $params[] = $searchTerm;
-        $types .= 'ssss';  
+        $types .= 'sss';  
     }
 
     if (in_array($sort, ['name ASC', 'name DESC', 'year ASC', 'year DESC'])) {
@@ -57,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             return [
                 'name' => $applicant['Name'],
                 'email' => $applicant['email'],
-                'id_number' => $applicant['school_id'],
                 'gradyear' => $applicant['gradyear'] ?? "N/A",
                 'school_id_pic' => !empty($applicant['school_id_pic']) ? 'data:image/jpeg;base64,' . base64_encode($applicant['school_id_pic']) : null
             ];

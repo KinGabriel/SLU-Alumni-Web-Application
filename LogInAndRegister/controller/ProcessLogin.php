@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../view/homeManager.php");
         } else {
             setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", false, true); 
-            header("Location: http://localhost:8080/alumni");
+            header("Location: http://localhost:8080/");
         }
         exit();
     } else {
