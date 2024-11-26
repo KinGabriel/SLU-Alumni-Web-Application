@@ -1,3 +1,13 @@
+/** 
+Author: Escaño, Nichole Jhoy
+Code Description:
+Reference: 
+
+
+*/
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -384,20 +394,6 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-#sortDropdown {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-#searchBar {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
 .connection-item {
     display: flex;
     align-items: center;
@@ -457,3 +453,37 @@ nav a:hover {
 .remove-btn:hover {
     background-color: #a71d2a;
 }
+
+/* Flex container for connections header */
+.connections-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Flex container for controls (Sort By & Search) */
+.connections-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the search bar */
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.connections-controls .form-select,
+.connections-controls .form-control {
+    width: 200px; 
+}
+
+.connections-controls .form-select {
+    margin-right: 10px;
+}
+
+.connections-controls .form-select {
+background-color: #003DA5;
+}
+
