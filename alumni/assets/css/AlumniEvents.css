@@ -328,36 +328,6 @@ nav a:hover {
     height: 20px;
     object-fit: contain;
 }
-
-/* Header Styling */
-.event-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #e8f1ff;
-    border: 1px solid #c5d7f2;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-  
-.event-header p {
-    margin: 0;
-    font-size: 16px;
-}
-  
-.view-event-button {
-    background-color: #1d4ed8;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-  
-.view-event-button:hover {
-    background-color: #3b82f6;
-}
   
 /* Filter Buttons */
 .filter-buttons {

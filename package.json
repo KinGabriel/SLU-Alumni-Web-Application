@@ -14,7 +14,12 @@
     "bootstrap": "^5.3.3",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.1",
+<<<<<<< HEAD
     "mysql2": "^3.11.4",
     "slu-alumni-web-application": "file:"
+=======
+    "express-session": "^1.18.1",
+    "mysql2": "^3.11.4"
+>>>>>>> bc44162f168a7ed98cc8d3b2f0c9affc03d8513e
   }
 }

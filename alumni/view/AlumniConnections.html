@@ -103,11 +103,13 @@
                 <!-- Controls (Sort by Name Dropdown & Search Bar) -->
                 <div class="connections-controls d-flex align-items-center">
                     <!-- Sort By Dropdown -->
-                    <select class="form-select me-3" aria-label="Sort By Name">
-                        <option selected>Sort by Name</option>
-                        <option value="1">A-Z</option>
-                        <option value="2">Z-A</option>
-                    </select>
+                    <div class="dropdown">
+                        <button id="dropdownButtonName">Sort By Name ▼</button>
+                        <div class="dropdown-content" id="dropdownContentName">
+                            <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
+                            <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
+                        </div>
+                    </div>
             
                     <!-- Search Bar -->
                     <form id="searchForm" class="d-flex">
@@ -117,6 +119,13 @@
                         </button> -->
                     </form>
                 </div>
+            </div>
+
+             <!--Following and Followers filter-->
+             <div class="filter-buttons">
+                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
+                <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
+                <button class="filter-button" onclick="filterEvents('following')">Following</button>
             </div>
         
             <!-- Connections Table -->
