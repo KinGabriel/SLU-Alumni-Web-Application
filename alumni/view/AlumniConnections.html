@@ -96,13 +96,40 @@
         </aside>
 
         <div class="connections-container">
-            <!-- Dropdown and Search Bar -->
-        
+            <!-- Connections Title and Controls -->
+            <div class="connections-header d-flex justify-content-between align-items-center">
+                <h2 class="connections-title">Connections</h2>
+                
+                <!-- Controls (Sort by Name Dropdown & Search Bar) -->
+                <div class="connections-controls d-flex align-items-center">
+                    <!-- Sort By Dropdown -->
+                    <div class="dropdown">
+                        <button id="dropdownButtonName">Sort By Name ▼</button>
+                        <div class="dropdown-content" id="dropdownContentName">
+                            <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
+                            <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
+                        </div>
+                    </div>
+            
+                    <!-- Search Bar -->
+                    <form id="searchForm" class="d-flex">
+                        <input type="text" name="search" placeholder="Search.." class="form-control me-2">
+                        <!-- <button type="submit" class="btn btn-outline-secondary">
+                            <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                        </button> -->
+                    </form>
+                </div>
+            </div>
+
+             <!--Following and Followers filter-->
+             <div class="filter-buttons">
+                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
+                <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
+                <button class="filter-button" onclick="filterEvents('following')">Following</button>
+            </div>
         
             <!-- Connections Table -->
             <div class="connections-table">
-                <h2 class="connections-title">Connections</h2> 
-                
                 <div class="connection-item">
                     <img src="../assets/images/anya.jpg" alt="Profile Picture" class="profile-pic">
                     <div class="name">Anya Forger</div>
@@ -111,7 +138,7 @@
                         <button class="remove-btn">Remove</button>
                     </div>
                 </div>
-
+        
                 <div class="connection-item">
                     <img src="../assets/images/asta.jpg" alt="Profile Picture" class="profile-pic">
                     <div class="name">Asta Staria</div>
@@ -120,7 +147,7 @@
                         <button class="remove-btn">Remove</button>
                     </div>
                 </div>
-
+        
                 <div class="connection-item">
                     <img src="../assets/images/yuno.jpeg" alt="Profile Picture" class="profile-pic">
                     <div class="name">Yuno Grinberyall</div>
