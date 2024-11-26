@@ -68,3 +68,10 @@ export const handleLogout = (req,res) =>{
         res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
     });
 }
+
+export const handleUserPost = (req,res)=> {
+    const userId = req.cookies.user_id
+    const query = "INSERT INTO posts (description,banner,access_type,post_type,user_id) VALUES (?,?,?,?)";
+    
+   
+}
