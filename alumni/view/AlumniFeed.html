@@ -312,11 +312,11 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById('logoutButton').addEventListener('click', function () {
+<script>  document.getElementById('logoutButton').addEventListener('click', function () {
     window.location.href = '/api/logout';
-});
+});</script>
+    <script>
+      
         document.addEventListener("DOMContentLoaded", () => {
             const modalTriggerElements = [
                 document.querySelector(".post-content textarea"),
@@ -338,7 +338,8 @@
    
 
     <!-- Bootstrap JavaScript -->
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js" defer></script>
+<script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+
     <script>
 fetch('/api/homefeed', {
     method: 'GET',
@@ -364,7 +365,45 @@ fetch('/api/homefeed', {
 
 </script>
 
-    
+    <script>
+  document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
+    const description = document.querySelector('.modal-body textarea').value;
+    const banner = '';  
+    const access_type = 'public';
+    const post_type = 'normal';
+
+    const postData = {
+        description,
+        banner,
+        access_type,
+        post_type
+    };
+
+console.log(postData)
+    fetch('/api/postfeed', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',  
+            'credentials': 'include'  
+        },
+        body: JSON.stringify(postData)  
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Post created successfully') {
+            alert('Post created successfully!');
+            $('#postModal').modal('hide');  
+            window.location.reload(); 
+        } else {
+            alert('Error creating post');
+        }
+    })
+    .catch(error => {
+        console.error('Error posting data:', error);
+        alert('There was an error while posting.');
+    });
+});
+    </script>
 
 </body>
 </html>

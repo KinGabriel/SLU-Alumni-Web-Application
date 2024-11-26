@@ -69,9 +69,16 @@ export const handleLogout = (req,res) =>{
     });
 }
 
-export const handleUserPost = (req,res)=> {
-    const userId = req.cookies.user_id
-    const query = "INSERT INTO posts (description,banner,access_type,post_type,user_id) VALUES (?,?,?,?)";
-    
-   
-}
+export const handleUserPost = (req, res) => {
+    const userId = req.cookies.user_id;
+    const { description, banner, access_type, post_type } = req.body;
+    console.log('Received data:', req.body);
+    const query = "INSERT INTO posts (description, banner, access_type, post_type, user_id) VALUES (?, ?, ?, ?, ?)";
+    dbConnection.query(query, [description, banner, access_type, post_type, userId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ message: 'Error creating post', error: err });
+        }
+        return res.status(200).json({ message: 'Post created successfully' });
+    });
+};
