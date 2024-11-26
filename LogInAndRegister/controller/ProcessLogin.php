@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Create a database connection
     $db = new dbConnection();
     $connection = $db->getConnection(); 
-
     $query = "SELECT * FROM user WHERE email = ?";
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $email);
