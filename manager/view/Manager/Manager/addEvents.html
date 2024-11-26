@@ -8,6 +8,10 @@
   font-family: Readex_Pro;
 }
 
+h1 {
+  margin-top: 20px; 
+}
+
 .card {
   position: relative;
   margin-bottom: 20px;
@@ -294,79 +298,105 @@ a {
   --placeholder: rgb(100, 100, 100); /* Gray for placeholder text */
 }
 
+/* Start of Wrapper Section */
 .wrapper {
-  width: min(325px, 80vw);
-  display: grid;
+    margin-top: 20px;
+    width: min(600px, 70vw); /* Increased max width and adjusted the percentage */
+    display: grid;
   align-items: center;
-  padding: 20px; /* Optional: Add space inside the wrapper */
-  height: 30vh; /* Full screen height */
-
-  & > * {
-    grid-column: 1;
-    grid-row: 1;
-    font: 1.1rem futura, helvetica, sans-serif;
-    color: var(--black); /* Black text */
-  }
-
-  & input {
-    position: relative;
-    border: 1.5px solid var(--black); /* Black border */
-    border-radius: 0.25rem;
-    outline: none;
-    background-color: transparent;
-    color: var(--black); /* Black text */
-    padding: 1rem;
-    z-index: 0;
-    transition: border-color 0.5s;
-
-    &:focus {
-      border-color: var(--primary); /* Black border when focused */
-    }
-
-    &:focus ~ span,
-    &:not(:placeholder-shown) ~ span {
-      transform: translateY(-1.8rem) scale(0.75);
-      padding: 0 0.25rem;
-      color: var(--black); /* Black text */
-    }
-  }
-
-  & span {
-    width: max-content;
-    background-color: var(--bg); /* White background */
-    margin-left: 1rem;
-    color: var(--placeholder); /* Gray placeholder text */
-    transition: transform 0.5s;
-  }
+  padding: 10px; /* Reduced padding to bring elements closer */
+  height: auto; /* Adjusted to auto to make it more flexible */
 }
-/* End of Wrapper Section */
 
+.wrapper > * {
+  grid-column: 1;
+  grid-row: 1;
+  font: 1.1rem futura, helvetica, sans-serif;
+  color: var(--black); /* Black text */
+  margin-bottom: 10px; /* Reduced margin to bring elements closer */
+}
+
+.wrapper input {
+  position: relative;
+  border: 1.5px solid var(--black); /* Black border */
+  border-radius: 0.25rem;
+  outline: none;
+  background-color: transparent;
+  color: var(--black); /* Black text */
+  padding: 0.75rem;
+  z-index: 0;
+  transition: border-color 0.5s;
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.wrapper input:focus {
+  border-color: var(--primary); /* Black border when focused */
+}
+
+.wrapper input:focus ~ span,
+.wrapper input:not(:placeholder-shown) ~ span {
+  transform: translateY(-1.8rem) scale(0.75);
+  padding: 0 0.25rem;
+  color: var(--black); /* Black text */
+}
+
+.wrapper span {
+  width: max-content;
+  background-color: var(--bg); /* White background */
+  margin-left: 1rem;
+  color: var(--placeholder); /* Gray placeholder text */
+  transition: transform 0.5s;
+}
+
+.event-description {
+  width: 100%; /* Full width within its container */
+  max-width: 1000px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the field horizontally */
+}
+
+.event-description input {
+  height: 60px; /* Adjust the height as needed */
+  padding: 1rem; /* Adjust padding to maintain the appearance */
+}
+
+
+
+/* End of Wrapper Section */
 /* Start of Session Fields Section */
 .session-fields {
   display: flex;
-  gap: 1.5rem; /* Add spacing between fields */
+  gap: 2rem; /* Increased gap for more space between fields */
   align-items: center;
-  justify-content: space-between; /* Adjust alignment */
+  justify-content: space-between;
+  margin-bottom: 20px; /* Added extra bottom margin */
 }
 
 .input-icon {
   position: relative;
-  width: 200px; /* Adjust width as needed */
+  width: 250px; /* Increased width of each input field */
+}
+.session-fields input {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1.5px solid var(--black); /* Keep the black border */
+  padding: 1rem; /* Adjust padding for input */
+  width: 100%; /* Make input take full width */
+  border-radius: 0.25rem; /* Rounded corners */
+  color: var(--black); /* Black text color */
+  font-size: 1rem; /* Adjust font size if needed */
 }
 
-.input-icon input {
-  width: 100%;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  padding: 0.5rem 0.75rem;
-  padding-left: 2.5rem; /* Add space for the icon */
-  font-size: 1rem;
+.session-fields input::placeholder {
+  color: var(--placeholder); /* Placeholder color */
+  opacity: 1; /* Ensures visibility of placeholder */
+  background-color: rgba(255, 255, 255, 0.9) !important;
 }
+
 
 .input-icon label {
   display: block;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem; /* Increased space below labels */
+  font-size: 1.3rem; /* Increased label font size */
 }
 
 .input-icon i {
@@ -375,10 +405,10 @@ a {
   left: 10px;
   transform: translateY(-50%);
   color: #777;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Increased icon size */
 }
-/* End of Session Fields Section */
 
+/* End of Session Fields Section */
 
 </style>
 
@@ -419,13 +449,23 @@ a {
                 </div>
             </div>
        
+            <h1>Event Description</h1>
 
             <main class='wrapper'>
                 <!-- Event Title -->
                 <input type='text' placeholder=''>
                 <span>Event Title</span>
               </main>
+
+              <main class='wrapper'>
+                <!-- Event Title -->
+                <input type='text' placeholder=''>
+                <span>Location</span>
+              </main>
               
+
+              <h1>Date & Time</h1>
+
               <div class="session-fields">
                 <!-- Start Date -->
                 <div class="input-icon">
@@ -449,8 +489,14 @@ a {
                 </div>
               </div>
               
+           
 
-
+              <h1>Additional Information</h1>
+              <main class='wrapper event-description'>
+                <!-- Event Description -->
+                <input type='text' placeholder=''>
+                <span>Event Description</span>
+              </main>
       
       <div class="buttons">
         <button class="btn btn-prev" id="btn-prev" disabled>Previous</button>

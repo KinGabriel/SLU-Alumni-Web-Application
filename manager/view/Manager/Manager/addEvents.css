@@ -24,7 +24,7 @@
   display: grid;
   align-items: start; /* Align content to the top */
   justify-items: center;
-  padding-top: 20px; /* Optional: Add padding for spacing */
+  padding-top: 27px; /* Optional: Add padding for spacing */
 }
 
 .steps-wrapper {
@@ -72,7 +72,7 @@
   transition: 300ms ease;
 }
 .steps-wrapper .buttons {
-  margin-block-start: 800px; /* Add spacing above buttons */
+  margin-block-start: 100px; /* Add spacing above buttons */
   display: flex;
   align-items: center;
   justify-content: center;
