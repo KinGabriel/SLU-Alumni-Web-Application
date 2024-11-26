@@ -1,7 +1,6 @@
 import dbConnection from '../../database/connection.js';
 export const getAlumni = (req, res) => {
-    //const userId = req.cookies.user_id;
-    const userId = 44;
+    const userId = req.cookies.user_id
     if (!userId) {
         return res.status(400).send('Invalid Access');
     }
@@ -58,3 +57,14 @@ export const getAlumni = (req, res) => {
 
     });
 };
+
+export const handleLogout = (req,res) =>{
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('An error occurred while logging out.');
+        }
+        res.clearCookie('user_id');
+        res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
+    });
+}
