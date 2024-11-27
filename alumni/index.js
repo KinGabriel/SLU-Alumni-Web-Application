@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 // create a session
 const key = randomBytes(16).toString('hex'); // generate a randon key
 app.use(session({
-    secret: 'key',  
+    secret: key,  
     resave: false, 
     saveUninitialized: false,  
     cookie: { secure: false } 
