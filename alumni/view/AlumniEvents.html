@@ -12,8 +12,8 @@
     <!-- Header separator -->
     <div class="header-separator"></div>
 
-    <!-- Header -->
-    <header>
+     <!-- Header -->
+     <header>
         <h1>
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <!-- Search bar -->
@@ -26,7 +26,45 @@
                 </form>
             </div>
         </h1>
+
+        <div class="profile-dropdown">
+            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" onclick="toggleDropdown()">
+            <div class="dropdown-menu" id="dropdownMenu">
+              <div class="dropdown-header">
+                <img src="../assets/images/candy.jpg" alt="Profile" class="dropdown-avatar">
+                <div class="dropdown-info">
+                  <h4>Nichole Caparas</h4>
+                  <p>Web Developer at Google</p>
+                </div>
+              </div>
+              <ul class="dropdown-links">
+                <li><a href="#">Manage Profile</a></li>
+                <li><a href="#">Close Account</a></li>
+              </ul>
+              <div class="logout-btn">
+                <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon"> 
+                <span> Log out </span> 
+              </div>              
+            </div>
+          </div>
+        
+          <script>
+            function toggleDropdown() {
+                const dropdownMenu = document.getElementById("dropdownMenu");
+                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            }
+        
+            // Close dropdown when clicking outside
+            document.addEventListener("click", function(event) {
+                const dropdown = document.getElementById("dropdownMenu");
+                const avatar = document.querySelector(".profile-avatar");
+                if (!dropdown.contains(event.target) && !avatar.contains(event.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+          </script>
     </header>
+
 
     <!-- Main Content -->
     <div class="main-content">
