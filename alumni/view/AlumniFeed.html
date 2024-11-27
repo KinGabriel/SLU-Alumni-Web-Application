@@ -28,41 +28,26 @@
         </h1>
 
         <div class="profile-dropdown">
-            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" onclick="toggleDropdown()">
-            <div class="dropdown-menu" id="dropdownMenu">
-              <div class="dropdown-header">
-                <img src="../assets/images/candy.jpg" alt="Profile" class="dropdown-avatar">
-                <div class="dropdown-info">
-                  <h4>Nichole Caparas</h4>
-                  <p>Web Developer at Google</p>
+            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+            <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+                <div class="dropdown-header">
+                    <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                    <div class="dropdown-info">
+                        <h4 name="name"></h4>
+                        <p>Web Developer at Google</p>
+                    </div>
                 </div>
-              </div>
-              <ul class="dropdown-links">
-                <li><a href="#">Manage Profile</a></li>
-                <li><a href="#">Close Account</a></li>
-              </ul>
-              <div class="logout-btn">
-                <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon"> 
-                <span> Log out </span> 
-              </div>              
+                <ul class="dropdown-links">
+                    <li><a href="#">Manage Profile</a></li>
+                    <li><a href="#">Close Account</a></li>
+                </ul>
+                <div class="logout-btn">
+                    <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                    <span>Log out</span>
+                </div>
             </div>
-          </div>
-        
-          <script>
-            function toggleDropdown() {
-                const dropdownMenu = document.getElementById("dropdownMenu");
-                dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-            }
-        
-            // Close dropdown when clicking outside
-            document.addEventListener("click", function(event) {
-                const dropdown = document.getElementById("dropdownMenu");
-                const avatar = document.querySelector(".profile-avatar");
-                if (!dropdown.contains(event.target) && !avatar.contains(event.target)) {
-                    dropdown.style.display = "none";
-                }
-            });
-          </script>
+        </div>
+              
     </header>
 
     <!-- Main Content 
@@ -108,7 +93,7 @@
                     </li>
                     <li>
                         <img src="../assets/images/connection.png" alt="Connections Icon" class="nav-icon">
-                        <a href="../view/AlumniConnections.html">Connections</a>
+                        <a href="/api/events">Connections</a>
                     </li>
                     <li>
                         <img src="../assets/images/latestNews.png" alt="News Icon" class="nav-icon">
@@ -293,23 +278,7 @@
     </div>
 </div>
 
-<script>
-   window.onscroll = function() {
-    var scrollPosition = window.pageYOffset;
-    var headerSeparator = document.getElementsByClassName("header-separator")[0];
-    var header = document.getElementsByTagName("header")[0];
-    if (scrollPosition === 0) {
-        headerSeparator.style.top = "0";
-        header.style.top = "30px";  
-        header.classList.remove("sticky");  
-    } else {
-        headerSeparator.style.top = "-10px";
-        header.style.top = "0";
-        if (scrollPosition > 100) {
-            header.classList.add("sticky");  
-        }
-    }
-};
+
     </script>
 
         <!-- Modal 
@@ -349,98 +318,10 @@
             </div>
         </div>
     </div>
-<script>  document.getElementById('logoutButton').addEventListener('click', function () {
-    window.location.href = '/api/logout';
-});</script>
-    <script>
-      
-        document.addEventListener("DOMContentLoaded", () => {
-            const modalTriggerElements = [
-                document.querySelector(".post-content textarea"),
-                document.querySelector(".post-actions .add-photo"),
-                document.querySelector(".post-actions .add-video")
-            ];
-    
-            modalTriggerElements.forEach(element => {
-                if (element) {
-                    element.addEventListener("click", () => {
-                        const postModal = new bootstrap.Modal(document.getElementById("postModal"));
-                        postModal.show();
-                    });
-                }
-            });
-        });
-    </script>
-
-   
 
     <!-- Bootstrap JavaScript -->
-<script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-
-    <script>
-fetch('/api/homefeed', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'credentials': 'include'  
-    }
-})
-.then(response => response.json())
-.then(data => {
-    console.log(data);
-    const pfpElements = document.querySelectorAll('[name="pfp"]');
-    pfpElements.forEach((element) => {
-        element.src = data.pfp;
-    });
-    document.querySelector('[name="name"]').innerText = data.name || 'Unknown';
-    document.querySelector('[name="bio"]').innerText = data.bio || '';
-    document.querySelector('[name="post_count"]').innerText = data.post_count || 0;
-    document.querySelector('[name="followers_count"]').innerText = data.followers_count || 0; 
-    document.querySelector('[name="followed_count"]').innerText = data.followed_count || 0; 
-})
-.catch(error => console.error('Error fetching data:', error));
-
-</script>
-
-    <script>
-  document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
-    const description = document.querySelector('.modal-body textarea').value;
-    const banner = '';  
-    const access_type = 'public';
-    const post_type = 'normal';
-
-    const postData = {
-        description,
-        banner,
-        access_type,
-        post_type
-    };
-
-console.log(postData)
-    fetch('/api/postfeed', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',  
-            'credentials': 'include'  
-        },
-        body: JSON.stringify(postData)  
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Post created successfully') {
-            alert('Post created successfully!');
-            $('#postModal').modal('hide');  
-            window.location.reload(); 
-        } else {
-            alert('Error creating post');
-        }
-    })
-    .catch(error => {
-        console.error('Error posting data:', error);
-        alert('There was an error while posting.');
-    });
-});
-    </script>
-
+  <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="../assets/js/handleHomefeed.js" defer>  </script>  
+  <script src="../assets/js/handleFetch.js" defer>  </script>  
 </body>
 </html>
