@@ -47,7 +47,7 @@ function getUserPosts() {
                 postElement.appendChild(postContent);
                 postElement.appendChild(document.createElement('hr'));
                 postElement.appendChild(postActions);
-                
+
                 feedContainer.appendChild(postElement);
             });
         })
@@ -88,12 +88,14 @@ function handlePostSubmit() {
                 const banner = '';  
                 const access_type = 'public';
                 const post_type = 'normal';
-
+                const datetime = new Date();
+                console.log(datetime)
                 const postData = {
                     description,
                     banner,
                     access_type,
-                    post_type
+                    post_type,
+                    datetime
                 };
 
                 console.log(postData);
@@ -112,9 +114,12 @@ function handlePostSubmit() {
 
                     if (data.message === 'Post created successfully') {
                         successModal.show();  // Show success modal
+                        
                     } else {
                         errorModal.show();  // Show error modal
                     }
+                    getUserInfo();
+                    getUserPosts();
                 })
                 .catch(error => {
                     console.error('Error posting data:', error);

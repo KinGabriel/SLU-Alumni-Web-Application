@@ -80,6 +80,7 @@ function logOut() {
     window.location.href = '/api/logout';
 }
 
+// helper methods for showin the post
 // create post header
 function createPostHeader(post) {
     const postHeader = document.createElement('div');
@@ -97,7 +98,14 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('span');
     postTime.classList.add('post-time');
-    postTime.textContent = post.date_time;
+    
+    // verify the time
+    if (post.datetime && !isNaN(new Date(post.datetime))) {
+        const formattedDate = formatDate(post.datetime);
+        postTime.textContent = formattedDate;
+    } else {
+        postTime.textContent = 'Invalid date';
+    }
 
     userInfo.appendChild(userName);
     userInfo.appendChild(postTime);
@@ -156,3 +164,39 @@ function createPostActionButton(type, icon, count) {
 
     return button;
 }
+
+// handle the date formating for the user post
+function formatDate(dateTime) {
+    const date = new Date(dateTime); 
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000); 
+    // Less than 1 minute ago
+    if (diffInSeconds < 60) {
+        return 'Just now';
+    }
+    // Less than 1 hour ago 
+    if (diffInSeconds < 3600) { 
+        const diffInMinutes = Math.floor(diffInSeconds / 60); 
+        return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    }
+    // Less than 24 hours ago
+    if (diffInSeconds < 86400) { 
+        const diffInHours = Math.floor(diffInSeconds / 3600); // Convert to hours
+        return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    }
+    // Less than 7 days ago 
+    if (diffInSeconds < 604800) { 
+        const diffInDays = Math.floor(diffInSeconds / 86400); // Convert to days
+        return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    }
+    // More than 7 days ago 
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    };
+    return date.toLocaleDateString('en-US', options) + ' at ' + date.toLocaleTimeString('en-US', { hour12: true });
+}
+// end of helper methods

@@ -1,4 +1,3 @@
-import { query } from 'express';
 import dbConnection from '../../database/connection.js';
 export const getAlumni = (req, res) => {
     const userId = req.cookies.user_id
@@ -72,10 +71,10 @@ export const handleLogout = (req,res) =>{
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
-    const { description, banner, access_type, post_type } = req.body;
+    const { description, banner, access_type, post_type,datetime} = req.body;
     console.log('Received data:', req.body);
-    const query = "INSERT INTO posts (description, banner, access_type, post_type, user_id) VALUES (?, ?, ?, ?, ?)";
-    dbConnection.query(query, [description, banner, access_type, post_type, userId], (err, result) => {
+    const query = "INSERT INTO posts (description, banner, access_type, post_type,datetime,user_id) VALUES (?, ?, ?, ?,?, ?)";
+    dbConnection.query(query, [description, banner, access_type, post_type,datetime, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });
