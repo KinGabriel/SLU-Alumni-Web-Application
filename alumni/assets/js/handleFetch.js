@@ -24,40 +24,106 @@ fetch('/api/homefeed', {
 })
 .catch(error => console.error('Error fetching data:', error));
 
-// handle posting
-document.querySelector('.modal-footer .btn-primary').addEventListener('click', () => {
-    const description = document.querySelector('.modal-body textarea').value;
-    const banner = '';  
-    const access_type = 'public';
-    const post_type = 'normal';
+// Handle posting
+// Initialize modals
+const postModalElement = document.getElementById("postModal");
+const successModalElement = document.getElementById("successModal");
+const errorModalElement = document.getElementById("errorModal");
 
-    const postData = {
-        description,
-        banner,
-        access_type,
-        post_type
+if (postModalElement && successModalElement && errorModalElement) {
+    const postModal = new bootstrap.Modal(postModalElement);
+    const successModal = new bootstrap.Modal(successModalElement);
+    const errorModal = new bootstrap.Modal(errorModalElement);
+
+    // Add event listeners to modal trigger buttons
+    const modalTriggerElements = [
+        document.querySelector(".post-content textarea"),
+        document.querySelector(".post-actions .add-photo"),
+        document.querySelector(".post-actions .add-video")
+    ];
+
+    modalTriggerElements.forEach(element => {
+        if (element) {
+            element.addEventListener("click", () => {
+                postModal.show();
+            });
+        }
+    });
+
+    // Submit post action
+    const submitPostButton = document.querySelector('#submitPost');
+    if (submitPostButton) {
+        submitPostButton.addEventListener('click', () => {
+            const description = document.querySelector('.modal-body textarea').value;
+            const banner = '';  
+            const access_type = 'public';
+            const post_type = 'normal';
+
+            const postData = {
+                description,
+                banner,
+                access_type,
+                post_type
+            };
+
+            console.log(postData);
+
+            fetch('/api/postfeed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',  
+                    'credentials': 'include'  
+                },
+                body: JSON.stringify(postData)  
+            })
+            .then(response => response.json())
+            .then(data => {
+                postModal.hide();  // Hide post modal
+
+                if (data.message === 'Post created successfully') {
+                    successModal.show();  // Show success modal
+                } else {
+                    errorModal.show();  // Show error modal
+                }
+            })
+            .catch(error => {
+                console.error('Error posting data:', error);
+                postModal.hide();  
+                errorModal.show();  
+            });
+        });
+    }
+
+    // Ensure backdrops are cleaned up properly
+    const cleanUpBackdrop = () => {
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.remove();
+        }
+        document.body.classList.remove('modal-open');
+        document.body.style = ''; // Remove inline styles added by Bootstrap
     };
 
-    fetch('/api/postfeed', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',  
-            'credentials': 'include'  
-        },
-        body: JSON.stringify(postData)  
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Post created successfully') {
-            alert('Post created successfully!');
-            $('#postModal').modal('hide');  
-            window.location.reload(); 
-        } else {
-            alert('Error creating post');
+    // Reset modals and backdrop when postModal is closed
+    postModalElement.addEventListener('hidden.bs.modal', cleanUpBackdrop);
+    successModalElement.addEventListener('hidden.bs.modal', cleanUpBackdrop);
+    errorModalElement.addEventListener('hidden.bs.modal', cleanUpBackdrop);
+
+    // Reset page after modals are closed
+    const resetPage = () => {
+        // Clear the input field in Post Modal
+        const postTextarea = document.querySelector('.modal-body textarea');
+        if (postTextarea) {
+            postTextarea.value = '';  // Clear textarea value
         }
-    })
-    .catch(error => {
-        console.error('Error posting data:', error);
-        alert('There was an error while posting.');
-    });
-});
+
+        // Hide any other modals in case they're open
+        successModal.hide();
+        errorModal.hide();
+        postModal.hide();
+    };
+
+    // Attach additional `hidden` events to reset state
+    successModalElement.addEventListener('hidden.bs.modal', resetPage);
+    errorModalElement.addEventListener('hidden.bs.modal', resetPage);
+}

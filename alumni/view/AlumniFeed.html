@@ -220,104 +220,80 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-              <!-- Post 3 -->
-              <div class="post">
-                <div class="post-header">
-                    <img src="../assets/images/anya.jpg" alt="User Profile" class="user-pic">
-                    <div>
-                        <h4 class="user-name">Anya Forger</h4>
-                        <span class="post-time">5 hours ago</span>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>Check out this amazing video I captured!</p>
-                    <video class="post-video" controls>
-                        <source src="../assets/images/vidsample.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <hr>
-                <div class="post-actions card-footer d-flex align-items-center">
-                    <div class="d-flex">
-                        <button class="btn btn-outline-primary me-2">
-                            <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                        </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
-                            <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                        </button>
-                    </div>
-                </div>
+<!-- Modal - Post Modal -->
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="postModalLabel">Create a Post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-                <!-- Post 4 -->
-                <div class="post">
-                    <div class="post-header">
-                        <img src="../assets/images/yuno.jpeg" alt="User Profile" class="user-pic">
-                        <div>
-                            <h4 class="user-name">Yuno Grinbellyall</h4>
-                            <span class="post-time">2 hours ago</span>
-                        </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
                     </div>
-                    <div class="post-content">
-                        <p>Enjoying the beautiful weather today!</p>
-                        <img src="../assets/images/SLU_thumbnail.png" alt="Post Image" class="post-image">
+                    <div class="mb-1">
+                        <label class="form-label fw-bold">Add to your post:</label> 
                     </div>
-                    <hr>
-                    <div class="post-actions card-footer d-flex align-items-center">
-                        <div class="d-flex">
-                            <button class="btn btn-outline-primary me-2">
-                                <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                            </button>
-                            <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
-                                <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                            </button>
-                        </div>
+                    <div class="mb-3">
+                        <label for="photoInput" class="form-label">Add a Photo</label>
+                        <input class="form-control" type="file" id="photoInput" accept="image/*">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="videoInput" class="form-label">Add a Video</label>
+                        <input class="form-control" type="file" id="videoInput" accept="video/*">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="submitPost">Post</button>
+            </div>
         </div>
     </div>
 </div>
 
 
-    </script>
-
-        <!-- Modal 
-        Author: Escaño, Nichole Jhoy
-        Code Description:
-        Reference: 
-        
-        
-        
-        -->
-    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="postModalLabel">Create a Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="photoInput" class="form-label">Add a Photo</label>
-                            <input class="form-control" type="file" id="photoInput" accept="image/*">
-                        </div>
-                        <div class="mb-3">
-                            <label for="videoInput" class="form-label">Add a Video</label>
-                            <input class="form-control" type="file" id="videoInput" accept="video/*">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <button type="button" class="btn btn-primary">Post</button>
-                </div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your post has been created successfully!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                There was an error while creating your post. Please try again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script>
    fetch('/api/getfeed')
     .then(response => response.json()) 
