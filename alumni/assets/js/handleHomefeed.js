@@ -79,3 +79,80 @@ for (let i = 0; i < logoutBtns.length; i++) {
 function logOut() {
     window.location.href = '/api/logout';
 }
+
+// create post header
+function createPostHeader(post) {
+    const postHeader = document.createElement('div');
+    postHeader.classList.add('post-header');
+
+    const profileImg = document.createElement('img');
+    profileImg.classList.add('user-pic');
+    profileImg.src = post.pfp || 'default.jpg';
+    profileImg.alt = 'User Profile';
+
+    const userInfo = document.createElement('div');
+    const userName = document.createElement('h4');
+    userName.classList.add('user-name');
+    userName.textContent = post.name;
+
+    const postTime = document.createElement('span');
+    postTime.classList.add('post-time');
+    postTime.textContent = post.date_time;
+
+    userInfo.appendChild(userName);
+    userInfo.appendChild(postTime);
+    postHeader.appendChild(profileImg);
+    postHeader.appendChild(userInfo);
+
+    return postHeader;
+}
+
+//  create post content
+function createPostContent(post) {
+    const postContent = document.createElement('div');
+    postContent.classList.add('post-content');
+    const postDescription = document.createElement('p');
+    postDescription.textContent = post.description;
+    postContent.appendChild(postDescription);
+
+    if (post.banner) {
+        const postBanner = document.createElement('img');
+        postBanner.classList.add('post-image');
+        postBanner.src = post.banner;
+        postBanner.alt = 'Post Image';
+        postContent.appendChild(postBanner);
+    }
+
+    return postContent;
+}
+
+//  create post actions
+function createPostActions(post) {
+    const postActions = document.createElement('div');
+    postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
+    const actionsContainer = document.createElement('div');
+    actionsContainer.classList.add('d-flex');
+
+    const likeButton = createPostActionButton('Like', 'like.png', post.like_count);
+    const commentButton = createPostActionButton('Comment', 'comment.png', post.comment_count);
+
+    actionsContainer.appendChild(likeButton);
+    actionsContainer.appendChild(commentButton);
+    postActions.appendChild(actionsContainer);
+
+    return postActions;
+}
+
+//create action buttons Like and Comment
+function createPostActionButton(type, icon, count) {
+    const button = document.createElement('button');
+    button.classList.add('btn', `btn-outline-${type.toLowerCase()}`, 'me-2');
+    const iconElement = document.createElement('img');
+    iconElement.classList.add('button-icon', 'me-2');
+    iconElement.src = `../assets/images/${icon}`;
+    iconElement.alt = `${type} Icon`;
+    button.appendChild(iconElement);
+    button.appendChild(document.createTextNode(`${type} (${count})`));
+
+    return button;
+}
