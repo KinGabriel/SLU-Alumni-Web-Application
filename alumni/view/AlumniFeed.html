@@ -223,7 +223,7 @@
         </div>
     </div>
 </div>
-
+<!--TO DO: show the uploaded image in the input then handle multiple image--> 
 <!-- Modal - Post Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -233,7 +233,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="postForm" enctype="multipart/form-data">
                     <div class="mb-3">
                         <textarea class="form-control" rows="3" placeholder="What's on your mind?"></textarea>
                     </div>
@@ -242,11 +242,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="photoInput" class="form-label">Add a Photo</label>
-                        <input class="form-control" type="file" id="photoInput" accept="image/*">
+                        <input class="form-control" type="file"   id="photoInput" accept="image/*" multiple>
                     </div>
                     <div class="mb-3">
                         <label for="videoInput" class="form-label">Add a Video</label>
-                        <input class="form-control" type="file" id="videoInput" accept="video/*">
+                        <input class="form-control" type="file" id="videoInput" accept="video/*" multiple>
                     </div>
                 </form>
             </div>
@@ -294,92 +294,7 @@
     </div>
 </div>
 
-    <script>
-   fetch('/api/getfeed')
-    .then(response => response.json()) 
-    .then(data => {
-        const posts = data.posts; 
-        const feedContainer = document.querySelector('.feed');
-        feedContainer.innerHTML = ''; 
-
-        posts.forEach(post => {
-            const postElement = document.createElement('div');
-            postElement.classList.add('post');
-            // Create post header section
-            const postHeader = document.createElement('div');
-            postHeader.classList.add('post-header');
-            // Create profile image element
-            const profileImg = document.createElement('img');
-            profileImg.classList.add('user-pic');
-            profileImg.src = post.pfp || 'default.jpg'; 
-            profileImg.alt = 'User Profile';
-            // Create user info container
-            const userInfo = document.createElement('div');
-            const userName = document.createElement('h4');
-            userName.classList.add('user-name');
-            userName.textContent = post.name; 
-            const postTime = document.createElement('span');
-            postTime.classList.add('post-time');
-            postTime.textContent = post.date_time; 
-            // Append the profile image and user info to the post header
-            userInfo.appendChild(userName);
-            userInfo.appendChild(postTime);
-            postHeader.appendChild(profileImg);
-            postHeader.appendChild(userInfo);
-            // Create post content section
-            const postContent = document.createElement('div');
-            postContent.classList.add('post-content');
-            const postDescription = document.createElement('p');
-            postDescription.textContent = post.description; // Set the description
-            postContent.appendChild(postDescription);
-            // If the post has image 
-            if (post.banner) {
-                const postBanner = document.createElement('img');
-                postBanner.classList.add('post-image');
-                postBanner.src = post.banner; 
-                postBanner.alt = 'Post Image';
-                postContent.appendChild(postBanner);
-            }
-            // Create post actions section
-            const postActions = document.createElement('div');
-            postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
-            const actionsContainer = document.createElement('div');
-            actionsContainer.classList.add('d-flex');
-            // Create Like button
-            const likeButton = document.createElement('button');
-            likeButton.classList.add('btn', 'btn-outline-primary', 'me-2');
-            const likeIcon = document.createElement('img');
-            likeIcon.classList.add('button-icon', 'me-2');
-            likeIcon.src = "../assets/images/like.png";
-            likeIcon.alt = "Like Icon";
-            likeButton.appendChild(likeIcon);
-            likeButton.appendChild(document.createTextNode(` Likes (${post.like_count})`));
-            // Create Comment button
-            const commentButton = document.createElement('button');
-            commentButton.classList.add('btn', 'btn-outline-secondary');
-            commentButton.setAttribute('data-bs-toggle', 'collapse');
-            commentButton.setAttribute('data-bs-target', '#comments2');
-            const commentIcon = document.createElement('img');
-            commentIcon.classList.add('button-icon', 'me-2');
-            commentIcon.src = "../assets/images/comment.png";
-            commentIcon.alt = "Comment Icon";
-            commentButton.appendChild(commentIcon);
-            commentButton.appendChild(document.createTextNode(` Comments (${post.comment_count})`));
-            // Append like and comment buttons to actions container
-            actionsContainer.appendChild(likeButton);
-            actionsContainer.appendChild(commentButton);
-            // Append actions container to post actions
-            postActions.appendChild(actionsContainer);
-            postElement.appendChild(postHeader);
-            postElement.appendChild(postContent);
-            postElement.appendChild(document.createElement('hr'));
-            postElement.appendChild(postActions);
-            // append to the feed 
-            feedContainer.appendChild(postElement);
-        });
-    })
-    .catch(err => console.error('Error fetching posts:', err));
-    </script>
+   
     
     <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>

@@ -1,4 +1,7 @@
 import dbConnection from '../../database/connection.js';
+import fs from 'fs';
+
+
 export const getAlumni = (req, res) => {
     const userId = req.cookies.user_id
     if (!userId) {
@@ -69,12 +72,23 @@ export const handleLogout = (req,res) =>{
     });
 }
 
+
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
-    const { description, banner, access_type, post_type,datetime} = req.body;
+    const { description, access_type, post_type, datetime } = req.body;
+
+    const uploadedImages = req.files['images[]'] || [];
+    const uploadedVideos = req.files['videos[]'] || [];
+    const bannerFiles = [...uploadedImages, ...uploadedVideos];
+
+
+    const banner = bannerFiles.map(file => file.path).join(',');
+
     console.log('Received data:', req.body);
-    const query = "INSERT INTO posts (description, banner, access_type, post_type,datetime,user_id) VALUES (?, ?, ?, ?,?, ?)";
-    dbConnection.query(query, [description, banner, access_type, post_type,datetime, userId], (err, result) => {
+    console.log('Uploaded files:', bannerFiles);
+
+    const query = "INSERT INTO posts (description, banner, access_type, post_type, datetime, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+    dbConnection.query(query, [description, banner, access_type, post_type, datetime, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });
@@ -82,6 +96,10 @@ export const handleUserPost = (req, res) => {
         return res.status(200).json({ message: 'Post created successfully' });
     });
 };
+
+
+
+
 
 export const getPost = (req, res) => {
     const userId = req.cookies.user_id;
@@ -132,14 +150,23 @@ export const getPost = (req, res) => {
 
         const posts = results.map(post => {
             if (post.banner) {
-                post.banner = `data:image/jpeg;base64,${post.banner.toString('base64')}`;
+                if (Buffer.isBuffer(post.banner)) {
+                    const bannerPath = post.banner.toString('utf-8').trim(); 
+                    if (fs.existsSync(bannerPath)) {
+                        post.banner = `data:image/jpeg;base64,${fs.readFileSync(bannerPath).toString('base64')}`;
+                    } else {
+                        post.banner = ''; 
+                    }
+                }
             }
-            if (post.pfp){
-                post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
+
+            if (post.pfp) {
+                if (Buffer.isBuffer(post.pfp)) {
+                    post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
+                }
             }
             return post;
         });
-
 
         res.status(200).json({ posts });
     });
