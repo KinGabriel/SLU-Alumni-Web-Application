@@ -358,140 +358,8 @@ a {
   height: 60px; /* Adjust the height as needed */
   padding: 1rem; /* Adjust padding to maintain the appearance */
 }
-
-
-
 /* End of Wrapper Section */
-/* Start of Session Fields Section */
-.session-fields {
-  display: flex;
-  gap: 2rem; /* Increased gap for more space between fields */
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px; /* Added extra bottom margin */
-}
 
-.input-icon {
-  position: relative;
-  width: 250px; /* Increased width of each input field */
-}
-.session-fields input {
-    background-color: rgba(255, 255, 255, 0.9) !important;
-    border: 1.5px solid var(--black); /* Keep the black border */
-  padding: 1rem; /* Adjust padding for input */
-  width: 100%; /* Make input take full width */
-  border-radius: 0.25rem; /* Rounded corners */
-  color: var(--black); /* Black text color */
-  font-size: 1rem; /* Adjust font size if needed */
-}
-
-.session-fields input::placeholder {
-  color: var(--placeholder); /* Placeholder color */
-  opacity: 1; /* Ensures visibility of placeholder */
-  background-color: rgba(255, 255, 255, 0.9) !important;
-}
-
-
-.input-icon label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.75rem; /* Increased space below labels */
-  font-size: 1.3rem; /* Increased label font size */
-}
-
-.input-icon i {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  color: #777;
-  font-size: 1.5rem; /* Increased icon size */
-}
-/* End of Session Fields Section */
-
-/* Step 2: Upload Image Section */
-.step-content.step-2 {
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 350px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.step-content.step-2 h1 {
-  font-size: 24px;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.upload-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-.upload-label {
-  font-size: 18px;
-  color: #4CAF50;
-  cursor: pointer;
-  background-color: #fff;
-  border: 2px solid #4CAF50;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.upload-label:hover {
-  background-color: #4CAF50;
-  color: white;
-  border-color: #45a049;
-}
-
-.upload-input {
-  display: none; /* Hide the default file input */
-}
-
-#file-name {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #666;
-}
-
-.step-content.step-2 p {
-  font-size: 14px;
-  color: #333;
-  line-height: 1.5;
-}
-
-.step-content.step-2 p:last-child {
-  color: #f44336; /* Red color for the error message or warnings */
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-  .step-content.step-2 {
-    width: 90%;
-  }
-
-  .upload-label {
-    font-size: 16px;
-    padding: 8px 15px;
-  }
-
-  #file-name {
-    font-size: 12px;
-  }
-
-  .step-content.step-2 p {
-    font-size: 12px;
-  }
-}
 
 </style>
 
@@ -532,63 +400,51 @@ a {
 
           <!-- Step 1 Content -->
           <div class="step-content" id="step1">
-              <h1>Event Description</h1>
+              <h1>Company Background</h1>
 
               <main class='wrapper'>
-                  <!-- Event Title -->
                   <input type='text' placeholder=''>
-                  <span>Event Title</span>
+                  <span>Company Name</span>
               </main>
 
               <main class='wrapper'>
-                  <!-- Location -->
                   <input type='text' placeholder=''>
-                  <span>Location</span>
+                  <span>Country</span>
               </main>
 
-              <h1>Date & Time</h1>
-
-              <div class="session-fields">
-                  <!-- Start Date -->
-                  <div class="input-icon">
-                      <label for="start-date">Start Date *</label>
-                      <input type="date" id="start-date">
-                      <i class="fa fa-calendar"></i>
-                  </div>
+              <main class='wrapper'>
               
-                  <!-- Start Time -->
-                  <div class="input-icon">
-                      <label for="start-time">Start Time *</label>
-                      <input type="time" id="start-time">
-                      <i class="fa fa-clock"></i>
-                  </div>
-              
-                  <!-- End Time -->
-                  <div class="input-icon">
-                      <label for="end-time">End Time *</label>
-                      <input type="time" id="end-time">
-                      <i class="fa fa-clock"></i>
-                  </div>
-              </div>
+                <input type='text' placeholder=''>
+                <span>Zip Code</span>
+            </main>
 
-              <h1>Additional Information</h1>
-              <main class='wrapper event-description'>
-                  <!-- Event Description -->
-                  <input type='text' placeholder=''>
-                  <span>Event Description</span>
-              </main>
-          </div>
+            
+            <main class='wrapper'>
+              
+                <input type='text' placeholder=''>
+                <span>Complete Address</span>
+            </main>
+
+            <main class='wrapper'>
+          
+                <input type='text' placeholder=''>
+                <span>Email Address</span>
+            </main>
+            <main class='wrapper'>
+              
+                <input type='text' placeholder=''>
+                <span>Contact Number</span>
+            </main>
+          
+          <main class='wrapper event-description'>
+            <!-- Company Description -->
+            <input type='text' placeholder=''>
+            <span>Company Description</span>
+        </main>
+    </div>
 
           <!-- Step 2 Content  -->
           <div class="step-content step-2">
-            <h1>Upload Image</h1>
-            <div class="upload-container">
-                <label for="image-upload" class="upload-label">Choose File</label>
-                <input type="file" id="image-upload" accept="image/jpeg, image/gif, image/png" class="upload-input">
-                <span id="file-name">No file chosen</span>
-            </div>
-            <p>Feature Image must be at least 1170 pixels wide by 504 pixels high.</p>
-            <p>Valid file formats: JPG, GIF, PNG.</p>
         </div>
         
 
