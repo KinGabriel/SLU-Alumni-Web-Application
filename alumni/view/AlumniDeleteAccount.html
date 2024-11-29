@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link href="../assets/css/AlumniConnections.css" rel="stylesheet">
+    <link href="../assets/css/AlumniDeleteAccount.css" rel="stylesheet">
     <link href="/../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +38,7 @@
                 </div>
               </div>
               <ul class="dropdown-links">
-                <li><a href="">View Profile</a></li>
+                <li><a href="#">View Profile</a></li>
                 <li><a href="../view/AlumniManageProfile.html">Manage Profile</a></li>
                 <li><a href="../view/AlumniDeleteAccount.html">Close Account</a></li>
               </ul>
@@ -47,9 +47,9 @@
                 <span> Log out </span> 
               </div>              
             </div>
-          </div>
+        </div>
         
-          <script>
+        <script>
             function toggleDropdown() {
                 const dropdownMenu = document.getElementById("dropdownMenu");
                 dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
@@ -63,7 +63,7 @@
                     dropdown.style.display = "none";
                 }
             });
-          </script>
+        </script>
     </header>
 
     <!-- Main Content -->
@@ -121,82 +121,27 @@
                     </li>
                 </ul>
             </nav>
-            <script>
-                document.querySelectorAll('nav li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active'); // Remove active class from all items
-                        });
-                        link.parentElement.classList.add('active'); // Add active class to the clicked item
-                    });
-                });
-            </script>
         </aside>
 
-        <div class="connections-container">
-            <!-- Connections Title and Controls -->
-            <div class="connections-header d-flex justify-content-between align-items-center">
-                <h2 class="connections-title">Connections</h2>
-                
-                <!-- Controls (Sort by Name Dropdown & Search Bar) -->
-                <div class="connections-controls d-flex align-items-center">
-                    <!-- Sort By Dropdown -->
-                    <div class="dropdown">
-                        <button id="dropdownButtonName">Sort By Name ▼</button>
-                        <div class="dropdown-content" id="dropdownContentName">
-                            <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
-                            <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
-                        </div>
-                    </div>
-            
-                    <!-- Search Bar -->
-                    <form id="searchForm" class="d-flex">
-                        <input type="text" name="search" placeholder="Search.." class="form-control me-2">
-                        <!-- <button type="submit" class="btn btn-outline-secondary">
-                            <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                        </button> -->
-                    </form>
-                </div>
-            </div>
-
-             <!--Following and Followers filter-->
-             <div class="filter-buttons">
-                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
-                <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
-                <button class="filter-button" onclick="filterEvents('following')">Following</button>
+        <div class="delete-account-container">
+            <h2>Delete account</h2>
+            <p class="warning-text">We're sorry to see you go.</p>
+            <p>Before you go...</p>
+            <ul>
+                <li>Take a backup of your data <a href="#">Here</a></li>
+                <li>If you delete your account, you will lose all your data.</li>
+            </ul>
+        
+            <div class="checkbox-container">
+                <label>
+                    <input type="checkbox" id="deleteCheckbox"> Yes, I'd like to delete my account
+                </label>
             </div>
         
-            <!-- Connections Table -->
-            <div class="connections-table">
-                <div class="connection-item">
-                    <img src="../assets/images/anya.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Anya Forger</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/asta.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Asta Staria</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/yuno.jpeg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Yuno Grinberyall</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
+            <div class="button-container">
+                <button class="keep-account-btn">Keep my account</button>
+                <button class="delete-account-btn">Delete my account</button>
             </div>
         </div>
-        
-        
 </body>
 </html>

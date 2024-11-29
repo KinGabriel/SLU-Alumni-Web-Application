@@ -1,0 +1,433 @@
+/** 
+Author: Escaño, Nichole Jhoy
+Code Description:
+Reference: 
+
+
+*/
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
+}
+
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;  /* Allow vertical scrolling if needed */
+    scroll-behavior: smooth;
+}
+
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4vw;
+    width: 100%;
+    transition: top 0.1s ease;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+/* Remove sticky positioning to avoid conflict */
+header.sticky {
+    position: fixed;
+    top: 0;
+}
+/* Header Separator */
+.header-separator {
+    position: relative;
+    background-color: #003DA5;
+    padding-bottom: 1.3vw;
+    width: 100%;
+    z-index: 101;
+}
+
+/* Search bar */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input[type="text"] {
+    padding: 6px 30px 6px 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 200px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.search .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 13vw;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.search .search-icon:hover {
+    opacity: 0.7;
+}
+
+/* Sidebar Styling */
+.main-content {
+    display: flex;
+    height: 100vh; 
+}
+
+aside {
+    width: 350px;
+    position: fixed;
+    top: 3.7vw;
+    background-color: #f4f4f4;
+    padding: 1vw;
+    height: calc(100vh - 4vw); 
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+/* Content Area */
+.content {
+    flex: 1;
+    margin-left: 350px; 
+    padding: 20px;
+    height: calc(100vh - 4vw); 
+    background-color: #f9f9f9;
+}
+
+.profile {
+    margin-top: 1.13vw;
+    margin-bottom: 0.1vw;
+    background-color: #fff;
+    padding: 1vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-bg img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.profile-info {
+    text-align: center;
+    margin-top: -1vw;
+}
+
+.profile-pic {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin-bottom: 1vw;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+/* Sidebar Icon */
+.sidebar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
+    margin-left: 5px;
+}
+
+.name {
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+.bio {
+    font-size: 1vw;
+    color: #777;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+}
+
+.stat-item {
+    font-size: 1.0vw;
+    text-align: center;
+}
+
+/* Sidebar Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    margin: 1.05vw 0;
+    padding: 0.1vw;
+    transition: background-color 0.3s;
+    padding-left: 1.5vw;
+}
+
+nav li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px; 
+    height: 100%;
+    background-color: #FFB200;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.0vw; 
+    font-weight: bold;
+    margin-left: 0.4vw; 
+    text-align: center;
+}
+
+nav a:hover {
+    color: #003DA5;
+}
+
+/* Icon Styling */
+.nav-icon {
+    width: 25px; 
+    height: 25px;
+    object-fit: contain;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.filter-button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.filter-button.active {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+/* News Styling */
+.news-title {
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #FEAF00;
+}
+
+.news-container {
+    flex: 1;
+    margin-left: 350px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #003DA5;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card-footer {
+    padding: 0; 
+}
+
+.card-footer .btn-read-more {
+    display: block;
+    width: 100%; 
+    background-color: #003DA5; 
+    color: #ffffff; 
+    padding: 15px 10px; 
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5; 
+    text-align: center; 
+}
+
+.btn-read-more:hover {
+    background-color: #6281b6; 
+}
+
+
+/* Profile dropdown styling */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+  }
+  
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 320px;
+    z-index: 1000;
+  }
+  
+.dropdown-header {
+    display: flex;
+    align-items: center; 
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px; 
+    object-fit: cover;
+  }
+  
+.dropdown-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.dropdown-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+.dropdown-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #6c757d;
+  }
+  
+.dropdown-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+.dropdown-links li {
+    padding: 12px 16px;
+  }
+  
+.dropdown-links li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #212529;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+.dropdown-links li a:hover {
+    background-color: #f8f9fa;
+  }
+  
+.logout-btn {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background-color: #f1f7ff;
+    color: #0056b3;
+    font-size: 16px; 
+    font-weight: 600; 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%; 
+    max-width: 300px; 
+    box-sizing: border-box; 
+    margin-left: 3%;
+    margin-top: 5%;
+}
+
+.logout-btn:hover {
+    background-color: #e0edff; 
+}
+
+.logout-icon {
+    margin-right: 10px; 
+    width: 20px; 
+    height: 20px; 
+}
+  

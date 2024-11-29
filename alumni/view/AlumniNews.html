@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link href="../assets/css/AlumniConnections.css" rel="stylesheet">
+    <link href="../assets/css/AlumniNews.css" rel="stylesheet">
     <link href="/../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -38,7 +38,7 @@
                 </div>
               </div>
               <ul class="dropdown-links">
-                <li><a href="">View Profile</a></li>
+                <li><a href="#">View Profile</a></li>
                 <li><a href="../view/AlumniManageProfile.html">Manage Profile</a></li>
                 <li><a href="../view/AlumniDeleteAccount.html">Close Account</a></li>
               </ul>
@@ -65,6 +65,7 @@
             });
           </script>
     </header>
+
 
     <!-- Main Content -->
     <div class="main-content">
@@ -133,70 +134,40 @@
             </script>
         </aside>
 
-        <div class="connections-container">
-            <!-- Connections Title and Controls -->
-            <div class="connections-header d-flex justify-content-between align-items-center">
-                <h2 class="connections-title">Connections</h2>
-                
-                <!-- Controls (Sort by Name Dropdown & Search Bar) -->
-                <div class="connections-controls d-flex align-items-center">
-                    <!-- Sort By Dropdown -->
-                    <div class="dropdown">
-                        <button id="dropdownButtonName">Sort By Name ▼</button>
-                        <div class="dropdown-content" id="dropdownContentName">
-                            <a href="#" class="sort-option" data-sort="name-asc">A - Z</a>
-                            <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
-                        </div>
-                    </div>
+    <!-- News -->
+    <div class = news-container> 
+        <h2 class="news-title">Discover SLU News</h2>
+       
+        <!-- <div class="filter-buttons">
+            <button class="filter-button active" onclick="filterEvents('all')">All</button>
+            <button class="filter-button" onclick="filterEvents('upcoming')">Upcoming</button>
+            <button class="filter-button" onclick="filterEvents('ended')">Ended</button>
+        </div> -->
             
-                    <!-- Search Bar -->
-                    <form id="searchForm" class="d-flex">
-                        <input type="text" name="search" placeholder="Search.." class="form-control me-2">
-                        <!-- <button type="submit" class="btn btn-outline-secondary">
-                            <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                        </button> -->
-                    </form>
-                </div>
-            </div>
-
-             <!--Following and Followers filter-->
-             <div class="filter-buttons">
-                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
-                <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
-                <button class="filter-button" onclick="filterEvents('following')">Following</button>
-            </div>
-        
-            <!-- Connections Table -->
-            <div class="connections-table">
-                <div class="connection-item">
-                    <img src="../assets/images/anya.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Anya Forger</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                <div class="card-body d-flex align-items-center">
+                
+                    <!-- News Info -->
+                    <div class="news-info">
+                        <h5 class="card-title">SLU Intramural Opening</h5>
+                        <p class="card-text">Lorem ipsum odor amet, consectetuer adipiscing elit. Praesent praesent egestas adipiscing euismod nibh quis diam interdum.</p>
                     </div>
                 </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/asta.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Asta Staria</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/yuno.jpeg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Yuno Grinberyall</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
+                <!-- Card Footer -->
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-read-more">
+                        Read More
+                    </button>
                 </div>
             </div>
         </div>
-        
-        
+    </div>
+        </div> <!--end of row row-cols-1 row-cols-md-3 g-4-->  
+    </div> <!--end of news-container-->  
+</div> <!--end of main-container-->  
+
 </body>
 </html>
