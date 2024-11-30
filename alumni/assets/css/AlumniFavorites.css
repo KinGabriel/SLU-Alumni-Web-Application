@@ -1,0 +1,553 @@
+/** 
+Author: Escaño, Nichole Jhoy
+Code Description:
+Reference: 
+
+
+*/
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
+}
+
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;  /* Allow vertical scrolling if needed */
+    scroll-behavior: smooth;
+}
+
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4vw;
+    width: 100%;
+    transition: top 0.1s ease;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+/* Remove sticky positioning to avoid conflict */
+header.sticky {
+    position: fixed;
+    top: 0;
+}
+/* Header Separator */
+.header-separator {
+    position: relative;
+    background-color: #003DA5;
+    padding-bottom: 1.3vw;
+    width: 100%;
+    z-index: 101;
+}
+
+/* Search bar */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input[type="text"] {
+    padding: 6px 30px 6px 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 200px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.search .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 13vw;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.search .search-icon:hover {
+    opacity: 0.7;
+}
+
+/* Sidebar Styling */
+.main-content {
+    display: flex;
+    height: 100vh; 
+}
+
+aside {
+    width: 350px;
+    position: fixed;
+    top: 3.7vw;
+    background-color: #f4f4f4;
+    padding: 1vw;
+    height: calc(100vh - 4vw); 
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+/* Content Area */
+.content {
+    flex: 1;
+    margin-left: 350px; 
+    padding: 20px;
+    height: calc(100vh - 4vw); 
+    background-color: #f9f9f9;
+}
+
+.profile {
+    margin-top: 1.13vw;
+    margin-bottom: 0.1vw;
+    background-color: #fff;
+    padding: 1vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-bg img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.profile-info {
+    text-align: center;
+    margin-top: -1vw;
+}
+
+.profile-pic {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    margin-bottom: 1vw;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+/* Sidebar Icon */
+.sidebar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
+    margin-left: 5px;
+}
+
+.name {
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+.bio {
+    font-size: 1vw;
+    color: #777;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+}
+
+.stat-item {
+    font-size: 1.0vw;
+    text-align: center;
+}
+
+/* Sidebar Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    margin: 1.05vw 0;
+    padding: 0.1vw;
+    transition: background-color 0.3s;
+    padding-left: 1.5vw;
+}
+
+nav li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7px; 
+    height: 100%;
+    background-color: #FFB200;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.0vw; 
+    font-weight: bold;
+    margin-left: 0.4vw; 
+    text-align: center;
+}
+
+nav a:hover {
+    color: #003DA5;
+}
+
+/* Icon Styling */
+.nav-icon {
+    width: 25px; 
+    height: 25px;
+    object-fit: contain;
+}
+
+/* Post Box */
+.post-box {
+    display: flex; 
+    align-items: flex-start; 
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px; 
+}
+
+.user-profile {
+    flex-shrink: 0; 
+}
+
+.user-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px; 
+}
+
+.post-content {
+    flex-grow: 1; 
+}
+
+.post-box textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px; 
+}
+
+.post-actions button {
+    display: flex;
+    align-items: center;
+    background-color: #E0E0E0;
+    color: #333333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 5px; 
+}
+
+
+.post-actions button:hover {
+    background-color: #e7e9ed;
+}
+
+
+/* Profile dropdown styling */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+  }
+  
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 320px;
+    z-index: 1000;
+  }
+  
+.dropdown-header {
+    display: flex;
+    align-items: center; 
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px; 
+    object-fit: cover;
+  }
+  
+.dropdown-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.dropdown-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+.dropdown-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #6c757d;
+  }
+  
+.dropdown-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+.dropdown-links li {
+    padding: 12px 16px;
+  }
+  
+.dropdown-links li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #212529;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+.dropdown-links li a:hover {
+    background-color: #f8f9fa;
+  }
+  
+.logout-btn {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background-color: #f1f7ff;
+    color: #0056b3;
+    font-size: 16px; 
+    font-weight: 600; 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%; 
+    max-width: 300px; 
+    box-sizing: border-box; 
+    margin-left: 3%;
+    margin-top: 5%;
+}
+
+.logout-btn:hover {
+    background-color: #e0edff; 
+}
+
+.logout-icon {
+    margin-right: 10px; 
+    width: 20px; 
+    height: 20px; 
+}
+
+
+/* Job Opp styling */
+.cards-container {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 35px; 
+    justify-content: flex-start; 
+    padding: 20px;
+    margin-left: 7vw; 
+}
+
+/* Individual Job Card */
+.job-card {
+    flex: 0 0 calc(50.33% - 50px); 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-type {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.job-type.full-time {
+    background-color: #28a745;
+}
+
+.job-type.internship {
+    background-color: #17a2b8;
+}
+
+.salary {
+    font-size: 12px;
+    color: #666;
+}
+
+.company-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.bookmark-btn {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.bookmark-btn img {
+    width: 12px; 
+    height: 20px; 
+}
+
+
+.job-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.text-primary {
+    text-align: left;
+    margin-left: 8%;  
+    font-weight: bold;
+    color:#003DA5;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: 8%;
+}
+  
+.filter-button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.filter-button.active {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+/*Pagination */
+.pagination {
+    display: flex;
+    justify-content: center; 
+    gap: 5px; 
+    margin: 20px 0; 
+}
+
+/* Style for individual page items */
+.page-item {
+    margin: 0; 
+}
+
+/* Style for page links */
+.page-link {
+    padding: 5px 10px; 
+    font-size: 14px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    color: #007bff; 
+    text-decoration: none; 
+}
+
+
+.page-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Active page link */
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Disable links (for next/prev) */
+.page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+}

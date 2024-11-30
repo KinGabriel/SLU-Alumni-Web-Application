@@ -114,7 +114,7 @@ function createPostHeader(post) {
 
     return postHeader;
 }
-
+// TO DO: adjust the size of the image based on the image size and how many images are on it and the image is clickable and downloadable
 //  create post content
 function createPostContent(post) {
     const postContent = document.createElement('div');
