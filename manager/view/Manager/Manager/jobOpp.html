@@ -360,6 +360,158 @@ a {
 }
 /* End of Wrapper Section */
 
+/* Step 2 Container */
+.step-content.step-2 {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px; /* Increased padding for larger content area */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  width: 80%; /* Increased width */
+  margin: 50px auto; /* Centers the container with spacing */
+  text-align: left;
+  font-size: 18px; /* Larger font size */
+}
+
+/* Form Container */
+.form-container {
+  width: 100%; /* Expand the container to full width of Step 2 */
+  padding: 25px;
+  border-radius: 10px;
+}
+
+/* Card Styling */
+.card {
+  background: #f9f9f9; /* Slightly lighter background */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px; /* Increased padding */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow for emphasis */
+  font-size: 16px; /* Larger text size inside cards */
+}
+
+/* Input Fields */
+.card input[type="text"],
+.card input[type="number"] {
+  width: 100%;
+  padding: 15px; /* Larger input fields */
+  font-size: 16px; /* Larger font size for inputs */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* Employment Type Styling */
+.card p {
+  font-size: 18px; /* Increased size for section titles */
+  font-weight: bold;
+}
+
+.card label {
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.card input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.5); /* Larger radio buttons */
+}
+
+
+/* Step 3 Container */
+.step-content.step-3 {
+  background-color: #fff;
+  border-radius: 12px; /* Round corners for a more modern look */
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+  width: 700px; /* Increased width for a more spacious form */
+  margin: 50px auto; /* Center the form with more space above and below */
+  text-align: left;
+}
+
+/* Job Description Section */
+.job-description {
+  margin-top: 40px; /* More space between sections */
+}
+
+.job-description h2 {
+  font-size: 28px; /* Larger header text */
+  color: #333;
+  margin-bottom: 30px; /* Increased margin for spacing */
+  font-weight: 600; /* Bold header */
+  text-transform: uppercase; /* All caps for emphasis */
+  letter-spacing: 1px; /* Slight spacing for a clean look */
+}
+
+/* Input Groups */
+.input-group {
+  margin-bottom: 30px; /* More space between fields */
+}
+
+/* Input Field Labels */
+.input-group label {
+  font-size: 18px; /* Larger font for labels */
+  color: #333;
+  font-weight: 600; /* Bold labels */
+  display: block;
+  margin-bottom: 10px; /* More spacing between label and field */
+}
+
+/* Textarea Fields */
+.input-group textarea {
+  width: 100%;
+  height: 150px; /* Larger textareas for more input space */
+  border: 2px solid #ccc; /* Thicker border for emphasis */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Larger padding for better spacing */
+  font-size: 16px; /* Larger text inside textarea */
+  resize: none; /* Prevent resizing */
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+.input-group textarea:focus {
+  border-color: #3c07ff; /* Blue border on focus */
+  box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2); /* Glow effect on focus */
+}
+
+/* Navigation Buttons */
+.buttons {
+  text-align: center;
+  margin-top: 40px; /* More space between form and buttons */
+}
+
+.buttons .btn {
+  background-color: #3c07ff; /* Bold color for buttons */
+  color: white;
+  font-size: 18px; /* Larger text in buttons */
+  padding: 12px 30px; /* Larger padding for a bolder look */
+  border-radius: 30px; /* Rounded buttons */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.buttons .btn:hover {
+  background-color: #2900b6; /* Darker blue on hover */
+  transform: translateY(-2px); /* Subtle hover effect */
+}
+
+.buttons .btn:disabled {
+  background-color: #ddd; /* Disabled button style */
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 769px) {
+  .step-content.step-3 {
+    width: 100%; /* Full-width form on small screens */
+    padding: 20px;
+  }
+}
+
+
 
 </style>
 
@@ -445,13 +597,74 @@ a {
 
           <!-- Step 2 Content  -->
           <div class="step-content step-2">
+            <div class="form-container">
+              <h2>Basic Information</h2>
+              <p class="info-text">This information will be displayed publicly</p>
+          
+              <!-- Job Title Card -->
+              <div class="card">
+                <label for="job-title">Job Title</label>
+                <input
+                  type="text"
+                  id="job-title"
+                  name="job-title"
+                  placeholder="e.g. Software Engineer"
+                  maxlength="80"
+                  required
+                />
+              </div>
+          
+              <!-- Employment Type Card -->
+              <!-- Employment Type Card -->
+<div class="card">
+  <p>Type of Employment</p>
+  <div>
+    <input type="radio" id="full-time" name="employment" value="Full-Time">
+    <label for="full-time">Full-Time</label>
+  </div>
+  <div>
+    <input type="radio" id="part-time" name="employment" value="Part-Time">
+    <label for="part-time">Part-Time</label>
+  </div>
+  <div>
+    <input type="radio" id="remote" name="employment" value="Remote">
+    <label for="remote">Remote</label>
+  </div>
+  <div>
+    <input type="radio" id="internship" name="employment" value="Internship">
+    <label for="internship">Internship</label>
+  </div>
+  <div>
+    <input type="radio" id="contract" name="employment" value="Contract">
+    <label for="contract">Contract</label>
+  </div>
+</div>
+            </div>
+          
         </div>
         
-
-          <!-- Step 3 Content  -->
-          <div class="step-content" id="step3" style="display: none;">
-              <!-- Blank content for Step 3 -->
+        <div class="step-content step-3" id="step3">
+          <!-- Job Description Section -->
+          <div class="job-description">
+            <h2>Job Description</h2>
+            <!-- Skills Section -->
+            <div class="input-group">
+              <label for="skills">Skills:</label>
+              <textarea
+                id="skills"
+                placeholder="Describe your key skills and qualifications relevant to the position."
+              ></textarea>
+            </div>
+            <!-- Requirements Section -->
+            <div class="input-group">
+              <label for="requirements">Requirements:</label>
+              <textarea
+                id="requirements"
+                placeholder="Outline the key qualifications and requirements for the position."
+              ></textarea>
+            </div>
           </div>
+        </div>
 
           <!-- Navigation Buttons -->
           <div class="buttons">
@@ -461,7 +674,7 @@ a {
       </div>
   </main>
 
-  <script src="addEvents.js"></script>
+  <script src="jobOpp.js"></script>
 </body>
 
 

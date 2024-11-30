@@ -6,7 +6,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary: hsl(270, 100%, 50%);
+  --primary: hsl(215, 100%, 24%);
   --white: #fff;
   --black: #000;
   --darker: color-mix(in oklab, var(--primary), var(--black, #000) 15%);

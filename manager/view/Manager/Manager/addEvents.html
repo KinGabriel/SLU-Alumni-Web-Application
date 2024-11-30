@@ -492,6 +492,72 @@ a {
     font-size: 12px;
   }
 }
+/* Styling the card container */
+.card {
+  width: 700px;  /* Increased width for a bigger card */
+  margin: 40px auto;  /* Increased margin for spacing */
+  border-radius: 12px;  /* Slightly more rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);  /* Stronger shadow for emphasis */
+  overflow: hidden;
+  background-color: #fff;
+}
+
+/* Styling the card header with image */
+.card-header {
+  width: 100%;
+  height: 400px;  /* Increased height for the image */
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-image {
+  max-width: 90%;  /* Increased width for image */
+  max-height: 90%;  /* Increased height for image */
+  object-fit: contain;
+}
+
+/* Styling the card body */
+.card-body {
+  padding: 30px;  /* More padding for spacious content */
+}
+
+/* Styling the event title */
+.event-title {
+  font-size: 28px;  /* Larger font for the title */
+  font-weight: bold;
+  margin-bottom: 15px;  /* Increased margin for spacing */
+}
+
+/* Styling date and time */
+.event-date-time {
+  font-size: 18px;  /* Larger font for date and time */
+  color: #555;
+  margin-bottom: 20px;  /* Increased margin */
+}
+
+.event-date-time .date, .event-date-time .time {
+  margin-right: 20px;  /* More space between date and time */
+}
+
+/* Styling the event location */
+.event-location {
+  font-size: 18px;  /* Larger font for location */
+  color: #888;
+  margin-bottom: 25px;  /* Increased margin */
+}
+
+.location-icon {
+  margin-right: 8px;  /* More space between icon and text */
+}
+
+/* Styling the event description */
+.event-description {
+  font-size: 16px;  /* Larger font for description */
+  color: #333;
+  line-height: 1.8;  /* Increased line height for readability */
+}
 
 </style>
 
@@ -594,7 +660,24 @@ a {
 
           <!-- Step 3 Content  -->
           <div class="step-content" id="step3" style="display: none;">
-              <!-- Blank content for Step 3 -->
+            <div class="card">
+              <div class="card-header">
+                <img src="Logo.png" alt="Event Image" class="event-image">
+              </div>
+              <div class="card-body">
+                <h2 class="event-title">Event Title</h2>
+                <p class="event-date-time">
+                  <span class="date">Date</span>
+                  <span class="time">Time</span>
+                </p>
+                <p class="event-location">
+                  <span class="location-icon">📍</span> Address
+                </p>
+                <p class="event-description">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et ligula sit amet nulla venenatis condimentum.
+                </p>
+              </div>
+            </div>
           </div>
 
           <!-- Navigation Buttons -->
