@@ -40,6 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $gradYear = isset($_POST["graduationYear"]) ? trim($_POST["graduationYear"]) : '';
+    if (!ctype_digit($gradYear) || (int)$gradYear < 1900 || (int)$gradYear > date('Y')) {
+        $_SESSION['confirmation_message'] = "Invalid graduation year. Please enter a valid 4-digit year.";
+        header("Location: ../view/Register.php");
+        exit();
+    }
+    $gradYear = (int)$gradYear;
+
     $query = "INSERT INTO applicants ( email, fname, lname, pword, program, gradyear, school_id_pic) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
@@ -49,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("sssssss",  $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
+    $stmt->bind_param("sssssis",  $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
     if ($stmt->execute()) {
         $_SESSION['confirmation_message'] = "Successfully sent your request! Please wait for the admin reviewal.";
     } else {

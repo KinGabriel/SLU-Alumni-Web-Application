@@ -55,8 +55,10 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                     <div class="input-inline-wrapper">
                         <div class="input-wrapper half-width">
                             <img src="../assets/images/graduation.png" alt="Graduation Year Icon" class="input-icon">
-                            <select name="graduationYear" class="input-field" required>
-                                <option value="" disabled selected> Graduation Year</option>
+                            <!-- <select id="graduationYearSelect" name="graduationYear" class="input-field" required> -->
+                                <input type="text" id="graduationYearInput" name="graduationYear" class="input-field" placeholder="Type Graduation Year" list="graduationYearList" required>
+                                <!-- <option value="" disabled selected> Graduation Year</option> -->
+                                <datalist id ="graduationYearList">
                                 <?php
                                     $currentYear = date("Y");
                                     for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
@@ -64,7 +66,8 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                                         echo "<option value=\"$year\" $selected>$year</option>";
                                     }
                                     ?>
-                            </select>
+                            <!-- </select> -->
+                                </datalist>
                         </div>
                         <div class="input-wrapper half-width">
                             <select name="program" class="input-field" required> 
@@ -95,7 +98,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                     <div class="input-wrapper">
                      <label for="school_id_file" class="custom-upload">
                             <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
-                            <span class="upload-text">Upload your school ID</span>
+                            <span class="upload-text">Upload your alumni proof (e.g. school ID, diploma, TOR)</span>
                             <input type="file" id="school_id_file" name="schoolIdFile" class="upload-button" accept="image/*" onchange="handleFileUpload()" />
                             <img id="image-preview" class="image-preview">
                         </label>
@@ -128,6 +131,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
             document.getElementById('modal').style.display = 'none';
         }
     </script>
+    <script src="../assets/js/graduationYear.js"></script>
     <script src="../assets/js/HandleAuthentication.js"></script>
 </body>
 </html>
