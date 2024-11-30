@@ -475,6 +475,62 @@ a {
   border-color: #3c07ff; /* Blue border on focus */
   box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2); /* Glow effect on focus */
 }
+/* Upload container styling */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #328195; /* Dashed border to indicate upload area */
+  padding: 20px;
+  width: 100%;
+  max-width: 500px; /* Limit width */
+  margin: 0 auto; /* Center the container */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the upload container */
+.upload-container:hover {
+  background-color: #e0f7fa; /* Light blue background when hovered */
+}
+
+/* Styling for the label */
+.upload-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #328195;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Styling for the input file element */
+.upload-input {
+  display: none; /* Hide the file input */
+}
+
+/* Styling for the file name text */
+#file-name {
+  font-size: 14px;
+  color: #666;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Add a message if no file is selected */
+.upload-container p {
+  font-size: 12px;
+  color: #777;
+  margin-top: 10px;
+}
+
+.upload-container .info-text {
+  font-size: 14px;
+  color: #333;
+  margin-top: 10px;
+}
 
 /* Navigation Buttons */
 .buttons {
@@ -597,6 +653,12 @@ a {
 
           <!-- Step 2 Content  -->
           <div class="step-content step-2">
+            <h1>Upload Company Logo</h1>
+            <div class="upload-container">
+                <label for="image-upload" class="upload-label">Choose Image</label>
+                <input type="file" id="image-upload" accept="image/jpeg, image/gif, image/png" class="upload-input">
+                <span id="file-name">No Image chosen</span>
+            </div>
             <div class="form-container">
               <h2>Basic Information</h2>
               <p class="info-text">This information will be displayed publicly</p>
@@ -644,6 +706,7 @@ a {
         </div>
         
         <div class="step-content step-3" id="step3">
+          
           <!-- Job Description Section -->
           <div class="job-description">
             <h2>Job Description</h2>
