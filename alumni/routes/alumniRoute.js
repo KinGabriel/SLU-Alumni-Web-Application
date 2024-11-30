@@ -1,6 +1,10 @@
 import express from 'express';
 import multer from 'multer';
 import { getAlumni, handleLogout, handleUserPost, getPost } from '../controller/alumniController.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
@@ -37,5 +41,25 @@ router.post('/postfeed', upload.fields([
     { name: 'videos[]', maxCount: 2 }   
 ]), handleUserPost);
 router.get('/getfeed', getPost); // Get posts
+router.get('/events', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/AlumniEvents.html'));
+});
+
+router.get('/connections', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/AlumniConnections.html'));
+});
+
+router.get('/jobs', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/AlumniJobOpp.html'));
+});
+
+router.get('/manageProfile', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/AlumniManageProfile.html'));
+});
+
+router.get('/news', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/AlumniNews.html'));
+});
 
 export default router;
+
