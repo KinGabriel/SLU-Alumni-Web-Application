@@ -119,12 +119,14 @@ aside {
 
 /* Content Area */
 .content {
-    flex: 1;
-    margin-left: 350px; 
-    padding: 20px;
-    height: calc(100vh - 4vw); 
-    background-color: #f9f9f9;
+    width: 100%;
+    padding-top: 5rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 0;
 }
+
 
 .profile {
     margin-top: 1.13vw;
@@ -410,7 +412,6 @@ nav a:hover {
     height: 20px; 
 }
 
-
 /* Job Opp styling */
 .cards-container {
     display: flex; 
@@ -427,13 +428,6 @@ nav a:hover {
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 30px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-.job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .job-type {
@@ -489,33 +483,13 @@ nav a:hover {
     color:#003DA5;
 }
 
-/* Filter Buttons */
-.filter-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    margin-left: 8%;
-}
-  
-.filter-button {
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-  
-.filter-button.active {
-    background-color: #1d4ed8;
-    color: white;
-}
-
 /*Pagination */
 .pagination {
     display: flex;
     justify-content: center; 
     gap: 5px; 
     margin: 20px 0; 
+    margin-right: 1.5vw; 
 }
 
 /* Style for individual page items */
@@ -550,4 +524,75 @@ nav a:hover {
 .page-item.disabled .page-link {
     color: #ccc;
     pointer-events: none;
+}
+
+/* Banner Section */
+.banner {
+    background-color: #CCDFFF;
+    border-radius: 10px;
+    width: 1400%;
+    max-width: 900px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control.search-bar {
+    width: 40%; 
+    border-radius: 5px;
+}
+
+.banner h1 {
+    font-size: 2rem;
+    color:#003DA5;
+    font-weight: bold;
+}
+
+.banner p {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Filters Section */
+.filters {
+    display: flex;
+    justify-content: left;
+    gap: 15px; 
+    width: 80%; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+}
+
+.header-job-opp .banner {
+    margin-right: 10px; 
+}
+
+.container.py-5 {
+    margin-right: 40px; 
+}
+
+/* Filter dropdown */
+.filters .dropdown-menu {
+    background-color: #f8f9fa; 
+    border-radius: 8px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+    width: 155px; 
+    margin-left: -20px; 
+}
+
+.filters {
+    text-align: left; 
+    margin-left: 25vw;
+}
+
+.filters .dropdown-menu .dropdown-item:active {
+    background-color: #ccc; 
+    color: #333; 
+}
+
+.filters .dropdown-menu.show {
+    width: 200px; 
+    padding: 12px 15px; 
 }
