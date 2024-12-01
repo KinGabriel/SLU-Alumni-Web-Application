@@ -187,37 +187,35 @@
                         <button class="btn btn-outline-primary me-2">
                             <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
                         </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
+                        <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
                             <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 2 -->
-            <div class="post">
-                <div class="post-header">
-                    <img src="../assets/images/yuno.jpeg" alt="User Profile" class="user-pic">
-                    <div>
-                        <h4 class="user-name">Yuno Grinbellyall</h4>
-                        <span class="post-time">5 hours ago</span>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>Check out this amazing video I captured!</p>
-                    <video class="post-video" controls>
-                        <source src="../assets/images/vidsample.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <hr>
-                <div class="post-actions card-footer d-flex align-items-center">
-                    <div class="d-flex">
-                        <button class="btn btn-outline-primary me-2">
-                            <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                        </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
-                            <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                        </button>
+            <!-- Comment Modal -->
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="commentsList">
+                                <!-- Comments will be loaded dynamically here -->
+                            </div>
+                            <div class="form-group">
+                                <textarea id="commentInput" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary mt-2 d-flex align-items-center justify-content-between" id="submitComment">
+                                        Submit Comment
+                                        <img src="../assets/images/send.png" alt="Submit Icon" class="ms-2" style="width: 20px; height: 20px;">
+                                    </button>
+                                </div>                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -301,7 +299,93 @@
     </div>
 </div>
 
-   
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // Handle comment button click
+    document.querySelectorAll('.comment-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const postId = this.closest('.post').getAttribute('data-post-id');
+            loadComments(postId);
+            // Show the modal
+            const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
+            commentModal.show();
+        });
+    });
+
+    // Handle comment submission
+    document.getElementById('submitComment').addEventListener('click', function() {
+        const commentText = document.getElementById('commentInput').value.trim();
+        if (commentText) {
+            const postId = document.querySelector('.modal').getAttribute('data-post-id');
+            submitComment(postId, commentText);
+            document.getElementById('commentInput').value = ''; // Clear the input
+        }
+    });
+});
+
+// Function to load comments for a specific post
+function loadComments(postId) {
+    //  replace this with an actual API call to fetch comments from the server
+    const comments = [
+        { username: 'Nichole', text: 'Nice nice!' },
+        { username: 'Mino', text: 'Cool!' }
+    ];
+
+    const commentsList = document.getElementById('commentsList');
+    commentsList.innerHTML = ''; // clear any existing comments
+
+    comments.forEach(comment => {
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.innerHTML = `
+            <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
+            <p class="comment-text"><strong>${comment.username}:</strong> ${comment.text}</p>
+        `;
+        commentsList.appendChild(commentDiv);
+    });
+
+    // set the postId for modal submission
+    document.querySelector('.modal').setAttribute('data-post-id', postId);
+}
+
+// Function to handle submitting a new comment
+function submitComment(postId, commentText) {
+    // implement API request to save the comment in your database
+    const newComment = {
+        username: 'You', // replace with logged-in user's name
+        text: commentText
+    };
+
+    // dynamically append the new comment to the modal
+     // replace with logged-in user's profile
+    const commentDiv = document.createElement('div');
+    commentDiv.classList.add('comment');
+    commentDiv.innerHTML = `
+        <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
+        <p class="comment-text"><strong>${newComment.username}:</strong> ${newComment.text}</p>
+    `;
+    const commentsList = document.getElementById('commentsList');
+    commentsList.appendChild(commentDiv);
+}
+
+// hides comment modal 
+document.addEventListener('DOMContentLoaded', () => {
+    const commentModal = document.getElementById('commentModal');
+
+    commentModal.addEventListener('hidden.bs.modal', () => {
+        // remove any backdrops
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.parentNode.removeChild(backdrop);
+        }
+
+        // ensure the body class is reset
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+    });
+});
+
+</script>
     
     <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
