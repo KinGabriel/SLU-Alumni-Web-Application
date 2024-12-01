@@ -60,60 +60,61 @@
    
    
    -->
-   <div class="main-content">
-       <!-- Sidebar -->
-       <aside>
-           <div class="profile">
-               <div class="profile-bg">
-                   <img src="../assets/images/slu.jpg" alt="Background Image">
-               </div>
-               <div class="profile-info">
-                   <img src="../assets/images/candy.jpg" alt="Profile Picture" class="profile-pic" name="pfp">
-                   <div class="name" name="name"></div>
-                   <div class="bio" name="bio">How to code.</div>
-                   <div class="stats">
-                       <div class="stat-item">
-                           <strong>Posts</strong><br><p name="post_count"></p>
-                       </div>
-                       <div class="stat-item" >
-                           <strong>Followers</strong><br><p name="followed_count"></p>
-                       </div>
-                       <div class="stat-item" >
-                           <strong>Following</strong><br><p name="followers_count"></p>
-                       </div>
-                   </div>
-               </div>
-           </div>
+    <!-- Main Content  -->
+    <div class="main-content">
+        <!-- Sidebar -->
+        <aside>
+            <div class="profile">
+                <div class="profile-bg">
+                    <img src="../assets/images/slu.jpg" alt="Background Image">
+                </div>
+                <div class="profile-info">
+                    <img src="" alt="Profile Picture" class="profile-pic" name="pfp">
+                    <div class="name" name="name"></div>
+                    <div class="bio" name="bio">How to code.</div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <strong>Posts</strong><br><p name="post_count"></p>
+                        </div>
+                        <div class="stat-item" >
+                            <strong>Followers</strong><br><p  name="followers_count"></p>
+                        </div>
+                        <div class="stat-item" >
+                            <strong>Following</strong><br><p name="followed_count"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-           <!-- Navigation -->
-           <nav>
-               <ul>
-                   <li>
-                       <img src="../assets/images/feed.png" alt="Feed Icon" class="nav-icon">
-                       <a href="/">Feed</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/connection.png" alt="Connections Icon" class="nav-icon">
-                       <a href="/api/connections">Connections</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/latestNews.png" alt="News Icon" class="nav-icon">
-                       <a href="/api/news">Latest News</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/events.png" alt="Events Icon" class="nav-icon">
-                       <a href="/api/events">Events</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
-                       <a href="/api/jobs">Job Opportunities</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
-                       <a href="../view/AlumniFavorites.html">Favorites</a>
-                   </li>
-               </ul>
-           </nav>
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li>
+                        <img src="../assets/images/feed.png" alt="Feed Icon" class="nav-icon">
+                        <a href="/">Feed</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/connection.png" alt="Connections Icon" class="nav-icon">
+                        <a href="/api/connections">Connections</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/latestNews.png" alt="News Icon" class="nav-icon">
+                        <a href="/api/news">Latest News</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/events.png" alt="Events Icon" class="nav-icon">
+                        <a href="/api/events">Events</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
+                        <a href="/api/jobs">Job Opportunities</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
+                        <a href="../view/AlumniFavorites.html">Favorites</a>
+                    </li>
+                </ul>
+            </nav>
             <script>
                 document.querySelectorAll('nav li a').forEach(link => {
                     link.addEventListener('click', () => {
@@ -192,7 +193,8 @@
         
             <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="../assets/js/handleHomefeed.js" defer>  </script>  
-  <script src="../assets/js/handleFetch.js" async>  </script> 
+  <script src="../assets/js/handleConnections.js" defer>  </script>  
+  <script src="../assets/js/handleConnectionFetch.js" defer>  </script> 
+  <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
 </body>
 </html>
