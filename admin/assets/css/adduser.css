@@ -13,26 +13,32 @@
 /* Header */
 header {
     display: flex;
-    align-items: center;
+    justify-content: space-between; 
+    align-items: center; 
     background-color: white;
-    padding: 0.2vw;
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    height: 4vw; 
 }
 
 header h1 {
     display: flex;
     align-items: center;
-    margin-left: 1.2vw;
-    font-size: 1.4vw;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
 }
 
 header span {
-    margin-left: 0.3vw;
+    margin-left: 0.2vw; 
 }
 
 header img.slu-logo {
     height: 50px;
-    width: auto;
+    width: auto; 
     margin-right: 10px;
 }
 
@@ -41,34 +47,86 @@ header img.slu-logo {
     padding-bottom: 2vw;
     width: 100%;
     margin-top: -1vh;
-    margin-bottom: 0.5vh;
+    /* margin-bottom: 0.5vh; */
 }
 
-/* Sidebar */
+.notif-bell {
+    margin-right: 10px; 
+}
+
+.profile-pic {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block; 
+    border: 1px solid #ccc; 
+}
+
+.header-profile {
+    display: flex;
+    /* flex-direction: column;  */
+    align-items: center; 
+}
+
+.header-profile i {
+    margin-right: 1vw;
+}
+
+.header-profile .user-name {
+    margin: 0; 
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem; 
+    font-size: 0.9rem; 
+    color: gray; 
+    display: block; 
+    font-size: small;
+}
+
+.account-details {
+    display: flex; 
+    flex-direction: column; 
+    align-items: left; 
+}
+
+/* Side Navigation Bar */
 .sidebar-container {
     background: rgba(244, 244, 244, 1);
     border-right: 1px solid #e5e5e5;
     position: fixed;
-    top: 0;
+    top: 3.9vw; 
     bottom: 0;
     height: 100%;
     width: 60px;
-    margin-top: 9.6vh;
     transition: width 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    z-index: 100;
+    z-index: 100; 
 }
 
-.sidebar-container:hover {
-    width: 250px;
+.sidebar-container {
+    width: 250px; 
 }
+
+.user-content {
+    position: relative; 
+    left: 70px; 
+    padding: 20px;
+    transition: left 0.3s ease; 
+    z-index: 0; 
+}
+
 
 .sidebar-menu {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-top: 25px;
 }
 
 .sidebar-menu ul {
@@ -80,6 +138,7 @@ header img.slu-logo {
 
 .sidebar-menu li {
     display: block;
+    margin-top: 10px; 
 }
 
 .sidebar-menu li a {
@@ -88,7 +147,12 @@ header img.slu-logo {
     padding: 10px;
     color: #999;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
+}
+
+.sidebar-menu li a {
+    min-width: 60px;
+    text-align: center;
 }
 
 .sidebar-menu li a .menu-item-text {
@@ -97,24 +161,21 @@ header img.slu-logo {
     color: #000;
 }
 
+/* Sidebar Icon */
 .sidebar-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 20px;
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
     margin-left: 5px;
 }
 
-.sidebar-menu li:hover a {
-    color: #fff;
-    background-color: rgba(0, 61, 165, 0.4);
-}
-
+/* Sticky Log Out Section */
 .sidebar-logout {
     position: absolute;
     bottom: 15vh;
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start;  
     align-items: center;
     padding: 10px;
 }
@@ -123,18 +184,15 @@ header img.slu-logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: 100%;
-    padding: 10px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    width: 100%; 
+    padding: 10px; 
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
-.sidebar-logout a:hover {
-    background-color: rgba(255, 178, 0, 1);
-}
 
 .menu-item-logout {
     color: black;
-    font-size: 1.9vh;
+    font-size: 1.9vh;  
     flex: 1;
     font-weight: bold;
 }
