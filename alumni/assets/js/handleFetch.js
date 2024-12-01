@@ -90,55 +90,53 @@ function handlePostSubmit() {
                 const description = document.querySelector('.modal-body textarea').value;
                 const access_type = 'public';
                 const post_type = 'normal';
-                const datetime = new Date().toISOString();  // Store datetime in ISO format
+                const datetime = new Date().toISOString();  
             
-                // Create a FormData object to handle file uploads (images, videos)
                 const formData = new FormData();
                 formData.append('description', description);
                 formData.append('access_type', access_type);
                 formData.append('post_type', post_type);
                 formData.append('datetime', datetime);
             
-                // Handle image upload for the banner (Photo)
                 const imageInput = document.getElementById('photoInput');
                 if (imageInput && imageInput.files.length > 0) {
                     Array.from(imageInput.files).forEach(file => {
-                        formData.append('images[]', file);  // Add the image files as an array
+                        formData.append('images[]', file);  
                     });
                 }
             
-                // Handle video upload for the banner (Video)
+               
                 const videoInput = document.getElementById('videoInput');
                 if (videoInput && videoInput.files.length > 0) {
                     Array.from(videoInput.files).forEach(file => {
-                        formData.append('videos[]', file);  // Add the video files as an array
+                        formData.append('videos[]', file); 
                     });
                 }
             
                 // Send data via fetch
                 fetch('/api/postfeed', {
                     method: 'POST',
-                    body: formData,  // Send FormData object which includes files and other data
-                    credentials: 'include'  // Include credentials for authentication if needed
+                    body: formData,  
+                    credentials: 'include'  
                 })
                 .then(response => response.json())
                 .then(data => {
-                    postModal.hide();  // Hide post modal
+                    postModal.hide();  
             
                     if (data.message === 'Post created successfully') {
-                        successModal.show();  // Show success modal
+                        successModal.show(); l
                     } else {
-                        errorModal.show();  // Show error modal
+                        errorModal.show(); 
                     }
             
-                    // Optionally fetch updated user info and posts after posting
+                    // fetch updated user info and posts after posting
                     getUserInfo();
                     getUserPosts();
                 })
                 .catch(error => {
                     console.error('Error posting data:', error);
-                    postModal.hide();  // Hide post modal on error
-                    errorModal.show();  // Show error modal
+                    postModal.hide(); 
+                    errorModal.show();  
                 });
             });
         }
@@ -175,8 +173,24 @@ function handlePostSubmit() {
         errorModalElement.addEventListener('hidden.bs.modal', resetPage);
     }
 }
-
-
+// handle like
+function handleLike(postId, likeButton, isLiked) {
+    fetch(`api/like/${postId}`, {
+        method: 'POST',
+        credentials: 'include', 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Like added successfully' || data.message === 'Like removed successfully') {
+            getUserPosts(); 
+        } else {
+            console.error('Unexpected response message:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 // Call the functions
 getUserInfo();

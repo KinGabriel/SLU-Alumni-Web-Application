@@ -1,5 +1,6 @@
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
+import path from 'path';
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
@@ -77,9 +78,21 @@ export const getPost = (req, res) => {
         const posts = results.map(post => {
             if (post.banner) {
                 if (Buffer.isBuffer(post.banner)) {
-                    const bannerPath = post.banner.toString('utf-8').trim(); 
+                    const bannerPath = post.banner.toString('utf-8').trim();
                     if (fs.existsSync(bannerPath)) {
-                        post.banner = `data:image/jpeg;base64,${fs.readFileSync(bannerPath).toString('base64')}`;
+                        const ext = path.extname(bannerPath).toLowerCase();
+        
+                        
+                        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+                            post.banner = `data:image/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
+                        }                        
+                        else if (['.mp4', '.mkv','.mov'].includes(ext)) {
+                          
+                            post.banner = `data:video/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
+                        } 
+                        else {
+                            post.banner = ''; 
+                        }
                     } else {
                         post.banner = ''; 
                     }

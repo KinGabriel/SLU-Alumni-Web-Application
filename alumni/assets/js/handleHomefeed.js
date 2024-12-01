@@ -119,20 +119,47 @@ function createPostHeader(post) {
 function createPostContent(post) {
     const postContent = document.createElement('div');
     postContent.classList.add('post-content');
+
     const postDescription = document.createElement('p');
     postDescription.textContent = post.description;
     postContent.appendChild(postDescription);
 
+    let postBanner;
     if (post.banner) {
-        const postBanner = document.createElement('img');
-        postBanner.classList.add('post-image');
-        postBanner.src = post.banner;
-        postBanner.alt = 'Post Image';
+        if (post.banner.startsWith('data:video/') || post.banner.endsWith('.mp4') || post.banner.endsWith('.mov') || post.banner.endsWith('.avi')) {
+            postBanner = document.createElement('video');
+            postBanner.classList.add('post-video');
+            postBanner.controls = true;
+            const videoSource = document.createElement('source');
+            videoSource.src = post.banner; 
+            // vid
+            if (post.banner.startsWith('data:video/')) {
+                videoSource.type = post.banner.split(';')[0].split(':')[1]; 
+            } else {
+                if (post.banner.endsWith('.mp4')) {
+                    videoSource.type = 'video/mp4';
+                } else if (post.banner.endsWith('.mov')) {
+                    videoSource.type = 'video/quicktime';
+                } else if (post.banner.endsWith('.avi')) {
+                    videoSource.type = 'video/x-msvideo';
+                }
+            }
+            postBanner.appendChild(videoSource);
+            //image
+        } else {
+            postBanner = document.createElement('img');
+            postBanner.classList.add('post-image');
+            postBanner.src = post.banner;
+            postBanner.alt = 'Post Image';
+        }
+
         postContent.appendChild(postBanner);
     }
 
     return postContent;
 }
+
+
 
 // Handle image input preview
 document.getElementById("photoInput").addEventListener("change", function (event) {
@@ -207,24 +234,6 @@ function createPostActionButton(type, icon, count) {
 
     return button;
 }
-function handleLike(postId, likeButton, isLiked) {
-    fetch(`api/like/${postId}`, {
-        method: 'POST',
-        credentials: 'include', 
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message === 'Like added successfully' || data.message === 'Like removed successfully') {
-            getUserPosts(); 
-        } else {
-            console.error('Unexpected response message:', data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-
 
 
 
