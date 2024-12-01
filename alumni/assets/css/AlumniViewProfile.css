@@ -1,0 +1,307 @@
+/** 
+Author: Escaño, Nichole Jhoy
+Code Description:
+Reference: 
+
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
+}
+
+
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;  /* Allow vertical scrolling if needed */
+    scroll-behavior: smooth;
+}
+
+
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4vw;
+    width: 100%;
+    transition: top 0.1s ease;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.2vw;
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+/* Remove sticky positioning to avoid conflict */
+header.sticky {
+    position: fixed;
+    top: 0;
+}
+/* Header Separator */
+.header-separator {
+    position: relative;
+    background-color: #003DA5;
+    padding-bottom: 1.3vw;
+    width: 100%;
+    z-index: 101;
+}
+
+/* Search bar */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input[type="text"] {
+    padding: 6px 30px 6px 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    width: 200px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.search .search-icon {
+    position: absolute;
+    top: 50%;
+    left: 13vw;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.search .search-icon:hover {
+    opacity: 0.7;
+}
+
+
+/* Profile dropdown styling */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+  }
+  
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 320px;
+    z-index: 1000;
+  }
+  
+.dropdown-header {
+    display: flex;
+    align-items: center; 
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px; 
+    object-fit: cover;
+  }
+  
+.dropdown-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+.dropdown-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+.dropdown-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #6c757d;
+  }
+  
+.dropdown-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+.dropdown-links li {
+    padding: 12px 16px;
+  }
+  
+.dropdown-links li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #212529;
+    display: block;
+    transition: background-color 0.3s;
+  }
+  
+.dropdown-links li a:hover {
+    background-color: #f8f9fa;
+  }
+  
+.logout-btn {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background-color: #f1f7ff;
+    color: #0056b3;
+    font-size: 16px; 
+    font-weight: 600; 
+    padding: 12px 24px; 
+    border-radius: 8px; 
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%; 
+    max-width: 300px; 
+    box-sizing: border-box; 
+    margin-left: 3%;
+    margin-top: 5%;
+}
+
+.logout-btn:hover {
+    background-color: #e0edff; 
+}
+
+.logout-icon {
+    margin-right: 10px; 
+    width: 20px; 
+    height: 20px; 
+}
+
+/*ALumni styling*/ 
+.cover-photo img {
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  /* Profile photo styling */
+  .profile-photo {
+    width: 120px;
+    height: 120px;
+    border: 3px solid white;
+    object-fit: cover;
+  }
+  
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Profile details alignment */
+  .profile-section {
+    display: flex;              
+    align-items: center;       
+    margin-right: 350px;       
+  }
+  
+  .profile-details h5 {
+    font-size: 20px;
+  }
+  
+  .profile-details p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  /* Navigation tabs */
+  .nav-tabs .nav-link {
+    color: black;
+    font-size: 14px;
+  }
+  
+  .nav-tabs {
+    border-bottom: none;
+    color: #007bff;
+  }
+  
+  /* Bio Section Positioning */
+  #bio-section {
+    position: absolute;  
+    top: 1%;           
+    left: 99%;        
+    z-index: 10;         
+    width: 300px;       
+  }
+
+#bio-section .card-title {
+    color: #003DA5; 
+    font-weight: bold;
+}
+
+  .container {
+    position: relative; 
+  }
+  
+  /* Feed styling */
+  .feed-profile-img {
+    width: 40px;   
+    height: 40px; 
+    object-fit: cover;
+}
+
+/* Like and comment */
+.post-actions button {
+    display: flex;
+    align-items: center;
+    background-color: #E0E0E0;
+    color: #333333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 5px; 
+}
+
+.post-actions button:hover {
+    background-color: #e7e9ed;
+    color: #333333;
+}
