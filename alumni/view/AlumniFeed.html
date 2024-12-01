@@ -224,6 +224,7 @@
         </div>
     </div>
 </div>
+
 <!--TO DO: show the uploaded image in the input then handle multiple image--> 
 <!-- Modal - Post Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
@@ -243,11 +244,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="photoInput" class="form-label">Add a Photo</label>
-                        <input class="form-control" type="file"   id="photoInput" accept="image/*" multiple>
+                        <input type="file" id="photoInput" multiple accept="image/*" class="form-control">
+                    </div>
+                    <div id="imagePreview" class="mb-3">
+                        <!-- Preview images will appear here -->
                     </div>
                     <div class="mb-3">
                         <label for="videoInput" class="form-label">Add a Video</label>
-                        <input class="form-control" type="file" id="videoInput" accept="video/*" multiple>
+                        <input type="file" id="videoInput" multiple accept="video/*" class="form-control">
+                        <div id="videoPreview" class="mb-3">
+                            <!-- Preview videos will appear here -->
+                        </div>
                     </div>
                 </form>
             </div>
@@ -257,7 +264,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">

@@ -134,6 +134,46 @@ function createPostContent(post) {
     return postContent;
 }
 
+// Handle image input preview
+document.getElementById("photoInput").addEventListener("change", function (event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById("imagePreview");
+    previewContainer.innerHTML = ""; // Clear previous previews
+
+    for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.classList.add("img-thumbnail", "m-1");
+            img.style.maxWidth = "100px"; 
+            previewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(files[i]);
+    }
+});
+
+// Handle video input preview
+document.getElementById("videoInput").addEventListener("change", function (event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById("videoPreview");
+    previewContainer.innerHTML = ""; // Clear previous previews
+
+    for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const video = document.createElement("video");
+            video.src = e.target.result;
+            video.classList.add("m-1");
+            video.style.maxWidth = "200px"; 
+            video.controls = true; // Enable playback controls
+            previewContainer.appendChild(video);
+        };
+        reader.readAsDataURL(files[i]);
+    }
+});
+
+
 //  create post actions
 function createPostActions(post) {
     const postActions = document.createElement('div');

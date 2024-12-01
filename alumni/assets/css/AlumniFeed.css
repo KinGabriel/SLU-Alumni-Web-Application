@@ -468,3 +468,26 @@ nav a:hover {
     width: 20px; 
     height: 20px; 
 }
+
+/* Image and Video preview */
+.image-wrapper {
+    display: inline-block;
+    margin: 5px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.post-image {
+    max-width: 100%;
+    max-height: 300px; 
+    margin: 5px;
+    object-fit: cover; /
+}
+
+#imagePreview img {
+    width: 100px;  
+    height: 100px; 
+    object-fit: cover; 
+    margin: 5px; 
+}
+
