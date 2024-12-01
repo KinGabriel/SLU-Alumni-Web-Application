@@ -1,7 +1,8 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getAlumni, handleLogout, handleUserPost, getPost } from '../controller/alumniController.js';
+import { getAlumni, handleLogout } from '../controller/alumniController.js';
+import {handleUserPost, getPost } from '../controller/feedController.js';
 import fileUploadMiddleware from '../middleware/fileUploadMiddleware.js';
 import authenticateMiddleware from '../middleware/authenticateMiddleware.js';
 
@@ -16,17 +17,6 @@ router.use(authenticateMiddleware);
 // Routes
 router.get('/homefeed', getAlumni); // Get startup info
 router.get('/logout', handleLogout); // Log out
-
-router.post(
-    '/postfeed',
-    fileUploadMiddleware.fields([
-        { name: 'images[]', maxCount: 5 },
-        { name: 'videos[]', maxCount: 2 }
-    ]),
-    handleUserPost
-);
-
-router.get('/getfeed', getPost); // Get posts
 
 // Serve static HTML files
 router.get('/events', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniEvents.html')));
