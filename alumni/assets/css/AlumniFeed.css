@@ -491,3 +491,63 @@ nav a:hover {
     margin: 5px; 
 }
 
+/* Comment */
+.comment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.comment-text {
+    font-size: 14px;
+    margin: 0;
+}
+
+.comment-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-btn img {
+    margin-right: 5px;
+}
+
+#submitComment {
+    background-color: #003DA5; 
+    border-color: #003DA5; 
+    color: white; 
+}
+
+#submitComment:hover {
+    background-color: #171acf; 
+    border-color: #171acf;
+}
+
+.post-header .dropdown {
+    position: relative;
+}
+
+.post-header .dropdown-menu {
+    min-width: 120px;
+    text-align: left;
+}
+
+/* 3 dots */
+.custom-dropdown {
+    min-width: 120px;
+    width: auto; 
+}
+
+.custom-dropdown .dropdown-item {
+    white-space: nowrap; 
+    padding: 5px 10px;
+}
