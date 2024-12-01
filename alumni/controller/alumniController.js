@@ -26,7 +26,7 @@ export const getAlumni = (req, res) => {
     WHERE 
         u.user_id = ?
     GROUP BY 
-        u.user_id, a.bio, u.fname, u.lname, u.pfp;
+        u.user_id
 `;
 
 

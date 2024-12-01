@@ -199,24 +199,28 @@ document.getElementById("videoInput").addEventListener("change", function (event
         reader.readAsDataURL(files[i]);
     }
 });
-
-//create action buttons Like and Comment
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
+
     const actionsContainer = document.createElement('div');
     actionsContainer.classList.add('d-flex');
 
-    const likeImage = post.is_liked ? 'like.png' : 'grayLike.png';  
+    const likeImage = post.is_liked ? 'like.png' : 'grayLike.png';
     const likeButton = createPostActionButton('Like', likeImage, post.like_count);
     const commentButton = createPostActionButton('Comment', 'comment.png', post.comment_count);
 
+    const likeCountElement = likeButton.querySelector('span');
+
     likeButton.addEventListener('click', function() {
-        handleLike(post.post_id, likeButton, post.is_liked);
+        const isLiked = post.is_liked;
+        post.is_liked = !isLiked;  // Toggle local state
+        handleLike(post.post_id, likeButton, isLiked, likeCountElement);
     });
 
     actionsContainer.appendChild(likeButton);
     actionsContainer.appendChild(commentButton);
+
     postActions.appendChild(actionsContainer);
 
     return postActions;
@@ -225,12 +229,17 @@ function createPostActions(post) {
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');
     button.classList.add('btn', `btn-outline-${type.toLowerCase()}`, 'me-2');
+
     const iconElement = document.createElement('img');
     iconElement.classList.add('button-icon', 'me-2');
     iconElement.src = `../assets/images/${icon}`;
     iconElement.alt = `${type} Icon`;
+
+    const countElement = document.createElement('span');
+    countElement.textContent = `${type} (${count})`;
+
     button.appendChild(iconElement);
-    button.appendChild(document.createTextNode(`${type} (${count})`));
+    button.appendChild(countElement);
 
     return button;
 }
@@ -272,3 +281,25 @@ function formatDate(dateTime) {
     return date.toLocaleDateString('en-US', options) + ' at ' + date.toLocaleTimeString('en-US', { hour12: true });
 }
 // end of helper methods
+
+// Likes
+//Helper to update the number of likes
+function updateLikeButton(likeButton, isLiked) {
+    const newIsLiked = !isLiked; 
+    const newLikeImage = newIsLiked ? 'like.png' : 'grayLike.png';
+    likeButton.querySelector('img').src = `../assets/images/${newLikeImage}`;
+    return newIsLiked;
+}
+
+//Helper for the display of the total likes 
+function updateLikeCount(likeCountElement, isLiked) {
+    let currentLikeCount = parseInt(likeCountElement.textContent.replace(/[^\d]/g, ''), 10);
+    if (isNaN(currentLikeCount)) {
+        currentLikeCount = 0;  
+    }
+
+    const newLikeCount = isLiked ? currentLikeCount + 1 : currentLikeCount - 1;
+    likeCountElement.textContent = `Like (${newLikeCount})`;
+    return newLikeCount;
+}
+// end of helper methods for likes

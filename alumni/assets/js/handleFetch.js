@@ -124,12 +124,12 @@ function handlePostSubmit() {
                     postModal.hide();  
             
                     if (data.message === 'Post created successfully') {
-                        successModal.show(); l
+                        successModal.show(); 
                     } else {
                         errorModal.show(); 
                     }
             
-                    // fetch updated user info and posts after posting
+
                     getUserInfo();
                     getUserPosts();
                 })
@@ -173,16 +173,17 @@ function handlePostSubmit() {
         errorModalElement.addEventListener('hidden.bs.modal', resetPage);
     }
 }
-// handle like
-function handleLike(postId, likeButton, isLiked) {
-    fetch(`api/like/${postId}`, {
+function handleLike(postId, likeButton, isLiked, likeCountElement) {
+    fetch(`/api/like/${postId}`, {
         method: 'POST',
-        credentials: 'include', 
+        credentials: 'include',
     })
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Like added successfully' || data.message === 'Like removed successfully') {
-            getUserPosts(); 
+            // Update the like button's icon and like count
+            const newIsLiked = updateLikeButton(likeButton, isLiked);  // Toggle the like state and icon
+            const newLikeCount = updateLikeCount(likeCountElement, newIsLiked);  // Update the like count
         } else {
             console.error('Unexpected response message:', data.message);
         }
@@ -191,6 +192,9 @@ function handleLike(postId, likeButton, isLiked) {
         console.error('Error:', error);
     });
 }
+
+
+
 
 // Call the functions
 getUserInfo();
