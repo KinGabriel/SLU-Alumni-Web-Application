@@ -88,7 +88,7 @@ function createPostHeader(post) {
 
     const profileImg = document.createElement('img');
     profileImg.classList.add('user-pic');
-    profileImg.src = post.pfp || 'default.jpg';
+    profileImg.src = post.pfp || '../assets/images//default-avatar-icon.jpg';
     profileImg.alt = 'User Profile';
 
     const userInfo = document.createElement('div');
@@ -173,16 +173,20 @@ document.getElementById("videoInput").addEventListener("change", function (event
     }
 });
 
-
-//  create post actions
+//create action buttons Like and Comment
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
     const actionsContainer = document.createElement('div');
     actionsContainer.classList.add('d-flex');
 
-    const likeButton = createPostActionButton('Like', 'like.png', post.like_count);
+    const likeImage = post.is_liked ? 'like.png' : 'grayLike.png';  
+    const likeButton = createPostActionButton('Like', likeImage, post.like_count);
     const commentButton = createPostActionButton('Comment', 'comment.png', post.comment_count);
+
+    likeButton.addEventListener('click', function() {
+        handleLike(post.post_id, likeButton, post.is_liked);
+    });
 
     actionsContainer.appendChild(likeButton);
     actionsContainer.appendChild(commentButton);
@@ -191,7 +195,6 @@ function createPostActions(post) {
     return postActions;
 }
 
-//create action buttons Like and Comment
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');
     button.classList.add('btn', `btn-outline-${type.toLowerCase()}`, 'me-2');
@@ -204,6 +207,26 @@ function createPostActionButton(type, icon, count) {
 
     return button;
 }
+function handleLike(postId, likeButton, isLiked) {
+    fetch(`api/like/${postId}`, {
+        method: 'POST',
+        credentials: 'include', 
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message === 'Like added successfully' || data.message === 'Like removed successfully') {
+            getUserPosts(); 
+        } else {
+            console.error('Unexpected response message:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
 
 // handle the date formating for the user post
 function formatDate(dateTime) {

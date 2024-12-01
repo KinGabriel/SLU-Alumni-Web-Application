@@ -2,8 +2,6 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { getAlumni, handleLogout } from '../controller/alumniController.js';
-import {handleUserPost, getPost } from '../controller/feedController.js';
-import fileUploadMiddleware from '../middleware/fileUploadMiddleware.js';
 import authenticateMiddleware from '../middleware/authenticateMiddleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
