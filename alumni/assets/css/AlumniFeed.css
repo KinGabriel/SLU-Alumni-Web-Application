@@ -531,3 +531,23 @@ nav a:hover {
     background-color: #171acf; 
     border-color: #171acf;
 }
+
+.post-header .dropdown {
+    position: relative;
+}
+
+.post-header .dropdown-menu {
+    min-width: 120px;
+    text-align: left;
+}
+
+/* 3 dots */
+.custom-dropdown {
+    min-width: 120px;
+    width: auto; 
+}
+
+.custom-dropdown .dropdown-item {
+    white-space: nowrap; 
+    padding: 5px 10px;
+}
