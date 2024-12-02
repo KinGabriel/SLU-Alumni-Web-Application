@@ -121,10 +121,6 @@ header img.slu-logo {
     z-index: 0; 
 }
 
-/* Move the user-content to the right when the sidebar is hovered */
-/* .sidebar-container:hover + .user-content {
-    left: 250px; 
-} */
 
 .sidebar-menu {
     flex: 1;
@@ -173,11 +169,6 @@ header img.slu-logo {
     margin-left: 5px;
 }
 
-/* Hover effect on sidebar items */
-/* .sidebar-menu li:hover a {
-    color: #fff;
-    background-color: rgba(0, 61, 165, 0.4);
-} */
 
 /* Sticky Log Out Section */
 .sidebar-logout {
@@ -228,24 +219,24 @@ header img.slu-logo {
 
 /* Form Container */
 .form-container {
-    max-width: 1000px; /* Slightly wider for balanced spacing */
+    max-width: 1000px;
     margin: auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px; /* Space between columns and fields */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
 }
 
 /* Header Title */
 .form-container .form-title {
-    grid-column: span 2; /* Spans across both columns */
+    grid-column: span 2; 
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    color: #0056b3; /* Matches SLU blue theme */
+    color: #0056b3; 
     margin-bottom: 20px;
 }
 
@@ -281,7 +272,7 @@ header img.slu-logo {
 
 /* Buttons Section */
 .form-actions {
-    grid-column: span 2; /* Aligns to the second column */
+    grid-column: span 2; 
     display: flex;
     justify-content: flex-end;
     gap: 15px;
@@ -301,7 +292,7 @@ header img.slu-logo {
 
 /* Add Button */
 .add-button {
-    background-color: #ffc107; /* Vibrant yellow for Add */
+    background-color: #ffc107; 
     color: #fff;
 }
 
@@ -312,7 +303,7 @@ header img.slu-logo {
 
 /* Clear Button */
 .clear-button {
-    background-color: #007bff; /* Blue for Clear */
+    background-color: #007bff; 
     color: #fff;
 }
 
@@ -324,11 +315,11 @@ header img.slu-logo {
 /* Responsive Design */
 @media (max-width: 768px) {
     .form-container {
-        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-columns: 1fr; 
     }
 
     .form-actions {
         grid-column: span 1;
-        justify-content: center; /* Center-align buttons on smaller screens */
+        justify-content: center; 
     }
 }
