@@ -201,3 +201,36 @@ body {
     font-size: 1.2rem;
   }
 }
+.password-container {
+  position: relative; 
+}
+
+.password-container input {
+  width: 25rem; 
+  padding: 12px; 
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  color: black;
+  box-sizing: border-box; 
+}
+
+.password-container button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+img.eye-icon {
+  width: 20px; 
+  height: 20px;
+  opacity: 0.6; 
+  transition: opacity 0.2s ease;
+}
+
+img.eye-icon:hover {
+  opacity: 1; 
+}

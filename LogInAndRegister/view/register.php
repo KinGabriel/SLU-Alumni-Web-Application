@@ -89,12 +89,22 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                     </div>
                     <div class="input-wrapper">
                         <img src="../assets/images/password.png" alt="Password Icon" class="input-icon" />
-                        <input type="password" name="password" class="input-field" placeholder="Password" value="<?= isset($formData['password']) ? htmlspecialchars($formData['password']) : '' ?>" required />
-                    </div>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" class="input-field" placeholder="Password" value="<?= isset($formData['password']) ? htmlspecialchars($formData['password']) : '' ?>" required />
+                            <button type="button" class="toggle-password">
+                                <img src="../assets/images/eye-icon-open.png" alt="Show Password" class="eye-icon" />
+                            </button>
+                        </div>
+                    </div>    
                     <div class="input-wrapper">
                         <img src="../assets/images/password.png" alt="Retype Password Icon" class="input-icon" />
-                        <input type="password" name="retype_password" class="input-field" placeholder="Retype Password" value="<?= isset($formData['retype_password']) ? htmlspecialchars($formData['retype_password']) : '' ?>" required />
-                    </div>
+                        <div class="password-container">
+                            <input type="password" id="retype_password" name="retype_password" class="input-field" placeholder="Retype Password" value="<?= isset($formData['retype_password']) ? htmlspecialchars($formData['retype_password']) : '' ?>" required />
+                            <button type="button" class="toggle-password">
+                                <img src="../assets/images/eye-icon-open.png" alt="Show Password" class="eye-icon" />
+                            </button>
+                        </div>
+                    </div>    
                     <div class="input-wrapper">
                      <label for="school_id_file" class="custom-upload">
                             <img src="../assets/images/upload file.png" alt="Upload Icon" class="upload-icon" />
@@ -131,6 +141,7 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
             document.getElementById('modal').style.display = 'none';
         }
     </script>
+    <script src="../assets/js/passwordToggle.js"></script>
     <script src="../assets/js/graduationYear.js"></script>
     <script src="../assets/js/HandleAuthentication.js"></script>
 </body>
