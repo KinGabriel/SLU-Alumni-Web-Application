@@ -8,7 +8,7 @@
 @font-face {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
-  }
+}
 
 /* Header */
 header {
@@ -169,6 +169,7 @@ header img.slu-logo {
     margin-left: 5px;
 }
 
+
 /* Sticky Log Out Section */
 .sidebar-logout {
     position: absolute;
@@ -197,9 +198,17 @@ header img.slu-logo {
     font-weight: bold;
 }
 
-/* Main content */
+
+.menu-item-logout {
+    color: black;
+    font-size: 1.9vh;  
+    flex: 1;
+    font-weight: bold;
+}
+
+/* Main Content */
 .main-content {
-    margin-left: 60px;
+    margin-left: 250px;
     padding: 20px;
     transition: margin-left 0.3s ease;
 }
@@ -208,187 +217,109 @@ header img.slu-logo {
     margin-left: 250px;
 }
 
+/* Form Container */
 .form-container {
-    background-color: #fff;
+    max-width: 1000px;
+    margin: auto;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
 }
 
-h2.form-title, h3.section-title {
-    color: #003DA5;
+/* Header Title */
+.form-container .form-title {
+    grid-column: span 2; 
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    color: #0056b3; 
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 10px;
-    margin-top: 30px;
 }
 
+/* Form Input Groups */
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4px; 
-    flex: 1;
-    margin-right: 0px; 
-}
-
-.form-group label {
-    margin-bottom: 2px; 
-    font-weight: bold;
-    color: #333;
-    margin-top: 10px;
-}
-
-/* General input and select styling */
-.form-group input, .form-group select {
-    padding: 8px; 
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
     margin-bottom: 10px;
 }
 
-.form-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px; /* Reduce the gap between fields */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+.form-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
 }
 
-.form-group#first-name input {
-    width: 35%; 
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
 }
 
-.form-group#last-name input {
-    width: 35%;
-    margin-left: -280px;
-}
-
-.form-group#last-name label {
-    margin-left: -280px;
-}
-
-.form-group#email input  {
-    width: 17%;
-}
-
-.form-group#school-id input {
-    width: 55%; 
-}
-
-.form-group#graduation-year select {
-    width: 60%; 
-    margin-left: -90px;
-}
-
-.form-group#graduation-year label {
-    margin-left: -90px;
-}
-
-.form-group#degree select {
-    width: 110%; 
-    margin-left: -185px;
-}
-
-.form-group#degree label {
-    margin-left: -185px;
-}
-
-.form-group#job-status select {
-    width: 50%; 
-    margin-left: -90px;
-}
-
-.form-group#job-status label {
-    margin-left: -90px;
-}
-
-.form-group#user-roles select {
-    width: 15%; 
-}
-
-.form-group.password input {
-    width: 17%; 
-}
-
-
-/* Action buttons */
+/* Buttons Section */
 .form-actions {
+    grid-column: span 2; 
     display: flex;
     justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.clear-button, .add-button {
-    padding: 9px 20px;
+.add-button,
+.clear-button {
+    padding: 12px 25px;
     border: none;
     border-radius: 5px;
-    font-size: 15px; 
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 65px; 
-    margin-right: 35px; 
-    width: 6.%;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
-.clear-button {
-    background-color: #003DA5;
-    color: #fff;
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-.clear-button:hover {
-    background-color: #0053A1;
-}
-
+/* Add Button */
 .add-button {
-    background-color: #FFB200;
+    background-color: #ffc107; 
     color: #fff;
-    font-weight: bold;
 }
 
 .add-button:hover {
-    background-color: #f3b146;
+    background-color: #e0a800;
+    transform: scale(1.05);
 }
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.4); 
-  }
-  
-  .modal-content {
-    width: 320px; 
-    max-width: 90%; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    flex-direction: column; 
-    align-items: center; 
-    background-color: #fff; 
-    color: #000; 
-    text-align: center; 
-    border-radius: 20px; 
-    padding: 30px 30px 70px; 
-  }
-  
-  .modal img {
-    width: 82px;
-    margin-bottom: 15px;
-  }
-  .modal p {
-    margin-bottom: 40px;
-    font-size: 18px;
-  }
-  button.accept {
-    background-color: #0049b1;
-    border: none;
-    border-radius: 5px;
-    width: 200px;
-    padding: 14px;
-    font-size: 16px;
-    color: #FFB200;
-    box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
-  }
+
+/* Clear Button */
+.clear-button {
+    background-color: #007bff; 
+    color: #fff;
+}
+
+.clear-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        grid-template-columns: 1fr; 
+    }
+
+    .form-actions {
+        grid-column: span 1;
+        justify-content: center; 
+    }
+}
