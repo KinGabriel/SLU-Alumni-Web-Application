@@ -306,6 +306,32 @@ header.sticky {
     color: #333333;
 }
 
+/* Follow Button */
+#followButton {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    padding: 8px 16px; 
+}
+
+/* Follow Icon inside Button */
+#followIcon {
+    width: 16px; 
+    height: 16px; 
+}
+
+/* Align Follow Button and Icon */
+.follow-container {
+  position: absolute; 
+  top: 80%; 
+  right: 20px; 
+  transform: translateY(-50%); 
+}
+/* For visibility toggle */
+.show-icon #followIcon {
+    display: inline-block; 
+}
+
 /* 3 dots */
 .custom-dropdown {
   min-width: 50px;
