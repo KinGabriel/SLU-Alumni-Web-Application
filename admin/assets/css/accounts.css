@@ -96,6 +96,14 @@ header img.slu-logo {
     align-items: left; 
 }
 
+/* Sidebar active link styling */
+.sidebar-menu li a.active {
+    background-color: rgba(0, 61, 165, 0.4); 
+    color: #cf1b1b; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 /* Side Navigation Bar */
 .sidebar-container {
     background: rgba(244, 244, 244, 1);

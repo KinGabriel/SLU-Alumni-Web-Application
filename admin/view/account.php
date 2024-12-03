@@ -29,56 +29,56 @@ require("../controller/HandleSession.php");
     </header>
 
     <div class="sidebar-container">  
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="../view/adminDashboard.php">
-                        <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
-                        <span class="menu-item-text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../view/UserRequest.php">
-                        <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
-                        <span class="menu-item-text">Account Requests</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../view/Account.php">
-                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
-                        <span class="menu-item-text">Accounts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#events">
-                        <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
-                        <span class="menu-item-text">Events</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#news">
-                        <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
-                        <span class="menu-item-text">News</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#job-opportunities">
-                        <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
-                        <span class="menu-item-text">Job Opportunities</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    
-        <!-- Sticky Log Out Button -->
-        <div class="sidebar-logout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/adminDashboard.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'adminDashboard.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/UserRequest.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'UserRequest.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
+                    <span class="menu-item-text">Account Requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/Account.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'Account.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="#events" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'events.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="#news" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'news.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+            <li>
+                <a href="#job-opportunities" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'job-opportunities.php') ? 'active' : ''; ?>">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
         <a href="../controller/ProcessLogOut.php">
-                <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
-                <span class="menu-item-logout">Log Out</span>
-            </a>
-        </div>
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
     </div>
+</div>
 
     <!-- User Requests table with Filters inside table headers -->
     <div class="user-content" id="userContent">
