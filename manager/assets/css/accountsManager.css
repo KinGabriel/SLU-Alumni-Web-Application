@@ -303,6 +303,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 1vw;
+    table-layout: auto;
 }
 
 .user-table th, .user-table td {
@@ -325,6 +326,10 @@
     background-color: #f4f4f4;
     text-align: left;
     color: #333;
+}
+
+.user-table td:nth-child(3) { /* Assuming 'ID Number' is the third column */
+  display: none; /* Hide it if not needed */
 }
 
 .user-table td {

@@ -33,25 +33,25 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 </header>
 
 <body>
-      <!-- User Requests table -->
-      <div class="user-content" id="userContent">
-        <h1>Account Requests List</h1>
-        <table class="user-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <!-- <th>ID Number</th> -->
-                    <th>Graduation Year</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <!-- User Requests table -->
+        <div class="user-content" id="userContent">
+            <h1>Account Requests List</h1>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <!-- <th>ID Number</th> -->
+                        <th>Graduation Year</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-            <tbody id="applicantTableBody">
-               
-            </tbody>
-        </table>
-    </div>
+                <tbody id="applicantTableBody">
+                
+                </tbody>
+            </table>
+        </div>
 
   <!-- Search bar -->
 <div class="search">
