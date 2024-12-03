@@ -136,6 +136,12 @@
     text-decoration-color: rgba(255, 178, 0, 1);
     text-decoration-thickness: 2.5px;
   }
+
+  nav a.active {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 178, 0, 1);
+    text-decoration-thickness: 2.5px;
+  }
   
   /* Log in button */
   .btn-logout {

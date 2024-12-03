@@ -4,6 +4,7 @@ $message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confi
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
 echo "<script>var message = '$message';</script>";
 unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         <span>SLU Alumina</span>
     </h1>
     <nav>
-        <a href="#home">Home</a>
+        <a href="../view/accountsManager.php" class="<?= $currentPage == 'accountsManager.php' ? 'active' : '' ?>">Home</a>
         <a href="#accounts">Accounts</a>
         <a href="#addevents">Add Events</a>
         <a href="#addjobs">Add Jobs</a>
