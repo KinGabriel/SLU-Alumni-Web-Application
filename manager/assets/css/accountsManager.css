@@ -61,9 +61,13 @@
       src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
     }
   
-  html {
+ 
+  html, body {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
   }
+
   
   .hidden {
     opacity: 0;
