@@ -383,7 +383,8 @@
 }
 
 .user-table .btn-view-profile {
-    padding: 8px 16px;
+    margin-left: 10px;
+    padding: 10px 16px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
