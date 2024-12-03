@@ -311,6 +311,10 @@
     border-bottom: 1px solid #ddd;
 }
 
+.user-table td:nth-child(1) {
+  text-align: left;
+}
+
 .user-table th {
     background-color: #f4f4f4;
     color: #333;

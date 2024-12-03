@@ -1,3 +1,10 @@
+<?php
+require("../controller/HandleSession.php");
+$message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
+$formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
+echo "<script>var message = '$message';</script>";
+unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,13 +14,13 @@
     <title>My Web Page</title>
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="accountsManager.css">
+    <link rel="stylesheet" href="../assets/css/accountsManager.css">
 </head>
 
 <div class="header-seperator"></div>
 <header>
     <h1>
-        <img src="Logo.png" alt="SLU Alumina Logo">
+        <img src="../assets/images/Logo.png" alt="SLU Alumina Logo">
         <span>SLU Alumina</span>
     </h1>
     <nav>
@@ -22,7 +29,7 @@
         <a href="#addevents">Add Events</a>
         <a href="#addjobs">Add Jobs</a>
     </nav>
-    <a href="#" target="_blank" class="btn-logout">Logout</a>
+    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
 </header>
 
 <body>
@@ -34,7 +41,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>ID Number</th>
+                    <!-- <th>ID Number</th> -->
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>
@@ -51,7 +58,7 @@
     <form id="searchForm">
         <input type="text" name="search" placeholder="Search..">
         <button type="submit">
-            <img src="search.png" alt="Search" class="search-icon">
+            <img src="../assets/images/search.png" alt="Search" class="search-icon">
         </button>
     </form>
 </div>
@@ -87,7 +94,7 @@
 </div>
 
 
-    <script src="handle.js"></script>
+    <script src="../assets/js/handle.js"></script>
 
     <script>
         if (message) {
