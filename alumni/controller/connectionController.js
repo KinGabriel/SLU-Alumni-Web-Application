@@ -3,11 +3,6 @@ import dbConnection from '../../database/connection.js';
 export const connections = (req, res) => {
     const userId = req.cookies.user_id;  
     const { search = '', filter, sort } = req.query;  
-
-    console.log('Search:', search);
-    console.log('Filter:', filter);
-    console.log('Sort:', sort);
-
     let query = `
         SELECT u.user_id, CONCAT(u.fname, ' ', u.lname) AS name, u.pfp
         FROM user u
@@ -58,7 +53,6 @@ export const connections = (req, res) => {
         if (validSortOrders.includes(sortOrder)) {
             query += ` ORDER BY name ${sortOrder.toUpperCase()}`;
         } else {
-            console.log('Invalid sort order');
             query += ` ORDER BY name ASC`; 
         }
     } 
@@ -81,5 +75,55 @@ export const connections = (req, res) => {
                 data: [],
             });
         }
+    });
+};
+
+export const removeFollowing = (req, res) => {
+    const userId = req.cookies.user_id;
+      const followedId = req.params.user_id;  
+
+    if (!followedId) {
+        return res.status(400).json({ error: "followedId is required." });
+    }
+
+    const query = `
+        DELETE FROM follows 
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+    
+    dbConnection.query(query, [userId, followedId], (err, result) => {
+        if (err) {
+            console.error("Error removing following:", err);
+            return res.status(500).json({ error: "Database error occurred while removing following." });
+        }
+
+        return res.status(200).json({ message: "Successfully removed following." });
+    });
+};
+
+
+export const removeFollower = (req, res) => {
+    const userId = req.cookies.user_id;  
+    const followerId = req.params.user_id;  
+    if (!followerId) {
+        return res.status(400).json({ error: "followerId is required." });
+    }
+
+    const query = `
+        DELETE FROM follows 
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+    
+    dbConnection.query(query, [followerId, userId], (err, result) => {
+        if (err) {
+            console.error("Error removing follower:", err);
+            return res.status(500).json({ error: "Database error occurred while removing follower." });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Follower not found." });
+        }
+
+        return res.status(200).json({ message: "Successfully removed follower." });
     });
 };

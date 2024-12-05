@@ -88,3 +88,24 @@ document.querySelectorAll('.sort-option').forEach(option => {
         fetchConnections();
     });
 });
+
+// TODO modal
+function removeConnection(user_id) {
+    const activeButton = document.querySelector('.filter-button.active');
+    const filterValue = activeButton ? activeButton.innerText.toLowerCase() : 'mutual';
+    if (filterValue === 'mutuals' || filterValue === 'following') {
+        deleteFollowing(user_id).then(() => {
+            fetchConnections(); 
+        }).catch(error => {
+            console.error('Error removing connection:', error.message);
+        });
+    } else if (filterValue === 'followers') {
+        deleteFollower(user_id).then(() => {
+            fetchConnections(); 
+        }).catch(error => {
+            console.error('Error removing connection:', error.message);
+        });
+    } else {
+        console.warn('Unknown filter value:', filterValue);
+    }
+}

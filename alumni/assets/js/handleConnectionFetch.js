@@ -9,13 +9,49 @@ function fetchConnections() {
     const searchQueryString = searchQuery ? `&search=${searchQuery}` : '';
     const filterQueryString = filterValue ? `&filter=${filterValue}` : '';
 
-    fetch(`/api/mutual?${searchQueryString}${filterQueryString}${sortQuery}`)
+    fetch(`/api/connection?${searchQueryString}${filterQueryString}${sortQuery}`)
         .then(response => response.json())
         .then(data => {
-            updateConnectionsTable(data);  // Update the connections table with fetched data
+            updateConnectionsTable(data);  
         })
         .catch(error => {
             console.error('Error fetching mutual connections:', error);
         });
 }
 fetchConnections()
+
+// TODO Modal
+async function deleteFollowing(following_id) {
+    try {
+        const response = await fetch(`/api/remove-following/${following_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const result = await response.json();
+        return result; 
+    } catch (error) {
+        console.error('Error deleting following:', error.message);
+        alert('Unable to delete the following. Please try again.');
+    }
+}
+
+
+// TODO Modal
+async function deleteFollower(follower_id) {
+    try {
+        const response = await fetch(`/api/remove-follower/${follower_id}`, {  
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+     
+        const result = await response.json();
+        return result; 
+    } catch (error) {
+        console.error('Error deleting following:', error.message);
+        alert('Unable to delete the follower. Please try again.');
+    }
+}
