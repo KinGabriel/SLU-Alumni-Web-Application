@@ -19,7 +19,7 @@
            <!-- Search bar -->
            <div class="search">
                <form id="searchForm">
-                   <input type="text" name="search" placeholder="Search..">
+                   <input type="text" name="search" placeholder="Search.." class="form-control">
                    <button type="submit">
                        <img src="../assets/images/search.png" alt="Search" class="search-icon">
                    </button>
@@ -48,19 +48,9 @@
                </div>
            </div>
        </div>
-             
    </header>
 
-   <!-- Main Content 
-   
-   Author: Escaño, Nichole Jhoy
-   Code Description:
-   Reference: 
-   
-   
-   
-   -->
-    <!-- Main Content  -->
+   <!-- Main Content -->
     <div class="main-content">
         <!-- Sidebar -->
         <aside>
@@ -76,10 +66,10 @@
                         <div class="stat-item">
                             <strong>Posts</strong><br><p name="post_count"></p>
                         </div>
-                        <div class="stat-item" >
-                            <strong>Followers</strong><br><p  name="followers_count"></p>
+                        <div class="stat-item">
+                            <strong>Followers</strong><br><p name="followers_count"></p>
                         </div>
-                        <div class="stat-item" >
+                        <div class="stat-item">
                             <strong>Following</strong><br><p name="followed_count"></p>
                         </div>
                     </div>
@@ -115,24 +105,12 @@
                     </li>
                 </ul>
             </nav>
-            <script>
-                document.querySelectorAll('nav li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active'); // Remove active class from all items
-                        });
-                        link.parentElement.classList.add('active'); // Add active class to the clicked item
-                    });
-                });
-            </script>
         </aside>
 
         <div class="connections-container">
-            <!-- Connections Title and Controls -->
             <div class="connections-header d-flex justify-content-between align-items-center">
                 <h2 class="connections-title">Connections</h2>
                 
-                <!-- Controls (Sort by Name Dropdown & Search Bar) -->
                 <div class="connections-controls d-flex align-items-center">
                     <!-- Sort By Dropdown -->
                     <div class="dropdown">
@@ -142,59 +120,34 @@
                             <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
                         </div>
                     </div>
+                    
             
                     <!-- Search Bar -->
                     <form id="searchForm" class="d-flex">
-                        <input type="text" name="search" placeholder="Search.." class="form-control me-2">
-                        <!-- <button type="submit" class="btn btn-outline-secondary">
-                            <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                        </button> -->
+                        <input type="text" name="searchConnection" placeholder="Search.." class="form-control me-2">
                     </form>
                 </div>
             </div>
 
-             <!--Following and Followers filter-->
-             <div class="filter-buttons">
-                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-button active" onclick="filterEvents('mutual')">Mutuals</button>
                 <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
                 <button class="filter-button" onclick="filterEvents('following')">Following</button>
             </div>
         
             <!-- Connections Table -->
-            <div class="connections-table">
-                <div class="connection-item">
-                    <img src="../assets/images/anya.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Anya Forger</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/asta.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Asta Staria</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/yuno.jpeg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Yuno Grinberyall</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
+            <div class="connections-table" id="connectionsTable">
+                <!-- DOM generated -->
             </div>
         </div>
-        
-            <!-- Bootstrap JavaScript -->
-  <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="../assets/js/handleConnections.js" defer>  </script>  
-  <script src="../assets/js/handleConnectionFetch.js" defer>  </script> 
-  <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/handleConnections.js" defer></script>  
+    <script src="../assets/js/handleConnectionFetch.js" defer></script> 
+    <script src="../assets/js/handleAlumniFetch.js" defer></script>  
+
 </body>
 </html>
