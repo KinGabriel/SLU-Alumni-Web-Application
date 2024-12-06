@@ -7,4 +7,7 @@ const router = express.Router();
 router.use(authenticateMiddleware);
 router.get('/getOwnFeed', getOwnPost); 
 router.post('/like/:postId', handleLikes);
+router.delete('/delete/:postId', );
+router.post('/editPost/:postId', );
+
 export default router;

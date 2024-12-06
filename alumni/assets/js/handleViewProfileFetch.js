@@ -22,12 +22,8 @@ function getOwnPosts() {
                 cardBody.appendChild(postHeader);
                 cardBody.appendChild(postContent);
 
-
-
                 postElement.appendChild(cardBody);
-
                 postElement.appendChild(postActions);
-
                 feedContainer.appendChild(postElement);
             });
         })
@@ -56,5 +52,11 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
     });
 }
 
-// end of helper methods for likes
+function deletePost(){
+
+}
+
+function editPost(){
+    
+}
 getOwnPosts()

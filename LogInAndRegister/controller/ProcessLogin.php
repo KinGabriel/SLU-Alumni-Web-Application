@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../manager/view/accountsManager.php");
         } else {
             setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", true, true);
-            header("Location: http://localhost:8080/");
+            header("Location: http://localhost:8080");
         }
         exit();
     } else {
