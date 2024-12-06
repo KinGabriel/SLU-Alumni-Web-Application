@@ -21,37 +21,72 @@ function fetchConnections() {
 fetchConnections()
 
 // TODO Modal
-async function deleteFollowing(following_id) {
+// Handle removal of follower
+async function removeFollower(user_id, name, confirmModal) {
     try {
-        const response = await fetch(`/api/connections/emove-following/${following_id}`, {
+        const response = await fetch(`/api/remove-follower/${user_id}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         });
-        const result = await response.json();
-        return result; 
+
+        if (response.ok) {
+            // Close the confirmation modal
+            confirmModal.hide();
+
+            // Show success modal for follower removal
+            const successModal = new bootstrap.Modal(document.getElementById('successRemoveFollowerModal'));
+            const removedFollowerNameElement = document.getElementById('removedFollowerName');
+            removedFollowerNameElement.textContent = name;
+            successModal.show();
+
+            // Remove the follower item from the DOM
+            const connectionItem = document.querySelector(`[data-user-id="${user_id}"]`);
+            if (connectionItem) {
+                connectionItem.remove();
+            }
+
+            // Refresh the connections list
+            fetchConnections();
+        } else {
+            alert('Failed to remove follower.');
+        }
     } catch (error) {
-        console.error('Error deleting following:', error.message);
-        alert('Unable to delete the following. Please try again.');
+        console.error('Error removing follower:', error);
+        alert('An error occurred while removing the follower.');
     }
 }
 
-
-// TODO Modal
-async function deleteFollower(follower_id) {
+// Handle removal of following
+async function removeFollowing(user_id, name, confirmModal) {
     try {
-        const response = await fetch(`/api/connections/remove-follower/${follower_id}`, {  
+        const response = await fetch(`/api/remove-following/${user_id}`, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
         });
-     
-        const result = await response.json();
-        return result; 
+
+        if (response.ok) {
+            // Close the confirmation modal
+            confirmModal.hide();
+
+            // Show success modal for following removal
+            const successModal = new bootstrap.Modal(document.getElementById('successRemoveFollowingModal'));
+            const removedFollowingNameElement = document.getElementById('removedFollowingName');
+            removedFollowingNameElement.textContent = name;
+            successModal.show();
+
+            // Remove the following item from the DOM
+            const connectionItem = document.querySelector(`[data-user-id="${user_id}"]`);
+            if (connectionItem) {
+                connectionItem.remove();
+            }
+
+            // Refresh the connections list
+            fetchConnections();
+        } else {
+            alert('Failed to remove following.');
+        }
     } catch (error) {
-        console.error('Error deleting following:', error.message);
-        alert('Unable to delete the follower. Please try again.');
+        console.error('Error removing following:', error);
+        alert('An error occurred while removing the following.');
     }
 }
