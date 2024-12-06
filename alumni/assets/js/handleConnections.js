@@ -6,9 +6,13 @@ function updateConnectionsTable(data) {
         table.innerHTML = `<p>No connections found.</p>`; 
     } else {
         let connections = data.data;
+        const activeButton = document.querySelector('.filter-button.active');
+        const filterValue = activeButton ? activeButton.innerText.toLowerCase() : 'mutual';
+
         connections.forEach(connection => {
             const connectionItem = document.createElement('div');
             connectionItem.classList.add('connection-item');
+            connectionItem.setAttribute('data-user-id', connection.user_id); // unique user ID attribute
             // Profile picture
             const profilePic = document.createElement('img');
             profilePic.src = connection.pfp;
@@ -25,13 +29,16 @@ function updateConnectionsTable(data) {
             messageBtn.classList.add('message-btn');
             messageBtn.textContent = 'Message';
             messageBtn.onclick = () => sendMessage(connection.user_id);
-            const removeBtn = document.createElement('button');
-            removeBtn.classList.add('remove-btn');
-            removeBtn.textContent = 'Remove';
-            removeBtn.onclick = () => removeConnection(connection.user_id);
+            // Conditionally show the "Remove" button based on the filter
+            if (filterValue !== 'mutuals') {
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('remove-btn');
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = () => removeConnection(connection.user_id, connection.name);       
+                actionsDiv.appendChild(removeBtn);
+            }
             // Append elements to actionsDiv
             actionsDiv.appendChild(messageBtn);
-            actionsDiv.appendChild(removeBtn);
             // Append elements to connectionItem
             connectionItem.appendChild(profilePic);
             connectionItem.appendChild(nameDiv);
@@ -90,22 +97,41 @@ document.querySelectorAll('.sort-option').forEach(option => {
 });
 
 // TODO modal
-function removeConnection(user_id) {
+function removeConnection(user_id, name) {
     const activeButton = document.querySelector('.filter-button.active');
     const filterValue = activeButton ? activeButton.innerText.toLowerCase() : 'mutual';
-    if (filterValue === 'mutuals' || filterValue === 'following') {
-        deleteFollowing(user_id).then(() => {
-            fetchConnections(); 
-        }).catch(error => {
-            console.error('Error removing connection:', error.message);
-        });
-    } else if (filterValue === 'followers') {
-        deleteFollower(user_id).then(() => {
-            fetchConnections(); 
-        }).catch(error => {
-            console.error('Error removing connection:', error.message);
-        });
-    } else {
-        console.warn('Unknown filter value:', filterValue);
-    }
+
+    if (filterValue === 'followers') {
+       // For followers
+       selectedUserId = user_id;
+       selectedConnectionName = name;
+
+       const connectionNameElement = document.getElementById('followerName');
+       connectionNameElement.textContent = name;
+
+       const confirmModal = new bootstrap.Modal(document.getElementById('confirmRemoveFollowerModal'));
+       confirmModal.show();
+       
+       // Handle removal on confirm button
+       document.getElementById('confirmRemoveFollowerButton').onclick = async () => {
+           await removeFollower(user_id, name, confirmModal);
+       };
+    } else if (filterValue === 'following') {
+       // For following
+       selectedUserId = user_id;
+       selectedConnectionName = name;
+
+       const connectionNameElement = document.getElementById('followingName');
+       connectionNameElement.textContent = name;
+
+       const confirmModal = new bootstrap.Modal(document.getElementById('confirmRemoveFollowingModal'));
+       confirmModal.show();
+       
+       // Handle removal on confirm button
+       document.getElementById('confirmRemoveFollowingButton').onclick = async () => {
+           await removeFollowing(user_id, name, confirmModal);
+       };
+   } else {
+       console.warn('Remove operation is not allowed for this filter.');
+   }
 }
