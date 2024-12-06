@@ -12,7 +12,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
     <link rel="stylesheet" href="../assets\css\adminDashboard.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
     <!-- Header separator -->
@@ -138,7 +138,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     </div>
     
     <!-- commented this because it is a bootstrap -->
- <!--   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
     <script src="../assets\js\HandleAdminDashboard.js?v=1"></script>
 </body>
 </html>

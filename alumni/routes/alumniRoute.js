@@ -22,5 +22,5 @@ router.get('/connections', (req, res) => res.sendFile(path.join(__dirname, '../v
 router.get('/jobs', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniJobOpp.html')));
 router.get('/manageProfile', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniManageProfile.html')));
 router.get('/news', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniNews.html')));
-
+router.get('/profile', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniViewProfile.html')));
 export default router;
