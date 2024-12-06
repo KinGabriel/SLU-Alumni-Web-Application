@@ -9,7 +9,7 @@ function fetchConnections() {
     const searchQueryString = searchQuery ? `&search=${searchQuery}` : '';
     const filterQueryString = filterValue ? `&filter=${filterValue}` : '';
 
-    fetch(`/api/connection?${searchQueryString}${filterQueryString}${sortQuery}`)
+    fetch(`/api/connections/get-connection?${searchQueryString}${filterQueryString}${sortQuery}`)
         .then(response => response.json())
         .then(data => {
             updateConnectionsTable(data);  
@@ -24,7 +24,11 @@ fetchConnections()
 // Handle removal of follower
 async function removeFollower(user_id, name, confirmModal) {
     try {
+<<<<<<< HEAD
         const response = await fetch(`/api/remove-follower/${user_id}`, {
+=======
+        const response = await fetch(`/api/connections/emove-following/${following_id}`, {
+>>>>>>> 43df0e1171a82995514bb0bd48024208e8dd3d17
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -59,7 +63,11 @@ async function removeFollower(user_id, name, confirmModal) {
 // Handle removal of following
 async function removeFollowing(user_id, name, confirmModal) {
     try {
+<<<<<<< HEAD
         const response = await fetch(`/api/remove-following/${user_id}`, {
+=======
+        const response = await fetch(`/api/connections/remove-follower/${follower_id}`, {  
+>>>>>>> 43df0e1171a82995514bb0bd48024208e8dd3d17
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });

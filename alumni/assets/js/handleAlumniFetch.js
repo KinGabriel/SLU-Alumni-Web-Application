@@ -26,4 +26,49 @@ function getUserInfo() {
     .catch(error => console.error('Error fetching data:', error));
 }
 
+// header drop down
+function toggleDropdown() {
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const isOpen = dropdownMenu.style.display === "block";
+
+    if (isOpen) {
+        dropdownMenu.style.display = "none";
+        hideDropdown();
+    } else {
+        dropdownMenu.style.display = "block";
+        showDropdown();
+    }
+}
+
+function showDropdown() {
+    function closeDropdown(event) {
+        const dropdown = document.getElementById("dropdownMenu");
+        const avatar = document.querySelector(".profile-avatar");
+
+        if (!dropdown.contains(event.target) && !avatar.contains(event.target)) {
+            dropdown.style.display = "none";
+            removeOutsideClickListener(); 
+        }
+    }
+
+    document.addEventListener("click", closeDropdown);
+    document.closeDropdownListener = closeDropdown;
+}
+
+function hideDropdown() {
+    if (document.closeDropdownListener) {
+        document.removeEventListener("click", document.closeDropdownListener);
+        delete document.closeDropdownListener;
+    }
+}
+
+//handle log out
+const logoutBtns = document.getElementsByClassName('logout-btn');
+for (let i = 0; i < logoutBtns.length; i++) {
+    logoutBtns[i].addEventListener('click', logOut);
+}
+function logOut() {
+    window.location.href = '/api/logout';
+}
+
 getUserInfo();

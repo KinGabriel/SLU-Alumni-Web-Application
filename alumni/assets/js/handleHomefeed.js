@@ -18,41 +18,7 @@ window.onscroll = function () {
 };
 
 
-// header drop down
-function toggleDropdown() {
-    const dropdownMenu = document.getElementById("dropdownMenu");
-    const isOpen = dropdownMenu.style.display === "block";
 
-    if (isOpen) {
-        dropdownMenu.style.display = "none";
-        hideDropdown();
-    } else {
-        dropdownMenu.style.display = "block";
-        showDropdown();
-    }
-}
-
-function showDropdown() {
-    function closeDropdown(event) {
-        const dropdown = document.getElementById("dropdownMenu");
-        const avatar = document.querySelector(".profile-avatar");
-
-        if (!dropdown.contains(event.target) && !avatar.contains(event.target)) {
-            dropdown.style.display = "none";
-            removeOutsideClickListener(); 
-        }
-    }
-
-    document.addEventListener("click", closeDropdown);
-    document.closeDropdownListener = closeDropdown;
-}
-
-function hideDropdown() {
-    if (document.closeDropdownListener) {
-        document.removeEventListener("click", document.closeDropdownListener);
-        delete document.closeDropdownListener;
-    }
-}
     // Handle the show of modal for post
       document.addEventListener("DOMContentLoaded", () => {
           const modalTriggerElements = [
@@ -71,14 +37,6 @@ function hideDropdown() {
           });
       });
 
-//handle log out
-const logoutBtns = document.getElementsByClassName('logout-btn');
-for (let i = 0; i < logoutBtns.length; i++) {
-    logoutBtns[i].addEventListener('click', logOut);
-}
-function logOut() {
-    window.location.href = '/api/logout';
-}
 
 // helper methods for showin the post
 // create post header
@@ -278,7 +236,7 @@ function formatDate(dateTime) {
         hour: '2-digit',
         minute: '2-digit',
     };
-    return date.toLocaleDateString('en-US', options) + ' at ' + date.toLocaleTimeString('en-US', { hour12: true });
+    return date.toLocaleDateString('en-US', options);
 }
 // end of helper methods
 

@@ -69,13 +69,21 @@
             <div class="profile-section d-flex align-items-center mt-4 px-4">
                 <!-- Profile Photo -->
                 <div class="profile-photo">
-                    <img src="../assets/images/candy.jpg" class="rounded-circle" alt="Profile" name="'pfp">
+                    <img src="" alt="Profile Picture" class="rounded-circle" name="pfp">
                 </div>
              <!-- Profile Details -->
              <div class="profile-details ms-3">
                 <h5 class="fw-bold mb-0" name="name">Taylor Swift</h5>
-                <p class="text-muted mb-1" name="followers_count"></p><strong>Followers</strong><br><p  name="followers_count"></p>
-                <p class="text-muted mb-1" name="followed_count"></p><strong>Following</strong><br><p name="followed_count"></p>
+                <!-- TODO fix design  --> 
+                <div class="stat-item">
+                    <strong>Posts</strong><br><p name="post_count"></p>
+                </div>
+                <div class="stat-item" >
+                    <strong>Followers</strong><br><p  name="followers_count"></p>
+                </div>
+                <div class="stat-item" >
+                    <strong>Following</strong><br><p name="followed_count"></p>
+                </div>
                 <p class="mb-0 d-flex align-items-center">
                     <img src="../assets/images/position.png" alt="Web Developer Icon" class="me-2" style="width: 20px; height: 20px;">
                     <i class="bi bi-briefcase"></i> Web Developer
@@ -105,6 +113,7 @@
         </div>
 
         <!-- Feed Section -->
+         <div id="feed">
             <div class="post card mt-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
@@ -142,7 +151,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
         <!-- Bio Section -->
         <div class="row mt-4">
             <div class="col-lg-3 ms-auto" id="bio-section">
@@ -206,86 +215,6 @@
     </div>
 </div>
 
-<script>  
-// Handles Edit and Delete
-document.addEventListener('DOMContentLoaded', () => {
-    // handle Edit Post button click
-    document.querySelectorAll('.edit-post-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const postElement = this.closest('.post');
-            const postContent = postElement.querySelector('.post-content p').innerText;
-            const postImage = postElement.querySelector('.post-image').src;
-
-            // populates the modal with the current post content and image
-            document.getElementById('editPostContent').value = postContent;
-            document.getElementById('currentEditImage').src = postImage;
-
-            // shows the modal
-            const editPostModal = new bootstrap.Modal(document.getElementById('editPostModal'));
-            editPostModal.show();
-
-            // saves changes on modal "Save" button click
-            document.getElementById('saveEditPost').onclick = function () {
-                const updatedContent = document.getElementById('editPostContent').value;
-                const updatedImage = document.getElementById('editPostImage').files[0];
-
-                // updates post content
-                postElement.querySelector('.post-content p').innerText = updatedContent;
-
-                // updates post image if a new image is uploaded
-                if (updatedImage) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        postElement.querySelector('.post-image').src = e.target.result;
-                    };
-                    reader.readAsDataURL(updatedImage);
-                }
-
-                // implement API call here to save updated post data to the database
-                console.log('Updated Post:', { text: updatedContent, image: updatedImage });
-
-                // close the modal
-                editPostModal.hide();
-            };
-        });
-    });
-
-    // Preview updated image before saving
-    document.getElementById('editPostImage').addEventListener('change', function () {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('currentEditImage').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-});
-
-    // Handle "Delete Post" click
-    document.querySelectorAll('.delete-post-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            currentPostElement = this.closest('.post');
-            // show the delete modal
-            const deleteModal = new bootstrap.Modal(document.getElementById('deletePostModal'));
-            deleteModal.show();
-        });
-    });
-
-    // confirm delete post
-    document.getElementById('confirmDeletePost').addEventListener('click', function () {
-        if (currentPostElement) {
-            currentPostElement.remove();
-            // implement API call to delete post from the server
-            console.log('Post deleted');
-            // close the modal
-            bootstrap.Modal.getInstance(document.getElementById('deletePostModal')).hide();
-        }
-    });
-
-0
-</script>
 
 <!--Inlined the style for the back button due to difficulty in calling it in the css-->
 <style> 
@@ -317,8 +246,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 </style>
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/handleHomeFeed.js" defer>  </script>  
-    <script src="../assets/js/handleHomeFeedFetch.js" defer>  </script>  
+    <script src="../assets/js/handleViewProfile.js" defer>  </script>  
+    <script src="../assets/js/handleViewProfileFetch.js" defer>  </script>  
     <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
 </body>
 </html>
