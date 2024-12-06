@@ -199,111 +199,137 @@ header.sticky {
 }
 
 .logout-btn:hover {
-    background-color: #e0edff; 
+  background-color: #e0edff; 
 }
 
 .logout-icon {
-    margin-right: 10px; 
-    width: 20px; 
-    height: 20px; 
+  margin-right: 10px; 
+  width: 20px; 
+  height: 20px; 
 }
 
-/*ALumni styling*/ 
+/* Alumni styling */
 .cover-photo img {
-    height: 250px;
-    object-fit: cover;
-  }
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Profile photo styling */
+.profile-photo {
+  width: 120px;
+  height: 120px;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Profile details alignment */
+.profile-section {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.profile-details .stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-details h5 {
+  font-size: 20px;
+}
+
+.profile-details p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Navigation tabs */
+.nav-tabs .nav-link {
+  color: black;
+  font-size: 14px;
+}
   
-  /* Profile photo styling */
-  .profile-photo {
-    width: 120px;
-    height: 120px;
-    border: 3px solid white;
-    object-fit: cover;
-  }
+.nav-tabs {
+  border-bottom: none;
+  color: #007bff;
+}
   
-  .profile-photo img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  /* Profile details alignment */
-  .profile-section {
-    display: flex;              
-    align-items: center;       
-    margin-right: 350px;       
-  }
-  
-  .profile-details h5 {
-    font-size: 20px;
-  }
-  
-  .profile-details p {
-    font-size: 14px;
-    margin-bottom: 5px;
-  }
-  
-  /* Navigation tabs */
-  .nav-tabs .nav-link {
-    color: black;
-    font-size: 14px;
-  }
-  
-  .nav-tabs {
-    border-bottom: none;
-    color: #007bff;
-  }
-  
-  /* Bio Section Positioning */
-  #bio-section {
-    position: absolute;  
-    top: 1%;           
-    left: 99%;        
-    z-index: 10;         
-    width: 300px;       
-  }
+/* Bio Section Positioning */
+#bio-section {
+  position: absolute;
+  top: 53%;      
+  right: 0;     
+  width: 250px; 
+  z-index: 10;  
+}
 
 #bio-section .card-title {
-    color: #003DA5; 
-    font-weight: bold;
+  color: #003DA5;
+  font-weight: bold;
 }
 
-  .container {
-    position: relative; 
-  }
+.edit-bio-img {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;  
+  height: 15px; /
+}
+
+.container {
+  position: relative;
+}
+
+/* Bio edit form positioning */
+#bio-edit-form {
+  display: none; /* Hidden by default */
+}
+
+textarea {
+  width: 50%;
+  resize: none;
+}
   
-  /* Feed styling */
-  .feed-profile-img {
-    width: 40px;   
-    height: 40px; 
-    object-fit: cover;
+/* Feed styling */
+.feed-profile-img {
+  width: 40px;   
+  height: 40px; 
+  object-fit: cover;
 }
 
 /* Like and comment */
 .post-actions button {
-    display: flex;
-    align-items: center;
-    background-color: #E0E0E0;
-    color: #333333;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 14px;
+  display: flex;
+  align-items: center;
+  background-color: #E0E0E0;
+  color: #333333;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .button-icon {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    margin-right: 5px; 
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-right: 5px; 
 }
 
 .post-actions button:hover {
-    background-color: #e7e9ed;
-    color: #333333;
+  background-color: #e7e9ed;
+  color: #333333;
 }
 
 /* 3 dots */
@@ -316,3 +342,4 @@ header.sticky {
   white-space: nowrap; 
   padding: 5px 10px;
 }
+

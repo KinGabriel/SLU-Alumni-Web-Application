@@ -53,48 +53,74 @@
 
     <!-- Back Button -->
       <a href="/" class="btn btn-outline-secondary back-btn">
-        <img src="../assets/images/feed.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Back to Home
+        <img src="../assets/images/feed.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Home
     </a>
 
-    <!-- Alumni Profile -->
-    <div class="container mt-4">
-        <!-- Header Section -->
-        <div class="card shadow-sm">
-            <!-- Cover Photo -->
-            <div class="cover-photo">
-                <img src="../assets/images/cover.jpg" class="img-fluid w-100" alt="Cover Photo">
+   <!-- Alumni Profile -->
+        <div class="container mt-4">
+            <!-- Header Section -->
+            <div class="card shadow-sm">
+                <!-- Cover Photo -->
+                <div class="cover-photo">
+                    <img src="../assets/images/cover.jpg" class="img-fluid w-100" alt="Cover Photo">
+                </div>
+
+                <!-- Profile Section -->
+                <div class="profile-section d-flex align-items-center mt-4 px-4">
+                    <!-- Profile Photo -->
+                    <div class="profile-photo">
+                        <img src="" alt="Profile Picture" class="rounded-circle" name="pfp" style="width: 100px; height: 100px;">
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="profile-details ms-3">
+                        <h4 class="fw-bold mb-0" name="name">Taylor Swift</h4>
+                        
+                        <!-- Stats (Followers, Following, Posts) -->
+                        <div class="stats mb-3">
+                            <div class="stat-item">
+                                <strong>Followers</strong><br><p name="followers_count">2</p>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Following</strong><br><p name="followed_count">2</p>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Posts</strong><br><p name="post_count">126</p>
+                            </div>
+                        </div>
+
+                        <!-- Job Title -->
+                        <p class="mb-0 d-flex align-items-center">
+                            <img src="../assets/images/position.png" alt="Web Developer Icon" class="me-2" style="width: 20px; height: 20px;">
+                            Web Developer
+                        </p>
+
+                        <!-- Location -->
+                        <p class="d-flex align-items-center">
+                            <img src="../assets/images/location.png" alt="Baguio City Icon" class="me-2 rounded-circle" style="width: 20px; height: 20px;">
+                            Baguio City
+                        </p>
+                    </div>
+                </div>
+
+               <!-- Bio Section -->
+               <div class="row mt-4">
+                <div class="col-lg-3 ms-auto" id="bio-section">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Bio</h5>
+                            <p id="bio-text" name="bio">How to code.</p>
+                            <img src="../assets/images/editbio.png" id="edit-bio-img" alt="Edit Bio" class="edit-bio-img" style="cursor: pointer; width: 15px; height: 15px; position: absolute; top: 10px; right: 10px;">
+                            <div id="bio-edit-form" class="mt-3" style="display: none;">
+                                <textarea id="bio-input" class="form-control" rows="4">How to code.</textarea>
+                                <button id="save-bio-btn" class="btn btn-success btn-sm mt-2">Save</button>
+                                <button id="cancel-bio-btn" class="btn btn-secondary btn-sm mt-2">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-    
-            <!-- Profile Section -->
-            <div class="profile-section d-flex align-items-center mt-4 px-4">
-                <!-- Profile Photo -->
-                <div class="profile-photo">
-                    <img src="" alt="Profile Picture" class="rounded-circle" name="pfp">
-                </div>
-             <!-- Profile Details -->
-             <div class="profile-details ms-3">
-                <h5 class="fw-bold mb-0" name="name">Taylor Swift</h5>
-                <!-- TODO fix design  --> 
-                <div class="stat-item">
-                    <strong>Posts</strong><br><p name="post_count"></p>
-                </div>
-                <div class="stat-item" >
-                    <strong>Followers</strong><br><p  name="followers_count"></p>
-                </div>
-                <div class="stat-item" >
-                    <strong>Following</strong><br><p name="followed_count"></p>
-                </div>
-                <p class="mb-0 d-flex align-items-center">
-                    <img src="../assets/images/position.png" alt="Web Developer Icon" class="me-2" style="width: 20px; height: 20px;">
-                    <i class="bi bi-briefcase"></i> Web Developer
-                </p>
-                <p class="d-flex align-items-center">
-                    <img src="../assets/images/location.png" alt="Baguio City Icon" class="me-2 rounded-circle" style="width: 20px; height: 20px;">
-                    <i class="bi bi-geo-alt"></i> Baguio City
-                </p>
-            </div>
-            </div>
-    
+
             <!-- Navigation Tabs -->
             <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
                 <li class="nav-item">
@@ -152,20 +178,45 @@
                 </div>
             </div>
         </div>
-        <!-- Bio Section -->
-        <div class="row mt-4">
-            <div class="col-lg-3 ms-auto" id="bio-section">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Bio</h5>
-                        <p name="bio">How to code.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-        
+        <script>
+            // Get elements
+            const editBioImg = document.getElementById('edit-bio-img');
+            const bioText = document.getElementById('bio-text');
+            const bioEditForm = document.getElementById('bio-edit-form');
+            const bioInput = document.getElementById('bio-input');
+            const saveBioBtn = document.getElementById('save-bio-btn');
+            const cancelBioBtn = document.getElementById('cancel-bio-btn');
+
+            // Show edit form and hide bio text when the edit icon is clicked
+            editBioImg.addEventListener('click', () => {
+                bioText.style.display = 'none'; // Hide the bio text
+                bioEditForm.style.display = 'block'; // Show the edit form
+                bioInput.value = bioText.innerText; // Pre-fill textarea with current bio text
+                editBioImg.style.display = 'none'; // Hide the edit icon
+            });
+
+            // Save bio changes
+            saveBioBtn.addEventListener('click', () => {
+                const updatedBio = bioInput.value; // Get the new bio text
+                bioText.innerText = updatedBio; // Update the displayed bio text
+                bioText.style.display = 'block'; // Show the updated bio text
+                bioEditForm.style.display = 'none'; // Hide the edit form
+                editBioImg.style.display = 'inline-block'; // Show the edit icon again
+
+                // TODO: Save the updated bio to the database or send to a server here
+                console.log('Bio updated:', updatedBio);
+            });
+
+            // Cancel editing bio
+            cancelBioBtn.addEventListener('click', () => {
+                bioText.style.display = 'block'; // Show the original bio text
+                bioEditForm.style.display = 'none'; // Hide the edit form
+                editBioImg.style.display = 'inline-block'; // Show the edit icon again
+            });
+
+        </script>
+    
 <!-- Edit Post Modal -->
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -184,7 +235,7 @@
                     <input type="file" id="editPostImage" accept="image/*" class="form-control">
                 </div>
                 <div id="editImagePreview" class="mb-3 text-center">
-                    <!-- Preview existing or newly uploaded image -->
+                    <!-- Preview existing or newly uploaded image/video -->
                     <img src="" alt="Current Post Image" class="img-fluid rounded" style="max-height: 200px;" id="currentEditImage">
                 </div>
             </div>
