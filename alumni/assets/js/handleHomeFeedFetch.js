@@ -1,6 +1,6 @@
 // handle get posts of users
 function getUserPosts() {
-    fetch('/api/getfeed')
+    fetch('/api/feed/getfeed')
         .then(response => response.json())
         .then(data => {
             const posts = data.posts;
@@ -86,7 +86,7 @@ function handlePostSubmit() {
                 }
             
                 // Send data via fetch
-                fetch('/api/postfeed', {
+                fetch('/api/feed/postfeed', {
                     method: 'POST',
                     body: formData,  
                     credentials: 'include'  
@@ -146,7 +146,7 @@ function handlePostSubmit() {
     }
 }
 function handleLike(postId, likeButton, isLiked, likeCountElement) {
-    fetch(`/api/like/${postId}`, {
+    fetch(`/api/feed/like/${postId}`, {
         method: 'POST',
         credentials: 'include',
     })
@@ -164,6 +164,7 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
         console.error('Error:', error);
     });
 }
+
 
 // Call the functions
 

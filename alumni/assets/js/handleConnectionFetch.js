@@ -9,7 +9,7 @@ function fetchConnections() {
     const searchQueryString = searchQuery ? `&search=${searchQuery}` : '';
     const filterQueryString = filterValue ? `&filter=${filterValue}` : '';
 
-    fetch(`/api/connection?${searchQueryString}${filterQueryString}${sortQuery}`)
+    fetch(`/api/connections/get-connection?${searchQueryString}${filterQueryString}${sortQuery}`)
         .then(response => response.json())
         .then(data => {
             updateConnectionsTable(data);  
@@ -23,7 +23,7 @@ fetchConnections()
 // TODO Modal
 async function deleteFollowing(following_id) {
     try {
-        const response = await fetch(`/api/remove-following/${following_id}`, {
+        const response = await fetch(`/api/connections/emove-following/${following_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ async function deleteFollowing(following_id) {
 // TODO Modal
 async function deleteFollower(follower_id) {
     try {
-        const response = await fetch(`/api/remove-follower/${follower_id}`, {  
+        const response = await fetch(`/api/connections/remove-follower/${follower_id}`, {  
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

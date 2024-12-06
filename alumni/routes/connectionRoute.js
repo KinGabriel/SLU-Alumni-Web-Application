@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(authenticateMiddleware);
 
-router.get('/connection', connections);
+router.get('/get-connection', connections);
 router.delete('/remove-following/:user_id', removeFollowing);
 router.delete('/remove-follower/:user_id', removeFollower);
 
