@@ -213,7 +213,7 @@ nav a.active {
         <a href="../view/addEvents.php">Add Events</a>
         <a href="../view/jobOpportunity.php">Add Jobs</a>
     </nav>
-    <a href="#" target="_blank" class="btn-logout">Logout</a>
+    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
 </header>
 
 <body>
@@ -235,9 +235,8 @@ nav a.active {
                             <input type="search" placeholder="Search by title or category" class="form-control mb-3" />
                             <div class="categories">
                                 <a href="#" class="badge rounded-pill active me-1">All</a>
-                                <a href="#" class="badge rounded-pill me-1">Category 1</a>
-                                <a href="#" class="badge rounded-pill me-1">Category 2</a>
-                                <a href="#" class="badge rounded-pill me-1">Category 3</a>
+                                <a href="#" class="badge rounded-pill me-1">Upcoming</a>
+                                <a href="#" class="badge rounded-pill me-1">Ended</a>
                             </div>
                         </div>
                     </div>
@@ -374,7 +373,7 @@ nav a.active {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
     <!-- Link to custom JavaScript -->
-    <script src="javascript.js"></script>
+    <script src="../assets/js/javascript.js"></script>
 </body>
 
 </html>

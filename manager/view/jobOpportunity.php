@@ -602,7 +602,7 @@ a {
         <a href="../view/addEvents.php">Add Events</a>
         <a href="../view/jobOpportunity.php" class="<?= $currentPage == 'jobOpportunity.php' ? 'active' : '' ?>">Add Jobs</a>
     </nav>
-    <a href="#" target="_blank" class="btn-logout">Logout</a>
+    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
 </header>
 <body>  
   <main class="main-wrapper">
@@ -662,7 +662,7 @@ a {
     </div>
 
           <!-- Step 2 Content  -->
-          <div class="step-content step-2">
+          <div class="step-content step-2" style="display: none;">
             <h1>Upload Company Logo</h1>
             <div class="upload-container">
                 <label for="image-upload" class="upload-label">Choose Image</label>
@@ -715,7 +715,7 @@ a {
           
         </div>
         
-        <div class="step-content step-3" id="step3">
+        <div class="step-content step-3" id="step3" style="display: none;">
           
           <!-- Job Description Section -->
           <div class="job-description">

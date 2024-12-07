@@ -587,12 +587,12 @@ a {
         <span>SLU Alumina</span>
     </h1>
     <nav>
-        <a href="../view/accountsManager.php">Home</a>
+        <a href="../view/managerHome.php">Home</a>
         <a href="../view/accountsManager.php">Accounts</a>
         <a href="../view/addEvents.php" class="<?= $currentPage == 'addEvents.php' ? 'active' : '' ?>">Add Events</a>
         <a href="../view/jobOpportunity.php">Add Jobs</a>
     </nav>
-    <a href="#" target="_blank" class="btn-logout">Logout</a>
+    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
 </header>
 <body>  
   <main class="main-wrapper">
@@ -656,7 +656,7 @@ a {
           </div>
 
           <!-- Step 2 Content  -->
-          <div class="step-content step-2">
+          <div class="step-content step-2" style="display: none;">
             <h1>Upload Image</h1>
             <div class="upload-container">
                 <label for="image-upload" class="upload-label">Choose File</label>
