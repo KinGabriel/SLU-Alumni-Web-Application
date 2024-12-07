@@ -183,6 +183,8 @@ function updateLikeCount(likeCountElement, isLiked) {
     likeCountElement.textContent = `Like (${newLikeCount})`;
     return newLikeCount;
 }
+
+// handles edit and delete
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("edit-post-btn")) {
         const postId = event.target.getAttribute("data-post-id");
@@ -190,40 +192,45 @@ document.addEventListener("click", (event) => {
             console.error("Post ID is missing");
             return;
         }
-        
+
         currentPostElement = event.target.closest(".post");
 
         const postContent = currentPostElement.querySelector(".post-content p").innerText;
         const mediaElement = currentPostElement.querySelector(".post-content img, .post-content video");
         const mediaPreviewContainer = document.getElementById("editMediaPreview");
 
+        // Set initial values in the modal
         document.getElementById("editPostContent").value = postContent;
         mediaPreviewContainer.innerHTML = "";
-        
+
+        // Display current media in the preview
         if (mediaElement) {
+            let previewElement;
             if (mediaElement.tagName === "IMG") {
-                const imgPreview = document.createElement("img");
-                imgPreview.src = mediaElement.src;
-                imgPreview.classList.add("img-fluid", "rounded");
-                imgPreview.style.maxHeight = "200px";
-                mediaPreviewContainer.appendChild(imgPreview);
+                previewElement = document.createElement("img");
+                previewElement.src = mediaElement.src;
             } else if (mediaElement.tagName === "VIDEO") {
-                const videoPreview = document.createElement("video");
-                videoPreview.src = mediaElement.src;
-                videoPreview.controls = true;
-                videoPreview.classList.add("img-fluid", "rounded");
-                videoPreview.style.maxHeight = "200px";
-                mediaPreviewContainer.appendChild(videoPreview);
+                previewElement = document.createElement("video");
+                previewElement.src = mediaElement.src;
+                previewElement.controls = true;
             }
+            previewElement.classList.add("img-fluid", "rounded");
+            previewElement.style.maxHeight = "200px";
+            mediaPreviewContainer.appendChild(previewElement);
         }
 
         const editPostModal = new bootstrap.Modal(document.getElementById("editPostModal"));
         editPostModal.show();
 
-        // Handle Save Changes
-        document.getElementById("saveEditPost").addEventListener("click", () => {
+        // Clear old event listeners to prevent duplicates
+        const saveButton = document.getElementById("saveEditPost");
+        const clonedSaveButton = saveButton.cloneNode(true);
+        saveButton.parentNode.replaceChild(clonedSaveButton, saveButton);
+
+        clonedSaveButton.addEventListener("click", () => {
             const updatedText = document.getElementById("editPostContent").value.trim();
-            const file = document.getElementById("editPostMedia").files[0];
+            const fileInput = document.getElementById("editPostMedia");
+            const file = fileInput.files[0];
 
             const postTextElement = currentPostElement.querySelector(".post-content p");
             postTextElement.textContent = updatedText;
@@ -232,6 +239,7 @@ document.addEventListener("click", (event) => {
             const existingMedia = mediaContainer.querySelector("img, video");
             if (existingMedia) mediaContainer.removeChild(existingMedia);
 
+            // Add new media preview if a file is selected
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
@@ -239,7 +247,6 @@ document.addEventListener("click", (event) => {
                     if (file.type.startsWith("image/")) {
                         newMediaElement = document.createElement("img");
                         newMediaElement.src = e.target.result;
-                        newMediaElement.alt = "Updated Image";
                     } else if (file.type.startsWith("video/")) {
                         newMediaElement = document.createElement("video");
                         newMediaElement.src = e.target.result;
@@ -249,25 +256,29 @@ document.addEventListener("click", (event) => {
                     mediaContainer.appendChild(newMediaElement);
                 };
                 reader.readAsDataURL(file);
-            } else if (mediaElement) {
-                // If no new file is selected, re-append the current media
-                mediaContainer.appendChild(mediaElement);
             }
 
+            // Hide the modal after save
             const editPostModalInstance = bootstrap.Modal.getInstance(document.getElementById("editPostModal"));
             editPostModalInstance.hide();
 
             try {
-                const result = editPost(postId, updatedText, file || mediaElement);  
-                console.log('Post updated successfully:', result); // TODO Modal
+                const result = editPost(postId, updatedText, file || mediaElement);
+                console.log("Post updated successfully:", result); // TODO Modal
+                // Show success modal
+                const successModal = new bootstrap.Modal(document.getElementById("successModal"));
+                successModal.show();
             } catch (error) {
-                console.error('Failed to update the post:', error);
+                console.error("Failed to update the post:", error); // TODO Modal
+                // Show error modal
+                const errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
+                errorModal.show();
             }
+            // Clear file input to avoid duplicated uploads
+            fileInput.value = "";
         });
     }
 });
-
-
 
 // Handle Delete Post button click
     document.addEventListener("click", (event) => {

@@ -203,27 +203,30 @@ nav li {
     padding-left: 1.5vw;
 }
 
+/* Style for the active navigation item */
+nav li.active {
+    position: relative;  
+}
+
+/* Left bar for active item */
 nav li.active::before {
-    content: '';
+    content: '';  
     position: absolute;
     left: 0;
     top: 0;
-    width: 7px; 
-    height: 100%;
-    background-color: #FFB200;
+    bottom: 0;
+    width: 5px;  
+    background-color: #FFB200;  
 }
 
-nav a {
+/* Style for the navigation links */
+nav li a {
     text-decoration: none;
     color: #333;
     font-size: 1.0vw; 
     font-weight: bold;
     margin-left: 0.4vw; 
     text-align: center;
-}
-
-nav a:hover {
-    color: #003DA5;
 }
 
 /* Icon Styling */
