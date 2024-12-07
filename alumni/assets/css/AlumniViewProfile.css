@@ -343,3 +343,11 @@ textarea {
   padding: 5px 10px;
 }
 
+/* Posted Video or Image */
+.post-image, .post-content video {
+  display: block; /* Make images and videos behave like block elements */
+  margin: 0 auto; 
+  max-width: 100%; 
+  height: auto; 
+  object-fit: contain; /* Ensure the media fits within its container without cropping */
+}

@@ -187,7 +187,26 @@
                     </div>
                 </div>
             </div>
-        
+
+            <!-- View Image Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">View Image</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="modalImage" src="" class="img-fluid" alt="Large Image">
+                            <!-- Image acting as download link -->
+                            <a id="downloadLink" href="#" download class="download-icon">
+                                <img src="../assets/images/download.png" alt="Download Icon" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Comment Modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

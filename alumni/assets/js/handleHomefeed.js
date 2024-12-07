@@ -117,8 +117,6 @@ function createPostContent(post) {
     return postContent;
 }
 
-
-
 // Handle image input preview
 document.getElementById("photoInput").addEventListener("change", function (event) {
     const files = event.target.files;
@@ -202,8 +200,6 @@ function createPostActionButton(type, icon, count) {
     return button;
 }
 
-
-
 // handle the date formating for the user post
 function formatDate(dateTime) {
     const date = new Date(dateTime); 
@@ -261,3 +257,23 @@ function updateLikeCount(likeCountElement, isLiked) {
     return newLikeCount;
 }
 // end of helper methods for likes
+
+// Handle Image Click to View in Modal
+document.addEventListener("DOMContentLoaded", () => {
+    const postImages = document.querySelectorAll('.post-image');
+    
+    postImages.forEach(image => {
+        image.addEventListener('click', () => {
+            const imageUrl = image.src;
+            const modalImage = document.getElementById('modalImage');
+            const downloadLink = document.getElementById('downloadLink');
+            // Set the modal image source
+            modalImage.src = imageUrl; 
+            // Set the download link
+            downloadLink.href = imageUrl; 
+          
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            imageModal.show();
+        });
+    });
+});

@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user['user_type'] == 'admin') {
             header("Location: ../../admin/view/adminDashboard.php");
         } elseif ($user['user_type'] == 'manager') {
-            header("Location: ../../manager/view/accountsManager.php");
+            header("Location: ../../manager/view/managerHome.php");
         } else {
             setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", true, true);
             header("Location: http://localhost:8080");
