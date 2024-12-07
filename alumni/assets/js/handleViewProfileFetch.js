@@ -52,11 +52,58 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
     });
 }
 
-function deletePost(){
+async function deletePost(postId) {
+    try {
+        const response = await fetch(`/delete/${postId}`, {
+            method: 'DELETE',
+        });
 
+        if (!response.ok) {
+            throw new Error(`Failed to delete post with ID ${postId}.`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+async function editPost(postId, description, mediaFile) {
+    const datetime = new Date().toISOString();
+    const formData = new FormData();
+    formData.append('description', description);
+    formData.append('datetime', datetime);
+
+    // Check if the media file is provided
+    if (mediaFile) {
+        // Check if the file is an image or video
+        const fileType = mediaFile.type.split('/')[0];  // 'image' or 'video'
+
+        // Append to the correct field based on the file type
+        if (fileType === 'image') {
+            formData.append('images[]', mediaFile); // Append to 'images[]' for images
+        } else if (fileType === 'video') {
+            formData.append('videos[]', mediaFile); // Append to 'videos[]' for videos
+        }
+    }
+
+    try {
+        const response = await fetch(`/api/viewProfile/editPost/${postId}`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to edit the post.');
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error.message);
+        throw error;
+    }
 }
 
-function editPost(){
-    
-}
+
 getOwnPosts()

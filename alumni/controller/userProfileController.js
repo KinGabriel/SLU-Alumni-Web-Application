@@ -109,3 +109,39 @@ export const handleLikes = (req, res) => {
         }
     });
 };
+
+export const editPost = async (req, res) => {
+    try {
+        const postId = req.params.postId;  // Extract postId from URL
+        const { description, datetime } = req.body;  // Extract data from request body
+
+        // Collect uploaded images and videos
+        const uploadedImages = req.files['images[]'] || [];
+        const uploadedVideos = req.files['videos[]'] || [];
+
+        // Combine images and videos into a single array (bannerFiles)
+        const bannerFiles = [...uploadedImages, ...uploadedVideos];
+
+        // Join the file paths into a comma-separated string
+        const banner = bannerFiles.map(file => file.path).join(',');
+
+        console.log('Received data:', req.body);  // Log the received data
+        console.log('Uploaded files:', bannerFiles);  // Log the uploaded files
+
+        // SQL query to update the post
+        const query = `
+            UPDATE posts
+            SET description = ?, banner = ?, datetime = ?
+            WHERE \`post_id\` = ?
+        `;
+
+        // Execute the query with the updated data
+        await dbConnection.execute(query, [description, banner, datetime, postId]);
+
+        // Respond with success message
+        res.status(200).json({ message: 'Post updated successfully' });
+    } catch (error) {
+        console.error('Error editing post:', error);  // Log any errors
+        res.status(500).json({ message: 'Failed to update the post' });
+    }
+};
