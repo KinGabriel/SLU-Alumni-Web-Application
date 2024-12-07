@@ -1,3 +1,7 @@
+<?php
+require("../controller/HandleSession.php");
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../Manager/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
 <style>
@@ -156,6 +160,12 @@ nav a:hover {
   text-decoration-thickness: 2.5px;
 }
 
+nav a.active {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 178, 0, 1);
+    text-decoration-thickness: 2.5px;
+}
+
 /* Log in button */
 .btn-logout {
   background-color: #1D4ED8;
@@ -194,14 +204,14 @@ nav a:hover {
 <div class="header-seperator"></div>
 <header>
     <h1>
-        <img src="Logo.png" alt="SLU Alumina Logo">
+        <img src="../assets/images/Logo.png" alt="SLU Alumina Logo">
         <span>SLU Alumina</span>
     </h1>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#addevents">Add Events</a>
-        <a href="#addjobs">Add Jobs</a>
+        <a href="../view/managerHome.php" class="<?= $currentPage == 'managerHome.php' ? 'active' : '' ?>">Home</a>
+        <a href="../view/accountsManager.php">Accounts</a>
+        <a href="../view/addEvents.php">Add Events</a>
+        <a href="../view/jobOpportunity.php">Add Jobs</a>
     </nav>
     <a href="#" target="_blank" class="btn-logout">Logout</a>
 </header>
@@ -259,7 +269,7 @@ nav a:hover {
                 <h5 class="card-title">Software Engineer</h5>
                 <span class="badge bg-success mb-2">FULL TIME</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
@@ -277,7 +287,7 @@ nav a:hover {
                 <h5 class="card-title">Visual Designer</h5>
                 <span class="badge bg-success mb-2">FULL TIME</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
@@ -295,7 +305,7 @@ nav a:hover {
                 <h5 class="card-title">Marketing Manager</h5>
                 <span class="badge bg-info mb-2">INTERNSHIP</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
@@ -313,7 +323,7 @@ nav a:hover {
                 <h5 class="card-title">Marketing Manager</h5>
                 <span class="badge bg-info mb-2">INTERNSHIP</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
@@ -330,7 +340,7 @@ nav a:hover {
                 <h5 class="card-title">Marketing Manager</h5>
                 <span class="badge bg-info mb-2">INTERNSHIP</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
@@ -348,7 +358,7 @@ nav a:hover {
                 <h5 class="card-title">Marketing Manager</h5>
                 <span class="badge bg-info mb-2">INTERNSHIP</span>
                 <div class="d-flex align-items-center">
-                    <img src="google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
                     <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>

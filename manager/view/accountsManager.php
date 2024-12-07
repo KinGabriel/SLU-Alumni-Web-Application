@@ -25,10 +25,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <span>SLU Alumina</span>
     </h1>
     <nav>
-        <a href="../view/accountsManager.php" class="<?= $currentPage == 'accountsManager.php' ? 'active' : '' ?>">Home</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#addevents">Add Events</a>
-        <a href="#addjobs">Add Jobs</a>
+        <a href="../view/managerHome.php">Home</a>
+        <a href="../view/accountsManager.php" class="<?= $currentPage == 'accountsManager.php' ? 'active' : '' ?>">Accounts</a>
+        <a href="../view/addEvents.php">Add Events</a>
+        <a href="../view/jobOpportunity.php">Add Jobs</a>
     </nav>
     <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
 </header>

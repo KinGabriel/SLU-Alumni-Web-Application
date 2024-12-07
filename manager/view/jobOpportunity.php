@@ -1,3 +1,7 @@
+<?php
+require("../controller/HandleSession.php");
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -140,6 +144,12 @@ nav a:hover {
   text-decoration: underline;
   text-decoration-color: rgba(255, 178, 0, 1);
   text-decoration-thickness: 2.5px;
+}
+
+nav a.active {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 178, 0, 1);
+    text-decoration-thickness: 2.5px;
 }
 
 /* Log in button */
@@ -577,20 +587,20 @@ a {
     <title>My Web Page</title>
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="addEvents.css">
+    <link rel="stylesheet" href="../assets/css/addEvents.css">
 </head>
 
 <div class="header-seperator"></div>
 <header>
     <h1>
-        <img src="Logo.png" alt="SLU Alumina Logo">
+        <img src="../assets/images/Logo.png" alt="SLU Alumina Logo">
         <span>SLU Alumina</span>
     </h1>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#accounts">Accounts</a>
-        <a href="#addevents">Add Events</a>
-        <a href="#addjobs">Add Jobs</a>
+        <a href="../view/managerHome.php">Home</a>
+        <a href="../view/accountsManager.php">Accounts</a>
+        <a href="../view/addEvents.php">Add Events</a>
+        <a href="../view/jobOpportunity.php" class="<?= $currentPage == 'jobOpportunity.php' ? 'active' : '' ?>">Add Jobs</a>
     </nav>
     <a href="#" target="_blank" class="btn-logout">Logout</a>
 </header>
@@ -737,7 +747,7 @@ a {
       </div>
   </main>
 
-  <script src="jobOpp.js"></script>
+  <script src="../assets/js/jobOpp.js"></script>
 </body>
 
 
