@@ -18,8 +18,8 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('small');
     postTime.classList.add('text-muted');
-    postTime.dataset.isEdited = post.isEdited || false; // Track if edited
-    postTime.textContent = formatDate(post.datetime, post.isEdited);
+    postTime.dataset.is_edited = post.is_edited || false; // Track if edited
+    postTime.textContent = formatDate(post.datetime, post.is_edited);
 
     userInfo.appendChild(userName);
     userInfo.appendChild(postTime);
@@ -308,24 +308,54 @@ document.addEventListener("click", (event) => {
     });
 
 // Handle Delete Post button click
-    document.addEventListener("click", (event) => {
-        if (event.target.classList.contains("delete-post-btn")) {
-            const button = event.target;
-            currentPostElement = button.closest(".post");
-            // Show the delete modal
-            const deleteModal = new bootstrap.Modal(document.getElementById("deletePostModal"));
-            deleteModal.show();
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-post-btn")) {
+        const button = event.target;
+        currentPostElement = button.closest(".post");
+
+        // Get the post ID from the data attribute of the button
+        const postId = button.getAttribute("data-post-id");
+
+        if (!postId) {
+            console.error("Post ID is missing");
+            return;
         }
-    });
+
+        // Store the postId in the delete modal for confirmation
+        const confirmDeleteButton = document.getElementById("confirmDeletePost");
+        confirmDeleteButton.setAttribute("data-post-id", postId);
+
+        // Show the delete modal
+        const deleteModal = new bootstrap.Modal(document.getElementById("deletePostModal"));
+        deleteModal.show();
+    }
+});
 
 // Confirm Delete Post
-    document.getElementById("confirmDeletePost").addEventListener("click", () => {
-        if (currentPostElement) {
-            currentPostElement.remove(); // Remove post from the DOM
-            // Simulate API call to delete post
-            console.log("Post deleted");
-            // Close the delete modal
-            const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deletePostModal"));
-            deleteModal.hide();
-        }
-    });
+document.getElementById("confirmDeletePost").addEventListener("click", (event) => {
+    const postId = event.target.getAttribute("data-post-id");
+
+    if (!postId) {
+        console.error("Post ID is missing");
+        return;
+    }
+
+    if (currentPostElement) {
+        currentPostElement.remove(); // Remove post from the DOM
+
+        // Call the function to delete the post (send the postId to the backend or server)
+        deletePost(postId);
+
+        console.log("Post deleted");
+
+        // Close the delete modal
+        const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deletePostModal"));
+        deleteModal.hide();
+    }
+});
+
+// Function to handle post deletion (for server-side action)
+function deletePost(postId) {
+    // Implement the logic to delete the post on the server (e.g., via an API call)
+    console.log(`Sending request to delete post with ID: ${postId}`);
+}

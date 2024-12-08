@@ -5,14 +5,13 @@ import path from 'path';
 export const getOwnPost =(req, res) =>{
     const userId = req.cookies.user_id;
     const query = `
-        SELECT 
+    SELECT 
         p.post_id,
         p.description,
         p.banner,
-        p.is_deleted,
-        p.access_type,
         p.post_type,
         p.datetime,
+        p.is_edited,
         COUNT(DISTINCT l.like_id) AS like_count,
         COUNT(DISTINCT c.comm_id) AS comment_count,
         u.user_id AS poster_id,
@@ -24,17 +23,15 @@ export const getOwnPost =(req, res) =>{
     LEFT JOIN comments c ON p.post_id = c.post_id
     LEFT JOIN follows f ON f.followed_id = p.user_id 
     JOIN user u ON u.user_id = p.user_id
-    WHERE 
-        p.is_deleted = 0
-        AND (
-            p.access_type = 'public' 
-            OR (p.access_type = 'following' AND f.followed_id IS NOT NULL) 
-            OR (p.access_type = 'private' AND p.user_id = ?)
+    WHERE  (
+            ( f.followed_id IS NOT NULL) 
+            OR (p.user_id = ?)
         ) AND p.user_id = ?
     GROUP BY 
         p.post_id
     ORDER BY p.post_id DESC
-    `;
+`;
+
 
     dbConnection.query(query, [userId, userId,userId], (error, results) => {
         if (error) {
@@ -55,24 +52,28 @@ export const getOwnPost =(req, res) =>{
         res.status(200).json({ posts });
     });
 }
-
-// helper method for images and videos
+// Helper method for handling images and videos
 const handleMedia = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {
         bannerPath = bannerPath.toString('utf-8').trim();
-        if (fs.existsSync(bannerPath)) {
-            const ext = path.extname(bannerPath).toLowerCase();
-            if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
-                return `data:image/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
-            if (['.mp4', '.mkv', '.mov'].includes(ext)) {
-                return `data:video/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
+    }
+    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
+        const ext = path.extname(bannerPath).toLowerCase();
+        
+        // Handle image files
+        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+            const imageBuffer = fs.readFileSync(bannerPath);
+            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
+        }
+        
+        // Handle video files
+        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
+            const videoBuffer = fs.readFileSync(bannerPath);
+            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
         }
     }
-    return '';
+    return ''; // if empty
 };
-
 export const handleLikes = (req, res) => {
     const userId = req.cookies.user_id;
     const postId = req.params.postId; 
@@ -112,31 +113,21 @@ export const handleLikes = (req, res) => {
 
 export const editPost = async (req, res) => {
     try {
-        const postId = req.params.postId;  // Extract postId from URL
-        const { description, datetime } = req.body;  // Extract data from request body
-
-        // Collect uploaded images and videos
+        const postId = req.params.postId; 
+        const { description, datetime } = req.body;  
+        const setEdit = 1;
         const uploadedImages = req.files['images[]'] || [];
         const uploadedVideos = req.files['videos[]'] || [];
-
-        // Combine images and videos into a single array (bannerFiles)
         const bannerFiles = [...uploadedImages, ...uploadedVideos];
-
-        // Join the file paths into a comma-separated string
         const banner = bannerFiles.map(file => file.path).join(',');
-
-        console.log('Received data:', req.body);  // Log the received data
-        console.log('Uploaded files:', bannerFiles);  // Log the uploaded files
-
-        // SQL query to update the post
         const query = `
             UPDATE posts
-            SET description = ?, banner = ?, datetime = ?
+            SET description = ?, banner = ?, datetime = ?, is_edited = ?
             WHERE \`post_id\` = ?
         `;
 
         // Execute the query with the updated data
-        await dbConnection.execute(query, [description, banner, datetime, postId]);
+        await dbConnection.execute(query, [description, banner, datetime,setEdit, postId]);
 
         // Respond with success message
         res.status(200).json({ message: 'Post updated successfully' });
@@ -145,3 +136,14 @@ export const editPost = async (req, res) => {
         res.status(500).json({ message: 'Failed to update the post' });
     }
 };
+
+export const deletePost = async (req,res) => {
+    try {
+    const postId = req.params.postId; 
+    const query = `  DELETE FROM  posts  WHERE  post_id = ?`;
+    await dbConnection.execute(query, [postId]);
+} catch (error) {
+    console.error('Error editing post:', error);  // Log any errors
+    res.status(500).json({ message: 'Failed to update the post' });
+}
+}

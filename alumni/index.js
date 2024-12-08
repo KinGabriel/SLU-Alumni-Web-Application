@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import alumniRoutes from './routes/alumniRoute.js';
 import feedRoutes from './routes/feedRoute.js';
 import connectionRoutes from './routes/connectionRoute.js';
-import useProfileRoute from './routes/useProfileRoute.js';
+import useProfileRoute from './routes/userProfileRoute.js';
 import { cookieMiddleware, cookieParser } from './middleware/cookieMiddleware.js';
 import sessionMiddleware from './middleware/sessionMiddleware.js';
 import staticMiddleware from './middleware/staticMiddleware.js';

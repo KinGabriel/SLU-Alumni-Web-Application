@@ -4,7 +4,7 @@ import path from 'path';
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
-    const { description, access_type, post_type, datetime } = req.body;
+    const { description, post_type, datetime } = req.body;
 
     const uploadedImages = req.files['images[]'] || [];
     const uploadedVideos = req.files['videos[]'] || [];
@@ -16,8 +16,8 @@ export const handleUserPost = (req, res) => {
     console.log('Received data:', req.body);
     console.log('Uploaded files:', bannerFiles);
 
-    const query = "INSERT INTO posts (description, banner, access_type, post_type, datetime, user_id) VALUES (?, ?, ?, ?, ?, ?)";
-    dbConnection.query(query, [description, banner, access_type, post_type, datetime, userId], (err, result) => {
+    const query = "INSERT INTO posts (description, banner,  post_type, datetime, user_id) VALUES (?,  ?, ?, ?, ?)";
+    dbConnection.query(query, [description, banner,  post_type, datetime, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });
@@ -28,38 +28,31 @@ export const handleUserPost = (req, res) => {
 export const getPost = (req, res) => {
     const userId = req.cookies.user_id;
     const query = `
-        SELECT 
-        p.post_id,
-        p.description,
-        p.banner,
-        p.is_deleted,
-        p.access_type,
-        p.post_type,
-        p.datetime,
-        COUNT(DISTINCT l.like_id) AS like_count,
-        COUNT(DISTINCT c.comm_id) AS comment_count,
-        u.user_id AS poster_id,
-        u.pfp,
-        CONCAT(u.fname, ' ', u.lname) AS name,
-        (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
-    FROM posts p
-    LEFT JOIN likes l ON p.post_id = l.post_id
-    LEFT JOIN comments c ON p.post_id = c.post_id
-    LEFT JOIN follows f ON f.followed_id = p.user_id 
-    JOIN user u ON u.user_id = p.user_id
-    WHERE 
-        p.is_deleted = 0
-        AND (
-            p.access_type = 'public' 
-            OR (p.access_type = 'following' AND f.followed_id IS NOT NULL) 
-            OR (p.access_type = 'private' AND p.user_id = ?)
-        )
-    GROUP BY 
-        p.post_id
+    SELECT 
+            p.post_id,
+            p.banner,
+            p.post_type,
+            p.datetime,
+            COUNT(DISTINCT l.like_id) AS like_count,
+            COUNT(DISTINCT c.comm_id) AS comment_count,
+            u.user_id AS poster_id,
+            u.pfp,
+            CONCAT(u.fname, ' ', u.lname) AS name,
+            (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
+        FROM posts p
+        LEFT JOIN likes l ON p.post_id = l.post_id
+        LEFT JOIN comments c ON p.post_id = c.post_id
+        LEFT JOIN follows f ON f.followed_id = p.user_id
+        JOIN user u ON u.user_id = p.user_id
+        WHERE 
+        p.user_id = ?  
+        OR f.follower_id = ?  
+GROUP BY 
+    p.post_id
     ORDER BY p.post_id DESC
-    `;
+`;
 
-    dbConnection.query(query, [userId, userId], (error, results) => {
+    dbConnection.query(query, [userId, userId,userId], (error, results) => {
         if (error) {
             console.error('Database error:', error);
             return res.status(500).json({ error: 'Failed to fetch posts.' });
@@ -78,21 +71,27 @@ export const getPost = (req, res) => {
         res.status(200).json({ posts });
     });
 };
-// helper method for images and videos
+// Helper method for handling images and videos
 const handleMedia = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {
         bannerPath = bannerPath.toString('utf-8').trim();
-        if (fs.existsSync(bannerPath)) {
-            const ext = path.extname(bannerPath).toLowerCase();
-            if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
-                return `data:image/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
-            if (['.mp4', '.mkv', '.mov'].includes(ext)) {
-                return `data:video/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
+    }
+    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
+        const ext = path.extname(bannerPath).toLowerCase();
+        
+        // Handle image files
+        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+            const imageBuffer = fs.readFileSync(bannerPath);
+            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
+        }
+        
+        // Handle video files
+        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
+            const videoBuffer = fs.readFileSync(bannerPath);
+            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
         }
     }
-    return ''; // Return empty string if file is invalid or doesn't exist
+    return ''; // if empty
 };
 
 

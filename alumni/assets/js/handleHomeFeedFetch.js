@@ -60,13 +60,10 @@ function handlePostSubmit() {
         if (submitPostButton) {
             submitPostButton.addEventListener('click', () => {
                 const description = document.querySelector('.modal-body textarea').value;
-                const access_type = 'public';
                 const post_type = 'normal';
                 const datetime = new Date().toISOString();  
-            
                 const formData = new FormData();
                 formData.append('description', description);
-                formData.append('access_type', access_type);
                 formData.append('post_type', post_type);
                 formData.append('datetime', datetime);
             
