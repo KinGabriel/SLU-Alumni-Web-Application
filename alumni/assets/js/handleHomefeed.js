@@ -211,26 +211,12 @@ function createPostActions(post) {
             document.body.appendChild(commentModal);
         }
 
-        // Load comments for the specific post
         loadComments(postId);
-
-        // Initialize and show the modal
         const modal = new bootstrap.Modal(commentModal);
         modal.show();
+        submitComment(postId); 
+       
     });
-
-    // Handle comment submission
-    const submitCommentButton = document.getElementById('submitComment');
-    if (submitCommentButton) {
-        submitCommentButton.addEventListener('click', function() {
-            const commentText = document.getElementById('commentInput').value.trim();
-            if (commentText) {
-                const postId = document.querySelector('.modal').getAttribute('data-post-id');
-                submitComment(postId, commentText);
-                document.getElementById('commentInput').value = ''; // Clear the input
-            }
-        });
-    }
 
     actionsContainer.appendChild(likeButton);
     actionsContainer.appendChild(commentButton);
@@ -269,6 +255,26 @@ function createCommentModal(postId) {
     `;
 
     return modal;
+}
+
+// Function to attach the comment submission listener
+function submitComment(postId) {
+    const submitCommentButton = document.getElementById('submitComment');
+    if (submitCommentButton) {
+        submitCommentButton.addEventListener('click', function() {
+            const commentText = document.getElementById('commentInput').value.trim();
+            if (commentText) {
+               
+
+                postComment(postId, commentText).then(success => {
+                    if (success) {
+                        loadComments(postId);  
+                        document.getElementById('commentInput').value = ''; 
+                    }
+                });
+            }
+        });
+    }
 }
 
 

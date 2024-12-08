@@ -1,6 +1,7 @@
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
+import sanitizeHtml from 'sanitize-html';
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
@@ -93,11 +94,36 @@ const handleMedia = (bannerPath) => {
     }
     return ''; // if empty
 };
+export const handleComments = (req, res) => {
+    const userId = req.cookies.user_id;
+    const { post_id, comment_message } = req.body; 
 
-export const handleComments  = (req, res) => {
+    if (!post_id || !comment_message) {
+        return res.status(400).json({ error: 'Post ID and comment text are required' });
+    }
+    const sanitizedCommentText = comment_message.trim();
+    if (sanitizedCommentText.length === 0) {
+        return res.status(400).json({ error: 'Comment cannot be empty' });
+    }
 
-}
-// Assuming you have already set up the 'dbConnection' correctly
+    const query = `
+        INSERT INTO comments (post_id, user_id, comment_message, date)
+        VALUES (?, ?, ?, NOW());
+    `;
+
+    dbConnection.execute(query, [post_id, userId, sanitizedCommentText], (err, results) => {
+        if (err) {
+            console.error('Error inserting comment:', err);
+            return res.status(500).json({ error: 'Database error occurred' });
+        }
+
+        res.status(200).json({ success: true, message: 'Comment submitted successfully' });
+    
+    });
+};
+
+
+
 export const getComments = (req, res) => {
     const postId = req.params.postId;
 

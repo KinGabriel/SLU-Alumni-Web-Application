@@ -19,7 +19,7 @@ router.post(
 );
 
 router.get('/getfeed', getPost); // Get posts
-router.post('/comment', handleComments);
+router.post('/send-comment', handleComments);
 router.post('/like/:postId', handleLikes);
 router.get('/getComments/:postId',getComments );
 
