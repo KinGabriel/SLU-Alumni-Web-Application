@@ -54,14 +54,14 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
 
 async function deletePost(postId) {
     try {
-        const response = await fetch(`/delete/${postId}`, {
+        const response = await fetch(`/api/viewProfile/deletePost/${postId}`, {
             method: 'DELETE',
         });
 
         if (!response.ok) {
-            throw new Error(`Failed to delete post with ID ${postId}.`);
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to delete the post.');
         }
-
         const result = await response.json();
         return result;
     } catch (error) {

@@ -32,7 +32,6 @@ export const getPost = (req, res) => {
         p.post_id,
         p.description,
         p.banner,
-        p.is_deleted,
         p.access_type,
         p.post_type,
         p.datetime,
@@ -47,9 +46,7 @@ export const getPost = (req, res) => {
     LEFT JOIN comments c ON p.post_id = c.post_id
     LEFT JOIN follows f ON f.followed_id = p.user_id 
     JOIN user u ON u.user_id = p.user_id
-    WHERE 
-        p.is_deleted = 0
-        AND (
+    WHERE (
             p.access_type = 'public' 
             OR (p.access_type = 'following' AND f.followed_id IS NOT NULL) 
             OR (p.access_type = 'private' AND p.user_id = ?)
@@ -78,21 +75,27 @@ export const getPost = (req, res) => {
         res.status(200).json({ posts });
     });
 };
-// helper method for images and videos
+// Helper method for handling images and videos
 const handleMedia = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {
         bannerPath = bannerPath.toString('utf-8').trim();
-        if (fs.existsSync(bannerPath)) {
-            const ext = path.extname(bannerPath).toLowerCase();
-            if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
-                return `data:image/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
-            if (['.mp4', '.mkv', '.mov'].includes(ext)) {
-                return `data:video/${ext.slice(1)};base64,${fs.readFileSync(bannerPath).toString('base64')}`;
-            }
+    }
+    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
+        const ext = path.extname(bannerPath).toLowerCase();
+        
+        // Handle image files
+        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+            const imageBuffer = fs.readFileSync(bannerPath);
+            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
+        }
+        
+        // Handle video files
+        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
+            const videoBuffer = fs.readFileSync(bannerPath);
+            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
         }
     }
-    return ''; // Return empty string if file is invalid or doesn't exist
+    return ''; // if empty
 };
 
 
