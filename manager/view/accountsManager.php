@@ -18,36 +18,90 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="../assets/css/accountsManager.css">
 </head>
 
-<div class="header-seperator"></div>
-<header>
-    <h1>
-        <img src="../assets/images/Logo.png" alt="SLU Alumina Logo">
-        <span>SLU Alumina</span>
-    </h1>
-    <nav>
-        <a href="../view/managerHome.php">Home</a>
-        <a href="../view/accountsManager.php" class="<?= $currentPage == 'accountsManager.php' ? 'active' : '' ?>">Accounts</a>
-        <a href="../view/addEvents.php">Add Events</a>
-        <a href="../view/jobOpportunity.php">Add Jobs</a>
-    </nav>
-    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
-</header>
+
+
 
 <body>
-    
+        <!-- Header separator -->
+        <div class="header-separator"> </div>
+    <header>
+        <h1>
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+            <span>SLU Alumina</span>
+        </h1>
+        <div class="header-profile">
+            <!-- <i class="fa-regular fa-bell"></i> -->
+            <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" >
+            <img src="<?php echo $_SESSION['pfp'] ?: '../assets\images\alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
+            <div class="account-details">
+                <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
+            </div>
+        </div>
+    </header>
+
+<!-- Sidebar -->
+<div class="sidebar-container">
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/managerHome.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'managerHome.php' ? 'active' : ''; ?>" id="homeLink">
+                    <img src="../assets/images/dashboard.png" alt="Home" class="sidebar-icon">
+                    <span class="menu-item-text">Home</span>
+                </a>
+            </li>
+  
+            <li>
+            <a href="../view/accountsManager.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                </a>
+            </li>
+
+            <li>
+            <a href="../view/addEvents.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                    <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+
+            <li>
+            <a href="../view/jobOpportunity.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+   
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
+        <a href="../controller/ProcessLogOut.php">
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
+    </div>
+</div>
         <!-- User Requests table -->
-        <div class="user-content" id="userContent">
-            <h1>Account Requests List</h1>
-            <table class="user-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <!-- <th>ID Number</th> -->
-                        <th>Graduation Year</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+    <div class="user-content" id="userContent">
+        <h1>Account Requests List</h1>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>ID Number</th>
+                    <th>Graduation Year</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
                 <tbody id="applicantTableBody">
                 

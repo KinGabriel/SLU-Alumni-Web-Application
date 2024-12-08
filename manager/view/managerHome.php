@@ -20,33 +20,32 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </head>
 
 <style>
- * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Readex_Pro;
 }
 
-
-
 /* Header */
 header {
     display: flex;
-    justify-content: space-between; /* Space between the logo and profile */
-    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between logo and profile */
+    align-items: center; /* Center vertically */
     background-color: white;
     padding: 0.1vw;
-    /* padding-right: 3vw; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index: 1000; 
-    height: 4vw; 
+    z-index: 1000;
+    height: 4vw;
 }
+
 @font-face {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
-  }
+}
+
 header h1 {
     display: flex;
     align-items: center;
@@ -60,20 +59,21 @@ header span {
 
 header img.slu-logo {
     height: 50px;
-    width: auto; 
+    width: auto;
     margin-right: 10px;
 }
 
+/* Separator */
 .header-separator {
     background-color: #003DA5;
     padding-bottom: 2vw;
     width: 100%;
     margin-top: -1vh;
-    /* margin-bottom: 0.5vh; */
 }
 
+/* Profile */
 .notif-bell {
-    margin-right: 10px; /* Adjust the value as needed */
+    margin-right: 10px;
 }
 
 .profile-pic {
@@ -81,14 +81,13 @@ header img.slu-logo {
     height: 40px;
     width: 40px;
     margin-right: 0.8rem;
-    display: inline-block; /* Ensure the image is displayed as a block */
-    border: 1px solid #ccc; /* Add a border to visualize it */
+    display: inline-block;
+    border: 1px solid #ccc;
 }
 
 .header-profile {
     display: flex;
-    /* flex-direction: column;  */
-    align-items: center; /* Align items to the left */
+    align-items: center;
 }
 
 .header-profile i {
@@ -96,26 +95,19 @@ header img.slu-logo {
 }
 
 .header-profile .user-name {
-    margin: 0; /* Reset any default margin */
+    margin: 0;
     font-size: small;
 }
 
 .header-profile .account-type {
     margin: 0;
-    margin-top: 0.2rem; /* Optional: space between user name and account type */
-    font-size: 0.9rem; /* Adjust font size if needed */
-    color: gray; /* Optional: Change the text color */
-    display: block; /* Ensure account type appears below username */
+    margin-top: 0.2rem;
     font-size: small;
+    color: gray;
+    display: block;
 }
 
-.account-details {
-    display: flex; /* Enable flexbox for the details */
-    flex-direction: column; /* Stack username and account type vertically */
-    align-items: left; /* Align items to the left */
-}
-
-/* Sidebar active link styling */
+/* Sidebar */
 .nav-link.active {
     background-color: rgba(0, 61, 165, 0.4);
     color: #cf1b1b;
@@ -123,12 +115,12 @@ header img.slu-logo {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Side Navigation Bar */
+/* Sidebar Container */
 .sidebar-container {
     background: rgba(244, 244, 244, 1);
     border-right: 1px solid #e5e5e5;
     position: fixed;
-    top: 3.9vw; 
+    top: 3.9vw;
     bottom: 0;
     height: 100%;
     width: 60px;
@@ -136,26 +128,23 @@ header img.slu-logo {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    z-index: 100; 
+    z-index: 100;
 }
 
 .sidebar-container {
-    width: 250px; 
+    width: 250px;
 }
 
+/* Content Area */
 .user-content {
-    position: relative; 
-    left: 70px; 
+    position: relative;
+    left: 70px;
     padding: 20px;
-    transition: left 0.3s ease; 
-    z-index: 0; 
+    transition: left 0.3s ease;
+    z-index: 0;
 }
 
-/* Move the user-content to the right when the sidebar is hovered */
-/* .sidebar-container:hover + .user-content {
-    left: 250px; 
-} */
-
+/* Sidebar Menu */
 .sidebar-menu {
     flex: 1;
     display: flex;
@@ -172,7 +161,7 @@ header img.slu-logo {
 
 .sidebar-menu li {
     display: block;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .sidebar-menu li a {
@@ -181,10 +170,6 @@ header img.slu-logo {
     padding: 10px;
     color: #999;
     text-decoration: none;
-    /* transition: background-color 0.2s ease, color 0.2s ease; */
-}
-
-.sidebar-menu li a {
     min-width: 60px;
     text-align: center;
 }
@@ -197,25 +182,19 @@ header img.slu-logo {
 
 /* Sidebar Icon */
 .sidebar-icon {
-    width: 30px; 
-    height: 30px; 
-    margin-right: 20px; 
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
     margin-left: 5px;
 }
 
-/* Hover effect on sidebar items */
-/* .sidebar-menu li:hover a {
-    color: #fff;
-    background-color: rgba(0, 61, 165, 0.4);
-} */
-
-/* Sticky Log Out Section */
+/* Sidebar Logout Section */
 .sidebar-logout {
     position: absolute;
     bottom: 15vh;
     width: 100%;
     display: flex;
-    justify-content: flex-start;  
+    justify-content: flex-start;
     align-items: center;
     padding: 10px;
 }
@@ -224,23 +203,19 @@ header img.slu-logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: 100%; 
-    padding: 10px; 
-    /* transition: background-color 0.2s ease, color 0.2s ease; */
+    width: 100%;
+    padding: 10px;
 }
 
-/* .sidebar-logout a:hover {
-    background-color:rgba(255, 178, 0, 1);;
-} */
-
+/* Logout Item */
 .menu-item-logout {
     color: black;
-    font-size: 1.9vh;  
+    font-size: 1.9vh;
     flex: 1;
     font-weight: bold;
 }
 
-/* Edit Icon Styling */
+/* Edit Icon */
 .edit-icon {
     position: absolute;
     top: 10px;
@@ -253,12 +228,10 @@ header img.slu-logo {
 }
 
 .edit-icon:hover {
-    color: #007bff; /* Change color on hover */
+    color: #007bff; /* Color change on hover */
 }
 
-
 </style>
-
 <head>
 
 </head>
