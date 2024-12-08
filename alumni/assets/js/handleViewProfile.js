@@ -205,8 +205,12 @@ document.addEventListener("click", (event) => {
         // Set initial values in the modal
         document.getElementById("editPostContent").value = postContent;
         mediaPreviewContainer.innerHTML = "";
+
         // Display current media in the preview
         if (mediaElement) {
+            const previewWrapper = document.createElement("div");
+            previewWrapper.classList.add("position-relative", "d-inline-block", "me-2");
+
             let previewElement;
             if (mediaElement.tagName === "IMG") {
                 previewElement = document.createElement("img");
@@ -218,13 +222,25 @@ document.addEventListener("click", (event) => {
             }
             previewElement.classList.add("img-fluid", "rounded");
             previewElement.style.maxHeight = "200px";
-            mediaPreviewContainer.appendChild(previewElement);
+
+            // Add an "X" button to remove the media preview
+            const closeButton = document.createElement("button");
+            closeButton.type = "button";
+            closeButton.classList.add("btn-close", "position-absolute", "top-0", "end-0", "m-1");
+            closeButton.setAttribute("aria-label", "Remove");
+            closeButton.addEventListener("click", () => {
+                mediaPreviewContainer.removeChild(previewWrapper);
+            });
+
+            previewWrapper.appendChild(previewElement);
+            previewWrapper.appendChild(closeButton);
+            mediaPreviewContainer.appendChild(previewWrapper);
         }
 
         const editPostModal = new bootstrap.Modal(document.getElementById("editPostModal"));
         editPostModal.show();
 
-        // Clear old event listeners to prevent duplicates
+        // Handle the save logic 
         const saveButton = document.getElementById("saveEditPost");
         const clonedSaveButton = saveButton.cloneNode(true);
         saveButton.parentNode.replaceChild(clonedSaveButton, saveButton);
@@ -233,15 +249,14 @@ document.addEventListener("click", (event) => {
             const updatedText = document.getElementById("editPostContent").value.trim();
             const fileInput = document.getElementById("editPostMedia");
             const file = fileInput.files[0];
-        
+
             const postTextElement = currentPostElement.querySelector(".post-content p");
             postTextElement.textContent = updatedText;
-        
+
             const mediaContainer = currentPostElement.querySelector(".post-content");
             const existingMedia = mediaContainer.querySelector("img, video");
-        
-            if (file) {
-                // Remove existing media if a new file is provided
+
+            if (file) { // Remove existing media if a new file is provided
                 if (existingMedia) mediaContainer.removeChild(existingMedia);
         
                 const reader = new FileReader();
@@ -287,10 +302,10 @@ document.addEventListener("click", (event) => {
                 errorModal.show();
             }
             // Clear file input to avoid duplicated uploads
-            fileInput.value = "";
-        });
-    }
-});
+            fileInput.value = "";   
+            });
+         }
+    });
 
 // Handle Delete Post button click
     document.addEventListener("click", (event) => {

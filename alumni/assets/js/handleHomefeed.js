@@ -126,11 +126,7 @@ document.getElementById("photoInput").addEventListener("change", function (event
     for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.classList.add("img-thumbnail", "m-1");
-            img.style.maxWidth = "100px"; 
-            previewContainer.appendChild(img);
+            addPreviewMedia(e.target.result, previewContainer, "img");
         };
         reader.readAsDataURL(files[i]);
     }
@@ -145,16 +141,48 @@ document.getElementById("videoInput").addEventListener("change", function (event
     for (let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const video = document.createElement("video");
-            video.src = e.target.result;
-            video.classList.add("m-1");
-            video.style.maxWidth = "200px"; 
-            video.controls = true; // Enable playback controls
-            previewContainer.appendChild(video);
+            addPreviewMedia(e.target.result, previewContainer, "video");
         };
         reader.readAsDataURL(files[i]);
     }
 });
+
+// Function to add media preview (image or video) with removable X button
+function addPreviewMedia(src, container, type) {
+    const previewWrapper = document.createElement("div");
+    previewWrapper.classList.add("position-relative", "d-inline-block", "m-1");
+
+    let previewElement;
+
+    // Create preview element (image or video)
+    if (type === "img") {
+        previewElement = document.createElement("img");
+        previewElement.src = src;
+        previewElement.classList.add("img-thumbnail");
+        previewElement.style.maxWidth = "100px";
+    } else if (type === "video") {
+        previewElement = document.createElement("video");
+        previewElement.src = src;
+        previewElement.classList.add("rounded");
+        previewElement.style.maxWidth = "200px";
+        previewElement.controls = true;
+    }
+
+    // Add an X button to remove the media preview
+    const closeButton = document.createElement("button");
+    closeButton.type = "button";
+    closeButton.classList.add("btn-close", "position-absolute", "top-0", "end-0", "m-1");
+    closeButton.setAttribute("aria-label", "Remove");
+    closeButton.addEventListener("click", () => {
+        container.removeChild(previewWrapper);
+    });
+
+    // Append elements to the wrapper and container
+    previewWrapper.appendChild(previewElement);
+    previewWrapper.appendChild(closeButton);
+    container.appendChild(previewWrapper);
+}
+
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
