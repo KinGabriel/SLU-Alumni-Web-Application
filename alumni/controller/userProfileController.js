@@ -5,11 +5,10 @@ import path from 'path';
 export const getOwnPost =(req, res) =>{
     const userId = req.cookies.user_id;
     const query = `
-        SELECT 
+    SELECT 
         p.post_id,
         p.description,
         p.banner,
-        p.access_type,
         p.post_type,
         p.datetime,
         COUNT(DISTINCT l.like_id) AS like_count,
@@ -24,14 +23,14 @@ export const getOwnPost =(req, res) =>{
     LEFT JOIN follows f ON f.followed_id = p.user_id 
     JOIN user u ON u.user_id = p.user_id
     WHERE  (
-            p.access_type = 'public' 
-            OR (p.access_type = 'following' AND f.followed_id IS NOT NULL) 
-            OR (p.access_type = 'private' AND p.user_id = ?)
+            ( f.followed_id IS NOT NULL) 
+            OR (p.user_id = ?)
         ) AND p.user_id = ?
     GROUP BY 
         p.post_id
     ORDER BY p.post_id DESC
-    `;
+`;
+
 
     dbConnection.query(query, [userId, userId,userId], (error, results) => {
         if (error) {

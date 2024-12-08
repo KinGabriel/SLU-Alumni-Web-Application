@@ -28,35 +28,31 @@ export const handleUserPost = (req, res) => {
 export const getPost = (req, res) => {
     const userId = req.cookies.user_id;
     const query = `
-        SELECT 
-        p.post_id,
-        p.description,
-        p.banner,
-        p.access_type,
-        p.post_type,
-        p.datetime,
-        COUNT(DISTINCT l.like_id) AS like_count,
-        COUNT(DISTINCT c.comm_id) AS comment_count,
-        u.user_id AS poster_id,
-        u.pfp,
-        CONCAT(u.fname, ' ', u.lname) AS name,
-        (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
-    FROM posts p
-    LEFT JOIN likes l ON p.post_id = l.post_id
-    LEFT JOIN comments c ON p.post_id = c.post_id
-    LEFT JOIN follows f ON f.followed_id = p.user_id 
-    JOIN user u ON u.user_id = p.user_id
-    WHERE (
-            p.access_type = 'public' 
-            OR (p.access_type = 'following' AND f.followed_id IS NOT NULL) 
-            OR (p.access_type = 'private' AND p.user_id = ?)
-        )
-    GROUP BY 
-        p.post_id
+    SELECT 
+            p.post_id,
+            p.banner,
+            p.post_type,
+            p.datetime,
+            COUNT(DISTINCT l.like_id) AS like_count,
+            COUNT(DISTINCT c.comm_id) AS comment_count,
+            u.user_id AS poster_id,
+            u.pfp,
+            CONCAT(u.fname, ' ', u.lname) AS name,
+            (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
+        FROM posts p
+        LEFT JOIN likes l ON p.post_id = l.post_id
+        LEFT JOIN comments c ON p.post_id = c.post_id
+        LEFT JOIN follows f ON f.followed_id = p.user_id
+        JOIN user u ON u.user_id = p.user_id
+        WHERE 
+        p.user_id = ?  
+        OR f.follower_id = ?  
+GROUP BY 
+    p.post_id
     ORDER BY p.post_id DESC
-    `;
+`;
 
-    dbConnection.query(query, [userId, userId], (error, results) => {
+    dbConnection.query(query, [userId, userId,userId], (error, results) => {
         if (error) {
             console.error('Database error:', error);
             return res.status(500).json({ error: 'Failed to fetch posts.' });
