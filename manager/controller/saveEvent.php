@@ -40,7 +40,7 @@ try {
         }
 
         // Prepare the SQL statement with placeholders
-        $sql = "INSERT INTO events (event_title, start_date, start_time, end_time, event_location, event_description, image_data) 
+        $sql = "INSERT INTO event (event_title, start_date, start_time, end_time, event_location, event_description, image_data) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         // Prepare the statement
