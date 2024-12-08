@@ -1,0 +1,382 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Readex_Pro';
+}
+
+@font-face {
+    font-family: 'Readex_Pro';
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 0.1vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 4vw;
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
+}
+
+header span {
+    margin-left: 0.2vw; 
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.header-separator {
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    margin-top: 0;
+}
+
+/* Profile */
+.notif-bell {
+    margin-right: 10px;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+}
+
+.header-profile i {
+    margin-right: 1vw;
+}
+
+.header-profile .user-name {
+    margin: 0;
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem;
+    font-size: small;
+    color: gray;
+    display: block;
+}
+
+/* Sidebar */
+.nav-link.active {
+    background-color: rgba(0, 61, 165, 0.4);
+    color: #cf1b1b;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-container {
+    background: rgba(244, 244, 244, 1);
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    top: 4vw;
+    bottom: 0;
+    height: 100%;
+    width: 250px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.user-content {
+    position: relative;
+    left: 250px;
+    padding: 20px;
+    transition: left 0.3s ease;
+    z-index: 0;
+}
+
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+}
+
+.sidebar-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    display: block;
+    margin-top: 10px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #999;
+    text-decoration: none;
+    text-align: left;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-menu li a:hover {
+    background-color: rgba(0, 61, 165, 0.1);
+    color: #000;
+}
+
+.sidebar-menu li a .menu-item-text {
+    flex: 1;
+    font-size: 1.9vh;
+    color: #000;
+}
+
+.sidebar-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+.sidebar-logout {
+    position: absolute;
+    bottom: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar-logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+}
+
+.menu-item-logout {
+    color: black;
+    font-size: 1.9vh;
+    flex: 1;
+    font-weight: bold;
+}
+
+/* Edit Icon */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: #007bff;
+}
+
+/* News Section */
+.news-title {
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #FEAF00;
+}
+
+.news-container {
+    flex: 1;
+    margin-left: 350px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #003DA5;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card-footer {
+    padding: 0;
+}
+
+.card-footer .btn-read-more {
+    display: block;
+    width: 100%;
+    background-color: #003DA5;
+    color: #ffffff;
+    padding: 15px 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.card-footer .btn-read-more:hover {
+    background-color: #6281b6;
+}
+
+/* Profile Dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 320px;
+    z-index: 1000;
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.dropdown-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-info h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dropdown-info p {
+    margin: 0;
+    font-size: 13px;
+    color: #6c757d;
+}
+
+.dropdown-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-links li {
+    padding: 12px 16px;
+}
+
+.dropdown-links li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #212529;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+.dropdown-links li a:hover {
+    background-color: #f8f9fa;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f7ff;
+    color: #0056b3;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    margin: 5% auto;
+}
+
+.logout-btn:hover {
+    background-color: #e0edff;
+}
+
+.logout-icon {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
