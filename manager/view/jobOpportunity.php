@@ -7,7 +7,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <style>
 
-
 h1 {
   margin-top: 20px; 
 }
@@ -879,32 +878,6 @@ a {
                   required
                 />
               </div>
-          
-              <!-- Employment Type Card -->
-              <!-- Employment Type Card -->
-<div class="card">
-  <p>Type of Employment</p>
-  <div>
-    <input type="radio" id="full-time" name="employment" value="Full-Time">
-    <label for="full-time">Full-Time</label>
-  </div>
-  <div>
-    <input type="radio" id="part-time" name="employment" value="Part-Time">
-    <label for="part-time">Part-Time</label>
-  </div>
-  <div>
-    <input type="radio" id="remote" name="employment" value="Remote">
-    <label for="remote">Remote</label>
-  </div>
-  <div>
-    <input type="radio" id="internship" name="employment" value="Internship">
-    <label for="internship">Internship</label>
-  </div>
-  <div>
-    <input type="radio" id="contract" name="employment" value="Contract">
-    <label for="contract">Contract</label>
-  </div>
-</div>
             </div>
           
         </div>
