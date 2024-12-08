@@ -34,6 +34,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </header>
 
 <body>
+    
         <!-- User Requests table -->
         <div class="user-content" id="userContent">
             <h1>Account Requests List</h1>

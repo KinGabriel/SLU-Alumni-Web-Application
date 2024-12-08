@@ -6,11 +6,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <html lang="en">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  font-family: Readex_Pro;
-}
+
 
 h1 {
   margin-top: 20px; 
@@ -68,11 +64,6 @@ h1 {
   font-weight: bold;
 }
 
-@font-face {
-  font-family: Readex_Pro;
-  src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -87,86 +78,240 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
-
-.header-seperator {
-  background-color: #003DA5;
-  padding-bottom: 2vw;
-  width: 100%;
-  margin-top: -1vh;
-  margin-bottom: 0.5vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Readex_Pro;
 }
 
-/* Header Section */
+@font-face {
+    font-family: Readex_Pro;
+    src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
+  }
+
+/* Header */
 header {
-  position: sticky;
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly off-white */
-  padding: 0.3vw;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  z-index: 1000;
-  transition: top 0.1s ease;
+    display: flex;
+    justify-content: space-between; /* Space between the logo and profile */
+    align-items: center; /* Center items vertically */
+    background-color: white;
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    height: 4vw; 
 }
 
 header h1 {
-  display: flex;
-  align-items: center;
-  margin-left: 1.2vw;
-  font-size: 1.4vw;
+    display: flex;
+    align-items: center;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
 }
 
 header span {
-  margin-left: 0.3vw;
+    margin-left: 0.2vw; 
 }
 
-header img {
-  height: 50px;
-  width: auto;
+header img.slu-logo {
+    height: 50px;
+    width: auto; 
+    margin-right: 10px;
 }
 
-nav {
-  margin-left: 27%;
-  margin-top: 0.2%;
+.header-separator {
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    margin-top: -1vh;
+    /* margin-bottom: 0.5vh; */
 }
 
-nav a {
-  padding: 0.3vw;
-  text-decoration: none;
-  color: inherit;
-  margin-left: 1vw; /* Adds spacing between links */
-  margin-right: 1vw; /* Adds spacing between links */
-  transition: color 0.2s ease;
-  font-size: 20px;
+.notif-bell {
+    margin-right: 10px; /* Adjust the value as needed */
 }
 
-nav a:hover {
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 178, 0, 1);
-  text-decoration-thickness: 2.5px;
+.profile-pic {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block; /* Ensure the image is displayed as a block */
+    border: 1px solid #ccc; /* Add a border to visualize it */
 }
 
-nav a.active {
-    text-decoration: underline;
-    text-decoration-color: rgba(255, 178, 0, 1);
-    text-decoration-thickness: 2.5px;
+.header-profile {
+    display: flex;
+    /* flex-direction: column;  */
+    align-items: center; /* Align items to the left */
 }
 
-/* Log in button */
-.btn-logout {
-  background-color: #1D4ED8;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin-left: 25vw;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
+.header-profile i {
+    margin-right: 1vw;
 }
 
-.btn-logout:hover {
-  background-color: #3B82F6;
+.header-profile .user-name {
+    margin: 0; /* Reset any default margin */
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem; /* Optional: space between user name and account type */
+    font-size: 0.9rem; /* Adjust font size if needed */
+    color: gray; /* Optional: Change the text color */
+    display: block; /* Ensure account type appears below username */
+    font-size: small;
+}
+
+.account-details {
+    display: flex; /* Enable flexbox for the details */
+    flex-direction: column; /* Stack username and account type vertically */
+    align-items: left; /* Align items to the left */
+}
+
+/* Sidebar active link styling */
+.nav-link.active {
+    background-color: rgba(0, 61, 165, 0.4);
+    color: #cf1b1b;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Side Navigation Bar */
+.sidebar-container {
+    background: rgba(244, 244, 244, 1);
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    top: 3.9vw; 
+    bottom: 0;
+    height: 100%;
+    width: 60px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 100; 
+}
+
+.sidebar-container {
+    width: 250px; 
+}
+
+.user-content {
+    position: relative; 
+    left: 70px; 
+    padding: 20px;
+    transition: left 0.3s ease; 
+    z-index: 0; 
+}
+
+/* Move the user-content to the right when the sidebar is hovered */
+/* .sidebar-container:hover + .user-content {
+    left: 250px; 
+} */
+
+.sidebar-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+}
+
+.sidebar-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    display: block;
+    margin-top: 10px; 
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #999;
+    text-decoration: none;
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
+}
+
+.sidebar-menu li a {
+    min-width: 60px;
+    text-align: center;
+}
+
+.sidebar-menu li a .menu-item-text {
+    flex: 1;
+    font-size: 1.9vh;
+    color: #000;
+}
+
+/* Sidebar Icon */
+.sidebar-icon {
+    width: 30px; 
+    height: 30px; 
+    margin-right: 20px; 
+    margin-left: 5px;
+}
+
+/* Hover effect on sidebar items */
+/* .sidebar-menu li:hover a {
+    color: #fff;
+    background-color: rgba(0, 61, 165, 0.4);
+} */
+
+/* Sticky Log Out Section */
+.sidebar-logout {
+    position: absolute;
+    bottom: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;  
+    align-items: center;
+    padding: 10px;
+}
+
+.sidebar-logout a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 100%; 
+    padding: 10px; 
+    /* transition: background-color 0.2s ease, color 0.2s ease; */
+}
+
+/* .sidebar-logout a:hover {
+    background-color:rgba(255, 178, 0, 1);;
+} */
+
+.menu-item-logout {
+    color: black;
+    font-size: 1.9vh;  
+    flex: 1;
+    font-weight: bold;
+}
+
+/* Edit Icon Styling */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: #007bff; /* Change color on hover */
 }
 
 body {
@@ -580,21 +725,74 @@ a {
     <link rel="stylesheet" href="../assets/css/addEvents.css">
 </head>
 
-<div class="header-seperator"></div>
-<header>
-    <h1>
-        <img src="../assets/images/Logo.png" alt="SLU Alumina Logo">
-        <span>SLU Alumina</span>
-    </h1>
-    <nav>
-        <a href="../view/managerHome.php">Home</a>
-        <a href="../view/accountsManager.php">Accounts</a>
-        <a href="../view/addEvents.php" class="<?= $currentPage == 'addEvents.php' ? 'active' : '' ?>">Add Events</a>
-        <a href="../view/jobOpportunity.php">Add Jobs</a>
+<body>
+    <!-- Header separator -->
+    <div class="header-separator"> </div>
+    <header>
+        <h1>
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+            <span>SLU Alumina</span>
+        </h1>
+        <div class="header-profile">
+            <!-- <i class="fa-regular fa-bell"></i> -->
+            <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" >
+            <img src="<?php echo $_SESSION['pfp'] ?: '../assets\images\alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
+            <div class="account-details">
+                <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
+            </div>
+        </div>
+    </header>
+
+<!-- Sidebar -->
+<div class="sidebar-container">
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/managerHome.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'managerHome.php' ? 'active' : ''; ?>" id="homeLink">
+                    <img src="../assets/images/dashboard.png" alt="Home" class="sidebar-icon">
+                    <span class="menu-item-text">Home</span>
+                </a>
+            </li>
+  
+            <li>
+            <a href="../view/accountsManager.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                </a>
+            </li>
+
+            <li>
+            <a href="../view/addEvents.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                    <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+
+            <li>
+            <a href="../view/jobOpportunity.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
+        </ul>
     </nav>
-    <a href="../controller/ProcessLogOut.php" target="_blank" class="btn-logout">Logout</a>
-</header>
-<body>  
+   
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
+        <a href="../controller/ProcessLogOut.php">
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
+    </div>
+</div>
   <main class="main-wrapper">
       <div class="steps-wrapper">
           <div class="steps">
