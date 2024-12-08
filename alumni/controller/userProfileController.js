@@ -11,6 +11,7 @@ export const getOwnPost =(req, res) =>{
         p.banner,
         p.post_type,
         p.datetime,
+        p.is_edited,
         COUNT(DISTINCT l.like_id) AS like_count,
         COUNT(DISTINCT c.comm_id) AS comment_count,
         u.user_id AS poster_id,

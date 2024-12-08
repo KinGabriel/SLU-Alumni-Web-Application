@@ -4,7 +4,7 @@ import path from 'path';
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
-    const { description, access_type, post_type, datetime } = req.body;
+    const { description, post_type, datetime } = req.body;
 
     const uploadedImages = req.files['images[]'] || [];
     const uploadedVideos = req.files['videos[]'] || [];
@@ -16,8 +16,8 @@ export const handleUserPost = (req, res) => {
     console.log('Received data:', req.body);
     console.log('Uploaded files:', bannerFiles);
 
-    const query = "INSERT INTO posts (description, banner, access_type, post_type, datetime, user_id) VALUES (?, ?, ?, ?, ?, ?)";
-    dbConnection.query(query, [description, banner, access_type, post_type, datetime, userId], (err, result) => {
+    const query = "INSERT INTO posts (description, banner,  post_type, datetime, user_id) VALUES (?,  ?, ?, ?, ?)";
+    dbConnection.query(query, [description, banner,  post_type, datetime, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });

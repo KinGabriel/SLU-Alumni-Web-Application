@@ -18,8 +18,8 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('small');
     postTime.classList.add('text-muted');
-    postTime.dataset.isEdited = post.isEdited || false; // Track if edited
-    postTime.textContent = formatDate(post.datetime, post.isEdited);
+    postTime.dataset.is_edited = post.is_edited || false; // Track if edited
+    postTime.textContent = formatDate(post.datetime, post.is_edited);
 
     userInfo.appendChild(userName);
     userInfo.appendChild(postTime);
