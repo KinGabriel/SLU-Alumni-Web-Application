@@ -1,5 +1,5 @@
 import express from 'express';
-import {handleUserPost, getPost,handleComments,handleLikes } from '../controller/feedController.js';
+import {handleUserPost, getPost,handleComments,handleLikes,getComments } from '../controller/feedController.js';
 import fileUploadMiddleware from '../middleware/fileUploadMiddleware.js';
 import authenticateMiddleware from '../middleware/authenticateMiddleware.js';
 
@@ -21,5 +21,6 @@ router.post(
 router.get('/getfeed', getPost); // Get posts
 router.post('/comment', handleComments);
 router.post('/like/:postId', handleLikes);
+router.get('/getComments/:postId',getComments );
 
 export default router;

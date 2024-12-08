@@ -182,7 +182,6 @@ function addPreviewMedia(src, container, type) {
     previewWrapper.appendChild(closeButton);
     container.appendChild(previewWrapper);
 }
-
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
@@ -198,9 +197,40 @@ function createPostActions(post) {
 
     likeButton.addEventListener('click', function() {
         const isLiked = post.is_liked;
-        post.is_liked = !isLiked;  // Toggle local state
+        post.is_liked = !isLiked;  
         handleLike(post.post_id, likeButton, isLiked, likeCountElement);
     });
+
+    // Handle comment button click
+    commentButton.addEventListener('click', function() {
+        const postId = post.post_id;
+
+        let commentModal = document.getElementById(`commentModal-${postId}`);
+        if (!commentModal) {
+            commentModal = createCommentModal(postId);
+            document.body.appendChild(commentModal);
+        }
+
+        // Load comments for the specific post
+        loadComments(postId);
+
+        // Initialize and show the modal
+        const modal = new bootstrap.Modal(commentModal);
+        modal.show();
+    });
+
+    // Handle comment submission
+    const submitCommentButton = document.getElementById('submitComment');
+    if (submitCommentButton) {
+        submitCommentButton.addEventListener('click', function() {
+            const commentText = document.getElementById('commentInput').value.trim();
+            if (commentText) {
+                const postId = document.querySelector('.modal').getAttribute('data-post-id');
+                submitComment(postId, commentText);
+                document.getElementById('commentInput').value = ''; // Clear the input
+            }
+        });
+    }
 
     actionsContainer.appendChild(likeButton);
     actionsContainer.appendChild(commentButton);
@@ -209,6 +239,38 @@ function createPostActions(post) {
 
     return postActions;
 }
+
+// Function to create a comment modal dynamically
+function createCommentModal(postId) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.id = `commentModal-${postId}`;
+    modal.setAttribute('data-post-id', postId);
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'commentModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="commentsList-${postId}">
+                        <!-- Comments will be dynamically loaded here -->
+                    </div>
+                    <textarea id="commentInput" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    return modal;
+}
+
 
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');

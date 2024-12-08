@@ -163,7 +163,42 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
 }
 
 
-// Call the functions
+function loadComments(postId) {
+    const commentsList = document.getElementById(`commentsList-${postId}`);
+    commentsList.innerHTML = ''; 
+
+    fetch(`/api/feed/getComments/${postId}`)  
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            return response.json();  
+        })
+        .then(comments => {
+           
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('comment');
+                
+                // Use your existing date formatting function
+                const formattedDate = formatDate(comment.date);
+
+                commentDiv.innerHTML = `
+                    <img src="${comment.pfp || '../assets/images/candy.jpg'}" alt="Profile" class="comment-pic">
+                    <p class="comment-text"><strong>${comment.name}: ${formattedDate}</strong> ${comment.comment_message} 
+                   </p>
+                `;
+
+                commentsList.appendChild(commentDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
+            commentsList.innerHTML = '<p>Failed to load comments. Please try again later.</p>';
+        });
+}
+
+
 
 getUserPosts();
 handlePostSubmit();

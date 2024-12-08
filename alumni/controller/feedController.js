@@ -94,11 +94,43 @@ const handleMedia = (bannerPath) => {
     return ''; // if empty
 };
 
-
-export const handleComments = (req,res) =>{
-    const userId = req.cookies.user_id;
+export const handleComments  = (req, res) => {
 
 }
+// Assuming you have already set up the 'dbConnection' correctly
+export const getComments = (req, res) => {
+    const postId = req.params.postId;
+
+    const query = `
+       SELECT 
+        CONCAT(u.fname, ' ', u.lname) AS name,
+        u.pfp, 
+        c.comment_message,
+        c.date
+    FROM
+        comments c
+        JOIN posts p ON c.post_id = p.post_id
+        JOIN user u ON c.user_id = u.user_id
+    WHERE
+        p.post_id = ?`;
+
+    dbConnection.execute(query, [postId], (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            return res.status(500).json({ error: 'Database error occurred' });
+        }
+        const comments = results.map(comment => {
+            if (comment.pfp) {
+                comment.pfp = `data:image/jpeg;base64,${comment.pfp.toString('base64')}`;
+            }
+            return comment;
+        });
+
+        // Return the comments as a JSON response
+        res.json(comments);
+    });
+};
+
 
 export const handleLikes = (req, res) => {
     const userId = req.cookies.user_id;

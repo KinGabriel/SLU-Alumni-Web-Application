@@ -332,53 +332,10 @@
 <script>
 // Handles Comments
     document.addEventListener('DOMContentLoaded', () => {
-    // handle comment button click
-    document.querySelectorAll('.comment-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const postId = this.closest('.post').getAttribute('data-post-id');
-            loadComments(postId);
-            // Show the modal
-            const commentModal = new bootstrap.Modal(document.getElementById('commentModal'));
-            commentModal.show();
-        });
-    });
-
-    // Handle comment submission
-    document.getElementById('submitComment').addEventListener('click', function() {
-        const commentText = document.getElementById('commentInput').value.trim();
-        if (commentText) {
-            const postId = document.querySelector('.modal').getAttribute('data-post-id');
-            submitComment(postId, commentText);
-            document.getElementById('commentInput').value = ''; // clear the input
-        }
-    });
+    
 });
 
-// Function to load comments for a specific post
-function loadComments(postId) {
-    //  replace this with an actual API call to fetch comments from the server -- for testing only
-    const comments = [
-        { username: 'Nikol', text: 'Nice nice!' },
-        { username: 'Mino', text: 'Cool!' },
-        { username: 'Wakin', text: 'Oh nooo'}
-    ];
 
-    const commentsList = document.getElementById('commentsList');
-    commentsList.innerHTML = ''; // clear any existing comments
-
-    comments.forEach(comment => {
-        const commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
-        commentDiv.innerHTML = `
-            <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
-            <p class="comment-text"><strong>${comment.username}:</strong> ${comment.text}</p>
-        `;
-        commentsList.appendChild(commentDiv);
-    });
-
-    // set the postId for modal submission
-    document.querySelector('.modal').setAttribute('data-post-id', postId);
-}
 
 // Function to handle submitting a new comment
 function submitComment(postId, commentText) {
