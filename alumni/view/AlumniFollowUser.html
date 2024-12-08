@@ -27,86 +27,127 @@
             </div>
         </h1>
 
-        <!-- Profile dropdown -->
-        <div class="profile-dropdown">
-            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-            <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
-                <div class="dropdown-header">
-                    <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                    <div class="dropdown-info">
-                        <h4 name="name"></h4>
-                        <p>Web Developer at Google</p>
+<!-- Profile dropdown: Allows user to view and manage their profile -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: GitHub, Facebook -->
+<!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+<div class="profile-dropdown">
+    <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+    <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
+        <div class="dropdown-header">
+            <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+            <div class="dropdown-info">
+                <h4 name="name"></h4>
+                <p>Web Developer at Google</p>
+            </div>
+        </div>
+        <ul class="dropdown-links">
+            <li><a href="/api/profile">View Profile</a></li>
+            <li><a href="#">Manage Profile</a></li>
+            <li><a href="#">Close Account</a></li>
+        </ul>
+        <div class="logout-btn">
+            <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+            <span>Log out</span>
+        </div>
+    </div>
+</div>         
+</header>
+
+<!-- Back Button: Navigates to the home page -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: GitHub, Facebook -->
+<!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+<a href="/" class="btn btn-outline-secondary back-btn">
+    <img src="../assets/images/feed.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Home
+</a>
+
+<!-- Alumni Profile: Displays the alumni's profile including their details and bio -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+<div class="container mt-4">
+    <!-- Header Section -->
+    <div class="card shadow-sm">
+        <!-- Cover Photo -->
+        <div class="cover-photo">
+            <img src="../assets/images/cover.jpg" class="img-fluid w-100" alt="Cover Photo">
+        </div>
+
+        <!-- Profile Section: Contains profile photo, name, job title, location, and stats -->
+        <!-- Design Inspiration: GitHub, Facebook -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+        <div class="profile-section d-flex align-items-center mt-4 px-4">
+            <!-- Profile Photo -->
+            <div class="profile-photo">
+                <img src="../assets/images/candy.jpg" alt="Profile Picture" class="rounded-circle" name="pfp" style="width: 100px; height: 100px;">
+            </div>
+
+            <!-- Profile Details -->
+            <div class="profile-details ms-3">
+                <h4 class="fw-bold mb-0" name="name">Taylor Swift</h4>
+
+                <!-- Stats (Followers, Following, Posts) -->
+                <div class="stats mb-3">
+                    <div class="stat-item">
+                        <strong>Followers</strong><br><p name="followers_count">2</p>
+                    </div>
+                    <div class="stat-item">
+                        <strong>Following</strong><br><p name="followed_count">2</p>
+                    </div>
+                    <div class="stat-item">
+                        <strong>Posts</strong><br><p name="post_count">126</p>
                     </div>
                 </div>
-                <ul class="dropdown-links">
-                    <li><a href="#">View Profile</a></li>
-                    <li><a href="#">Manage Profile</a></li>
-                    <li><a href="#">Close Account</a></li>
-                </ul>
-                <div class="logout-btn">
-                    <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                    <span>Log out</span>
-                </div>
-            </div>
-        </div>         
-    </header>
 
-      <!-- Back Button -->
-      <a href="/" class="btn btn-outline-secondary back-btn">
-        <img src="../assets/images/feed.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Back to Home
-    </a>
-
-    <!-- Alumni Profile -->
-    <div class="container mt-4">
-        <!-- Header Section -->
-        <div class="card shadow-sm">
-            <!-- Cover Photo -->
-            <div class="cover-photo">
-                <img src="../assets/images/blackclover.jpg" class="img-fluid w-100" alt="Cover Photo">
-            </div>
-            <!-- Profile Section -->
-            <div class="profile-section d-flex align-items-center mt-4 px-4">
-                <!-- Profile Photo -->
-                <div class="profile-photo">
-                    <img src="../assets/images/asta.jpg" class="rounded-circle" alt="Profile">
-                </div>
-           <!-- Profile Details -->
-            <div class="profile-details ms-3">
-                <h5 class="fw-bold mb-0">Asta Staria</h5>
-                <p class="text-muted mb-1">200 Connections</p>
+                <!-- Job Title -->
                 <p class="mb-0 d-flex align-items-center">
                     <img src="../assets/images/position.png" alt="Web Developer Icon" class="me-2" style="width: 20px; height: 20px;">
-                    <i class="bi bi-briefcase"></i> Web Developer
+                    Web Developer
                 </p>
+
+                <!-- Location -->
                 <p class="d-flex align-items-center">
                     <img src="../assets/images/location.png" alt="Baguio City Icon" class="me-2 rounded-circle" style="width: 20px; height: 20px;">
-                    <i class="bi bi-geo-alt"></i> Baguio City
+                    Baguio City
                 </p>
+
+                <!-- Follow Button -->
+                <button class="btn btn-primary d-flex align-items-center mt-3">
+                    <img src="../assets/images/follow.png" alt="Follow Icon" class="me-2" style="width: 20px; height: 20px;">
+                    Follow
+                </button>
             </div>
         </div>
-           <!-- Follow Button with Icon -->
-        <div class="follow-container px-4 mt-3">
-            <button class="btn btn-primary" id="followButton">
-                <img src="../assets/images/follow.png" id="followIcon" alt="Follow Icon">
-                Follow
-            </button>
+
+        <!-- Bio Section -->
+        <div class="row mt-4">
+            <div class="col-lg-3 ms-auto" id="bio-section">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bio</h5>
+                    </div>
+                </div>
+            </div>
         </div>
-            <!-- Navigation Tabs -->
-            <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Feed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Connections</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Media</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Videos</a>
-                </li>
-            </ul>
-        </div>
+
+        <!-- Navigation Tabs: Provides navigation between Feed, Connections, Media, and Videos -->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+        <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Feed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Connections</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Media</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Videos</a>
+            </li>
+        </ul>
+    </div>
 
         <!-- Feed Section -->
         <div class="post card mt-4">
@@ -145,19 +186,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Bio Section -->
-        <div class="row mt-4">
-            <div class="col-lg-3 ms-auto" id="bio-section">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h5 class="card-title">Bio</h5>
-                        <p>How to code.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <!--Inlined the style for the back button due to difficulty in calling it in the css-->
 <style> 
