@@ -1,4 +1,3 @@
-
 // Post Header
 function createPostHeader(post) {
     const postHeader = document.createElement('div');
@@ -19,7 +18,8 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('small');
     postTime.classList.add('text-muted');
-    postTime.textContent = formatDate(post.datetime);
+    postTime.dataset.isEdited = post.isEdited || false; // Track if edited
+    postTime.textContent = formatDate(post.datetime, post.isEdited);
 
     userInfo.appendChild(userName);
     userInfo.appendChild(postTime);
@@ -44,6 +44,7 @@ function createPostHeader(post) {
 
     return postHeader;
 }
+
 
 // Post Content
 function createPostContent(post) {
@@ -129,38 +130,40 @@ function createPostActionButton(type, icon, count) {
 }
 
 // handle the date formating for the user post
-function formatDate(dateTime) {
-    const date = new Date(dateTime); 
+function formatDate(dateTime, isEdited = false) {
+    const date = new Date(dateTime);
     const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000); 
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    let timeString = '';
     // Less than 1 minute ago
     if (diffInSeconds < 60) {
-        return 'Just now';
-    }
-    // Less than 1 hour ago 
-    if (diffInSeconds < 3600) { 
-        const diffInMinutes = Math.floor(diffInSeconds / 60); 
-        return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
-    }
+        timeString = 'Just now';
+     // Less than 1 hour ago 
+    } else if (diffInSeconds < 3600) {
+        const diffInMinutes = Math.floor(diffInSeconds / 60);
+        timeString = `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
     // Less than 24 hours ago
-    if (diffInSeconds < 86400) { 
-        const diffInHours = Math.floor(diffInSeconds / 3600); // Convert to hours
-        return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
-    }
+    } else if (diffInSeconds < 86400) {
+        const diffInHours = Math.floor(diffInSeconds / 3600);
+        timeString = `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
     // Less than 7 days ago 
-    if (diffInSeconds < 604800) { 
-        const diffInDays = Math.floor(diffInSeconds / 86400); // Convert to days
-        return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
-    }
+    } else if (diffInSeconds < 604800) {
+        const diffInDays = Math.floor(diffInSeconds / 86400);
+        timeString = `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
     // More than 7 days ago 
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    };
-    return date.toLocaleDateString('en-US', options);
+    } else {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        };
+        timeString = date.toLocaleDateString('en-US', options);
+    }
+
+    return isEdited ? `${timeString} (edited)` : timeString;
 }
 
 // Likes
@@ -202,7 +205,6 @@ document.addEventListener("click", (event) => {
         // Set initial values in the modal
         document.getElementById("editPostContent").value = postContent;
         mediaPreviewContainer.innerHTML = "";
-
         // Display current media in the preview
         if (mediaElement) {
             let previewElement;
@@ -231,16 +233,17 @@ document.addEventListener("click", (event) => {
             const updatedText = document.getElementById("editPostContent").value.trim();
             const fileInput = document.getElementById("editPostMedia");
             const file = fileInput.files[0];
-
+        
             const postTextElement = currentPostElement.querySelector(".post-content p");
             postTextElement.textContent = updatedText;
-
+        
             const mediaContainer = currentPostElement.querySelector(".post-content");
             const existingMedia = mediaContainer.querySelector("img, video");
-            if (existingMedia) mediaContainer.removeChild(existingMedia);
-
-            // Add new media preview if a file is selected
+        
             if (file) {
+                // Remove existing media if a new file is provided
+                if (existingMedia) mediaContainer.removeChild(existingMedia);
+        
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     let newMediaElement;
@@ -256,9 +259,18 @@ document.addEventListener("click", (event) => {
                     mediaContainer.appendChild(newMediaElement);
                 };
                 reader.readAsDataURL(file);
+            } else if (!updatedText && existingMedia) {
+                // If no text or file is updated, retain the existing media
+                if (!mediaContainer.contains(existingMedia)) {
+                    mediaContainer.appendChild(existingMedia);
+                }
             }
-
-            // Hide the modal after save
+        
+            // Update the post time with the (edited) label
+            const postTimeElement = currentPostElement.querySelector("small.text-muted");
+            postTimeElement.dataset.isEdited = true;
+            postTimeElement.textContent = formatDate(new Date(), true);
+        
             const editPostModalInstance = bootstrap.Modal.getInstance(document.getElementById("editPostModal"));
             editPostModalInstance.hide();
 
