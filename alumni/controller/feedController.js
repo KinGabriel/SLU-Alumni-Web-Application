@@ -4,8 +4,8 @@ import path from 'path';
 
 
 export const handleUserPost = (req, res) => {
-    const userId = req.cookies.user_id;
-    const { description, post_type, datetime } = req.body;
+    const userId = req.userId
+    const { description, post_type } = req.body;
 
     const uploadedImages = req.files['images[]'] || [];
     const uploadedVideos = req.files['videos[]'] || [];
@@ -17,8 +17,8 @@ export const handleUserPost = (req, res) => {
     console.log('Received data:', req.body);
     console.log('Uploaded files:', bannerFiles);
 
-    const query = "INSERT INTO posts (description, banner,  post_type, datetime, user_id) VALUES (?,  ?, ?, ?, ?)";
-    dbConnection.query(query, [description, banner,  post_type, datetime, userId], (err, result) => {
+    const query = "INSERT INTO posts (description, banner,  post_type, datetime, user_id) VALUES (?,  ?, ?, NOW(), ?)";
+    dbConnection.query(query, [description, banner,  post_type, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });
@@ -27,7 +27,7 @@ export const handleUserPost = (req, res) => {
     });
 };
 export const getPost = (req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
     const query = `
     SELECT 
             p.post_id,
@@ -96,7 +96,7 @@ const handleMedia = (bannerPath) => {
     return ''; // if empty
 };
 export const handleComments = (req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
     const { post_id, comment_message } = req.body; 
 
     if (!post_id || !comment_message) {
@@ -160,7 +160,7 @@ export const getComments = (req, res) => {
 
 
 export const handleLikes = (req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
     const postId = req.params.postId; 
 
     const checkLikeQuery = 'SELECT * FROM likes WHERE post_id = ? AND user_id = ?';

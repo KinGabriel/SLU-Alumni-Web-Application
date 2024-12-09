@@ -1,8 +1,8 @@
 import dbConnection from '../../database/connection.js';
-
+import mysql from 'mysql2/promise';
 
 export const getAlumni = (req, res) => {
-    const userId = req.cookies.user_id
+    const userId = req.userId
     if (!userId) {
         return res.status(400).send('Invalid Access');
     }
@@ -60,6 +60,36 @@ export const getAlumni = (req, res) => {
 
     });
 };
+
+export const searchUsers = async (req, res) => {
+    const searchTerm = req.query.query || "";  // Get the search term from the query string
+
+    if (!searchTerm) {
+        return res.status(400).json({ error: 'Search term is required' });  // Return error if no search term
+    }
+
+    try {
+        // Query to search users by name (using ? for parameterized queries)
+        const query = `SELECT user_id, CONCAT(fname, ' ', lname) AS name 
+                       FROM user 
+                       WHERE CONCAT(fname, ' ', lname) LIKE ?`;
+
+        // Use the promise-based query method provided by mysql2
+        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`]);
+
+        // If no users were found
+        if (users.length === 0) {
+            return res.status(404).json({ message: 'No users found' });
+        }
+
+        // Return the users as JSON
+        res.json({ users });
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+        res.status(500).json({ error: 'Internal server error' });  // Handle any server errors
+    }
+};
+
 
 export const handleLogout = (req,res) =>{
     req.session.destroy(err => {

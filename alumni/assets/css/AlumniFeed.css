@@ -602,3 +602,20 @@ img.img-fluid {
     height: 100%;
     object-fit: contain; 
 }
+/* TODO design of the search */
+#searchResults {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
+}

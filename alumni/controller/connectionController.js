@@ -1,7 +1,7 @@
 import dbConnection from '../../database/connection.js';
 
 export const connections = (req, res) => {
-    const userId = req.cookies.user_id;  
+    const userId = req.userId;
     const { search = '', filter, sort } = req.query;  
     let query = `
         SELECT u.user_id, CONCAT(u.fname, ' ', u.lname) AS name, u.pfp

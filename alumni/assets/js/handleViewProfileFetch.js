@@ -74,16 +74,14 @@ async function editPost(postId, description, mediaFile) {
     formData.append('description', description);
     formData.append('datetime', datetime);
 
-    // Check if the media file is provided
-    if (mediaFile) {
-        // Check if the file is an image or video
-        const fileType = mediaFile.type.split('/')[0];  // 'image' or 'video'
+    if (mediaFile && mediaFile.type) {
 
-        // Append to the correct field based on the file type
+        const fileType = mediaFile.type.split('/')[0]; 
+
         if (fileType === 'image') {
-            formData.append('images[]', mediaFile); // Append to 'images[]' for images
+            formData.append('images[]', mediaFile); 
         } else if (fileType === 'video') {
-            formData.append('videos[]', mediaFile); // Append to 'videos[]' for videos
+            formData.append('videos[]', mediaFile); 
         }
     }
 
@@ -104,6 +102,7 @@ async function editPost(postId, description, mediaFile) {
         throw error;
     }
 }
+
 
 
 getOwnPosts()

@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export const getOwnPost =(req, res) =>{
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
     const query = `
     SELECT 
         p.post_id,
@@ -75,7 +75,7 @@ const handleMedia = (bannerPath) => {
     return ''; // if empty
 };
 export const handleLikes = (req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
     const postId = req.params.postId; 
 
     const checkLikeQuery = 'SELECT * FROM likes WHERE post_id = ? AND user_id = ?';
@@ -110,32 +110,48 @@ export const handleLikes = (req, res) => {
         }
     });
 };
-
 export const editPost = async (req, res) => {
     try {
-        const postId = req.params.postId; 
-        const { description, datetime } = req.body;  
-        const setEdit = 1;
-        const uploadedImages = req.files['images[]'] || [];
-        const uploadedVideos = req.files['videos[]'] || [];
+        const postId = req.params.postId; // Post ID from request parameters
+        const { description } = req.body; // Updated description from the request body
+        const setEdit = 1; // Mark the post as edited
+
+        // Check if postId and description are provided
+        if (!postId || !description) {
+            return res.status(400).json({ message: 'Post ID and description are required' });
+        }
+
+        // Handle file uploads (images and videos)
+        const uploadedImages = (req.files && req.files['images[]']) || [];
+        const uploadedVideos = (req.files && req.files['videos[]']) || [];
         const bannerFiles = [...uploadedImages, ...uploadedVideos];
-        const banner = bannerFiles.map(file => file.path).join(',');
+        const banner = bannerFiles.length > 0
+            ? bannerFiles.map(file => file.path).join(',')
+            : null; // Handle case where no new files are uploaded
+
+        // Build the SQL query
         const query = `
             UPDATE posts
-            SET description = ?, banner = ?, datetime = ?, is_edited = ?
-            WHERE \`post_id\` = ?
+            SET description = ?, 
+                banner = IFNULL(?, banner), -- Update banner only if new files are uploaded
+                datetime = NOW(), 
+                is_edited = ?
+            WHERE post_id = ?
         `;
 
-        // Execute the query with the updated data
-        await dbConnection.execute(query, [description, banner, datetime,setEdit, postId]);
+        // Execute the query
+         await dbConnection.execute(query, [description, banner, setEdit, postId]);
 
-        // Respond with success message
+      
+
+        // Respond with success
         res.status(200).json({ message: 'Post updated successfully' });
     } catch (error) {
-        console.error('Error editing post:', error);  // Log any errors
+        console.error('Error editing post:', error);
         res.status(500).json({ message: 'Failed to update the post' });
     }
 };
+
 
 export const deletePost = async (req,res) => {
     try {
