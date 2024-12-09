@@ -1,7 +1,6 @@
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
-import sanitizeHtml from 'sanitize-html';
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
