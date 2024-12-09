@@ -16,7 +16,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/jobOpp.css">
 </head>
 
 <head>
@@ -92,41 +92,133 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 </div>
-        <div class="container py-100">
-            <!-- Page Title for Events -->
-            <div class="row mb-2">
-                <div class="col">
+
+
+
+
+<!-- Jobs Section Title -->
+<div class="row mb-5 pt-4">
+    <div class="col">
+        <h1>Job Opportunities</h1>
+    </div>
+</div>
+
+<div class="filter-container">
+  <span class="filter-bubble active" data-filter="full-time">Full-time</span>
+  <span class="filter-bubble" data-filter="part-time">Part-time</span>
+  <span class="filter-bubble" data-filter="internship">Internship</span>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Card 1 -->
+    <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Software Engineer</h5>
+                <span class="badge bg-success mb-2">FULL TIME</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
                 </div>
             </div>
-
-            <div class="container py-5">
-                <!-- Search and Categories Section Events -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="form-group bg-white input-icon p-3 rounded shadow-sm mb-3">
-                            <i class="fas fa-search"></i>
-                            <input type="search" placeholder="Search by title or category" class="form-control mb-3" />
-                            <div class="categories">
-                                <a href="#" class="badge rounded-pill active me-1">All</a>
-                                <a href="#" class="badge rounded-pill me-1">Upcoming</a>
-                                <a href="#" class="badge rounded-pill me-1">Ended</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h1>Events</h1>
-
-        <!-- Dynamic Cards Container -->
-        <div class="row row-cols-md-3 gx-3" id="cards-container">
-            <!-- Cards will be inserted here via JavaScript -->
         </div>
+    </div>
 
-                
+    <!-- Card 2 -->
+    <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Visual Designer</h5>
+                <span class="badge bg-success mb-2">FULL TIME</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                </div>
             </div>
         </div>
-  
-
+    </div>
     
+    <!-- Card 3 -->
+    <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Marketing Manager</h5>
+                <span class="badge bg-info mb-2">INTERNSHIP</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Card 4 -->
+      <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Marketing Manager</h5>
+                <span class="badge bg-info mb-2">INTERNSHIP</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- Card 5 -->
+      <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Marketing Manager</h5>
+                <span class="badge bg-info mb-2">INTERNSHIP</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Card 6 -->
+      <div class="col">
+        <div class="card shadow-sm position-relative">
+            <!-- Edit Icon -->
+            <button class="edit-icon">
+                <i class="fas fa-edit"></i>
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">Marketing Manager</h5>
+                <span class="badge bg-info mb-2">INTERNSHIP</span>
+                <div class="d-flex align-items-center">
+                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
  <!-- Pagination -->
  <div class="pagination">
                 <ul class="pagination">
@@ -153,9 +245,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-    <!-- Link to custom JavaScript -->
-    <script src="../assets/js/javascript.js"></script>
+<!-- Link to custom JavaScript -->
+<script src="../assets/js/jobopp.js"></script>
 </body>
 
 </html>
