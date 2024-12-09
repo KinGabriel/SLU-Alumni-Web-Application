@@ -18,14 +18,16 @@
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <!-- Search bar -->
             <div class="search">
-                <form id="searchForm">
-                    <input type="text" name="search" placeholder="Search..">
+                <form id="searchForm" onsubmit="return false;">
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
                     <button type="submit">
                         <img src="../assets/images/search.png" alt="Search" class="search-icon">
                     </button>
                 </form>
             </div>
         </h1>
+        
+        <ul id="searchResults"></ul>
 
 <!-- Profile dropdown: Allows user to view and manage their profile -->
 <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
