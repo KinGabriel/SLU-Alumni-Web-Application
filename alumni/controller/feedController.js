@@ -2,7 +2,6 @@ import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
 
-
 export const handleUserPost = (req, res) => {
     const userId = req.userId
     const { description, post_type } = req.body;

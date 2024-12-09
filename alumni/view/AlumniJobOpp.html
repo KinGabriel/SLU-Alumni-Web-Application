@@ -11,7 +11,12 @@
    <!-- Header separator -->
    <div class="header-separator"></div>
 
-   <!-- Header -->
+    <!-- Header Section: Displays the SLU Alumina logo, search bar, and user profile dropdown -->
+    <!-- Reference: Chatgpt-->
+    <!-- Library Used: Bootstrap (https://getbootstrap.com/)-->
+    <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com) -->
+    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+     
    <header>
        <h1>
            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
@@ -50,16 +55,12 @@
              
    </header>
 
-   <!-- Main Content 
-   
-   Author: Escaño, Nichole Jhoy
-   Code Description:
-   Reference: 
-   
-   
-   
-   -->
-   <div class="main-content">
+    <!-- Sidebar: Contains profile information, navigation links to different sections like Feed, Connections, News, Events, Job Opportunities, and Favorites -->
+    <!-- Reference: Chatgpt-->
+    <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com) -->
+    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+     <!-- Libraries Used: Bootstrap (https://getbootstrap.com/) -->
+    <div class="main-content">
        <!-- Sidebar -->
        <aside>
            <div class="profile">
@@ -107,15 +108,15 @@
                        <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
                        <a href="/api/jobs">Job Opportunities</a>
                    </li>
-                   <li>
-                       <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
-                       <a href="../view/AlumniFavorites.html">Favorites</a>
-                   </li>
                </ul>
            </nav>
         </aside>
 
-        <!-- Main Content -->
+    <!-- Job Opportunities Section: Displays a list of job cards with details like job title, company, location, and salary -->
+    <!-- Reference: Chatgpt-->
+    <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com) -->
+    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+     <!-- Libraries Used: Bootstrap (https://getbootstrap.com/) -->
         <div class="content p-5">
             <!-- Header Job Opportunities Banner -->
             <div class="header-job-opp text-center mb-5">
@@ -129,7 +130,11 @@
                 </div>
             </div>
 
-            <!-- Filters Section -->
+        <!-- Filters Section: Includes dropdown menus for filtering job results by type, date posted, and salary estimate -->
+        <!-- Reference: Chatgpt-->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com)-->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="filters mb-5">
             <div class="dropdown d-inline-block">
                 <button class="btn btn-outline-primary dropdown-toggle filter-btn" type="button" id="dropdownJobType" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #008CBA;  color: white;">
@@ -153,7 +158,7 @@
                 </ul>
             </div>
 
-            <div class="dropdown d-inline-block">
+            <!-- <div class="dropdown d-inline-block">
                 <button class="btn btn-outline-primary dropdown-toggle filter-btn" type="button" id="dropdownSalaryEstimate" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #008CBA;  color: white;">
                     Salary Estimate
                 </button>
@@ -162,7 +167,7 @@
                     <li><a class="dropdown-item" href="#">$30,000 - $40,000</a></li>
                     <li><a class="dropdown-item" href="#">$40,000 - $50,000</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
 
         <!-- Job Cards Section -->
@@ -174,7 +179,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -183,9 +187,6 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
                 <!-- Job Card 2 -->
@@ -194,7 +195,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -203,9 +203,6 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
                 <!-- Job Card 3 -->
@@ -214,7 +211,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -223,9 +219,6 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
                 <!-- Job Card 4 -->
@@ -234,7 +227,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -243,9 +235,6 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
                 <!-- Job Card 5 -->
@@ -254,7 +243,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -263,9 +251,6 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
                 <!-- Job Card 6 -->
@@ -274,7 +259,6 @@
                         <h3 class="job-title mb-3">Software Engineer</h3>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="job-type full-time">FULL-TIME</span>
-                            <span class="salary">Salary: $20,000 - $25,000</span>
                         </div>
                         <div class="d-flex align-items-center">
                             <img src="../assets/images/company.jpg" alt="Google Logo" class="company-logo me-3">
@@ -283,14 +267,14 @@
                                 <p class="m-0 text-muted">Dhaka, Bangladesh</p>
                             </div>
                         </div>
-                        <button class="bookmark-btn">
-                            <img src="../assets/images/saved.png" alt="Bookmark Icon">
-                        </button>
                     </div>
                 </div>
             </div>
 
             <!-- Pagination -->
+            <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+            <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com) -->
+            <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
             <div class="pagination">
                 <ul class="pagination">
                     <li class="page-item disabled">
