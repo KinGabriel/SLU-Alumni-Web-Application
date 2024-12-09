@@ -203,25 +203,6 @@ Profile Dropdown -->
                 </div>
             </div>
 
-            <!-- View Image Modal -->
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="imageModalLabel">View Image</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img id="modalImage" src="" class="img-fluid" alt="Large Image">
-                            <!-- Image acting as download link -->
-                            <a id="downloadLink" href="#" download class="download-icon">
-                                <img src="../assets/images/download.png" alt="Download Icon" class="img-fluid">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Comment Modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -331,58 +312,6 @@ Profile Dropdown -->
 
 
 
-
-
-
-<script>
-// Handles Comments
-    document.addEventListener('DOMContentLoaded', () => {
-    
-});
-
-// Function to handle submitting a new comment
-function submitComment(postId, commentText) {
-    // implement API request to save the comment the database
-    const newComment = {
-        username: 'You', // replace with logged-in user's name
-        text: commentText
-    };
-
-    // dynamically append the new comment to the modal
-     // replace with logged-in user's profile
-    const commentDiv = document.createElement('div');
-    commentDiv.classList.add('comment');
-    commentDiv.innerHTML = `
-        <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
-        <p class="comment-text"><strong>${newComment.username}:</strong> ${newComment.text}</p>
-    `;
-    const commentsList = document.getElementById('commentsList');
-    commentsList.appendChild(commentDiv);
-}
-
-// hides comment modal 
-document.addEventListener('DOMContentLoaded', () => {
-    const commentModal = document.getElementById('commentModal');
-
-    commentModal.addEventListener('hidden.bs.modal', () => {
-        // remove any backdrops
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.parentNode.removeChild(backdrop);
-        }
-
-        // ensure the body class is reset
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-    });
-});
-
-// Handles Report 
-
-// TO DO: Report JS
-
-
-</script>
     
     <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
