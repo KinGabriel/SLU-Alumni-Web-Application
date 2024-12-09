@@ -182,6 +182,7 @@ function addPreviewMedia(src, container, type) {
     previewWrapper.appendChild(closeButton);
     container.appendChild(previewWrapper);
 }
+// Function to create the post actions section
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
@@ -195,13 +196,14 @@ function createPostActions(post) {
 
     const likeCountElement = likeButton.querySelector('span');
 
+    // Like button functionality
     likeButton.addEventListener('click', function() {
         const isLiked = post.is_liked;
-        post.is_liked = !isLiked;  
+        post.is_liked = !isLiked;
         handleLike(post.post_id, likeButton, isLiked, likeCountElement);
     });
 
-    // Handle comment button click
+    // Comment button functionality
     commentButton.addEventListener('click', function() {
         const postId = post.post_id;
 
@@ -211,11 +213,12 @@ function createPostActions(post) {
             document.body.appendChild(commentModal);
         }
 
-        loadComments(postId);
+        loadComments(postId); // Load existing comments for the post
         const modal = new bootstrap.Modal(commentModal);
         modal.show();
-        submitComment(postId); 
-       
+
+        // Ensure the submit comment handler is set only once
+        setupSubmitCommentHandler(postId);
     });
 
     actionsContainer.appendChild(likeButton);
@@ -247,8 +250,8 @@ function createCommentModal(postId) {
                     <div id="commentsList-${postId}">
                         <!-- Comments will be dynamically loaded here -->
                     </div>
-                    <textarea id="commentInput" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
-                    <button class="btn btn-primary mt-2" id="submitComment">Submit</button>
+                    <textarea id="commentInput-${postId}" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-primary mt-2" id="submitComment-${postId}">Submit</button>
                 </div>
             </div>
         </div>
@@ -257,25 +260,39 @@ function createCommentModal(postId) {
     return modal;
 }
 
-// Function to attach the comment submission listener
-function submitComment(postId) {
-    const submitCommentButton = document.getElementById('submitComment');
+// Function to set up the submit comment handler only once
+function setupSubmitCommentHandler(postId) {
+    const submitCommentButton = document.getElementById(`submitComment-${postId}`);
     if (submitCommentButton) {
-        submitCommentButton.addEventListener('click', function() {
-            const commentText = document.getElementById('commentInput').value.trim();
-            if (commentText) {
-               
+        submitCommentButton.removeEventListener('click', submitCommentHandler);
+        submitCommentButton.addEventListener('click', submitCommentHandler);
+    }
 
-                postComment(postId, commentText).then(success => {
-                    if (success) {
-                        loadComments(postId);  
-                        document.getElementById('commentInput').value = ''; 
-                    }
-                });
-            }
-        });
+    // Comment submission handler
+    function submitCommentHandler() {
+        const commentInput = document.getElementById(`commentInput-${postId}`);
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            postComment(postId, commentText).then(success => {
+                if (success) {
+                    loadComments(postId);  
+                    commentInput.value = ''; // Clear the comment input
+                }
+            });
+        }
     }
 }
+
+function postComment(postId, commentText) {
+    return new Promise(resolve => {
+        handleComment(postId, commentText)
+        setTimeout(() => {
+            console.log(`Comment posted on post ${postId}: ${commentText}`);
+            resolve(true); 
+        }, 1000);
+    });
+}
+
 
 
 function createPostActionButton(type, icon, count) {

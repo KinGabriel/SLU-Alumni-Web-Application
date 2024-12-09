@@ -1,7 +1,7 @@
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
-import sanitizeHtml from 'sanitize-html';
+
 
 export const handleUserPost = (req, res) => {
     const userId = req.cookies.user_id;
@@ -34,6 +34,7 @@ export const getPost = (req, res) => {
             p.banner,
             p.post_type,
             p.datetime,
+            p.description,
             COUNT(DISTINCT l.like_id) AS like_count,
             COUNT(DISTINCT c.comm_id) AS comment_count,
             u.user_id AS poster_id,
