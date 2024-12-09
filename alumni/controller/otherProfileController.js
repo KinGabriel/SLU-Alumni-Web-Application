@@ -1,11 +1,8 @@
 import dbConnection from '../../database/connection.js';
 
-
-export const getAlumni = (req, res) => {
-    const userId = req.userId
-    if (!userId) {
-        return res.status(400).send('Invalid Access');
-    }
+export const  getOtherUserInfo = (req,res) => {
+    const userId = req.query.user_id; 
+    console.log("Received user_id:", userId); 
 
   const query = `
     SELECT 
@@ -49,6 +46,14 @@ export const getAlumni = (req, res) => {
         } else {
             req.session.pfp = '/assets/images/default-avatar-icon.jpg'; 
         }
+        console.log('Response sent:', {
+            name: user.Name,
+            bio: user.bio,
+            follower_count: user.follower_count,
+            followed_count: user.followed_count,
+            post_count: user.post_count,
+            pfp: req.session.pfp,
+        });
         res.json({
             name: user.Name,
             bio: user.bio,
@@ -57,47 +62,7 @@ export const getAlumni = (req, res) => {
             post_count: user.post_count,
             pfp: req.session.pfp,
         });
+     
 
-    });
-};
-
-export const searchUsers = async (req, res) => {
-    const searchTerm = req.query.query || "";  
-
-    if (!searchTerm) {
-        return res.status(400).json({ error: 'Search term is required' });  
-    }
-
-    try {
-        const query = `SELECT user_id, CONCAT(fname, ' ', lname) AS name 
-                       FROM user 
-                       WHERE CONCAT(fname, ' ', lname) LIKE ?`;
-
-
-        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`]);
-
-        // If no users were found
-        if (users.length === 0) {
-            return res.status(404).json({ message: 'No users found' });
-        }
-
-        // Return the users as JSON
-        res.json({ users });
-    } catch (error) {
-        console.error('Error fetching search results:', error);
-        res.status(500).json({ error: 'Internal server error' });  // Handle any server errors
-    }
-};
-
-
-export const handleLogout = (req,res) =>{
-    req.session.destroy(err => {
-        if (err) {
-            console.error('Error destroying session:', err);
-            return res.status(500).send('An error occurred while logging out.');
-        }
-        res.clearCookie('user_id');
-        res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
     });
 }
-

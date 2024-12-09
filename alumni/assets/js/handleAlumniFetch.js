@@ -71,7 +71,7 @@ function logOut() {
     window.location.href = '/api/logout';
 }
 
-// Frontend JavaScript
+
 function searchUsers() {
     const searchTerm = document.getElementById('searchInput').value;
     
@@ -95,7 +95,7 @@ function searchUsers() {
                 const listItem = document.createElement('li');
                 listItem.textContent = user.name;
                 listItem.classList.add("search-result-item");
-                listItem.onclick = () => handleUserClick(user);
+                listItem.onclick = () => handleUserClick(user.user_id);
                 resultsContainer.appendChild(listItem);
             });
         })
@@ -107,15 +107,7 @@ function searchUsers() {
 
 function handleUserClick(user) {
     console.log("User clicked:", user);
-    // Implement redirection or any other action you want to trigger on user click
+    window.location.href = `/api/profile-other?user_id=${user}`;
 }
-
-
-function handleUserClick(user) {
-    console.log("User clicked:", user);
-  
-}
-
-
 
 getUserInfo();

@@ -82,23 +82,23 @@
         <div class="profile-section d-flex align-items-center mt-4 px-4">
             <!-- Profile Photo -->
             <div class="profile-photo">
-                <img src="../assets/images/candy.jpg" alt="Profile Picture" class="rounded-circle" name="pfp" style="width: 100px; height: 100px;">
+                <img src="../assets/images/candy.jpg" alt="Profile Picture" class="rounded-circle" name="otherPfp" style="width: 100px; height: 100px;">
             </div>
 
             <!-- Profile Details -->
             <div class="profile-details ms-3">
-                <h4 class="fw-bold mb-0" name="name">Taylor Swift</h4>
+                <h4 class="fw-bold mb-0" name="otherUserName">Taylor Swift</h4>
 
                 <!-- Stats (Followers, Following, Posts) -->
                 <div class="stats mb-3">
                     <div class="stat-item">
-                        <strong>Followers</strong><br><p name="followers_count">2</p>
+                        <strong>Followers</strong><br><p name="other_followers_count">2</p>
                     </div>
                     <div class="stat-item">
-                        <strong>Following</strong><br><p name="followed_count">2</p>
+                        <strong>Following</strong><br><p name="other_followed_count">2</p>
                     </div>
                     <div class="stat-item">
-                        <strong>Posts</strong><br><p name="post_count">126</p>
+                        <strong>Posts</strong><br><p name="other_post_count">126</p>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@
 
         <!-- Bio Section -->
         <div class="row mt-4">
-            <div class="col-lg-3 ms-auto" id="bio-section">
+            <div class="col-lg-3 ms-auto" id="bio-section" name="other_bio">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Bio</h5>
@@ -222,7 +222,9 @@
 </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/handleHomefeed.js" defer></script>  
+    <script src="../assets/js/handleOtherProfileFetch.js" defer></script>  
+    <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
+
 
 </body>
 </html>

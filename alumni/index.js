@@ -5,6 +5,7 @@ import alumniRoutes from './routes/alumniRoute.js';
 import feedRoutes from './routes/feedRoute.js';
 import connectionRoutes from './routes/connectionRoute.js';
 import useProfileRoute from './routes/userProfileRoute.js';
+import otherProfileRoute from './routes/otherProfileRoute.js'; 
 import { cookieMiddleware, cookieParser } from './middleware/cookieMiddleware.js';
 import sessionMiddleware from './middleware/sessionMiddleware.js';
 import staticMiddleware from './middleware/staticMiddleware.js';
@@ -35,8 +36,10 @@ app.get('/', (req, res) => {
 // API Routes
 app.use('/api', alumniRoutes);
 app.use('/api/feed', feedRoutes);
-app.use('/api/connections',connectionRoutes )
+app.use('/api/connections',connectionRoutes)
 app.use('/api/viewProfile',useProfileRoute)
+app.use('/api/profile-other',otherProfileRoute)
+
 // Start the Server
 const port = process.env.PORT;
 app.listen(port, () => {
