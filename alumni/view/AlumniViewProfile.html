@@ -12,7 +12,10 @@
     <!-- Header separator -->
     <div class="header-separator"></div>
 
-    <!-- Header -->
+    <!-- Header Section: This contains the main header with the logo and search bar -->
+    <!-- Design Inspiration: GitHub, Facebook -->
+    <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
     <header>
         <h1>
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
@@ -27,7 +30,10 @@
             </div>
         </h1>
 
-        <!-- Profile dropdown -->
+         <!-- Profile dropdown: Allows user to view and manage their profile -->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Design Inspiration: GitHub, Facebook -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="profile-dropdown">
             <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
             <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
@@ -51,12 +57,16 @@
         </div>         
     </header>
 
-    <!-- Back Button -->
+   <!-- Back Button: Navigates to the home page -->
+    <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+    <!-- Design Inspiration: GitHub, Facebook -->
       <a href="/" class="btn btn-outline-secondary back-btn">
         <img src="../assets/images/feed.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Home
     </a>
 
-   <!-- Alumni Profile -->
+       <!-- Alumni Profile: Displays the alumni's profile including their details and bio -->
+     <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="container mt-4">
             <!-- Header Section -->
             <div class="card shadow-sm">
@@ -65,7 +75,9 @@
                     <img src="../assets/images/cover.jpg" class="img-fluid w-100" alt="Cover Photo">
                 </div>
 
-                <!-- Profile Section -->
+            <!-- Profile Section: Contains profile photo, name, job title, location, and stats -->
+            <!-- Design Inspiration: GitHub, Facebook -->
+            <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
                 <div class="profile-section d-flex align-items-center mt-4 px-4">
                     <!-- Profile Photo -->
                     <div class="profile-photo">
@@ -114,7 +126,9 @@
                 </div>
             </div>
 
-            <!-- Navigation Tabs -->
+            <!-- Navigation Tabs: Provides navigation between Feed, Connections, Media, and Videos -->
+            <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+            <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
             <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Feed</a>
@@ -131,7 +145,10 @@
             </ul>
         </div>
 
-        <!-- Feed Section -->
+        <!-- Feed Section: Displays a post, its options (edit, delete), and interaction buttons -->
+        <!-- Design Inspiration: GitHub, Facebook -->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
          <div id="feed">
             <div class="post card mt-4">
                 <div class="card-body">
@@ -172,7 +189,9 @@
             </div>
         </div>
 
-        <!-- Edit Post Modal -->
+        <!-- Edit Post Modal: Allows users to edit their post -->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -210,7 +229,9 @@
             </div>
         </div>
         
-        <!-- Delete Post Modal -->
+        <!-- Delete Post Modal: Confirms if the user wants to delete the post -->
+        <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -230,7 +251,10 @@
             </div>
         </div>
 
-        <!-- Modal for Success -->
+        
+        <!-- Success Modal: Shows success message after successful post update -->
+         <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -248,7 +272,9 @@
             </div>
         </div>
 
-        <!-- Modal for Error -->
+         <!-- Error Modal: Shows error message if there's an issue updating the post -->
+          <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+        <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
