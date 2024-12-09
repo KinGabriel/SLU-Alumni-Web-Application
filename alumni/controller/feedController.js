@@ -33,6 +33,7 @@ export const getPost = (req, res) => {
             p.banner,
             p.post_type,
             p.datetime,
+            p.description,
             COUNT(DISTINCT l.like_id) AS like_count,
             COUNT(DISTINCT c.comm_id) AS comment_count,
             u.user_id AS poster_id,

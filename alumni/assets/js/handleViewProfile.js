@@ -354,8 +354,3 @@ document.getElementById("confirmDeletePost").addEventListener("click", (event) =
     }
 });
 
-// Function to handle post deletion (for server-side action)
-function deletePost(postId) {
-    // Implement the logic to delete the post on the server (e.g., via an API call)
-    console.log(`Sending request to delete post with ID: ${postId}`);
-}
