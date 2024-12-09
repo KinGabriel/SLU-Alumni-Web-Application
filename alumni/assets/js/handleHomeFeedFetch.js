@@ -162,7 +162,6 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
     });
 }
 
-
 function loadComments(postId) {
     const commentsList = document.getElementById(`commentsList-${postId}`);
     commentsList.innerHTML = ''; // Clear previous comments
@@ -189,17 +188,23 @@ function loadComments(postId) {
                 const commentText = document.createElement('p');
                 commentText.classList.add('comment-text');
                 
-                // Create the strong tag for name and date
-                const strongTag = document.createElement('strong');
-                const formattedDate = formatDate(comment.date);  // Assuming formatDate is defined elsewhere
-                strongTag.textContent = `${comment.name}: ${formattedDate}`;
+                // Create the strong tag for name
+                const nameTag = document.createElement('strong');
+                nameTag.textContent = comment.name;
                 
                 // Create the comment message text
-                const commentMessageText = document.createTextNode(` ${comment.comment_message}`);
-
-                // Append strong tag and message to the comment text
-                commentText.appendChild(strongTag);
+                const commentMessageText = document.createTextNode(`: ${comment.comment_message} `);
+                
+                // Create the span for the date
+                const dateTag = document.createElement('span');
+                dateTag.classList.add('comment-date');
+                const formattedDate = formatDate(comment.date);  // Assuming formatDate is defined elsewhere
+                dateTag.textContent = `(${formattedDate})`;  // Adding parentheses around the date
+                
+                // Append name, comment, and date to the comment text
+                commentText.appendChild(nameTag);
                 commentText.appendChild(commentMessageText);
+                commentText.appendChild(dateTag);
 
                 // Append the profile image and comment text to the comment div
                 commentDiv.appendChild(profileImage);
@@ -214,7 +219,6 @@ function loadComments(postId) {
             commentsList.innerHTML = '<p>Failed to load comments. Please try again later.</p>';
         });
 }
-
 
 
 async function postComment(postId, commentText) {
