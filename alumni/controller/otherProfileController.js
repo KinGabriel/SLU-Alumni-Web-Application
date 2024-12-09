@@ -46,14 +46,7 @@ export const  getOtherUserInfo = (req,res) => {
         } else {
             req.session.pfp = '/assets/images/default-avatar-icon.jpg'; 
         }
-        console.log('Response sent:', {
-            name: user.Name,
-            bio: user.bio,
-            follower_count: user.follower_count,
-            followed_count: user.followed_count,
-            post_count: user.post_count,
-            pfp: req.session.pfp,
-        });
+      
         res.json({
             name: user.Name,
             bio: user.bio,
@@ -66,3 +59,87 @@ export const  getOtherUserInfo = (req,res) => {
 
     });
 }
+
+export const follow = (req, res) => {
+    const targetUserId = req.query.user_id; 
+    const user_id = req.userId; 
+    console.log(user_id,targetUserId );
+
+    const checkFollowQuery = `
+        SELECT * FROM follows
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+
+    dbConnection.query(checkFollowQuery, [user_id, targetUserId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        if (result.length > 0) {
+            return res.status(400).json({ message: 'You are already following this user' });
+        }
+
+        const followQuery = `
+            INSERT INTO follows (follower_id, followed_id, date_followed)
+            VALUES (?, ?, NOW())
+        `;
+
+        dbConnection.query(followQuery, [user_id, targetUserId], (err, result) => {
+            if (err) {
+                console.error('Database Error:', err);  // Log the error
+                return res.status(500).json({ error: 'Error following user' });
+            }
+            res.status(200).json({ message: 'User followed successfully' });
+        });
+        
+    });
+};
+
+
+export const unfollow = (req, res) => {
+    const targetUserId = req.query.user_id; 
+    const user_id = req.userId; 
+
+    const unfollowQuery = `
+        DELETE FROM follows
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+
+    dbConnection.query(unfollowQuery, [user_id, targetUserId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error unfollowing user' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(400).json({ message: 'You are not following this user' });
+        }
+
+        res.status(200).json({ message: 'User unfollowed successfully' });
+    });
+};
+
+
+export const isFollowing = (req, res) => {
+    const targetUserId = req.query.user_id; 
+    const user_id = req.userId; 
+
+    if (!targetUserId || !user_id) {
+        return res.status(400).json({ message: 'User ID or logged-in user ID is missing' });
+    }
+
+    const checkFollowQuery = `
+        SELECT COUNT(*) AS isFollowing
+        FROM follows
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+
+    dbConnection.query(checkFollowQuery, [user_id, targetUserId], (err, result) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ message: 'Error checking follow status', error: err });
+        }
+
+        const isFollowing = result[0].isFollowing > 0;
+        res.json({ isFollowing });
+    });
+};
