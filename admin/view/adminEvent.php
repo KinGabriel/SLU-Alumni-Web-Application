@@ -1,18 +1,26 @@
 <?php
 require("../controller/HandleSession.php");
-$message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
-$formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
-echo "<script>var message = '$message';</script>";
-unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets\css\adminEvent.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>My Web Page</title>
+
+    <!-- Link to Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link to FontAwesome for icons (CDN) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Link to compiled custom styles (CSS) -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<head>
+
 </head>
 <body>
     <!-- Header separator -->
@@ -33,70 +41,121 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </div>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar-container">
-        <!-- Navigation menu -->
-        <nav class="sidebar-menu">
-            <ul>
-                <li><a href="/view\adminDashboard.html"><img src="/assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon"><span class="menu-item-text">Dashboard</span></a></li>
-                <li><a href="/view\adminUserRequest.html"><img src="/assets/images/userRequest.png" alt="User Requests" class="sidebar-icon"><span class="menu-item-text">User Requests</span></a></li>
-                <li><a href="#user-accounts"><img src="/assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon"><span class="menu-item-text">User Accounts</span></a></li>
-                <li><a href="/view\adminEvent.html"><img src="/assets/images/events.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">Events</span></a></li>
-                <li><a href="#news"><img src="/assets/images/news.png" alt="News" class="sidebar-icon"><span class="menu-item-text">News</span></a></li>
-                <li><a href="#job-opportunities"><img src="/assets/images/job.png" alt="Job" class="sidebar-icon"><span class="menu-item-text">Job Opportunities</span></a></li>
-            </ul>
-        </nav>
+<!-- Sidebar -->
+<div class="sidebar-container">
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/adminDashboard.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminDashboard.php' ? 'active' : ''; ?>" id="dashboardLink">
+                    <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/UserRequest.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'UserRequest.php' ? 'active' : ''; ?>" id="userRequestLink">
+                    <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
+                    <span class="menu-item-text">Account Requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                    <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+            <li>
+                <a href="#job-opportunities" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 
-        <!-- Sticky Log Out Button -->
-        <div class="sidebar-logout">
-            <a href="#logout">
-                <img src="/assets/images/logout.png" alt="Log Out" class="sidebar-icon">
-                <span class="menu-item-logout">Log Out</span>
-            </a>
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
+        <a href="../controller/ProcessLogOut.php">
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
+    </div>
+</div>
+        <div class="container py-100">
+            <!-- Page Title for Events -->
+            <div class="row mb-2">
+                <div class="col">
+                </div>
+            </div>
+
+            <div class="container py-5">
+                <!-- Search and Categories Section Events -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-group bg-white input-icon p-3 rounded shadow-sm mb-3">
+                            <i class="fas fa-search"></i>
+                            <input type="search" placeholder="Search by title or category" class="form-control mb-3" />
+                            <div class="categories">
+                                <a href="#" class="badge rounded-pill active me-1">All</a>
+                                <a href="#" class="badge rounded-pill me-1">Upcoming</a>
+                                <a href="#" class="badge rounded-pill me-1">Ended</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1>Events</h1>
+
+        <!-- Dynamic Cards Container -->
+        <div class="row row-cols-md-3 gx-3" id="cards-container">
+            <!-- Cards will be inserted here via JavaScript -->
         </div>
-    </div>   
+
+                
+            </div>
+        </div>
+  
+
     
-    <div class="event-header">
-        <h3>SLU Events</h3>
-        <div class="searchbar">
-            <input type="text" placeholder="Search...">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-    </div>
-    <div class="events">
-        <div class="event-tabs">
-            <button class="upcoming">Upcoming</button>
-            <button class="ongoing">Ongoing</button>
-            <button class="past">Past</button>
-            <button class="button-add">Add New Event</button>
-        </div>
-        <div class="event-cards">
-            <div class="cards">
-                <img src="/assets\images\alumni.png" alt="">
-                <h4>Title</h4>
-                <h4>Time & Date</h4>
-                <i class="fa-solid fa-pen"></i>
-            </div>
-            <div class="cards">
-                <img src="/assets\images\alumni.png" alt="">
-                <h4>Title</h4>
-                <h4>Time & Date</h4>
-                <i class="fa-solid fa-pen"></i>
-            </div>
-            <div class="cards">
-                <img src="/assets\images\alumni.png" alt="">
-                <h4>Title</h4>
-                <h4>Time & Date</h4>
-                <i class="fa-solid fa-pen"></i>
-            </div>
-            <div class="cards">
-                <img src="/assets\images\alumni.png" alt="">
-                <h4>Title</h4>
-                <h4>Time & Date</h4>
-                <i class="fa-solid fa-pen"></i>
+ <!-- Pagination -->
+ <div class="pagination">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span>
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">1</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next &raquo;</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-    <script src="../assets\js\HandleAdminDashboard.js"></script>
+ 
+
+    <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Link to custom JavaScript -->
+    <script src="../assets/js/javascript.js"></script>
 </body>
+
 </html>

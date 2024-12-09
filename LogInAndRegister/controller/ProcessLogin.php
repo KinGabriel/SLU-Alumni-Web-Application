@@ -2,7 +2,7 @@
 require '../../database/Configuration.php'; 
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = filter_var(trim($_POST["email"]), filter: FILTER_SANITIZE_EMAIL);
+    $email = filter_var(trim($_POST["email"]), FILTER_SANITIZE_EMAIL);
     $password = trim($_POST["password"]);
 
     // Create a database connection
@@ -44,10 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user['user_type'] == 'admin') {
             header("Location: ../../admin/view/adminDashboard.php");
         } elseif ($user['user_type'] == 'manager') {
-            header("Location: ../view/homeManager.php");
+            header("Location: ../../manager/view/managerHome.php");
         } else {
-            setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", false, true); 
-            header("Location: http://localhost:8080/");
+            setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", true, true);
+            header("Location: http://localhost:8080");
         }
         exit();
     } else {

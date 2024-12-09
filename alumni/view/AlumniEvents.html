@@ -1,3 +1,9 @@
+<!-- Events Section: Displays upcoming events for SLU alumni -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/) -->
+<!-- Group Member Responsible:  Escaño, Nichole Jhoy -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +19,20 @@
 
    <!-- Header -->
    <header>
-       <h1>
-           <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
-           <!-- Search bar -->
-           <div class="search">
-               <form id="searchForm">
-                   <input type="text" name="search" placeholder="Search..">
-                   <button type="submit">
-                       <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                   </button>
-               </form>
-           </div>
-       </h1>
+    <h1>
+        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <!-- Search bar -->
+        <div class="search">
+            <form id="searchForm" onsubmit="return false;">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <button type="submit">
+                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </h1>
+    
+    <ul id="searchResults"></ul>
 
        <div class="profile-dropdown">
            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
@@ -50,15 +58,7 @@
              
    </header>
 
-   <!-- Main Content 
-   
-   Author: Escaño, Nichole Jhoy
-   Code Description:
-   Reference: 
-   
-   
-   
-   -->
+   <!-- Main Content -->
    <div class="main-content">
        <!-- Sidebar -->
        <aside>
@@ -107,10 +107,6 @@
                        <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
                        <a href="/api/jobs">Job Opportunities</a>
                    </li>
-                   <li>
-                       <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
-                       <a href="../view/AlumniFavorites.html">Favorites</a>
-                   </li>
                </ul>
            </nav>
             <script>
@@ -157,8 +153,7 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
@@ -185,14 +180,12 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
             </div>
             
-
             <div class="col">
                 <div class="card h-100">
                     <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
@@ -214,8 +207,7 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
@@ -242,8 +234,7 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
@@ -270,8 +261,7 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
@@ -298,8 +288,7 @@
                     <!-- Card Footer -->
                     <div class="card-footer">
                         <button class="btn btn-primary btn-interested">
-                            Interested
-                            <img src="../assets/images/interested.png" alt="Interested Icon" class="interested-icon">
+                            Read More
                         </button>
                     </div>
                 </div>
@@ -307,6 +296,7 @@
         </div> <!--end of row row-cols-1 row-cols-md-3 g-4-->  
     </div> <!--end of event-container-->  
 </div> <!--end of main-container-->  
+
     <!-- Bootstrap JavaScript -->
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="../assets/js/handleHomefeed.js" defer>  </script>  

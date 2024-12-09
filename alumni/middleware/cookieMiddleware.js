@@ -5,6 +5,7 @@ const cookieMiddleware = (req, res, next) => {
     if (!userId) {
         return res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
     }
+    req.userId = userId; 
     next();
 };
 

@@ -1,3 +1,14 @@
+<!-- Connections: 
+Alumni can view their mutual connections, following, and followers.
+They can message or remove people from their following or followers list.
+Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
+ -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/) -->
+<!-- Group Member Responsible:  Escaño, Nichole Jhoy -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +25,20 @@
 
    <!-- Header -->
    <header>
-       <h1>
-           <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
-           <!-- Search bar -->
-           <div class="search">
-               <form id="searchForm">
-                   <input type="text" name="search" placeholder="Search..">
-                   <button type="submit">
-                       <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                   </button>
-               </form>
-           </div>
-       </h1>
+    <h1>
+        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <!-- Search bar -->
+        <div class="search">
+            <form id="searchForm" onsubmit="return false;">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <button type="submit">
+                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </h1>
+    
+    <ul id="searchResults"></ul>
 
        <div class="profile-dropdown">
            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
@@ -48,90 +61,65 @@
                </div>
            </div>
        </div>
-             
    </header>
 
-   <!-- Main Content 
-   
-   Author: Escaño, Nichole Jhoy
-   Code Description:
-   Reference: 
-   
-   
-   
-   -->
-   <div class="main-content">
-       <!-- Sidebar -->
-       <aside>
-           <div class="profile">
-               <div class="profile-bg">
-                   <img src="../assets/images/slu.jpg" alt="Background Image">
-               </div>
-               <div class="profile-info">
-                   <img src="../assets/images/candy.jpg" alt="Profile Picture" class="profile-pic" name="pfp">
-                   <div class="name" name="name"></div>
-                   <div class="bio" name="bio">How to code.</div>
-                   <div class="stats">
-                       <div class="stat-item">
-                           <strong>Posts</strong><br><p name="post_count"></p>
-                       </div>
-                       <div class="stat-item" >
-                           <strong>Followers</strong><br><p name="followed_count"></p>
-                       </div>
-                       <div class="stat-item" >
-                           <strong>Following</strong><br><p name="followers_count"></p>
-                       </div>
-                   </div>
-               </div>
-           </div>
+   <!-- Main Content -->
+    <div class="main-content">
+        <!-- Sidebar -->
+        <aside>
+            <div class="profile">
+                <div class="profile-bg">
+                    <img src="../assets/images/slu.jpg" alt="Background Image">
+                </div>
+                <div class="profile-info">
+                    <img src="" alt="Profile Picture" class="profile-pic" name="pfp">
+                    <div class="name" name="name"></div>
+                    <div class="bio" name="bio">How to code.</div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <strong>Posts</strong><br><p name="post_count"></p>
+                        </div>
+                        <div class="stat-item">
+                            <strong>Followers</strong><br><p name="followers_count"></p>
+                        </div>
+                        <div class="stat-item">
+                            <strong>Following</strong><br><p name="followed_count"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-           <!-- Navigation -->
-           <nav>
-               <ul>
-                   <li>
-                       <img src="../assets/images/feed.png" alt="Feed Icon" class="nav-icon">
-                       <a href="/">Feed</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/connection.png" alt="Connections Icon" class="nav-icon">
-                       <a href="/api/connections">Connections</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/latestNews.png" alt="News Icon" class="nav-icon">
-                       <a href="/api/news">Latest News</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/events.png" alt="Events Icon" class="nav-icon">
-                       <a href="/api/events">Events</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
-                       <a href="/api/jobs">Job Opportunities</a>
-                   </li>
-                   <li>
-                       <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
-                       <a href="../view/AlumniFavorites.html">Favorites</a>
-                   </li>
-               </ul>
-           </nav>
-            <script>
-                document.querySelectorAll('nav li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active'); // Remove active class from all items
-                        });
-                        link.parentElement.classList.add('active'); // Add active class to the clicked item
-                    });
-                });
-            </script>
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li>
+                        <img src="../assets/images/feed.png" alt="Feed Icon" class="nav-icon">
+                        <a href="/">Feed</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/connection.png" alt="Connections Icon" class="nav-icon">
+                        <a href="/api/connections">Connections</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/latestNews.png" alt="News Icon" class="nav-icon">
+                        <a href="/api/news">Latest News</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/events.png" alt="Events Icon" class="nav-icon">
+                        <a href="/api/events">Events</a>
+                    </li>
+                    <li>
+                        <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
+                        <a href="/api/jobs">Job Opportunities</a>
+                    </li>
+                </ul>
+            </nav>
         </aside>
 
         <div class="connections-container">
-            <!-- Connections Title and Controls -->
             <div class="connections-header d-flex justify-content-between align-items-center">
                 <h2 class="connections-title">Connections</h2>
                 
-                <!-- Controls (Sort by Name Dropdown & Search Bar) -->
                 <div class="connections-controls d-flex align-items-center">
                     <!-- Sort By Dropdown -->
                     <div class="dropdown">
@@ -141,58 +129,105 @@
                             <a href="#" class="sort-option" data-sort="name-desc">Z - A</a>
                         </div>
                     </div>
-            
+                    
                     <!-- Search Bar -->
                     <form id="searchForm" class="d-flex">
-                        <input type="text" name="search" placeholder="Search.." class="form-control me-2">
-                        <!-- <button type="submit" class="btn btn-outline-secondary">
-                            <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                        </button> -->
+                        <input type="text" name="searchConnection" placeholder="Search.." class="form-control me-2">
                     </form>
                 </div>
             </div>
 
-             <!--Following and Followers filter-->
-             <div class="filter-buttons">
-                <button class="filter-button active" onclick="filterEvents('all')">Mutuals</button>
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-button active" onclick="filterEvents('mutual')">Mutuals</button>
                 <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
                 <button class="filter-button" onclick="filterEvents('following')">Following</button>
             </div>
         
             <!-- Connections Table -->
-            <div class="connections-table">
-                <div class="connection-item">
-                    <img src="../assets/images/anya.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Anya Forger</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/asta.jpg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Asta Staria</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
-                    </div>
-                </div>
-        
-                <div class="connection-item">
-                    <img src="../assets/images/yuno.jpeg" alt="Profile Picture" class="profile-pic">
-                    <div class="name">Yuno Grinberyall</div>
-                    <div class="actions">
-                        <button class="message-btn">Message</button>
-                        <button class="remove-btn">Remove</button>
+            <div class="connections-table" id="connectionsTable">
+                <!-- DOM generated -->
+            </div>
+
+            <!-- Confirmation Modal: Removing Following -->
+            <div class="modal fade" id="confirmRemoveFollowingModal" tabindex="-1" aria-labelledby="confirmRemoveFollowingModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmRemoveFollowingModalLabel">Confirm Remove</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to stop following <span id="followingName" class="fw-bold"></span>?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="confirmRemoveFollowingButton">Remove</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-            <!-- Bootstrap JavaScript -->
-  <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="../assets/js/handleHomefeed.js" defer>  </script>  
-  <script src="../assets/js/handleFetch.js" async>  </script> 
+
+            <!-- Success Modal: Following Removed -->
+            <div class="modal fade" id="successRemoveFollowingModal" tabindex="-1" aria-labelledby="successRemoveFollowingModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successRemoveFollowingModalLabel">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            You have successfully unfollowed <span id="removedFollowingName" class="fw-bold"></span>.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirmation Modal: Removing Follower -->
+            <div class="modal fade" id="confirmRemoveFollowerModal" tabindex="-1" aria-labelledby="confirmRemoveFollowerModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmRemoveFollowerModalLabel">Confirm Remove</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to remove <span id="followerName" class="fw-bold"></span> as a follower?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="confirmRemoveFollowerButton">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Modal: Follower Removed -->
+            <div class="modal fade" id="successRemoveFollowerModal" tabindex="-1" aria-labelledby="successRemoveFollowerModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successRemoveFollowerModalLabel">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span id="removedFollowerName" class="fw-bold"></span> has been successfully removed as a follower.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/handleConnections.js" defer></script>  
+    <script src="../assets/js/handleConnectionFetch.js" defer></script> 
+    <script src="../assets/js/handleAlumniFetch.js" defer></script>  
+
 </body>
 </html>

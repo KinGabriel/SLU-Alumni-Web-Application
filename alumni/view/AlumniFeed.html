@@ -1,3 +1,14 @@
+<!-- AlumniFeed: 
+Feed for Alumni: Alumni can view their own and others' posts, keeping them connected.
+Post Creation: Alumni can upload photos or videos to share updates.
+Engagement: Alumni can like and comment on posts to interact with others.
+Profile Dropdown -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Reference: Chatgpt-->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com), Facebook-->
+<!-- Group Member Responsible: Escaño, Nichole Jhoy & Caparas, Joaquin Gabriel-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +29,17 @@
             <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <!-- Search bar -->
             <div class="search">
-                <form id="searchForm">
-                    <input type="text" name="search" placeholder="Search..">
+                <form id="searchForm" onsubmit="return false;">
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
                     <button type="submit">
                         <img src="../assets/images/search.png" alt="Search" class="search-icon">
                     </button>
                 </form>
             </div>
         </h1>
+        
+        <ul id="searchResults"></ul>
+        
 
         <div class="profile-dropdown">
             <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
@@ -38,7 +52,7 @@
                     </div>
                 </div>
                 <ul class="dropdown-links">
-                    <li><a href="#">View Profile</a></li>
+                    <li><a href="/api/profile">View Profile</a></li>
                     <li><a href="#">Manage Profile</a></li>
                     <li><a href="#">Close Account</a></li>
                 </ul>
@@ -51,15 +65,7 @@
               
     </header>
 
-    <!-- Main Content 
-    
-    Author: Escaño, Nichole Jhoy
-    Code Description:
-    Reference: 
-    
-    
-    
-    -->
+    <!-- Main Content  -->
     <div class="main-content">
         <!-- Sidebar -->
         <aside>
@@ -76,10 +82,10 @@
                             <strong>Posts</strong><br><p name="post_count"></p>
                         </div>
                         <div class="stat-item" >
-                            <strong>Followers</strong><br><p name="followed_count"></p>
+                            <strong>Followers</strong><br><p  name="followers_count"></p>
                         </div>
                         <div class="stat-item" >
-                            <strong>Following</strong><br><p name="followers_count"></p>
+                            <strong>Following</strong><br><p name="followed_count"></p>
                         </div>
                     </div>
                 </div>
@@ -108,33 +114,34 @@
                         <img src="../assets/images/job.png" alt="Job Opportunities Icon" class="nav-icon">
                         <a href="/api/jobs">Job Opportunities</a>
                     </li>
-                    <li>
-                        <img src="../assets/images/favorites.png" alt="Favorites Icon" class="nav-icon">
-                        <a href="../view/AlumniFavorites.html">Favorites</a>
-                    </li>
                 </ul>
             </nav>
             <script>
+            // Add the 'active' class based on the current URL
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentPath = window.location.pathname; // Get the current URL path
+                const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
+
+                navLinks.forEach(link => {
+                    // Check if the link's href matches the current path
+                    if (link.href.endsWith(currentPath)) {
+                        link.parentElement.classList.add('active');  // Add active class to the corresponding list item
+                    }
+                });
+
                 document.querySelectorAll('nav li a').forEach(link => {
                     link.addEventListener('click', () => {
                         document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active'); // Remove active class from all items
+                            item.classList.remove('active');  // Remove active class from all items
                         });
-                        link.parentElement.classList.add('active'); // Add active class to the clicked item
+                        link.parentElement.classList.add('active');  // Add active class to the clicked item
                     });
                 });
+            });
             </script>
         </aside>
 
-        <!-- Feed Content 
-       
-        Author: Escaño, Nichole Jhoy
-        Code Description:
-        Reference: 
-        
-        
-    
-    -->
+        <!-- Feed Content -->
         
     <div class="content">
         <!-- Post Box -->
@@ -157,24 +164,26 @@
             </div>
         </div>
         
-        <!-- Feed 
-    
-        Author: Escaño, Nichole Jhoy
-        Code Description:
-        Reference: 
-    
-    
-
-    -->
-        
+        <!-- Feed  -->
         <div class="feed">
             <!-- Post 1 -->
             <div class="post">
-                <div class="post-header">
-                    <img src="../assets/images/asta.jpg" alt="User Profile" class="user-pic" >
-                    <div>
-                        <h4 class="user-name">Asta Staria</h4>
-                        <span class="post-time">2 hours ago</span>
+                <div class="post-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/images/asta.jpg" alt="User Profile" class="user-pic">
+                        <div>
+                            <h4 class="user-name">Asta Staria</h4>
+                            <span class="post-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <!-- Three-dot menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-link p-0 text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../assets/images/dots.png" alt="Options" style="width: 40px; height: 40px;">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+                            <li><button class="dropdown-item edit-post-btn style=">Report Post</button></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="post-content">
@@ -187,43 +196,61 @@
                         <button class="btn btn-outline-primary me-2">
                             <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
                         </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
+                        <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
                             <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Post 2 -->
-            <div class="post">
-                <div class="post-header">
-                    <img src="../assets/images/yuno.jpeg" alt="User Profile" class="user-pic">
-                    <div>
-                        <h4 class="user-name">Yuno Grinbellyall</h4>
-                        <span class="post-time">5 hours ago</span>
+            <!-- View Image Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">View Image</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img id="modalImage" src="" class="img-fluid" alt="Large Image">
+                            <!-- Image acting as download link -->
+                            <a id="downloadLink" href="#" download class="download-icon">
+                                <img src="../assets/images/download.png" alt="Download Icon" class="img-fluid">
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="post-content">
-                    <p>Check out this amazing video I captured!</p>
-                    <video class="post-video" controls>
-                        <source src="../assets/images/vidsample.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <hr>
-                <div class="post-actions card-footer d-flex align-items-center">
-                    <div class="d-flex">
-                        <button class="btn btn-outline-primary me-2">
-                            <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                        </button>
-                        <button class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#comments2">
-                            <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                        </button>
+            </div>
+
+            <!-- Comment Modal -->
+            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="commentsList">
+                                <!-- Comments will be loaded dynamically here -->
+                            </div>
+                            <div class="form-group">
+                                <textarea id="commentInput" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary mt-2 d-flex align-items-center justify-content-between" id="submitComment">
+                                        Submit Comment
+                                        <img src="../assets/images/send.png" alt="Submit Icon" class="ms-2" style="width: 20px; height: 20px;">
+                                    </button>
+                                </div>                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!--TO DO: show the uploaded image in the input then handle multiple image--> 
 <!-- Modal - Post Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
@@ -243,11 +270,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="photoInput" class="form-label">Add a Photo</label>
-                        <input class="form-control" type="file"   id="photoInput" accept="image/*" multiple>
+                        <input type="file" id="photoInput" multiple accept="image/*" class="form-control">
+                    </div>
+                    <div id="imagePreview" class="mb-3 text-center d-flex flex-wrap gap-2">
+                        <!-- Dynamic Image Preview Container -->
                     </div>
                     <div class="mb-3">
                         <label for="videoInput" class="form-label">Add a Video</label>
-                        <input class="form-control" type="file" id="videoInput" accept="video/*" multiple>
+                        <input type="file" id="videoInput" multiple accept="video/*" class="form-control">
+                    </div>
+                    <div id="videoPreview" class="mb-3 text-center d-flex flex-wrap gap-2">
+                        <!-- Dynamic Video Preview Container -->
                     </div>
                 </form>
             </div>
@@ -257,7 +290,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -295,11 +327,67 @@
     </div>
 </div>
 
-   
+<!-- Report Modal -->
+
+
+
+
+
+
+<script>
+// Handles Comments
+    document.addEventListener('DOMContentLoaded', () => {
+    
+});
+
+// Function to handle submitting a new comment
+function submitComment(postId, commentText) {
+    // implement API request to save the comment the database
+    const newComment = {
+        username: 'You', // replace with logged-in user's name
+        text: commentText
+    };
+
+    // dynamically append the new comment to the modal
+     // replace with logged-in user's profile
+    const commentDiv = document.createElement('div');
+    commentDiv.classList.add('comment');
+    commentDiv.innerHTML = `
+        <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
+        <p class="comment-text"><strong>${newComment.username}:</strong> ${newComment.text}</p>
+    `;
+    const commentsList = document.getElementById('commentsList');
+    commentsList.appendChild(commentDiv);
+}
+
+// hides comment modal 
+document.addEventListener('DOMContentLoaded', () => {
+    const commentModal = document.getElementById('commentModal');
+
+    commentModal.addEventListener('hidden.bs.modal', () => {
+        // remove any backdrops
+        const backdrop = document.querySelector('.modal-backdrop');
+        if (backdrop) {
+            backdrop.parentNode.removeChild(backdrop);
+        }
+
+        // ensure the body class is reset
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+    });
+});
+
+// Handles Report 
+
+// TO DO: Report JS
+
+
+</script>
     
     <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="../assets/js/handleHomefeed.js" defer>  </script>  
-  <script src="../assets/js/handleFetch.js" async>  </script>  
+  <script src="../assets/js/handleHomeFeed.js" defer>  </script>  
+  <script src="../assets/js/handleHomeFeedFetch.js" defer>  </script>  
+  <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
 </body>
 </html>

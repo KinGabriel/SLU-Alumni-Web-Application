@@ -1,12 +1,7 @@
 /** 
 Author: Escaño, Nichole Jhoy
-Code Description:
-Reference: 
-
-
+Reference: ChatGPT
 */
-
-
 
 * {
     margin: 0;
@@ -203,27 +198,30 @@ nav li {
     padding-left: 1.5vw;
 }
 
+/* Style for the active navigation item */
+nav li.active {
+    position: relative;  
+}
+
+/* Left bar for active item */
 nav li.active::before {
-    content: '';
+    content: '';  
     position: absolute;
     left: 0;
     top: 0;
-    width: 7px; 
-    height: 100%;
-    background-color: #FFB200;
+    bottom: 0;
+    width: 5px;  
+    background-color: #FFB200;  
 }
 
-nav a {
+/* Style for the navigation links */
+nav li a {
     text-decoration: none;
     color: #333;
     font-size: 1.0vw; 
     font-weight: bold;
     margin-left: 0.4vw; 
     text-align: center;
-}
-
-nav a:hover {
-    color: #003DA5;
 }
 
 /* Icon Styling */
@@ -467,4 +465,152 @@ nav a:hover {
     margin-right: 10px; 
     width: 20px; 
     height: 20px; 
+}
+
+/* Image and Video preview */
+.image-wrapper {
+    display: inline-block;
+    margin: 5px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.post-image {
+    max-width: 100%;
+    max-height: 300px; 
+    margin: 5px;
+    object-fit: cover; /
+}
+
+#imagePreview img {
+    width: 100px;  
+    height: 100px; 
+    object-fit: cover; 
+    margin: 5px; 
+}
+
+/* Comment */
+.comment {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.comment-text {
+    font-size: 14px;
+    margin: 0;
+}
+
+.comment-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-btn img {
+    margin-right: 5px;
+}
+
+#submitComment {
+    background-color: #003DA5; 
+    border-color: #003DA5; 
+    color: white; 
+}
+
+#submitComment:hover {
+    background-color: #171acf; 
+    border-color: #171acf;
+}
+
+.post-header .dropdown {
+    position: relative;
+}
+
+.post-header .dropdown-menu {
+    min-width: 120px;
+    text-align: left;
+}
+
+/* 3 dots */
+.custom-dropdown {
+    min-width: 120px;
+    width: auto; 
+}
+
+.custom-dropdown .dropdown-item {
+    white-space: nowrap; 
+    padding: 5px 10px;
+}
+
+/* Posted Video or Image */
+img.img-fluid {
+    max-width: 200%;
+    height: auto;
+  }
+  
+  .post-image, .post-content video {
+    display: block; /* Make images and videos behave like block elements */
+    margin: 0 auto; 
+    max-width: 100%; 
+    height: auto; 
+    object-fit: contain; /* Ensure the media fits within its container without cropping */
+}
+
+/* View Image*/
+#imageModal .modal-dialog {
+    max-width: 60%;
+}
+
+#imageModal .modal-body {
+    text-align: center;
+    position: relative; 
+}
+
+
+#modalImage {
+    max-width: 100%;  
+    max-height: 500px;  
+    width: auto;        
+    height: auto;      
+    object-fit: contain; 
+}
+
+/*  Download link */
+.download-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;  
+    height: 35px;  
+}
+
+.download-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}
+/* TODO design of the search */
+#searchResults {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-result-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background-color: #f0f0f0;
 }

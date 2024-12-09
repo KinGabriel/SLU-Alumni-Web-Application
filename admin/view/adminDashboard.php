@@ -12,7 +12,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
     <link rel="stylesheet" href="../assets\css\adminDashboard.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
     <!-- Header separator -->
@@ -33,56 +33,58 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </div>
     </header>
 
-   <!-- Sidebar -->
-   <div class="sidebar-container">
-        <!-- Navigation menu -->
-        <nav class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="../view/adminDashboard.php">
+<!-- Sidebar -->
+<div class="sidebar-container">
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/adminDashboard.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminDashboard.php' ? 'active' : ''; ?>" id="dashboardLink">
                     <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
                     <span class="menu-item-text">Dashboard</span>
-                    </a>
-             </li>
-                <li>
-                    <a href="../view/UserRequest.php">
+                </a>
+            </li>
+            <li>
+                <a href="../view/UserRequest.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'UserRequest.php' ? 'active' : ''; ?>" id="userRequestLink">
                     <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
                     <span class="menu-item-text">Account Requests</span>
                 </a>
-                </li>
-                <li>
-                    <a href="../view/Account.php">
+            </li>
+            <li>
+                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
                     <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
                     <span class="menu-item-text">Accounts</span>
-                    </a>
-                </li>
-                <li><a href="../view\adminEvent.php">
+                </a>
+            </li>
+            <li>
+                <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
                     <span class="menu-item-text">Events</span>
                 </a>
             </li>
-                <li>
-                    <a href="#news">
-                        <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
-                        <span class="menu-item-text">News</span>
-                    </a>
-                </li>
-                <li><a href="#job-opportunities">
-                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+            <li>
+                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                    <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+            <li>
+            <a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+            <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
                     <span class="menu-item-text">Job Opportunities</span>
                 </a>
             </li>
-            </ul>
-        </nav>
+        </ul>
+    </nav>
 
-        <!-- Sticky Log Out Button -->
-        <div class="sidebar-logout">
-            <a href="../controller/ProcessLogOut.php">
-                <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
-                <span class="menu-item-logout">Log Out</span>
-            </a>
-        </div>
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
+        <a href="../controller/ProcessLogOut.php">
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
     </div>
+</div>
+
     <!-- stats -->
     <div class="card-container">
     <div class="card" id="totalMembersCard">
@@ -136,7 +138,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     </div>
     
     <!-- commented this because it is a bootstrap -->
- <!--   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --> 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
     <script src="../assets\js\HandleAdminDashboard.js?v=1"></script>
 </body>
 </html>

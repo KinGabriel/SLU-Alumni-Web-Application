@@ -32,8 +32,13 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
           </div>
           <div class="input-wrapper">
             <img src="../assets/images/password.png" alt="Password Icon" class="input-icon" />
-            <input type="password" name="password" class="input-field" placeholder="Password" required />
-          </div>
+              <div class="password-container">
+                <input type="password" id="password" name="password" class="input-field" placeholder="Password" value="<?= isset($formData['password']) ? htmlspecialchars($formData['password']) : '' ?>" required />
+                <button type="button" class="toggle-password">
+                  <img src="../assets/images/eye-icon-open.png" alt="Show Password" class="eye-icon" />
+                </button>
+              </div>
+          </div>  
           <a href="#" class="forgot-password">Forgot Password</a>
           <button type="submit" class="login-button">Login Now</button>
         </form>
@@ -53,6 +58,7 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
     }
 });
   </script>
+  <script src="../assets/js/passwordToggle.js"></script>
 </head>
 </body>
 </html>

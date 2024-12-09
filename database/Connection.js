@@ -1,15 +1,18 @@
 import mysql from 'mysql2';
+import dotenv from 'dotenv';
 
-const dbConnection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',              
-  password: '',              
-  database: 'slu_alumina'   
+dotenv.config();
+
+const dbConnection =   mysql.createConnection({
+  host: process.env.DB_HOST ,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 dbConnection.connect((error) => {
   if (error) {
-    console.error('Error establishing DB connection:', error);
+    console.error('Error establishing DB connection:', error.message);
     return;
   }
   console.log('DB connection established');
