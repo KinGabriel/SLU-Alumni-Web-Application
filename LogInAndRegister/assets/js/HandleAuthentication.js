@@ -32,7 +32,7 @@ function emptyField(firstName, lastName, email, password, retypePassword, school
     }
     if (!schoolIdFile.files.length) {
         var createMessage = document.createElement('p');
-        createMessage.innerHTML = 'Please upload your school ID.';
+        createMessage.innerHTML = 'Please upload your alumni proof.';
         createMessage.style.color = 'red';
         messageContainer.appendChild(createMessage);
         return true; 
@@ -87,7 +87,7 @@ function emptyField(firstName, lastName, email, password, retypePassword, school
         };
         fileReader.readAsDataURL(file);
     } else {
-        uploadText.textContent = 'Upload your school ID';
+        uploadText.textContent = 'Upload your alumni proof';
         imagePreview.style.display = 'none';
     }
   }
