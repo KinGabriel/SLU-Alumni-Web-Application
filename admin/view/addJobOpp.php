@@ -726,6 +726,8 @@ a {
 
     <!-- Link to compiled custom styles (CSS) -->
     <link rel="stylesheet" href="../assets/css/addEvents.css">
+    <!-- Author: Vergara Carlos Miguel -->
+    <!-- Used References: Codepen and ChatGPT -->
 </head>
 
 
