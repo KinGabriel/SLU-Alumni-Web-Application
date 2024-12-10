@@ -89,5 +89,39 @@ function toggleFollow() {
     }
 }
 
+function getOtherPosts() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetUserId = urlParams.get('user_id');
+    fetch(`/api/profile-other/getOwnFeed?user_id=${targetUserId}`)
+        .then(response => response.json())
+        .then(data => {
+            const posts = data.posts;
+            const feedContainer = document.querySelector('#feed');
+
+            feedContainer.innerHTML = ''; // Clear existing posts
+
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post', 'card', 'mt-4'); 
+
+                // Call helper methods
+                const postHeader = createPostHeader(post);
+                const postContent = createPostContent(post);
+                const postActions = createPostActions(post);
+
+                // Append components to the post container
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+                cardBody.appendChild(postHeader);
+                cardBody.appendChild(postContent);
+
+                postElement.appendChild(cardBody);
+                postElement.appendChild(postActions);
+                feedContainer.appendChild(postElement);
+            });
+        })
+        .catch(err => console.error('Error fetching posts:', err));
+}
+
 
 getOtherUserInfo()
