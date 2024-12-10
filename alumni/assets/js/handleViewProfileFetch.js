@@ -104,5 +104,86 @@ async function editPost(postId, description, mediaFile) {
 }
 
 
+function loadComments(postId) {
+    const commentsList = document.getElementById(`commentsList-${postId}`);
+    commentsList.innerHTML = ''; // Clear previous comments
+
+    fetch(`/api/feed/getComments/${postId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch comments');
+            }
+            return response.json();
+        })
+        .then(comments => {
+            comments.forEach(comment => {
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('comment');
+                
+                // Create the profile image element
+                const profileImage = document.createElement('img');
+                profileImage.src = comment.pfp || '../assets/images/candy.jpg'; // Default image if no profile picture
+                profileImage.alt = 'Profile';
+                profileImage.classList.add('comment-pic');
+                
+                // Create the paragraph for the comment text
+                const commentText = document.createElement('p');
+                commentText.classList.add('comment-text');
+                
+                // Create the strong tag for name
+                const nameTag = document.createElement('strong');
+                nameTag.textContent = comment.name;
+                
+                // Create the comment message text
+                const commentMessageText = document.createTextNode(`: ${comment.comment_message} `);
+                
+                // Create the span for the date
+                const dateTag = document.createElement('span');
+                dateTag.classList.add('comment-date');
+                const formattedDate = formatDate(comment.date);  // Assuming formatDate is defined elsewhere
+                dateTag.textContent = `(${formattedDate})`;  // Adding parentheses around the date
+                
+                // Append name, comment, and date to the comment text
+                commentText.appendChild(nameTag);
+                commentText.appendChild(commentMessageText);
+                commentText.appendChild(dateTag);
+
+                // Append the profile image and comment text to the comment div
+                commentDiv.appendChild(profileImage);
+                commentDiv.appendChild(commentText);
+
+                // Append the comment div to the comments list
+                commentsList.appendChild(commentDiv);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
+            commentsList.innerHTML = '<p>Failed to load comments. Please try again later.</p>';
+        });
+}
+
+
+async function postComment(postId, commentText) {
+    const response = await fetch('/api/feed/send-comment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            post_id: postId,
+            comment_message: commentText, 
+        })
+    });
+
+    if (!response.ok) {
+        console.error('Error posting comment:', response.status, await response.text());
+        return false;
+    }
+
+    const result = await response.json();
+    return result.success; // Assuming the response contains { success: true/false }
+}
+
+
 
 getOwnPosts()

@@ -47,42 +47,146 @@ function createPostHeader(post) {
 
 
 // Post Content
+//  create post content
 function createPostContent(post) {
     const postContent = document.createElement('div');
-    postContent.classList.add('post-content', 'mt-3');
+    postContent.classList.add('post-content');
 
     const postDescription = document.createElement('p');
     postDescription.textContent = post.description;
     postContent.appendChild(postDescription);
 
+    let postBanner;
     if (post.banner) {
-        const isVideo = /\.(mp4|mov|avi)$/i.test(post.banner) || post.banner.startsWith('data:video/');
-        if (isVideo) {
-            const videoElement = document.createElement('video');
-            videoElement.classList.add('img-fluid', 'post-video');
-            videoElement.controls = true;
+        if (post.banner.startsWith('data:video/') || post.banner.endsWith('.mp4') || post.banner.endsWith('.mov') || post.banner.endsWith('.avi')) {
+            postBanner = document.createElement('video');
+            postBanner.classList.add('post-video');
+            postBanner.controls = true;
 
             const videoSource = document.createElement('source');
             videoSource.src = post.banner;
-            videoSource.type = post.banner.startsWith('data:video/')
-                ? post.banner.split(';')[0].split(':')[1]
-                : 'video/mp4';
 
-            videoElement.appendChild(videoSource);
-            postContent.appendChild(videoElement);
+            // Set video type
+            if (post.banner.startsWith('data:video/')) {
+                videoSource.type = post.banner.split(';')[0].split(':')[1];
+            } else {
+                if (post.banner.endsWith('.mp4')) {
+                    videoSource.type = 'video/mp4';
+                } else if (post.banner.endsWith('.mov')) {
+                    videoSource.type = 'video/quicktime';
+                } else if (post.banner.endsWith('.avi')) {
+                    videoSource.type = 'video/x-msvideo';
+                }
+            }
+            postBanner.appendChild(videoSource);
+
+            // No click event for videos
         } else {
-            const imageElement = document.createElement('img');
-            imageElement.classList.add('img-fluid', 'post-image');
-            imageElement.src = post.banner;
-            imageElement.alt = 'Post Image';
-            postContent.appendChild(imageElement);
+            postBanner = document.createElement('img');
+            postBanner.classList.add('post-image');
+            postBanner.src = post.banner;
+            postBanner.alt = 'Post Image';
+
+            // Click event to trigger view and download option for images 
+            postBanner.addEventListener('click', function () {
+                openMediaModal(post.banner, `image-${post.post_id}.jpg`);
+            });
         }
+
+        postContent.appendChild(postBanner);
     }
 
     return postContent;
 }
 
-// Post Actions
+// Function to open the media in a modal
+function openMediaModal(mediaUrl, filename) {
+    const modal = document.createElement('div');
+    modal.classList.add('media-modal');
+    modal.style.display = 'block'; // Show modal
+
+    // Modal content
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('media-modal-content');
+
+    // Determine if media is an image or video and append accordingly
+    let mediaElement;
+    if (mediaUrl.startsWith('data:video/') || mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.mov') || mediaUrl.endsWith('.avi')) {
+        mediaElement = document.createElement('video');
+        mediaElement.classList.add('modal-video');
+        mediaElement.controls = true;
+
+        const videoSource = document.createElement('source');
+        videoSource.src = mediaUrl;
+
+        // Set video type
+        if (mediaUrl.startsWith('data:video/')) {
+            videoSource.type = mediaUrl.split(';')[0].split(':')[1];
+        } else {
+            if (mediaUrl.endsWith('.mp4')) {
+                videoSource.type = 'video/mp4';
+            } else if (mediaUrl.endsWith('.mov')) {
+                videoSource.type = 'video/quicktime';
+            } else if (mediaUrl.endsWith('.avi')) {
+                videoSource.type = 'video/x-msvideo';
+            }
+        }
+        mediaElement.appendChild(videoSource);
+
+       
+    } else {
+        mediaElement = document.createElement('img');
+        mediaElement.classList.add('modal-image');
+        mediaElement.src = mediaUrl;
+        mediaElement.alt = 'Post Image';
+
+        
+        const downloadButton = document.createElement('button');
+        downloadButton.classList.add('dlbutton');
+
+        // Create an image element to be inside the button
+        const img = document.createElement('img');
+        img.src = '../assets/images/dl.png';
+        img.alt = 'Download Icon';
+        const text = document.createTextNode('Download');
+
+        downloadButton.appendChild(img);
+        downloadButton.appendChild(text);
+
+        downloadButton.addEventListener('click', function () {
+            const a = document.createElement('a');
+            a.href = mediaUrl;
+            a.download = filename; // Customize download filename
+            a.click();
+        });
+
+        modalContent.appendChild(downloadButton);
+    }
+
+    modalContent.appendChild(mediaElement);
+
+    // Create close button for modal with "X"
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button');
+
+    // Create image element for the close button
+    const closeImage = document.createElement('img');
+    closeImage.src = '../assets/images/close.png';
+    closeImage.alt = 'Close';
+    closeButton.appendChild(closeImage);
+
+    closeButton.addEventListener('click', function () {
+        modal.style.display = 'none'; // Close modal
+    });
+
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+
+    // Append modal to the body
+    document.body.appendChild(modal);
+}
+
+// Function to create the post actions section
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
@@ -96,10 +200,29 @@ function createPostActions(post) {
 
     const likeCountElement = likeButton.querySelector('span');
 
-    likeButton.addEventListener('click', function () {
+    // Like button functionality
+    likeButton.addEventListener('click', function() {
         const isLiked = post.is_liked;
         post.is_liked = !isLiked;
         handleLike(post.post_id, likeButton, isLiked, likeCountElement);
+    });
+
+    // Comment button functionality
+    commentButton.addEventListener('click', function() {
+        const postId = post.post_id;
+
+        let commentModal = document.getElementById(`commentModal-${postId}`);
+        if (!commentModal) {
+            commentModal = createCommentModal(postId);
+            document.body.appendChild(commentModal);
+        }
+
+        loadComments(postId); // Load existing comments for the post
+        const modal = new bootstrap.Modal(commentModal);
+        modal.show();
+
+        // Ensure the submit comment handler is set only once
+        setupSubmitCommentHandler(postId);
     });
 
     actionsContainer.appendChild(likeButton);
@@ -108,6 +231,70 @@ function createPostActions(post) {
     postActions.appendChild(actionsContainer);
 
     return postActions;
+}
+
+// Function to create a comment modal dynamically
+function createCommentModal(postId) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.id = `commentModal-${postId}`;
+    modal.setAttribute('data-post-id', postId);
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'commentModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="commentsList-${postId}">
+                        <!-- Comments will be dynamically loaded here -->
+                    </div>
+                    <textarea id="commentInput-${postId}" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-primary mt-2" id="submitComment-${postId}">Submit</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    return modal;
+}
+
+// Function to set up the submit comment handler only once
+function setupSubmitCommentHandler(postId) {
+    const submitCommentButton = document.getElementById(`submitComment-${postId}`);
+    if (submitCommentButton) {
+        submitCommentButton.removeEventListener('click', submitCommentHandler);
+        submitCommentButton.addEventListener('click', submitCommentHandler);
+    }
+
+    // Comment submission handler
+    function submitCommentHandler() {
+        const commentInput = document.getElementById(`commentInput-${postId}`);
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            postComment(postId, commentText).then(success => {
+                if (success) {
+                    loadComments(postId);  
+                    commentInput.value = ''; // Clear the comment input
+                }
+            });
+        }
+    }
+}
+
+function postComment(postId, commentText) {
+    return new Promise(resolve => {
+        handleComment(postId, commentText)
+        setTimeout(() => {
+            console.log(`Comment posted on post ${postId}: ${commentText}`);
+            resolve(true); 
+        }, 1000);
+    });
 }
 
 // Utility for creating action buttons
