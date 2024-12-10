@@ -17,11 +17,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <!-- Link to compiled custom styles (CSS) -->
     <link rel="stylesheet" href="../assets/css/jobOpp.css">
+
+    <!-- Author: Vergara Carlos Miguel -->
+    <!-- Used References: Codepen and ChatGPT -->
 </head>
 
-<head>
 
-</head>
 <body>
     <!-- Header separator -->
     <div class="header-separator"> </div>
@@ -39,6 +40,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
             </div>
         </div>
+
+                    
+
     </header>
 
 <!-- Sidebar -->
@@ -98,11 +102,17 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <!-- Jobs Section Title -->
 <div class="row mb-5 pt-4">
+
+<form action="addJobOpp.php" method="POST">
+    <button type="submit" class="custom-btn btn-3">
+        <span>Add Job</span>
+    </button>
+</form>
+
     <div class="col">
         <h1>Job Opportunities</h1>
     </div>
 </div>
-
 <div class="filter-container">
   <span class="filter-bubble active" data-filter="full-time">Full-time</span>
   <span class="filter-bubble" data-filter="part-time">Part-time</span>

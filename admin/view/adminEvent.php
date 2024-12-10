@@ -17,11 +17,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
     <!-- Link to compiled custom styles (CSS) -->
     <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- Author: Vergara Carlos Miguel -->
+    <!-- Used References: Codepen and ChatGPT -->
 </head>
 
-<head>
 
-</head>
 <body>
     <!-- Header separator -->
     <div class="header-separator"> </div>
@@ -40,6 +40,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
     </header>
+
+    
 
 <!-- Sidebar -->
 <div class="sidebar-container">
@@ -98,6 +100,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <div class="col">
                 </div>
             </div>
+
+           <!-- Add Event Button (Form Method) -->
+<form action="addEvents.php" method="POST">
+    <button type="submit" class="custom-btn btn-3">
+        <span>Add Events</span>
+    </button>
+</form>
+
 
             <div class="container py-5">
                 <!-- Search and Categories Section Events -->
