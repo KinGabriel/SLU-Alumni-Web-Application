@@ -94,7 +94,8 @@
         <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <!-- Purpose: Enable alumni to edit their personal, education, and job-related information. -->
         <!-- Libraries Used: Bootstrap (https://getbootstrap.com/) -->
- <!-- Manage Profile Form Section -->
+
+<!-- Manage Profile Form Section -->
 <form id="manage-profile">
     <div class="profile-section text-left mb-4">
         <img src="../assets/images/default-profile.jpg" alt="Profile Picture" class="profile-img" id="profileImage" onclick="triggerFileInput()">
@@ -151,129 +152,146 @@
                     </div>
                 </div>
             </div>
-        
-            <!-- Education Section -->
-            <div class="col-md-6 mb-2">
+
+            <!-- Account Type and Education Section -->
+            <div class="col-md-6 mb-4">
                 <div class="rounded p-4 shadow-sm bg-light">
-                    <h3>Education</h3>
-                    <div class="mb-3">
-                        <label for="school" class="form-label">School</label>
-                        <select class="form-select" id="school">
-                            <option disabled selected>Choose...</option>
-                            <option value="1">Saint Louis University</option>
-                            <option value="2">University of Baguio</option>
-                            <option value="3">Other</option>
-                        </select>
+                      <!-- Account Type -->
+                    <div class="col-md-6 mb-5">
+                        <h3>Account Type</h3>
+                        <div class="d-flex justify-content-start gap-5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypeAdmin" value="private">
+                            <label class="form-check-label" for="accountTypePrivate">
+                                Private
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypeUser" value="public">
+                            <label class="form-check-label" for="accountTypePublic">
+                                Public
+                            </label>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="degree" class="form-label">Degree</label>
-                        <select class="form-select" id="degree">
-                            <option disabled selected>Choose...</option>
-                            <option value="1">BS Information Technology</option>
-                            <option value="2">BS Computer Science</option>
-                            <option value="3">Other</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gradYear" class="form-label">Graduation Year</label>
-                        <select class="form-select" id="gradYear">
-                            <option disabled selected>Choose...</option>
-                            <option value="2024">2024</option>
-                            <option value="2025">2025</option>
-                            <option value="2026">2026</option>
-                        </select>
+                        <!-- Education -->
+                        <div class="col-md-6 mb-4 mt-4" >
+                            <h3>Education</h3>
+                            <label for="school" class="form-label">School</label>
+                            <select class="form-select" id="school">
+                                <option disabled selected>Choose...</option>
+                                <option value="1">Saint Louis University</option>
+                                <option value="2">University of Baguio</option>
+                                <option value="3">Other</option>
+                            </select>
+                            <label for="degree" class="form-label mt-2">Degree</label>
+                            <select class="form-select" id="degree">
+                                <option disabled selected>Choose...</option>
+                                <option value="1">BS Information Technology</option>
+                                <option value="2">BS Computer Science</option>
+                                <option value="3">Other</option>
+                            </select>
+                            <label for="gradYear" class="form-label mt-2">Graduation Year</label>
+                            <select class="form-select" id="gradYear">
+                                <option disabled selected>Choose...</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-           <!-- Save Changes and Clear Buttons -->
-            <div class="d-flex justify-content-end move-top gap-2">
-                <button type="button" class="btn btn-secondary me-2" id="clearInfoButton">Clear</button>
-                <button type="button" class="btn btn-primary" id="saveChangesButton">Save Changes</button>
-            </div>
+        <!-- Save Changes and Clear Buttons -->
+        <div class="d-flex justify-content-end move-top gap-2 mt-2 mb-5">
+            <button type="button" class="btn btn-secondary me-2" id="clearInfoButton">Clear</button>
+            <button type="button" class="btn btn-primary" id="saveChangesButton">Save Changes</button>
+        </div>
 
-            <!-- Change Password Section -->
-            <div class="col-md-12 mb-4">
-                <div class="rounded p-4 shadow-sm bg-light">
-                    <h3>Change Password</h3>
-                    <div class="mb-3">
-                        <label for="currentPassword" class="form-label">Current Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="currentPassword" class="form-control" aria-describedby="currentPasswordHelpBlock">
-                            <span class="eye-icon" id="toggleCurrentPassword">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <small id="currentPasswordHelpBlock" class="form-text text-muted">
-                            Enter your current password.
-                        </small>
+        <!-- Change Password Section -->
+        <div class="col-md-12 mb-4">
+            <div class="rounded p-4 shadow-sm bg-light">
+                <h3>Change Password</h3>
+                <div class="mb-3">
+                    <label for="currentPassword" class="form-label">Current Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="currentPassword" class="form-control" aria-describedby="currentPasswordHelpBlock">
+                        <span class="eye-icon" id="toggleCurrentPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
-                    <div class="mb-3">
-                        <label for="newPassword" class="form-label">New Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="newPassword" class="form-control" aria-describedby="newPasswordHelpBlock">
-                            <span class="eye-icon" id="toggleNewPassword">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                        <small id="newPasswordHelpBlock" class="form-text text-muted">
-                            Your new password must be at least 8 characters long.
-                        </small>
+                    <small id="currentPasswordHelpBlock" class="form-text text-muted">
+                        Enter your current password.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="newPassword" class="form-control" aria-describedby="newPasswordHelpBlock">
+                        <span class="eye-icon" id="toggleNewPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
-                    <div class="mb-3">
-                        <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
-                        <div class="password-wrapper">
-                            <input type="password" id="confirmNewPassword" class="form-control">
-                            <span class="eye-icon" id="toggleConfirmNewPassword">
-                                <i class="fas fa-eye"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end move-top">
-                        <button type="button" class="btn btn-secondary me-2" id="clearPasswordButton">Clear</button>
-                        <button type="button" class="btn btn-warning" id="changePasswordButton">Change Password</button>
+                    <small id="newPasswordHelpBlock" class="form-text text-muted">
+                        Your new password must be at least 8 characters long.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmNewPassword" class="form-control">
+                        <span class="eye-icon" id="toggleConfirmNewPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
                 </div>
             </div>
+        </div>
+
+          <!-- Change password and Clear Buttons -->
+        <div class="d-flex justify-content-end move-top mt-2 mb-5">
+            <button type="button" class="btn btn-secondary me-2" id="clearPasswordButton">Clear</button>
+            <button type="button" class="btn btn-warning" id="changePasswordButton">Change Password</button>
         </div>
     </div>
 </form>
 
-<!-- Success Modal for Change Password -->
-<div class="modal" id="changePasswordSuccessModal" tabindex="-1" aria-labelledby="changePasswordSuccessModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="changePasswordSuccessModalLabel">Success</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Your password has been changed successfully!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+        <!-- Success Modal for Change Password -->
+        <div class="modal" id="changePasswordSuccessModal" tabindex="-1" aria-labelledby="changePasswordSuccessModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordSuccessModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Your password has been changed successfully!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Failure Modal for Change Password -->
-<div class="modal" id="changePasswordFailureModal" tabindex="-1" aria-labelledby="changePasswordFailureModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="changePasswordFailureModalLabel">Failed</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                There was an error changing your password. Please try again.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+        <!-- Failure Modal for Change Password -->
+        <div class="modal" id="changePasswordFailureModal" tabindex="-1" aria-labelledby="changePasswordFailureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordFailureModalLabel">Failed</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        There was an error changing your password. Please try again.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
         <!-- Save Changes Modal -->
         <div class="modal" id="saveChangesModal" tabindex="-1" aria-labelledby="saveChangesModalLabel" aria-hidden="true">

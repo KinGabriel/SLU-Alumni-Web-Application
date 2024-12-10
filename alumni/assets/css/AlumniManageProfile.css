@@ -391,7 +391,7 @@ input {
 .container {
     display: flex;
     flex-direction: column;
-    height: 45vh;
+    height: 60vh;
 }
 
 /* Styling for the form */
