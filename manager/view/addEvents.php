@@ -808,94 +808,98 @@ a {
           <div class="step-content" id="step1">
               <h1>Event Description</h1>
 
-              <main class='wrapper'>
-                  <!-- Event Title -->
-                  <input type='text' placeholder=''>
-                  <span>Event Title</span>
-              </main>
+              <form id="event-form" action="../controller/saveEvent.php" method="POST" enctype="multipart/form-data">
+                <main class='wrapper'>
+                    <!-- Event Title -->
+                    <input type='text' id="event-title-input" name="event_title" placeholder='' required> 
+                    <span>Event Title</span>
+                </main>
 
-              <main class='wrapper'>
-                  <!-- Location -->
-                  <input type='text' placeholder=''>
-                  <span>Location</span>
-              </main>
+                <main class='wrapper'>
+                    <!-- Location -->
+                    <input type='text' id="event-location-input" name="location" placeholder='' required>
+                    <span>Location</span>
+                </main>
 
-              <h1>Date & Time</h1>
+                <h1>Date & Time</h1>
 
-              <div class="session-fields">
-                  <!-- Start Date -->
-                  <div class="input-icon">
-                      <label for="start-date">Start Date *</label>
-                      <input type="date" id="start-date">
-                      <i class="fa fa-calendar"></i>
-                  </div>
-              
-                  <!-- Start Time -->
-                  <div class="input-icon">
-                      <label for="start-time">Start Time *</label>
-                      <input type="time" id="start-time">
-                      <i class="fa fa-clock"></i>
-                  </div>
-              
-                  <!-- End Time -->
-                  <div class="input-icon">
-                      <label for="end-time">End Time *</label>
-                      <input type="time" id="end-time">
-                      <i class="fa fa-clock"></i>
-                  </div>
-              </div>
+                <div class="session-fields">
+                    <!-- Start Date -->
+                    <div class="input-icon">
+                        <label for="start-date">Start Date *</label>
+                        <input type="date" id="start-date" name="start_date" required>
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                
+                    <!-- Start Time -->
+                    <div class="input-icon">
+                        <label for="start-time">Start Time *</label>
+                        <input type="time" id="start-time" name="start_time" required>
+                        <i class="fa fa-clock"></i>
+                    </div>
+                
+                    <!-- End Time -->
+                    <div class="input-icon">
+                        <label for="end-time">End Time *</label>
+                        <input type="time" id="end-time" name="end_time" required>
+                        <i class="fa fa-clock"></i>
+                    </div>
+                </div>
 
-              <h1>Additional Information</h1>
-              <main class='wrapper event-description'>
-                  <!-- Event Description -->
-                  <input type='text' placeholder=''>
-                  <span>Event Description</span>
-              </main>
-          </div>
-
-          <!-- Step 2 Content  -->
-          <div class="step-content step-2" style="display: none;">
-            <h1>Upload Image</h1>
-            <div class="upload-container">
-                <label for="image-upload" class="upload-label">Choose File</label>
-                <input type="file" id="image-upload" accept="image/jpeg, image/gif, image/png" class="upload-input">
-                <span id="file-name">No file chosen</span>
+                <h1>Additional Information</h1>
+                <main class='wrapper event-description'>
+                    <!-- Event Description -->
+                    <input type='text' id="event-description-input" placeholder='' name="description" required>
+                    <span>Event Description</span>
+                </main>
             </div>
-            <p>Valid file formats: JPG, GIF, PNG.</p>
-        </div>
-        
 
-          <!-- Step 3 Content  -->
-          <div class="step-content" id="step3" style="display: none;">
-            <div class="card">
-              <div class="card-header">
-                <img src="Logo.png" alt="Event Image" class="event-image">
+            <!-- Step 2 Content  -->
+            <div class="step-content step-2" style="display: none;">
+              <h1>Upload Image</h1>
+              <div class="upload-container">
+                  <label for="image-upload" class="upload-label">Choose File</label>
+                  <input type="file" id="image-upload" name="image" accept="image/jpeg, image/gif, image/png" class="upload-input">
+                  <span id="file-name">No file chosen</span>
               </div>
-              <div class="card-body">
-                <h2 class="event-title">Event Title</h2>
-                <p class="event-date-time">
-                  <span class="date">Date</span>
-                  <span class="time">Time</span>
-                </p>
-                <p class="event-location">
-                  <span class="location-icon">📍</span> Address
-                </p>
-                <p class="event-description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur et ligula sit amet nulla venenatis condimentum.
-                </p>
+              <p>Valid file formats: JPG, GIF, PNG.</p>
+              <img src="" alt="Event Image" class="event-image" style="display: none; width: 200px; height: 200px; object-fit: cover;">
+          </div>
+          
+
+            <!-- Step 3 Content  -->
+            <div class="step-content" id="step3" style="display: none;">
+              <div class="card">
+                <div class="card-header">
+                  <img src="" alt="Event Image" class="event-image" id="event-image-preview">
+                </div>
+                <div class="card-body">
+                  <h2 class="event-title">Event Title</h2>
+                  <p class="event-date-time">
+                    <span class="date">Date</span>
+                    <span class="time">Time</span>
+                  </p>
+                  <p class="event-location">
+                    <span class="location-icon">📍</span> 
+                    <span class="location-text">Address</span>
+                  </p>
+                  <p class="event-description">
+                    <span class="description"></span>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Navigation Buttons -->
-          <div class="buttons">
-              <button class="btn btn-prev" id="btn-prev" disabled>Previous</button>
-              <button class="btn btn-next" id="btn-next">Next</button>
-          </div>
+            <!-- Navigation Buttons -->
+            <div class="buttons">
+                <button class="btn btn-prev" id="btn-prev" disabled>Previous</button>
+                <button class="btn btn-next" id="btn-next" type="button">Next</button>
+            </div>
+          </form>
       </div>
   </main>
 
-  <script src="../assets/js/addEvents.js"></script>
+  <script src="../assets/js/addEvents.js" defer></script>
 </body>
 
 

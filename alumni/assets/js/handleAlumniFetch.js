@@ -71,4 +71,43 @@ function logOut() {
     window.location.href = '/api/logout';
 }
 
+
+function searchUsers() {
+    const searchTerm = document.getElementById('searchInput').value;
+    
+    if (searchTerm === "") {
+        document.getElementById('searchResults').innerHTML = "";
+        return;
+    }
+
+    fetch(`/api/search?query=${searchTerm}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = "";
+
+            data.users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.textContent = user.name;
+                listItem.classList.add("search-result-item");
+                listItem.onclick = () => handleUserClick(user.user_id);
+                resultsContainer.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching search results:', error);
+            document.getElementById('searchResults').innerHTML = "Error fetching results.";
+        });
+}
+
+function handleUserClick(user) {
+    console.log("User clicked:", user);
+    window.location.href = `/api/profile-other?user_id=${user}`;
+}
+
 getUserInfo();

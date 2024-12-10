@@ -24,7 +24,7 @@ fetchConnections()
 // Handle removal of follower
 async function removeFollower(user_id, name, confirmModal) {
     try {
-        const response = await fetch(`/api/remove-follower/${user_id}`, {
+        const response = await fetch(`/api/connections/remove-follower/${user_id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });
@@ -59,7 +59,7 @@ async function removeFollower(user_id, name, confirmModal) {
 // Handle removal of following
 async function removeFollowing(user_id, name, confirmModal) {
     try {
-        const response = await fetch(`/api/remove-following/${user_id}`, {
+        const response = await fetch(`/api/connections/remove-following/${user_id}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
         });

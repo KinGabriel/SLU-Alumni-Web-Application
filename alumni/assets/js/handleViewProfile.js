@@ -18,8 +18,8 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('small');
     postTime.classList.add('text-muted');
-    postTime.dataset.isEdited = post.isEdited || false; // Track if edited
-    postTime.textContent = formatDate(post.datetime, post.isEdited);
+    postTime.dataset.is_edited = post.is_edited || false; // Track if edited
+    postTime.textContent = formatDate(post.datetime, post.is_edited);
 
     userInfo.appendChild(userName);
     userInfo.appendChild(postTime);
@@ -354,8 +354,3 @@ document.getElementById("confirmDeletePost").addEventListener("click", (event) =
     }
 });
 
-// Function to handle post deletion (for server-side action)
-function deletePost(postId) {
-    // Implement the logic to delete the post on the server (e.g., via an API call)
-    console.log(`Sending request to delete post with ID: ${postId}`);
-}
