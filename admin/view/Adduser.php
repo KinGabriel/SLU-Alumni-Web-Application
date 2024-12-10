@@ -78,74 +78,111 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         <div class="form-container">
             <h2 class="form-title">Create New User</h2>
             <form action="../controller/ProcessAddUser.php" method="POST" enctype="multipart/form-data" onsubmit="validateFormAdmin(event)">
-                <div class="form-row">
-                    <div class="form-group">
+                <!-- flexbox for the subtitles Personal Information and Alumni Information -->
+                <div class="info-titles">
+                    <h3 class="section-title">Personal Information:</h3>
+                    <h3 class="section-title">Alumni Information:</h3>
+                </div>
+                    
+                <div class="form-grid">
+                    <div class="first-name-grid">
                         <label for="first-name">First Name</label>
-                        <input type="text" id="first-name" name="first-name" required>
+                        <input type="text" id="first-name" name="first-name" value="<?= isset($formData['first-name']) ? htmlspecialchars($formData['first-name']) : '' ?>" required>
                     </div>
-                    <div class="form-group">
+
+                    <div class="last-name-grid">
                         <label for="last-name">Last Name</label>
-                        <input type="text" id="last-name" name="last-name" required>
-                    </div>
-                </div>
+                        <input type="text" id="last-name" name="last-name" value="<?= isset($formData['last-name']) ? htmlspecialchars($formData['last-name']) : '' ?>"  required>
+                    </div>   
 
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
+                    <div class="email-add-grid">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" value="<?= isset($formData['email']) ? htmlspecialchars($formData['email']) : '' ?>" required />
+                    </div>
+
+                    <div class="password-grid">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password" value="<?= isset($formData['password']) ? htmlspecialchars($formData['password']) : '' ?>" required>
                     </div>
-                    <div class="form-group">
-                        <label for="repeat-password">Repeat Password</label>
-                        <input type="password" id="repeat-password" name="repeat-password" required>
-                    </div>
-                </div>
 
-                <h3 class="section-title">Alumni Information:</h3>
-                <div class="form-row">
-                    <div class="form-group">
+                    <div class="retype-pw-grid">
+                        <label for="password">Repeat Password</label>
+                        <input type="password" id="retype_password" name="retype_password" value="<?= isset($formData['retype_password']) ? htmlspecialchars($formData['retype_password']) : '' ?>" required>
+                    </div>
+
+                    <div class="id-grid">
                         <label for="school-id">School ID</label>
                         <input type="text" id="school-id" name="school-id">
                     </div>
-                    <div class="form-group">
-                        <label for="workplace">Workplace</label>
-                        <input type="text" id="workplace" name="workplace">
-                    </div>
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="graduation-year">Graduation Year</label>
-                        <select id="graduation-year" name="graduation-year">
-                            <option value="" disabled selected>Select Graduation Year</option>
-                            <?php
-                                $currentYear = date("Y");
-                                for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
-                                    echo "<option value=\"$year\">$year</option>";
-                                }
-                            ?>
-                        </select>
+                    <div class="gradyear-grid">
+                        <label for="graduationYear">Graduation Year</label>
+                        <input type="text" id="graduationYearInput" name="graduationYear" class="input-field" list="graduationYearList" required>
+                                    <datalist id ="graduationYearList">
+                                    <?php
+                                        $currentYear = date("Y");
+                                        for ($year = $currentYear; $year >= $currentYear - 90; $year--) {
+                                            $selected = isset($formData['graduationYear']) && $formData['graduationYear'] == $year ? 'selected' : '';
+                                            $yearValue = htmlspecialchars($year);
+
+                                            echo "<option value=\"$yearValue\" $selected>$yearValue</option>";
+                                        }
+                                        ?>
+                                    </datalist>
                     </div>
-                    <div class="form-group">
-                        <label for="program">Degree</label>
-                        <select id="program" name="program">
-                            <option value="" disabled selected>Select Program</option>
-                            <?php
-                                $filePath = '../assets/programs.txt';
-                                if (file_exists($filePath)) {
-                                    $programs = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-                                    foreach ($programs as $program) {
-                                        echo "<option value=\"$program\">$program</option>";
+
+                    <div class="school-grid">
+                        <label for="school">School</label>
+                        <select name="school" class="input-field" id="schoolDropdown"> 
+                        <option value="" disabled selected> Select School</option>
+                        <?php
+                                    $filePath = '../assets/schools.txt'; 
+                                    if (file_exists($filePath)) {
+                                        $schools = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                        foreach ($schools as $school) {
+                                            $selected = isset($formData['school']) && $formData['school'] == $school ? 'selected' : '';
+                                            echo "<option value=\"$school\" $selected>$school</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=\"\">N/A</option>"; 
                                     }
-                                } else {
-                                    echo "<option value=\"\">N/A</option>";
-                                }
-                            ?>
+                        ?>
                         </select>
+                    </div>    
+
+                    <div class="program-grid">
+                        <label for="program">Program</label>
+                        <select name="program" class="input field" id="programDropdown">
+                        <option value="" disabled selected> Select Program</option>
+                        </select>
+                    </div>    
+
+                    <div class="jobstatus-grid">
+                        <label for="job-status">Job Status</label>
+                            <select id="job-status" name="job-status">
+                                <option value="" disabled selected> Select Job Status</option>
+                                <option value="employed" <?= isset($formData['job-status']) && $formData['job-status'] == 'employed' ? 'selected' : '' ?>>Employed</option>
+                                <option value="unemployed" <?= isset($formData['job-status']) && $formData['job-status'] == 'unemployed' ? 'selected' : '' ?>>Unemployed</option>
+                            </select>
+                    </div>
+                    
+                    <div class="company-grid" id="companyGrid">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" value="<?= isset($formData['company']) ? htmlspecialchars($formData['company']) : '' ?>"  required>
+                    </div>   
+
+                <!-- User Roles -->
+                <div class="user-roles-grid">
+                    <h3 class="section-title">User Roles:</h3>
+                    <div class="form-row">
+                        <div class="form-group" id="user-roles">
+                            <select id="user-roles" name="user-roles">
+                            <option value="" disabled selected> Select Role</option>
+                            <option value="alumni" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'alumni' ? 'selected' : '' ?>>Alumni</option>
+                            <option value="admin" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'admin' ? 'selected' : '' ?>>Admin</option>
+                            <option value="manager" <?= isset($formData['user-roles']) && $formData['user-roles'] == 'manager' ? 'selected' : '' ?>>Manager</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -156,5 +193,38 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById('schoolDropdown').addEventListener('change', function() {
+            const school = this.value;
+            const programDropdown = document.getElementById('programDropdown');
+
+            // Clear current options
+            programDropdown.innerHTML = '<option value="" disabled selected> Select Program</option>';
+
+            if (!school) return;
+
+            // Fetch programs for the selected school
+            fetch(`../controller/getPrograms.php?school=${encodeURIComponent(school)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    // Populate the programDropdown with fetched programs
+                    data.forEach(program => {
+                        const option = document.createElement('option');
+                        option.value = program;
+                        option.textContent = program;
+                        programDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching programs:', error));
+        });
+    </script>
+
+    <script src="../../LogInAndRegister/assets/js/graduationYear.js"></script>
+    <script src="../assets/js/toggleCompanyGrid.js"></script>
 </body>
 </html>

@@ -4,20 +4,23 @@ require("../controller/HandleSession.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : ''; 
     $password = isset($_POST["password"]) ? $_POST["password"] : '';
+    $retypePassword = isset($_POST["retype_password"]) ? $_POST["retype_password"] : '';
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : ''; 
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : ''; 
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
-    $idImage = isset($_POST["schoolIdFile"]) ? $_POST["schoolIdFile"] : ''; 
-    $program = isset($_POST["program"]) ? $_POST["program"] : ''; 
-    $gradYear = isset($_POST["graduation-year"]) ? $_POST["graduation-year"] : ''; 
+    $idImage = isset($_POST["schoolIdFile"]) ? $_POST["schoolIdFile"] : '';
+    $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : ''; 
+    $school = isset($_POST["school"]) ? $_POST[$school] : ''; 
+    $program = isset($_POST["program"]) ? $_POST[$program] : ''; 
     $jobStatus = isset($_POST["job-status"]) ? $_POST["job-status"] : '';
+    $company = isset($_POST["company"]) ? $_POST["company"] : '';
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
     $db = new dbConnection();
     $connection = $db->getConnection();
    
     if($userType == 'alumni') {
          // check if important fields are not entered for alumni accounts
-        if (empty($schoolID) || empty($gradYear) || empty($jobStatus)) {
+        if (empty($gradYear) || empty($jobStatus)) {
             $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "Please insert all fields... ";
             header("Location: ../view/AddUser.php");
@@ -30,19 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../view/AddUser.php");
             return;
         }
-         // check if the school id length is 7
-         if (strlen($schoolID) != 7) {
-            $_SESSION['formData'] = $_POST;
-            $_SESSION['confirmationMessage'] = "School ID number should be 7 digits long... ";
-            header("Location: ../view/AddUser.php");
-            return;
-        }
     }
     // set the admin automatically into employed and also set the employed and unemployed to 1 as employed and 0 as unemployed
+    // jobStatus will not be stored anymore in the database
     if($jobStatus == 'employed' || $userType == 'admin' ) {
-        $jobStatus = '1';
-    }else if($jobStatus == 'unemployed') {
-    $jobStatus = '0';
+        $company = 'SLU Alumina';
+    } else if($jobStatus == 'unemployed') {
+        $company = 'N/A';
     }
 
     
