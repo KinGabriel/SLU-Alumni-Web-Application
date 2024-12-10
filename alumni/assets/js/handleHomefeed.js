@@ -1,3 +1,25 @@
+ // Add the 'active' class based on the current URL
+ document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname; // Get the current URL path
+    const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current path
+        if (link.href.endsWith(currentPath)) {
+            link.parentElement.classList.add('active');  // Add active class to the corresponding list item
+        }
+    });
+
+    document.querySelectorAll('nav li a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('nav li').forEach(item => {
+                item.classList.remove('active');  // Remove active class from all items
+            });
+            link.parentElement.classList.add('active');  // Add active class to the clicked item
+        });
+    });
+});
+
 
 // hanlde the scroll of the homefeed
 window.onscroll = function () {
@@ -17,25 +39,46 @@ window.onscroll = function () {
     }
 };
 
+// Handle the show of modal for post
+document.addEventListener("DOMContentLoaded", () => {
+    const modalTriggerElements = [
+        document.querySelector(".post-content textarea"),
+        document.querySelector(".post-actions .add-photo"),
+        document.querySelector(".post-actions .add-video")
+    ];
 
+    modalTriggerElements.forEach(element => {
+        if (element) {
+            element.addEventListener("click", () => {
+                const postModal = new bootstrap.Modal(document.getElementById("postModal"));
+                postModal.show();
+            });
+        }
+    });
 
-    // Handle the show of modal for post
-      document.addEventListener("DOMContentLoaded", () => {
-          const modalTriggerElements = [
-              document.querySelector(".post-content textarea"),
-              document.querySelector(".post-actions .add-photo"),
-              document.querySelector(".post-actions .add-video")
-          ];
-  
-          modalTriggerElements.forEach(element => {
-              if (element) {
-                  element.addEventListener("click", () => {
-                      const postModal = new bootstrap.Modal(document.getElementById("postModal"));
-                      postModal.show();
-                  });
-              }
-          });
-      });
+    // Get the modal form elements
+    const textArea = document.querySelector("#postForm textarea");
+    const photoInput = document.querySelector("#photoInput");
+    const videoInput = document.querySelector("#videoInput");
+    const submitButton = document.getElementById("submitPost");
+
+    // Function to check if the "Post" button should be enabled
+    function checkPostButton() {
+        const hasText = textArea.value.trim() !== "";
+        const hasImage = photoInput.files.length > 0;
+        const hasVideo = videoInput.files.length > 0;
+
+        submitButton.disabled = !(hasText || hasImage || hasVideo);
+    }
+
+    // Add event listeners to trigger the check
+    textArea.addEventListener("input", checkPostButton); // Check when text is entered
+    photoInput.addEventListener("change", checkPostButton); // Check when a photo is selected
+    videoInput.addEventListener("change", checkPostButton); // Check when a video is selected
+
+    // Initially check if the button should be enabled or not
+    checkPostButton();
+});
 
 
 // helper methods for showin the post
@@ -380,8 +423,6 @@ function setupSubmitCommentHandler(postId) {
         }
     }
 }
-
-
 
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');

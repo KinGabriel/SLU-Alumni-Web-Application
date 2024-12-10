@@ -116,29 +116,6 @@ Profile Dropdown -->
                     </li>
                 </ul>
             </nav>
-            <script>
-            // Add the 'active' class based on the current URL
-            document.addEventListener('DOMContentLoaded', () => {
-                const currentPath = window.location.pathname; // Get the current URL path
-                const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
-
-                navLinks.forEach(link => {
-                    // Check if the link's href matches the current path
-                    if (link.href.endsWith(currentPath)) {
-                        link.parentElement.classList.add('active');  // Add active class to the corresponding list item
-                    }
-                });
-
-                document.querySelectorAll('nav li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active');  // Remove active class from all items
-                        });
-                        link.parentElement.classList.add('active');  // Add active class to the clicked item
-                    });
-                });
-            });
-            </script>
         </aside>
 
         <!-- Feed Content -->
@@ -202,7 +179,7 @@ Profile Dropdown -->
                     </div>
                 </div>
             </div>
-
+            
             <!-- Comment Modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -231,7 +208,6 @@ Profile Dropdown -->
         </div>
     </div>
 </div>
-
 <!--TO DO: show the uploaded image in the input then handle multiple image--> 
 <!-- Modal - Post Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
@@ -266,7 +242,7 @@ Profile Dropdown -->
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="submitPost">Post</button>
+                <button type="button" class="btn btn-primary" id="submitPost" disabled>Post</button>
             </div>
         </div>
     </div>
