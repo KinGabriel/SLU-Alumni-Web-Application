@@ -1,3 +1,25 @@
+/* 
+Alumni Controller: Handles the retrieval of alumni information, user search functionality, and logout process for the SLU Alumni Web Application.
+- getAlumni: Fetches the profile information of the logged-in user, including their name, profile picture (pfp), bio, follower count, followed count, and post count.
+    - Uses SQL JOIN queries to gather data from multiple tables (user, alumni, follows, posts) and returns the data in a formatted response.
+    - If the user has a profile picture, it is encoded in base64 for inline display. If not, a default image is used.
+- searchUsers: Allows searching for users by name (first and last name).
+    - Performs a LIKE query to match user names based on the search term provided by the user.
+    - Returns a list of matching users, or an appropriate error message if no users are found.
+    - Handles errors using try-catch to ensure server-side errors are logged and appropriately returned.
+- handleLogout: Handles the user logout process.
+    - Destroys the current session and clears the user’s cookie.
+    - Redirects the user to the login page after a successful logout.
+    - Logs an error message if there is an issue destroying the session.
+Dependencies:
+    - dbConnection: Handles MySQL database queries and interactions.
+    - req.session: Utilized for session management to store and retrieve user-related data.
+Error Handling:
+    - Logs database and session errors with detailed messages for easier debugging.
+    - Ensures the appropriate HTTP status codes (200, 400, 404, 500) are returned along with meaningful error messages when needed.
+Group Member Responsible: Caparas, Joaquin Gabriel
+*/
+
 import dbConnection from '../../database/connection.js';
 
 

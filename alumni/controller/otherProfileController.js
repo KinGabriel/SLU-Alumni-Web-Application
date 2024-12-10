@@ -1,3 +1,19 @@
+/* 
+Other Profile Controller: Manages user-related interactions such as fetching user details, following, unfollowing, and checking follow status in the SLU Alumni Web Application.
+- getOtherUserInfo: Retrieves detailed information about another user, including their name, bio, follower and followed counts, and post count.
+    - Handles profile picture formatting and default fallback if no profile picture is available.
+    - Returns data as a JSON response for use in the frontend.
+- follow: Allows a user to follow another user, ensuring that duplicate follow actions are prevented.
+    - Verifies if the user is already following the target user before performing the follow action.
+    - Uses database queries to update the `follows` table and responds with a success or failure message.
+- unfollow: Allows a user to unfollow another user, checking if the user is actually following the target before attempting to delete the follow relationship.
+    - Deletes the entry in the `follows` table and provides feedback on whether the unfollow action was successful.
+- isFollowing: Checks if a user is already following another user by querying the `follows` table.
+    - Returns a boolean value indicating the follow status.
+Group Member Responsible: Caparas, Joaquin Gabriel
+*/
+
+
 import dbConnection from '../../database/connection.js';
 
 export const  getOtherUserInfo = (req,res) => {
