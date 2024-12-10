@@ -40,7 +40,7 @@ app.use('/api/feed', feedRoutes);
 app.use('/api/connections',connectionRoutes)
 app.use('/api/viewProfile',useProfileRoute)
 app.use('/api/profile-other',otherProfileRoute)
-app.use('api/manage-i',manangeProfileRoute )
+app.use('api/manage-profie',manangeProfileRoute )
 
 // Start the Server
 const port = process.env.PORT;

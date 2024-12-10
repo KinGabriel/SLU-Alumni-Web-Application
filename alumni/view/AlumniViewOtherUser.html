@@ -153,7 +153,7 @@
     </div>
 
         <!-- Feed Section -->
-         <div id-="feed">
+         <div id="feed">
         <div class="post card mt-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -191,10 +191,42 @@
             </div>
         </div>
         
+
+<!--Inlined the style for the back button due to difficulty in calling it in the css-->
+<style> 
+/* Back button */
+.back-btn {
+    position: absolute; 
+    left: 5%; 
+    top: 14%; 
+    z-index: 1000; 
+    padding: 8px 16px; 
+    color: #007bff;
+    display: flex; 
+    align-items: center; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    font-size: 14px; 
+}
+
+.back-btn:hover {
+    background-color: #f1f1f1; 
+    color: #0056b3;
+    border-color: #0056b3; 
+}
+
+.back-btn img {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 8px; 
+}
+
+</style>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/handleOtherProfileFetch.js" defer></script> 
-    <script src="../assets/js/handleOtherProfile.js" defer></script>   
+    <script src="../assets/js/handleOtherProfileFetch.js" defer></script>  
     <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
+    <script src="../assets/js/handleOtherProfile.js" defer>  </script>  
 
 
 </body>

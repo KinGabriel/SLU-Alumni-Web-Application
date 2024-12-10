@@ -381,15 +381,7 @@ function setupSubmitCommentHandler(postId) {
     }
 }
 
-function postComment(postId, commentText) {
-    return new Promise(resolve => {
-        handleComment(postId, commentText)
-        setTimeout(() => {
-            console.log(`Comment posted on post ${postId}: ${commentText}`);
-            resolve(true); 
-        }, 1000);
-    });
-}
+
 
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');

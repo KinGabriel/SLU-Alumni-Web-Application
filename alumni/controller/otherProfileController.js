@@ -1,4 +1,6 @@
 import dbConnection from '../../database/connection.js';
+import fs from 'fs';
+import path from 'path';
 
 export const  getOtherUserInfo = (req,res) => {
     const userId = req.query.user_id; 
@@ -142,4 +144,83 @@ export const isFollowing = (req, res) => {
         const isFollowing = result[0].isFollowing > 0;
         res.json({ isFollowing });
     });
+};
+
+
+
+
+export const getOhterPost =(req, res) =>{
+    const targetUserId = req.query.user_id;
+    const userId = req.userId;
+    
+    
+    const query = `
+    SELECT 
+        p.post_id,
+        p.description,
+        p.banner,
+        p.post_type,
+        p.datetime,
+        p.is_edited,
+        COUNT(DISTINCT l.like_id) AS like_count,
+        COUNT(DISTINCT c.comm_id) AS comment_count,
+        u.user_id AS poster_id,
+        u.pfp,
+        CONCAT(u.fname, ' ', u.lname) AS name,
+        (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
+    FROM posts p
+    LEFT JOIN likes l ON p.post_id = l.post_id
+    LEFT JOIN comments c ON p.post_id = c.post_id
+    LEFT JOIN follows f ON f.followed_id = p.user_id 
+    JOIN user u ON u.user_id = p.user_id
+    WHERE  (
+            ( f.followed_id IS NOT NULL) 
+            OR (p.user_id = ?)
+        ) AND p.user_id = ?
+    GROUP BY 
+        p.post_id
+    ORDER BY p.post_id DESC
+`;
+
+
+    dbConnection.query(query, [userId, targetUserId,targetUserId], (error, results) => {
+        if (error) {
+            console.error('Database error:', error);
+            return res.status(500).json({ error: 'Failed to fetch posts.' });
+        }
+
+        const posts = results.map(post => {
+            if (post.banner) {
+                post.banner = handleMedia(post.banner);
+            }
+            if (post.pfp) {
+                post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
+            }
+            post.is_liked = post.is_liked > 0; // Convert to boolean
+            return post;
+        });
+        res.status(200).json({ posts });
+    });
+}
+// Helper method for handling images and videos
+const handleMedia = (bannerPath) => {
+    if (Buffer.isBuffer(bannerPath)) {
+        bannerPath = bannerPath.toString('utf-8').trim();
+    }
+    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
+        const ext = path.extname(bannerPath).toLowerCase();
+        
+        // Handle image files
+        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+            const imageBuffer = fs.readFileSync(bannerPath);
+            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
+        }
+        
+        // Handle video files
+        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
+            const videoBuffer = fs.readFileSync(bannerPath);
+            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
+        }
+    }
+    return ''; // if empty
 };
