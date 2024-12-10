@@ -93,8 +93,12 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     <div class="last-name-grid">
                         <label for="last-name">Last Name</label>
                         <input type="text" id="last-name" name="last-name" value="<?= isset($formData['last-name']) ? htmlspecialchars($formData['last-name']) : '' ?>"  required>
-                    </div>   
-
+                    </div>
+                    
+                    <div class="middle-name-grid">
+                        <label for="middle-name"> Middle Name <span>(optional)</span> </label>
+                        <input type="text" id="middle-name" name="middle-name" value="<?= isset($formData['middle-name']) ? htmlspecialchars($formData['middle-name']) : '' ?>" >
+                    </div>
                     <div class="email-add-grid">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" value="<?= isset($formData['email']) ? htmlspecialchars($formData['email']) : '' ?>" required />
@@ -106,13 +110,13 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     </div>
 
                     <div class="retype-pw-grid">
-                        <label for="password">Repeat Password</label>
+                        <label for="password">Confirm Password</label>
                         <input type="password" id="retype_password" name="retype_password" value="<?= isset($formData['retype_password']) ? htmlspecialchars($formData['retype_password']) : '' ?>" required>
                     </div>
 
                     <div class="id-grid">
                         <label for="school-id">School ID</label>
-                        <input type="text" id="school-id" name="school-id">
+                        <input type="text" id="school-id" name="school-id" value="<?= isset($formData['school-id']) ? htmlspecialchars($formData['school-id']) : '' ?>" >
                     </div>
 
                     <div class="gradyear-grid">
@@ -168,7 +172,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     
                     <div class="company-grid" id="companyGrid">
                         <label for="company">Company</label>
-                        <input type="text" id="company" name="company" value="<?= isset($formData['company']) ? htmlspecialchars($formData['company']) : '' ?>"  required>
+                        <input type="text" id="company" name="company" value="<?= isset($formData['company']) ? htmlspecialchars($formData['company']) : '' ?>" >
                     </div>   
 
                 <!-- User Roles -->
