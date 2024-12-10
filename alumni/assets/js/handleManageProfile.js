@@ -104,3 +104,4 @@ function updateProfileImage(event) {
         document.getElementById('profileImage').src = "../assets/images/default-profile.jpg";
     }
 }
+
