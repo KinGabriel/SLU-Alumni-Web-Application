@@ -1,11 +1,9 @@
 
 function populateForm() {
-    fetch(`/api/manage-profie/get-details`)
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
+    fetch(`/api/manage-profile/get-info`)
+    .then(response => response.json())
+        .then(data => { 
+            
             document.getElementById('profileImage').src = data.pfp || '../assets/images/default-profile.jpg';
             document.getElementById('firstName').value = data.fname || '';
             document.getElementById('middleName').value = data.mname || '';
@@ -40,7 +38,7 @@ function handleSaveChanges() {
         gradYear: document.getElementById('gradYear').value,
     };
 
-    fetch('/api/manage-profie/update-details', {
+    fetch('/api/manage-profile/update-details', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -94,9 +92,7 @@ function updateProfileImage(event) {
 document.addEventListener('DOMContentLoaded', () => {
     populateForm();
     document.getElementById('saveChangesButton').addEventListener('click', handleSaveChanges);
-    document.getElementById('clearInfoButton').addEventListener('click', clearForm);
     document.getElementById('changePasswordButton').addEventListener('click', handleChangePassword);
-    document.getElementById('clearPasswordButton').addEventListener('click', clearPasswordFields);
 });
 
 

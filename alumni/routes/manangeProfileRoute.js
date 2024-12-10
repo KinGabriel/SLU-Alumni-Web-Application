@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.use(authenticateMiddleware);
 
-router.get('/getinfo', getProfileInfo)
+router.get('/get-info', getProfileInfo)
 
 
 
