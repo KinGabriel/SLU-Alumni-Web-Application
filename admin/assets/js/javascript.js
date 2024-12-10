@@ -1,3 +1,5 @@
+/*   Author: Vergara Carlos Miguel 
+     Used References: Codepen  */
 const renderCards = (cardsContainer, cards) => {
   cardsContainer.innerHTML = "";
 
@@ -136,8 +138,6 @@ const data = {
       tags: ["category 3"],
       cover: [
         "https://via.placeholder.com/550x225/C7B15B/D5C481?text=Placeholder",
-        "https://via.placeholder.com/550x225/D17A7E/D88D90?text=Placeholder",
-        "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
       ],
       date: "October 16, 2024"
     },

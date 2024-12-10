@@ -1,3 +1,31 @@
+/* 
+Feed Controller: Handles operations related to creating posts, retrieving posts, managing likes, and comments for the user in the social media application.
+- handleUserPost: Handles the creation of a new post with a description, post type, and uploaded media (images/videos).
+    - Combines uploaded media files (images/videos) into a banner field and stores them in the database.
+    - Utilizes a query to insert the post into the database and responds with success or error.
+- getPost: Fetches posts for the authenticated user, including details like description, banner (images/videos), like count, comment count, user profile info, and whether the post is liked.
+    - Processes and formats the banner media as base64 encoded data for inline usage.
+- handleLikes: Manages the liking and unliking of posts by the authenticated user.
+    - Checks if the user has already liked the post and updates the like status in the database accordingly.
+- handleComments: Allows users to comment on posts, validating the input for non-empty and sanitized content.
+    - Inserts the comment into the database and sends a success or failure response.
+- getComments: Retrieves the comments for a specific post by fetching the post's comments from the database.
+    - Formats profile pictures of commenters to base64 encoded format.
+Dependencies:
+    - dbConnection: Manages interactions with the MySQL database for all queries.
+    - fs: Provides file system access to read and process media files like images and videos.
+    - path: Resolves file paths to handle different types of media files (images/videos).
+Helper Functions:
+    - handleMedia: Converts media files (images/videos) to base64 encoded strings to embed them directly into the responses.
+    - handleFileExistence: Validates if a file exists and processes its media accordingly.
+Error Handling:
+    - Comprehensive error handling for database interactions, file system operations, and input validation.
+    - Returns appropriate HTTP status codes and error messages to the client for easy debugging.
+Group Member Responsible:  Caparas, Joaquin Gabriel
+*/
+
+
+
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
