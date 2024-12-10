@@ -186,6 +186,7 @@ function openMediaModal(mediaUrl, filename) {
     document.body.appendChild(modal);
 }
 
+
 // Function to create the post actions section
 function createPostActions(post) {
     const postActions = document.createElement('div');
@@ -517,7 +518,7 @@ document.addEventListener("click", (event) => {
         deleteModal.show();
     }
 });
-
+ 
 // Confirm Delete Post
 document.getElementById("confirmDeletePost").addEventListener("click", (event) => {
     const postId = event.target.getAttribute("data-post-id");
@@ -529,11 +530,21 @@ document.getElementById("confirmDeletePost").addEventListener("click", (event) =
 
     if (currentPostElement) {
         currentPostElement.remove(); // Remove post from the DOM
+        try {
+            const result = deletePost(postId);
+            console.log("Post deleted successfully:", result);
 
-        // Call the function to delete the post (send the postId to the backend or server)
-        deletePost(postId);
+            // Show success modal
+            const successModal = new bootstrap.Modal(document.getElementById("deleteSuccessModal"));
+            successModal.show();
+        } catch (error) {
+            // An error occurred during deletion
+            console.error("Failed to delete the post:", error);
 
-        console.log("Post deleted");
+            // Show failure modal
+            const errorModal = new bootstrap.Modal(document.getElementById("deleteFailureModal"));
+            errorModal.show();
+        }
 
         // Close the delete modal
         const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deletePostModal"));
