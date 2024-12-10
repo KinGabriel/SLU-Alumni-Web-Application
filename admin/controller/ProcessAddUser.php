@@ -7,11 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $retypePassword = isset($_POST["retype_password"]) ? $_POST["retype_password"] : '';
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : ''; 
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : ''; 
+    $middleName = isset($_POST["middle-name"]) ? $_POST["middle-name"] : ''; 
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
     $idImage = isset($_POST["schoolIdFile"]) ? $_POST["schoolIdFile"] : '';
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : ''; 
-    $school = isset($_POST["school"]) ? $_POST[$school] : ''; 
-    $program = isset($_POST["program"]) ? $_POST[$program] : ''; 
+    $school = isset($_GET["school"]) ? $_GET[$school] : ''; 
+    $program = isset($_GET["program"]) ? $_GET[$program] : ''; 
     $jobStatus = isset($_POST["job-status"]) ? $_POST["job-status"] : '';
     $company = isset($_POST["company"]) ? $_POST["company"] : '';
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
@@ -36,13 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // set the admin automatically into employed and also set the employed and unemployed to 1 as employed and 0 as unemployed
     // jobStatus will not be stored anymore in the database
-    if($jobStatus == 'employed' || $userType == 'admin' ) {
+    if($jobStatus == 'employed' && $userType == 'admin' ) {
         $company = 'SLU Alumina';
     } else if($jobStatus == 'unemployed') {
         $company = 'N/A';
     }
 
-    
+    if(empty($schoolID) && $userType =='alumni') {
+        $schoolID = null;
+    }
+
+
     // Check if email exist
     if(isEmailExist($connection, $email)) {
         $_SESSION['formData'] = $_POST;
@@ -51,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO user (email, pword, fname, lname, pfp, user_type,is_employed) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO user (email, pword, fname, lname, mname, pfp, user_type, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
     if ($stmt === false) {
@@ -60,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("ssssssi", $email, $hashedPassword, $firstName, $lastName, $idImage, $userType,$jobStatus);
+    $stmt->bind_param("ssssssss", $email, $hashedPassword, $firstName, $lastName, $middleName, $idImage, $userType, $company);
     
     if ($stmt->execute()) {
         $_SESSION['confirmationMessage'] = "Successfully added an account!";
@@ -70,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($userType == "alumni") {
             $id = getID($connection, $email);
             if ($id !== null) {
-                addAlumni($connection, $id, $schoolID, $program, $gradYear);
+                addAlumni($connection, $id, $schoolID, $school, $program, $gradYear);
             }
         }
     } else {
@@ -94,10 +99,10 @@ function getID($connection, $email) {
         return null;
     }
 }
-function addAlumni($connection, $id, $schoolID, $program, $gradYear) {
-    $query = "INSERT INTO alumni (user_id, school_id, gradyear, program) VALUES (?, ?, ?, ?)";
+function addAlumni($connection, $id, $schoolID, $school, $program, $gradYear) {
+    $query = "INSERT INTO alumni (user_id, school_id, gradyear, school, program) VALUES (?, ?, ?, ?, ?)";
     $stmt = $connection->prepare($query);
-    $stmt->bind_param("iiis", $id, $schoolID, $gradYear, $program);
+    $stmt->bind_param("iiiss", $id, $schoolID, $gradYear, $school, $program);
     $stmt->execute();
     return true;
 }
