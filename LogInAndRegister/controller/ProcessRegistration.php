@@ -7,6 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $retypePassword = isset($_POST["retypePassword"]) ? $_POST["retypePassword"] : '';
     $firstName = isset($_POST["firstName"]) ? $_POST["firstName"] : '';
     $lastName = isset($_POST["lastName"]) ? $_POST["lastName"] : '';
+    $middleName = isset($_POST["middleName"]) ? $_POST["middleName"] : '';
+    $school = isset($_POST["school"]) ? $_POST["school"] : '';
     $program = isset($_POST["program"]) ? $_POST["program"] : '';
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : '';
     $db = new dbConnection();
@@ -38,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     }
-
+    
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $gradYear = isset($_POST["graduationYear"]) ? trim($_POST["graduationYear"]) : '';
@@ -49,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $gradYear = (int)$gradYear;
 
-    $query = "INSERT INTO applicants ( email, fname, lname, pword, program, gradyear, school_id_pic) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO applicants ( email, fname, lname, mname, pword, school, program, gradyear, school_id_pic) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
     if ($stmt === false) {
@@ -58,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("sssssis",  $email, $firstName, $lastName, $hashedPassword, $program, $gradYear, $idImage);
+    $stmt->bind_param("sssssssis",  $email, $firstName, $lastName, $middleName, $hashedPassword, $school, $program, $gradYear, $idImage);
     if ($stmt->execute()) {
         $_SESSION['confirmation_message'] = "Successfully sent your request! Please wait for the admin reviewal.";
     } else {

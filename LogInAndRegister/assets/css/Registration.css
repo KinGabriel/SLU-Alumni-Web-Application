@@ -77,8 +77,7 @@ body {
 .input-inline-wrapper {
   display: flex;
   justify-content: space-between;
- 
- 
+  gap: .5rem;
 }
 .input-inline-wrapper img{
   display: flex;
