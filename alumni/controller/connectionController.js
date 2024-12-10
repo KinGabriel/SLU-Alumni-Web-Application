@@ -1,3 +1,33 @@
+/* 
+Connections Controller: Manages user connections, including fetching and removing followers and following relationships in the SLU Alumni Web Application.
+- connections: Retrieves and filters user connections based on the specified criteria (mutual connections, followers, following, or general connections).
+    - Filters results using the `filter` query parameter (e.g., mutual, followers, following).
+    - Allows search functionality by first name or last name via the `search` query parameter.
+    - Supports sorting of results by name in ascending or descending order via the `sort` query parameter.
+    - Executes a dynamic SQL query based on the specified filters and search criteria.
+- removeFollowing: Removes a user from the following list (unfollows a user).
+    - Ensures that the `followedId` parameter is provided and performs the deletion in the database.
+    - Handles errors such as missing `followedId` and database failures.
+- removeFollower: Removes a user from the follower list (unfollows the user).
+    - Ensures that the `followerId` parameter is provided and performs the deletion in the database.
+    - Handles errors such as missing `followerId` and database failures, along with checking if the follower exists before deletion.
+Dependencies:
+    - dbConnection: Manages MySQL database interactions to fetch, insert, and delete user connection data.
+    - req.cookies: Used to retrieve the `user_id` from the request cookie for session management.
+    - req.query: Handles dynamic query parameters for filtering, searching, and sorting.
+    - req.params: Used for extracting user IDs from URL parameters.
+  
+Helper Functions:
+    - None specified. Database operations are performed directly within the controller methods.
+Error Handling:
+    - Comprehensive error handling for database queries, missing query parameters, and invalid requests.
+    - Returns appropriate HTTP status codes (200 for success, 400/500 for client/server errors).
+    - Clear error messages are provided for missing or invalid parameters and query failures.
+Group Member Responsible: Caparas, Joaquin Gabriel
+*/
+
+
+
 import dbConnection from '../../database/connection.js';
 
 export const connections = (req, res) => {

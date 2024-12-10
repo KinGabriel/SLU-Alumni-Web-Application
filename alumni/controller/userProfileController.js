@@ -1,3 +1,24 @@
+/* 
+User Profile Controller: Provides functionalities for retrieving, liking, editing, and deleting posts in the SLU Alumni Web Application.
+    - getOwnPost: Fetches posts created by the authenticated user, along with likes, comments, and user details.
+        - Handles media (images/videos) and user profile picture formatting for proper display.
+    - handleLikes: Enables liking and unliking posts, with real-time updates to the database.
+    - editPost: Allows authenticated users to edit their posts, including updating the description and media files.
+    - deletePost: Deletes the specified post based on the provided post ID.
+Dependencies:
+    - dbConnection: Handles MySQL database interactions.
+    - fs: Provides file system access for handling images and videos.
+    - path: Resolves file paths for media handling.
+Helper Functions:
+    - handleMedia: Converts media files to base64 format for secure inline usage in web views.
+Error Handling:
+    - Comprehensive error logging for database and file system issues.
+    - Returns appropriate HTTP status codes and error messages.
+Group Member Responsible: Caparas, Joaquin Gabriel
+*/
+
+
+
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';

@@ -1,27 +1,19 @@
 <?php
 require("../controller/HandleSession.php");
-$currentPage = basename($_SERVER['PHP_SELF']);
+$message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
+$formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
+echo "<script>var message = '$message';</script>";
+unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
-
-    <!-- Link to Bootstrap CSS (CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Link to FontAwesome for icons (CDN) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Author: Vergara Carlos Miguel -->
-    <!-- Used References: Codepen and ChatGPT -->
+    <title>SLU Alumina</title>
+    <link rel="stylesheet" href="../assets\css\news.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
-
-
 <body>
     <!-- Header separator -->
     <div class="header-separator"> </div>
@@ -40,8 +32,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
     </header>
-
-    
 
 <!-- Sidebar -->
 <div class="sidebar-container">
@@ -78,8 +68,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li>
-                <a href="#job-opportunities" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
-                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+            <a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+            <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
                     <span class="menu-item-text">Job Opportunities</span>
                 </a>
             </li>
@@ -94,78 +84,44 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </a>
     </div>
 </div>
-        <div class="container py-100">
-            <!-- Page Title for Events -->
-            <div class="row mb-2">
-                <div class="col">
-                </div>
-            </div>
 
            <!-- Add Event Button (Form Method) -->
-<form action="addEvents.php" method="POST">
+<form action="addnews.php" method="POST">
     <button type="submit" class="custom-btn btn-3">
-        <span>Add Events</span>
+        <span>Add News</span>
     </button>
 </form>
 
-
-            <div class="container py-5">
-                <!-- Search and Categories Section Events -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="form-group bg-white input-icon p-3 rounded shadow-sm mb-3">
-                            <i class="fas fa-search"></i>
-                            <input type="search" placeholder="Search by title or category" class="form-control mb-3" />
-                            <div class="categories">
-                                <a href="#" class="badge rounded-pill active me-1">All</a>
-                                <a href="#" class="badge rounded-pill me-1">Upcoming</a>
-                                <a href="#" class="badge rounded-pill me-1">Ended</a>
-                            </div>
-                        </div>
+<div class="news-container">
+    <h2 class="news-title">SLU News</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100">
+                <!-- Edit Icon -->
+                <a href="#" class="edit-icon">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
+                <div class="card-body d-flex align-items-center">
+                    <!-- News Info -->
+                    <div class="news-info">
+                        <h5 class="card-title">SLU Intramural Opening</h5>
+                        <p class="card-text">Lorem ipsum odor amet, consectetuer adipiscing elit. Praesent praesent egestas adipiscing euismod nibh quis diam interdum.</p>
                     </div>
                 </div>
-                <h1>Events</h1>
-
-        <!-- Dynamic Cards Container -->
-        <div class="row row-cols-md-3 gx-3" id="cards-container">
-            <!-- Cards will be inserted here via JavaScript -->
-        </div>
-
-                
+                <!-- Card Footer -->
+                <div class="card-footer">
+                    <button class="btn btn-primary btn-read-more">
+                        Read More
+                    </button>
+                </div>
             </div>
         </div>
-  
+    </div>
+</div>
 
-    
- <!-- Pagination -->
- <div class="pagination">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">&laquo;</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next &raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
- 
 
-    <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+   
 
-    <!-- Link to custom JavaScript -->
-    <script src="../assets/js/javascript.js"></script>
 </body>
-
 </html>

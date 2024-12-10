@@ -6,6 +6,7 @@ import feedRoutes from './routes/feedRoute.js';
 import connectionRoutes from './routes/connectionRoute.js';
 import useProfileRoute from './routes/userProfileRoute.js';
 import otherProfileRoute from './routes/otherProfileRoute.js'; 
+import manangeProfileRoute from './routes/manangeProfileRoute.js'; 
 import { cookieMiddleware, cookieParser } from './middleware/cookieMiddleware.js';
 import sessionMiddleware from './middleware/sessionMiddleware.js';
 import staticMiddleware from './middleware/staticMiddleware.js';
@@ -39,6 +40,7 @@ app.use('/api/feed', feedRoutes);
 app.use('/api/connections',connectionRoutes)
 app.use('/api/viewProfile',useProfileRoute)
 app.use('/api/profile-other',otherProfileRoute)
+app.use('api/manage-i',manangeProfileRoute )
 
 // Start the Server
 const port = process.env.PORT;
