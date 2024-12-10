@@ -6,63 +6,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <html lang="en">
 
 <style>
-
-
-h1 {
-  margin-top: 20px; 
-}
-
-.card {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.bubble {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.has-multiple-icon {
-  display: none;
-}
-
-.card-body a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.card-body a:hover {
-  text-decoration: underline;
-}
-
-.cover-image {
-  width: 100%;
-  height: auto;
-}
-
-.categories a.active {
-  font-weight: bold;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.hidden {
-  opacity: 0;
-  transform: translateY(300px);
-  transition: all 1s ease-in;
-}
-
-.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 * {
     margin: 0;
     padding: 0;
@@ -74,6 +17,97 @@ html {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
   }
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between; /* Space between the logo and profile */
+    align-items: center; /* Center items vertically */
+    background-color: white;
+    padding: 0.1vw;
+    /* padding-right: 3vw; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+    height: 4vw; 
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    margin-left: 0.8vw;
+    font-size: 1.2vw;
+}
+
+header span {
+    margin-left: 0.2vw; 
+}
+
+header img.slu-logo {
+    height: 50px;
+    width: auto; 
+    margin-right: 10px;
+}
+
+.header-separator {
+    background-color: #003DA5;
+    padding-bottom: 2vw;
+    width: 100%;
+    margin-top: -1vh;
+    /* margin-bottom: 0.5vh; */
+}
+
+.notif-bell {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+.profile-pic {
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    margin-right: 0.8rem;
+    display: inline-block; /* Ensure the image is displayed as a block */
+    border: 1px solid #ccc; /* Add a border to visualize it */
+}
+
+.header-profile {
+    display: flex;
+    /* flex-direction: column;  */
+    align-items: center; /* Align items to the left */
+}
+
+.header-profile i {
+    margin-right: 1vw;
+}
+
+.header-profile .user-name {
+    margin: 0; /* Reset any default margin */
+    font-size: small;
+}
+
+.header-profile .account-type {
+    margin: 0;
+    margin-top: 0.2rem; /* Optional: space between user name and account type */
+    font-size: 0.9rem; /* Adjust font size if needed */
+    color: gray; /* Optional: Change the text color */
+    display: block; /* Ensure account type appears below username */
+    font-size: small;
+}
+
+.account-details {
+    display: flex; /* Enable flexbox for the details */
+    flex-direction: column; /* Stack username and account type vertically */
+    align-items: left; /* Align items to the left */
+}
+
+/* Sidebar active link styling */
+.nav-link.active {
+    background-color: rgba(0, 61, 165, 0.4);
+    color: #cf1b1b;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 /* Side Navigation Bar */
 .sidebar-container {
@@ -192,6 +226,109 @@ html {
     font-weight: bold;
 }
 
+.card-container {
+    padding-top: 1rem;
+    padding-left: 18vw;
+    padding-right: 1rem;
+    display: flex; /* Use flexbox for alignment */
+    gap: 10px; /* Space between cards */
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+}
+
+.card {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 22px; /* Inner padding for the card content */
+    width: 16vw; /* Set width for each card */
+    text-align: center; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+}
+
+/* Align image and text in card-content */
+.card-content {
+    display: flex;
+    align-items: center; /* Vertically aligns the image and text */
+    justify-content: center; /* Aligns content horizontally if needed */
+    gap: 10px; /* Adds space between the image and the text */
+    padding-top: 2vw; /* Default padding-top for all cards */
+}
+
+.card-content img {
+    width: 30px; /* Adjust image size as needed */
+    height: auto;
+}
+
+h3 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; /* Space below header */
+}
+
+h2 {
+    color: #333; /* Header color */
+    margin-bottom: 20px; 
+    margin-top: 30px;
+}
+
+
+p {
+    color: #666; /* Paragraph color */
+}
+
+.second-row {
+    padding-top: 1rem;
+    padding-left: 18vw;
+    padding-right: 1rem;
+    display: flex; /* Use flexbox for alignment */
+    gap: 10px; /* Space between cards */
+    flex-wrap: nowrap; /* Prevent cards from wrapping to the next line */
+}
+
+.first-div {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    height: 30vw; /* Inner padding for the card content */
+    width: 48.45vw; /* Set width for each card */
+    text-align: center; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+.first-div h3 {
+    padding-top: 2vw;
+    padding-left: 2vw; 
+}
+
+.second-div {
+    background-color: #fff; /* Background color of each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    height: 30vw; /* Inner padding for the card content */
+    width: 32.45vw; /* Set width for each card */
+    text-align: left; /* Center align text inside cards */
+    transition: transform 0.3s ease; /* Transition for hover effect */
+}
+.second-div h3 {
+    padding-top: 2vw;
+    padding-left: 2vw; 
+}
+
+.chart-container {
+    padding-top: 2vw;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    /* height: 10vw; Set a height for the container */
+}
+
+canvas {
+    width: 60% !important;
+    height: 20vw !important; /* Set your desired height */
+    
+}
 /* Edit Icon Styling */
 .edit-icon {
     position: absolute;
@@ -607,7 +744,6 @@ a {
   color: #333;
   line-height: 1.8;  /* Increased line height for readability */
 }
-
 </style>
 
 <head>
@@ -620,7 +756,75 @@ a {
 
 <body>
     
+ <!-- Header separator -->
+ <div class="header-separator"> </div>
+    <header>
+        <h1>
+            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+            <span>SLU Alumina</span>
+        </h1>
+        <div class="header-profile">
+            <!-- <i class="fa-regular fa-bell"></i> -->
+            <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" >
+            <img src="<?php echo $_SESSION['pfp'] ?: '../assets\images\alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
+            <div class="account-details">
+                <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
+                <span class="account-type"><?php echo $_SESSION['user_type']; ?></span>
+            </div>
+        </div>
+    </header>
 
+<!-- Sidebar -->
+<div class="sidebar-container">
+    <nav class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="../view/adminDashboard.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminDashboard.php' ? 'active' : ''; ?>" id="dashboardLink">
+                    <img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon">
+                    <span class="menu-item-text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/UserRequest.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'UserRequest.php' ? 'active' : ''; ?>" id="userRequestLink">
+                    <img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon">
+                    <span class="menu-item-text">Account Requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                    <span class="menu-item-text">Accounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
+                    <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
+                    <span class="menu-item-text">Events</span>
+                </a>
+            </li>
+            <li>
+                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                    <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
+                    <span class="menu-item-text">News</span>
+                </a>
+            </li>
+            <li>
+            <a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+            <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+                    <span class="menu-item-text">Job Opportunities</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Sticky Log Out Button -->
+    <div class="sidebar-logout">
+        <a href="../controller/ProcessLogOut.php">
+            <img src="../assets/images/logout.png" alt="Log Out" class="sidebar-icon">
+            <span class="menu-item-logout">Log Out</span>
+        </a>
+    </div>
+</div>
 
   <main class="main-wrapper">
       <div class="steps-wrapper">
