@@ -62,7 +62,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                 </a>
             </li>
             <li>
-                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                <a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
                     <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>
