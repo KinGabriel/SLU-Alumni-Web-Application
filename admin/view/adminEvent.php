@@ -4,7 +4,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/event.css">
     <!-- Author: Vergara Carlos Miguel -->
     <!-- Used References: Codepen and ChatGPT -->
 </head>
