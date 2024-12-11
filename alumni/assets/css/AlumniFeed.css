@@ -522,14 +522,14 @@ nav li a {
 }
 
 #submitComment {
-    background-color: #003DA5; 
-    border-color: #003DA5; 
+    background-color: #171acf; 
+    border-color: #171acf; 
     color: white; 
 }
 
 #submitComment:hover {
-    background-color: #171acf; 
-    border-color: #171acf;
+    background-color: #003DA5; 
+    border-color:#003DA5;
 }
 
 .post-header .dropdown {

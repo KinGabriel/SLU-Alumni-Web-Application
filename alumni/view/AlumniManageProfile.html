@@ -161,43 +161,33 @@
                         <h3>Account Type</h3>
                         <div class="d-flex justify-content-start gap-5">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="accountType" id="accountTypeAdmin" value="private">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypePrivate" value="private">
                             <label class="form-check-label" for="accountTypePrivate">
                                 Private
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="accountType" id="accountTypeUser" value="public">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypePublic" value="public">
                             <label class="form-check-label" for="accountTypePublic">
                                 Public
                             </label>
-                        </div>
+                        </div>                        
                     </div>
-                        <!-- Education -->
-                        <div class="col-md-6 mb-4 mt-4" >
-                            <h3>Education</h3>
-                            <label for="school" class="form-label">School</label>
-                            <select class="form-select" id="school">
-                                <option disabled selected>Choose...</option>
-                                <option value="1">Saint Louis University</option>
-                                <option value="2">University of Baguio</option>
-                                <option value="3">Other</option>
-                            </select>
-                            <label for="degree" class="form-label mt-2">Degree</label>
-                            <select class="form-select" id="degree">
-                                <option disabled selected>Choose...</option>
-                                <option value="1">BS Information Technology</option>
-                                <option value="2">BS Computer Science</option>
-                                <option value="3">Other</option>
-                            </select>
-                            <label for="gradYear" class="form-label mt-2">Graduation Year</label>
-                            <select class="form-select" id="gradYear">
-                                <option disabled selected>Choose...</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                            </select>
-                        </div>
+                    
+                       <!-- Education -->
+                    <div class="col-md-8 mb-4 mt-4">
+                        <h3>Education</h3>
+                        
+                        <label for="school" class="form-label">School</label>
+                        <input type="text" class="form-control" id="school" placeholder="Enter your school" style="min-width: 400px;" readonly  />
+
+                        <label for="degree" class="form-label mt-2">Degree</label>
+                        <input type="text" class="form-control" id="degree" placeholder="Enter your degree" style="min-width: 400px;" readonly />
+                        
+                        <label for="gradYear" class="form-label mt-2">Graduation Year</label>
+                        <input type="number" class="form-control" id="gradYear" placeholder="Enter your graduation year" style="min-width: 400px;"  readonly />
+                    </div>
+
                     </div>
                 </div>
             </div>
