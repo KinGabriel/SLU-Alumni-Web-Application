@@ -72,19 +72,20 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li>
-                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                <a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
                     <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>
             </li>
             <li>
-                <a href="#job-opportunities" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
-                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+            <a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+            <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
                     <span class="menu-item-text">Job Opportunities</span>
                 </a>
             </li>
         </ul>
     </nav>
+
 
     <!-- Sticky Log Out Button -->
     <div class="sidebar-logout">
