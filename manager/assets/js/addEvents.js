@@ -2,7 +2,7 @@
 const steps = document.querySelectorAll(".step"),
       progress = document.querySelector(".progress-bar .progress"),
       buttons = document.querySelectorAll(".buttons .btn"),
-      stepContents = document.querySelectorAll(".step-content");
+      stepContents = document.querySelectorAll(".step-content"),
       fileInput = document.getElementById("image-upload"),
       fileNameLabel = document.getElementById("file-name"), // File name label
       btnPrev = document.getElementById("btn-prev"),
@@ -45,8 +45,16 @@ document.getElementById("event-description-input").addEventListener("input", cap
 // Update the current step and DOM  
 const updateSteps = (e) => {
     console.log("Upload file:", uploadedImageFile);
+
+    if (e.target.id === "btn-next" && !checkRequiredFields()) {
+        e.preventDefault(); // Prevent moving to the next step
+        alert("Please fill in all required fields.");
+        return;
+    }
     
-    captureEventDetails();
+    if (e.target.id === "btn-next" && checkRequiredFields()) {
+        captureEventDetails();
+    }
     
     if (e.target.id === "btn-next" && currentStep === 3) {
         e.preventDefault();
@@ -106,48 +114,54 @@ const updateSteps = (e) => {
 
 // Show selected file name and image preview
 const handleImageUploadPreview = () => {
-    const file = fileInput.files[0];
+    const file = fileInput.files[0]; // Get the selected file
 
     if (file) {
         fileNameLabel.textContent = file.name; // Show file name
         const reader = new FileReader();
-        
+
         // Preview image (if it's an image file)
-        reader.onload = function(e) {
-            uploadedImageURL = e.target.result; // Store the image URL
-            const imagePreview = document.querySelector(".event-image");
-            imagePreview.src = uploadedImageURL; // Set image source to the uploaded file
-            imagePreview.style.display = "block"; // Make image visible
+        reader.onload = function (e) {
+            uploadedImageURL = e.target.result; // Store the uploaded image URL
+            uploadedImageFile = file; // Store the file reference
+            console.log("Uploaded file:", uploadedImageFile);
         };
 
         // Read the file as a data URL to display it
         reader.readAsDataURL(file);
-
-        uploadedImageFile = file;
-        console.log("Upload file:", uploadedImageFile);
     } else {
-        fileNameLabel.textContent = "No file chosen"; // Reset file name if no file is selected
+        // Reset values if no file is selected
+        fileNameLabel.textContent = "No file chosen"; // Reset file name label
+        uploadedImageURL = null; // Clear the uploaded image URL
+        uploadedImageFile = null; // Clear the uploaded file
+        fileInput.value = ""; // Clear the file input
+        console.log("No file selected.");
     }
 };
 
+
+
 // Display event preview on Step 3
 const displayEventPreview = () => {
+    // Ensure uploadedImageURL is set correctly
+    const previewImageURL = uploadedImageURL || "../assets/images/default-event-image.png"; // Fallback to default image
+
     // Set the event details for Step 3 preview
-    document.getElementById("event-image-preview").src = uploadedImageURL; // Set the event image
-    // Set the event title
-    document.querySelector(".event-title").textContent = eventDetails.title;
+    document.getElementById("event-image-preview").src = previewImageURL; // Set the event image
+    document.querySelector(".event-title").textContent = eventDetails.title || "Untitled Event"; // Set the event title
     
     // Set the event date and time
     const eventDateTime = document.querySelector(".event-date-time");
-    eventDateTime.querySelector(".date").textContent = eventDetails.startDate; // Event Date
-    eventDateTime.querySelector(".time").textContent = `${eventDetails.startTime} - ${eventDetails.endTime}`; // Event Time
+    eventDateTime.querySelector(".date").textContent = eventDetails.startDate || "No date"; // Event Date
+    eventDateTime.querySelector(".time").textContent = `${eventDetails.startTime || "N/A"} - ${eventDetails.endTime || "N/A"}`; // Event Time
     
     // Set the event location
-    document.querySelector(".location-text").textContent = eventDetails.location; // Event Location
+    document.querySelector(".location-text").textContent = eventDetails.location || "No location provided"; // Event Location
     
     // Set the event description
-    document.querySelector(".description").textContent = eventDetails.description; // Event Description
+    document.querySelector(".description").textContent = eventDetails.description || "No description provided"; // Event Description
 };
+
 
 // Add event listener to the file input for previewing the image
 fileInput.addEventListener("change", handleImageUploadPreview);
@@ -167,26 +181,72 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
         console.log("Uploading file:", uploadedImageFile); // Log the file to check it's available
         formData.append("image", uploadedImageFile); // Add the image file to the form data
     } else {
-        console.log("No image uploaded.");
+        console.log("No image uploaded. Using default image.");
+        formData.append("defaultImage", "../assets/images/default-event-image.png");
     }
 
     fetch("../controller/saveEvent.php", {
         method: "POST",
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json(); // Parse the response as JSON
+        } else {
+            throw new Error("Invalid response format from server.");
+        }
+    })
+    .then((data) => {
         if (data.success) {
             alert("Event added successfully!");
             window.location.href = "../view/addEvents.php"; // Redirect after success
         } else {
-            alert("Error: " + data.error);
+            console.error("Server Error:", data.error);
+            alert("Error: " + (data.error || "An unknown error occurred."));
         }
     })
-    .catch(error => {
-        alert("An error occurred: " + error);
+    .catch((error) => {
+        console.error("Fetch Error:", error); // Log the error for debugging
+        throw new Error("An unexpected error occurred. Please try again later.");
     });
 });
+
+
+
+function checkRequiredFields() {
+    const requiredFields = document.querySelectorAll('[required]'); // Select all fields with "required" attribute
+    let allValid = true; // Flag to track if all fields are valid
+
+    // Loop through each required field
+    requiredFields.forEach((field) => {
+        if (!field.value.trim()) { // Check if the field is empty
+            field.classList.add('error'); // Optionally, add an error class for styling
+            allValid = false; // Mark validation as failed
+        } else {
+            field.classList.remove('error'); // Remove error class if field is not empty
+        }
+    });
+
+    return allValid; // Return true if all fields are valid, otherwise false
+}
+
+
+const handleInputValidation = (event) => {
+    const field = event.target;
+
+    if (field.value.trim() === '') {
+        field.classList.add('error'); // Add error class if the field is empty
+    } else {
+        field.classList.remove('error'); // Remove error class if the field is filled
+    }
+};
+
+const requiredFields = document.querySelectorAll('[required]');
+requiredFields.forEach(field => {
+    field.addEventListener('input', handleInputValidation);
+});
+
 
 // Show the first step initially
 // updateSteps({ target: { id: "btn-next" } });
