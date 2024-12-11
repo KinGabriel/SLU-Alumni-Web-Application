@@ -25,37 +25,41 @@ import dotenv from 'dotenv';
 
 // Load environment variables from .env
 dotenv.config();
-
 export const getAlumni = (req, res) => {
-    const userId = req.userId
+    const userId = req.userId;
     if (!userId) {
         return res.status(400).send('Invalid Access');
     }
 
-  const query = `
-    SELECT 
-        CONCAT(u.fname, ' ', u.lname) AS Name, 
-        u.pfp,
-        a.bio, 
-        COUNT(DISTINCT CASE WHEN f.follower_id = ? THEN f.followed_id END) AS followed_count, 
-        COUNT(DISTINCT CASE WHEN f.followed_id = ? THEN f.follower_id END) AS follower_count, 
-        COUNT(DISTINCT p.post_id) AS post_count
-    FROM 
-        user u
-    JOIN 
-        alumni a ON u.user_id = a.user_id
-    LEFT JOIN 
-        follows f ON u.user_id = f.follower_id OR u.user_id = f.followed_id
-    LEFT JOIN 
-        posts p ON u.user_id = p.user_id
-    WHERE 
-        u.user_id = ?
-    GROUP BY 
-        u.user_id
-`;
+    const query = `
+        SELECT 
+            u.user_id,
+            CONCAT(u.fname, ' ', u.lname) AS Name, 
+            u.pfp,
+            a.bio, 
+            COUNT(DISTINCT CASE WHEN f.follower_id = ? AND f.is_requested = 0 THEN f.followed_id END) AS followed_count, 
+            COUNT(DISTINCT CASE WHEN f.followed_id = ? AND f.is_requested = 0 THEN f.follower_id END) AS follower_count, 
+            COUNT(DISTINCT p.post_id) AS post_count,
+            EXISTS (
+                SELECT 1 
+                FROM follows 
+                WHERE follower_id = ? AND followed_id = u.user_id AND is_requested = 1
+            ) AS is_requested
+        FROM 
+            user u
+        JOIN 
+            alumni a ON u.user_id = a.user_id
+        LEFT JOIN 
+            follows f ON u.user_id = f.follower_id OR u.user_id = f.followed_id
+        LEFT JOIN 
+            posts p ON u.user_id = p.user_id
+        WHERE 
+            u.user_id = ?
+        GROUP BY 
+            u.user_id
+    `;
 
-
-    dbConnection.query(query, [userId,userId,userId], (err, result) => {
+    dbConnection.query(query, [userId, userId, userId, userId], (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ message: 'Database error', error: err });
@@ -65,24 +69,19 @@ export const getAlumni = (req, res) => {
             return res.status(404).json({ message: 'Invalid Access' });
         }
 
-       
         const user = result[0];
 
-        
-        if (user.pfp) {
-            req.session.pfp = 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64');
-        } else {
-            req.session.pfp = '/assets/images/default-avatar-icon.jpg'; 
-        }
-        res.json({
+        const responseData = {
             name: user.Name,
             bio: user.bio,
-            follower_count: user.follower_count,
-            followed_count: user.followed_count,
             post_count: user.post_count,
-            pfp: req.session.pfp,
-        });
-
+            pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
+        };
+        if (user.is_requested === 0) {
+            responseData.follower_count = user.follower_count;
+            responseData.followed_count = user.followed_count;
+        } 
+        res.json(responseData);
     });
 };
 

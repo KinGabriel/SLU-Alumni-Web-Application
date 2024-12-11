@@ -20,7 +20,7 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
 
-                checkIfFollowing(userId); // verify if is already followed or not
+                checkIfFollowing(userId); 
             })
             .catch(error => console.error('Error fetching data:', error));
     } else {
@@ -42,15 +42,21 @@ function checkIfFollowing(targetUserId) {
             followText.textContent = "Unfollow";
             followIcon.src = "../assets/images/unfollow.png"; 
             followButton.classList.add("following");
+            followButton.classList.remove("requested");
+        } else if (data.isRequested) {
+            followText.textContent = "Requested";
+            followIcon.src = "../assets/images/requested.png"; 
+            followButton.classList.add("requested");
+            followButton.classList.remove("following");
         } else {
             followText.textContent = "Follow";
             followIcon.src = "../assets/images/follow.png"; 
             followButton.classList.remove("following");
+            followButton.classList.remove("requested");
         }
     })
     .catch(error => console.error('Error:', error));
 }
-
 function toggleFollow() {
     const followButton = document.getElementById("follow-btn");
     const followText = document.getElementById("follow-text");
@@ -64,45 +70,97 @@ function toggleFollow() {
     const urlParams = new URLSearchParams(window.location.search);
     const targetUserId = urlParams.get('user_id');
 
-    if (isFollowing) {
-        // Unfollow
-        followText.textContent = "Follow";
-        followIcon.src = "../assets/images/follow.png"; 
-        followButton.classList.remove("following");
-        followersCount = Math.max(0, followersCount - 1); 
-        followersCountElement.textContent = followersCount;
+    // Fetch the current follow status to check if the request is pending
+    fetch(`/api/profile-other/is-following?user_id=${targetUserId}`, {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.isRequested) {
+            // If the follow request is pending, treat it like "unfollow" action
+            followText.textContent = "Follow";
+            followIcon.src = "../assets/images/follow.png"; 
+            followButton.classList.remove("requested");
+            followButton.classList.remove("following");
 
-        fetch(`/api/profile-other/unfollow?user_id=${targetUserId}`, {
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ targetUserId }),
-        }).then(response => response.json())
-          .then(data => console.log(data))
-          .catch(error => {
-              console.error('Error:', error);
-              followersCountElement.textContent = followersCount + 1;
-          });
-    } else {
-        // Follow
-        followText.textContent = "Unfollow";
-        followIcon.src = "../assets/images/unfollow.png"; 
-        followButton.classList.add("following");
+            followersCount = Math.max(0, followersCount - 1); 
+            followersCountElement.textContent = followersCount;
 
-        followersCount += 1;
-        followersCountElement.textContent = followersCount;
+            fetch(`/api/profile-other/unfollow?user_id=${targetUserId}`, {
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUserId }),
+            }).then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => {
+                  console.error('Error:', error);
+                  followersCountElement.textContent = followersCount + 1;
+              });
 
-        fetch(`/api/profile-other/follow?user_id=${targetUserId}`, {
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ targetUserId }),
-        }).then(response => response.json())
-          .then(data => console.log(data))
-          .catch(error => {
-              console.error('Error:', error);
-              followersCountElement.textContent = followersCount - 1;
-          });
-    }
+            return; 
+        }
+
+        if (data.isPrivate) {
+            followText.textContent = "Requested";
+            followIcon.src = "../assets/images/requested.png"; 
+            followButton.classList.add("requested");
+            followButton.classList.remove("following");
+            followersCountElement.textContent = followersCount;
+            fetch(`/api/profile-other/follow?user_id=${targetUserId}`, {
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUserId }),
+            }).then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => {
+                  console.error('Error:', error);
+              });
+
+        } else if (isFollowing) {
+            followText.textContent = "Follow";
+            followIcon.src = "../assets/images/follow.png"; 
+            followButton.classList.remove("following");
+            followersCount = Math.max(0, followersCount - 1); 
+            followersCountElement.textContent = followersCount;
+
+            fetch(`/api/profile-other/unfollow?user_id=${targetUserId}`, {
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUserId }),
+            }).then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => {
+                  console.error('Error:', error);
+                  followersCountElement.textContent = followersCount + 1;
+              });
+        } else {
+            followText.textContent = "Unfollow";
+            followIcon.src = "../assets/images/unfollow.png"; 
+            followButton.classList.add("following");
+
+            followersCount += 1;
+            followersCountElement.textContent = followersCount;
+
+            fetch(`/api/profile-other/follow?user_id=${targetUserId}`, {
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ targetUserId }),
+            }).then(response => response.json())
+              .then(data => console.log(data))
+              .catch(error => {
+                  console.error('Error:', error);
+                  followersCountElement.textContent = followersCount - 1;
+              });
+        }
+    })
+    .catch(error => {
+        console.error('Error checking follow status:', error);
+    });
 }
+
+
+
+
 
 function getOtherPosts() {
     const urlParams = new URLSearchParams(window.location.search);

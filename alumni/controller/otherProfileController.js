@@ -1,44 +1,30 @@
-/* 
-Other Profile Controller: Manages user-related interactions such as fetching user details, following, unfollowing, and checking follow status in the SLU Alumni Web Application.
-- getOtherUserInfo: Retrieves detailed information about another user, including their name, bio, follower and followed counts, and post count.
-    - Handles profile picture formatting and default fallback if no profile picture is available.
-    - Returns data as a JSON response for use in the frontend.
-- follow: Allows a user to follow another user, ensuring that duplicate follow actions are prevented.
-    - Verifies if the user is already following the target user before performing the follow action.
-    - Uses database queries to update the `follows` table and responds with a success or failure message.
-- unfollow: Allows a user to unfollow another user, checking if the user is actually following the target before attempting to delete the follow relationship.
-    - Deletes the entry in the `follows` table and provides feedback on whether the unfollow action was successful.
-- isFollowing: Checks if a user is already following another user by querying the `follows` table.
-    - Returns a boolean value indicating the follow status.
-Group Member Responsible: Caparas, Joaquin Gabriel
-*/
-
-
 import dbConnection from '../../database/connection.js';
-import fs from 'fs';
-import path from 'path';
 
 export const getOtherUserInfo = (req, res) => {
-    const userId = req.query.user_id; // Target user ID
-    const requesterId = req.session.user_id; // Current logged-in user ID (from session)
+    const userId = req.query.user_id; 
+    const requesterId = req.user_id;
 
     console.log("Received user_id:", userId);
 
-    // SQL query to check privacy settings and fetch details
     const query = `
         SELECT 
             u.user_id,
             CONCAT(u.fname, ' ', u.lname) AS Name, 
             u.pfp,
             a.bio,
-            (SELECT COUNT(*) FROM follows WHERE follower_id = u.user_id) AS followed_count,
-            (SELECT COUNT(*) FROM follows WHERE followed_id = u.user_id) AS follower_count,
+            (SELECT COUNT(*) FROM follows WHERE follower_id = u.user_id AND is_requested = 0) AS followed_count,  -- Exclude requested followers
+            (SELECT COUNT(*) FROM follows WHERE followed_id = u.user_id AND is_requested = 0) AS follower_count,  -- Exclude requested followers
             (SELECT COUNT(*) FROM posts WHERE user_id = u.user_id) AS post_count,
             EXISTS (
                 SELECT 1
                 FROM follows
                 WHERE follower_id = ? AND followed_id = u.user_id
             ) AS is_follower,
+            EXISTS (
+                SELECT 1
+                FROM follows
+                WHERE follower_id = ? AND followed_id = u.user_id AND is_requested = 1
+            ) AS is_requested,  -- Checks if the current user has a pending follow request
             u.access_type
         FROM 
             user u
@@ -48,7 +34,7 @@ export const getOtherUserInfo = (req, res) => {
             u.user_id = ?
     `;
 
-    dbConnection.query(query, [requesterId, userId], (err, result) => {
+    dbConnection.query(query, [requesterId, requesterId, userId], (err, result) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ message: 'Database error', error: err });
@@ -60,62 +46,81 @@ export const getOtherUserInfo = (req, res) => {
 
         const user = result[0];
 
-        if (user.is_private && !user.is_follower && userId !== requesterId) {
-            return res.status(403).json({ message: 'This account is private.' });
-        }
-
-        if (user.pfp) {
-            req.session.pfp = 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64');
-        } else {
-            req.session.pfp = '/assets/images/default-avatar-icon.jpg';
-        }
-        res.json({
+        const responseData = {
             name: user.Name,
             bio: user.bio,
-            follower_count: user.follower_count,
-            followed_count: user.followed_count,
             post_count: user.post_count,
-            pfp: req.session.pfp,
-        });
+            pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
+        };
+        if (user.is_requested === 0) {
+            responseData.follower_count = user.follower_count;
+            responseData.followed_count = user.followed_count;
+        } else {
+            responseData.follower_count = "Request Pending";
+            responseData.followed_count = "Request Pending";
+        }
+
+        res.json(responseData);
     });
 };
+
+
+
 
 
 export const follow = (req, res) => {
     const targetUserId = req.query.user_id; 
     const user_id = req.userId; 
-    console.log(user_id,targetUserId );
 
     const checkFollowQuery = `
-        SELECT * FROM follows
-        WHERE follower_id = ? AND followed_id = ?
+        SELECT access_type FROM user
+        WHERE user_id = ?
     `;
 
-    dbConnection.query(checkFollowQuery, [user_id, targetUserId], (err, result) => {
+    dbConnection.query(checkFollowQuery, [targetUserId], (err, result) => {
         if (err) {
+            console.error('Database error:', err);
             return res.status(500).json({ error: 'Database error' });
         }
 
-        if (result.length > 0) {
-            return res.status(400).json({ message: 'You are already following this user' });
+        if (result.length === 0) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-        const followQuery = `
-            INSERT INTO follows (follower_id, followed_id, date_followed)
-            VALUES (?, ?, NOW())
+        const isPrivate = result[0].access_type === 'private';
+        const checkExistingFollowQuery = `
+            SELECT * FROM follows
+            WHERE follower_id = ? AND followed_id = ?
         `;
 
-        dbConnection.query(followQuery, [user_id, targetUserId], (err, result) => {
+        dbConnection.query(checkExistingFollowQuery, [user_id, targetUserId], (err, result) => {
             if (err) {
-                console.error('Database Error:', err);  // Log the error
-                return res.status(500).json({ error: 'Error following user' });
+                return res.status(500).json({ error: 'Database error' });
             }
-            res.status(200).json({ message: 'User followed successfully' });
+
+            if (result.length > 0) {
+                return res.status(400).json({ message: 'Follow request already exists or you are already following this user' });
+            }
+
+            const followQuery = `
+                INSERT INTO follows (follower_id, followed_id, date_followed, is_requested)
+                VALUES (?, ?, NOW(), ?)
+            `;
+
+            const isRequested = isPrivate ? 1 : 0; 
+
+            dbConnection.query(followQuery, [user_id, targetUserId, isRequested], (err, result) => {
+                if (err) {
+                    console.error('Database Error:', err);
+                    return res.status(500).json({ error: 'Error following user' });
+                }
+
+                const message = isRequested? 'Follow request sent successfully': 'User followed successfully';
+                res.status(200).json({ message });
+            });
         });
-        
     });
 };
-
 
 export const unfollow = (req, res) => {
     const targetUserId = req.query.user_id; 
@@ -139,7 +144,6 @@ export const unfollow = (req, res) => {
     });
 };
 
-
 export const isFollowing = (req, res) => {
     const targetUserId = req.query.user_id; 
     const user_id = req.userId; 
@@ -149,9 +153,14 @@ export const isFollowing = (req, res) => {
     }
 
     const checkFollowQuery = `
-        SELECT COUNT(*) AS isFollowing
-        FROM follows
-        WHERE follower_id = ? AND followed_id = ?
+        SELECT 
+            COUNT(*) AS isFollowing,
+            is_requested,
+            u.access_type
+        FROM follows f
+        JOIN user u ON u.user_id = f.followed_id
+        WHERE f.follower_id = ? AND f.followed_id = ? 
+        GROUP BY f.followed_id
     `;
 
     dbConnection.query(checkFollowQuery, [user_id, targetUserId], (err, result) => {
@@ -160,14 +169,39 @@ export const isFollowing = (req, res) => {
             return res.status(500).json({ message: 'Error checking follow status', error: err });
         }
 
-        const isFollowing = result[0].isFollowing > 0;
-        res.json({ isFollowing });
+        if (result.length === 0) {
+            const checkPrivacyQuery = `
+                SELECT access_type 
+                FROM user 
+                WHERE user_id = ?
+            `;
+            dbConnection.query(checkPrivacyQuery, [targetUserId], (err, privacyResult) => {
+                if (err) {
+                    console.error('Database error:', err);
+                    return res.status(500).json({ message: 'Error checking privacy status', error: err });
+                }
+
+                if (privacyResult.length === 0) {
+                    return res.status(404).json({ message: 'Target user not found' });
+                }
+
+                const isPrivate = privacyResult[0].access_type === 'private';
+                res.json({ isFollowing: false, isRequested: false, isPrivate });
+            });
+        } else {
+            const isFollowing = result[0].isFollowing > 0 && result[0].is_requested === 0;
+            const isRequested = result[0].is_requested === 1;
+            const isPrivate = result[0].access_type === 'private';
+
+            res.json({ isFollowing, isRequested, isPrivate });
+        }
     });
 };
 
 export const getOtherPost = (req, res) => {
     const targetUserId = req.query.user_id;
-    const userId = req.userId; 
+    const userId = req.userId;
+
     const query = `
         SELECT 
             p.post_id,
@@ -187,19 +221,22 @@ export const getOtherPost = (req, res) => {
                 FROM follows
                 WHERE follower_id = ? AND followed_id = u.user_id
             ) AS is_follower,
-            (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked
+            (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked,
+            f.is_requested
         FROM posts p
         LEFT JOIN likes l ON p.post_id = l.post_id
         LEFT JOIN comments c ON p.post_id = c.post_id
         JOIN user u ON u.user_id = p.user_id
+        LEFT JOIN follows f ON f.follower_id = ? AND f.followed_id = u.user_id
         WHERE (
             (u.access_type = 'public') OR
             (u.access_type = 'private' AND (
-                u.user_id = ? OR EXISTS (
+                u.user_id = ? OR 
+                (f.is_requested = 0 AND EXISTS (
                     SELECT 1
                     FROM follows
                     WHERE follower_id = ? AND followed_id = u.user_id
-                )
+                ))
             ))
         ) AND p.user_id = ?
         GROUP BY 
@@ -207,7 +244,7 @@ export const getOtherPost = (req, res) => {
         ORDER BY p.post_id DESC
     `;
 
-    dbConnection.query(query, [userId, userId, userId, userId, targetUserId], (error, results) => {
+    dbConnection.query(query, [userId, userId, userId, userId, userId, targetUserId], (error, results) => {
         if (error) {
             console.error('Database error:', error);
             return res.status(500).json({ error: 'Failed to fetch posts.' });
@@ -220,7 +257,7 @@ export const getOtherPost = (req, res) => {
             if (post.pfp) {
                 post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
             }
-            post.is_liked = post.is_liked > 0; // Convert to boolean
+            post.is_liked = post.is_liked > 0; 
             return post;
         });
 
@@ -228,25 +265,12 @@ export const getOtherPost = (req, res) => {
     });
 };
 
-// Helper method for handling images and videos
-const handleMedia = (bannerPath) => {
-    if (Buffer.isBuffer(bannerPath)) {
-        bannerPath = bannerPath.toString('utf-8').trim();
+const handleMedia = (media) => {
+    if (media.includes('image')) {
+        return `data:image/jpeg;base64,${media.toString('base64')}`;
+    } else if (media.includes('video')) {
+        return `data:video/mp4;base64,${media.toString('base64')}`;
+    } else {
+        return '/assets/images/default-banner.jpg';
     }
-    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
-        const ext = path.extname(bannerPath).toLowerCase();
-        
-        // Handle image files
-        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
-            const imageBuffer = fs.readFileSync(bannerPath);
-            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
-        }
-        
-        // Handle video files
-        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
-            const videoBuffer = fs.readFileSync(bannerPath);
-            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
-        }
-    }
-    return ''; // if empty
 };

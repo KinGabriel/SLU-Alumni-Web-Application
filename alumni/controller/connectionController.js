@@ -29,7 +29,6 @@ Group Member Responsible: Caparas, Joaquin Gabriel
 
 
 import dbConnection from '../../database/connection.js';
-
 export const connections = (req, res) => {
     const userId = req.userId;
     const { search = '', filter, sort } = req.query;  
@@ -42,7 +41,7 @@ export const connections = (req, res) => {
     // filter 
     if (filter === 'mutual') {
         query += `
-            INNER JOIN follows f1 ON u.user_id = f1.followed_id
+             INNER JOIN follows f1 ON u.user_id = f1.followed_id
             INNER JOIN follows f2 ON u.user_id = f2.follower_id
             WHERE f1.follower_id = ? AND f2.followed_id = ?
         `;
@@ -50,20 +49,27 @@ export const connections = (req, res) => {
     } else if (filter === 'followers') {
         query += `
             INNER JOIN follows f ON u.user_id = f.follower_id
-            WHERE f.followed_id = ?
+            WHERE f.followed_id = ? AND f.is_requested = 0
         `;
         queryParams = [userId];  
     } else if (filter === 'following') {
         query += `
             INNER JOIN follows f ON u.user_id = f.followed_id
-            WHERE f.follower_id = ?
+            WHERE f.follower_id = ? AND f.is_requested = 0
         `;
         queryParams = [userId]; 
+    } else if (filter === 'request') {
+        query += `
+        INNER JOIN follows f1 ON u.user_id = f1.followed_id
+        INNER JOIN follows f2 ON u.user_id = f2.follower_id
+        WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 0 AND f2.is_requested = 0
+    `;
+    queryParams = [userId, userId];  
     } else {
         query += `
             INNER JOIN follows f1 ON u.user_id = f1.followed_id
             INNER JOIN follows f2 ON u.user_id = f2.follower_id
-            WHERE f1.follower_id = ? AND f2.followed_id = ?
+            WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 1 AND f2.is_requested = 0
         `;
         queryParams = [userId, userId];  
     }
@@ -107,6 +113,8 @@ export const connections = (req, res) => {
         }
     });
 };
+
+
 
 export const removeFollowing = (req, res) => {
     const userId = req.cookies.user_id;

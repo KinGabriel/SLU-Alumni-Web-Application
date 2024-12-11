@@ -142,10 +142,8 @@ export const updatePassword = async (req, res) => {
                     return res.status(400).json({ error: 'Current password is incorrect' });
                 }
 
-                // Hash the new password before saving it
                 const hashedNewPassword = bcrypt.hashSync(newPassword, 10);
 
-                // Update password in the database
                 const updateQuery = 'UPDATE user SET pword = ? WHERE user_id = ?';
                 dbConnection.query(updateQuery, [hashedNewPassword, req.userId], (err, result) => {
                     if (err) {
