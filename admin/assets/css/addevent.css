@@ -637,15 +637,19 @@ a {
 }
 
 /* Card Styling */
+/* Card Styling */
 .card {
   background: #f9f9f9; /* Slightly lighter background */
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 25px; /* Increased padding */
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow for emphasis */
-  font-size: 16px; /* Larger text size inside cards */
+  padding: 40px; /* Increased padding for larger content area */
+  margin-bottom: 30px; /* Additional spacing between cards */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better emphasis */
+  font-size: 18px; /* Larger text size inside cards */
+  width: 90%; /* Increased card width */
+  margin: 30px auto; /* Centers the card horizontally */
 }
+
 
 /* Input Fields */
 .card input[type=text],
@@ -685,19 +689,6 @@ a {
   text-align: left;
 }
 
-/* Job Description Section */
-.job-description {
-  margin-top: 40px; /* More space between sections */
-}
-
-.job-description h2 {
-  font-size: 28px; /* Larger header text */
-  color: #333;
-  margin-bottom: 30px; /* Increased margin for spacing */
-  font-weight: 600; /* Bold header */
-  text-transform: uppercase; /* All caps for emphasis */
-  letter-spacing: 1px; /* Slight spacing for a clean look */
-}
 
 /* Input Groups */
 .input-group {
@@ -738,55 +729,59 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px dashed #328195; /* Dashed border to indicate upload area */
-  padding: 20px;
+  border: 3px dashed #328195; /* Thicker dashed border for emphasis */
+  padding: 40px; /* Increased padding for larger content area */
   width: 100%;
-  max-width: 500px; /* Limit width */
-  margin: 0 auto; /* Center the container */
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  max-width: 700px; /* Increased max-width for a bigger card */
+  height: 300px;
+  margin: 30px auto; /* Add top margin and center the container */
+  border-radius: 12px; /* Larger border radius for a softer look */
+  background-color: #f4faff; /* Slightly darker background for better contrast */
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover transition */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Added shadow for depth */
 }
-
 /* Hover effect for the upload container */
 .upload-container:hover {
   background-color: #e0f7fa; /* Light blue background when hovered */
+  transform: scale(1.02); /* Slight zoom-in effect */
 }
 
-/* Styling for the label */
+
 .upload-label {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px; /* Larger font size for visibility */
+  font-weight: 700; /* Bolder font for emphasis */
   color: #328195;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Increased margin for spacing */
 }
 
-/* Styling for the input file element */
+
 .upload-input {
   display: none; /* Hide the file input */
 }
 
-/* Styling for the file name text */
+
 #file-name {
-  font-size: 14px;
-  color: #666;
-  margin-top: 10px;
+  font-size: 18px; /* Larger font size for readability */
+  color: #555; /* Slightly darker color */
+  margin-top: 15px; /* Increased spacing */
   font-style: italic;
 }
 
-/* Add a message if no file is selected */
+
 .upload-container p {
-  font-size: 12px;
-  color: #777;
-  margin-top: 10px;
+  font-size: 16px; /* Larger font size for better readability */
+  color: #666; /* Enhanced contrast for visibility */
+  margin-top: 15px; /* Increased spacing */
 }
 
+
 .upload-container .info-text {
-  font-size: 14px;
-  color: #333;
-  margin-top: 10px;
+  font-size: 18px; /* Larger font size */
+  color: #222; /* Darker color for emphasis */
+  margin-top: 20px; /* Increased spacing for better layout */
+  line-height: 1.8; /* Improved line spacing */
 }
 
 /* Start of Session Fields Section */
@@ -1010,6 +1005,42 @@ a {
 .buttons .btn:disabled {
   background-color: #ddd; /* Disabled button style */
   cursor: not-allowed;
+}
+/* Previous Button Styling */
+.btn-prev {
+  background-color: #3c07ff !important; /* Bright blue background */
+  color: white !important;
+  padding: 10px 20px; /* Button size */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-prev:hover {
+  background-color: #3300cc !important; /* Darker blue on hover */
+}
+
+.btn-prev:disabled {
+  background-color: #b0bec5 !important; /* Gray color when disabled */
+  cursor: not-allowed;
+}
+
+/* Next Button Styling */
+.btn-next {
+  background-color: #3c07ff !important; /* Bright blue background */
+  color: white !important;
+  padding: 10px 20px; /* Button size */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-next:hover {
+  background-color: #3300cc !important; /* Darker blue on hover */
 }
 
 /* Responsive Design */

@@ -779,32 +779,43 @@ a {
   margin-top: 10px;
 }
 
-/* Navigation Buttons */
-.buttons {
-  text-align: center;
-  margin-top: 40px; /* More space between form and buttons */
-}
-
-.buttons .btn {
-  background-color: #3c07ff; /* Bold color for buttons */
-  color: white;
-  font-size: 18px; /* Larger text in buttons */
-  padding: 12px 30px; /* Larger padding for a bolder look */
-  border-radius: 30px; /* Rounded buttons */
+/* Previous Button Styling */
+.btn-prev {
+  background-color: #3c07ff !important; /* Bright blue background */
+  color: white !important;
+  padding: 10px 20px; /* Button size */
+  font-size: 16px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-.buttons .btn:hover {
-  background-color: #2900b6; /* Darker blue on hover */
-  transform: translateY(-2px); /* Subtle hover effect */
+.btn-prev:hover {
+  background-color: #3300cc !important; /* Darker blue on hover */
 }
 
-.buttons .btn:disabled {
-  background-color: #ddd; /* Disabled button style */
+.btn-prev:disabled {
+  background-color: #b0bec5 !important; /* Gray color when disabled */
   cursor: not-allowed;
 }
+
+/* Next Button Styling */
+.btn-next {
+  background-color: #3c07ff !important; /* Bright blue background */
+  color: white !important;
+  padding: 10px 20px; /* Button size */
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-next:hover {
+  background-color: #3300cc !important; /* Darker blue on hover */
+}
+
 
 /* Responsive Design */
 @media (max-width: 769px) {
