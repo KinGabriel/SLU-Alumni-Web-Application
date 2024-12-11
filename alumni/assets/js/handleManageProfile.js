@@ -36,7 +36,7 @@ document.getElementById('confirmSaveChanges').addEventListener('click', function
     var success = true; 
     var saveChangesModal = bootstrap.Modal.getInstance(document.getElementById('saveChangesModal'));
     saveChangesModal.hide();
-
+    handleSaveChanges()
     if (success) {
         var successModal = new bootstrap.Modal(document.getElementById('saveChangesSuccessModal'));
         successModal.show();
