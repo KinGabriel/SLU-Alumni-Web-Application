@@ -1,3 +1,7 @@
+// Author: Vergara, Carlos Miguel
+// Code from Codepen
+// Edited with ChatGPT
+
 const renderCards = (cardsContainer, cards) => {
   cardsContainer.innerHTML = ""; // Clear the container before rendering
 
@@ -8,7 +12,11 @@ const renderCards = (cardsContainer, cards) => {
     cardElement.classList.add("col");
 
     cardElement.innerHTML = `
-      <div class="card border-0 bg-transparent">
+      <div class="card border-0 bg-transparent position-relative">
+        <!-- Edit Icon -->
+        <a href="#" class="edit-icon position-absolute top-0 end-0 p-2 text-dark">
+          <i class="fas fa-edit"></i>
+        </a>
         <a href="#" class="${cover.length > 1 ? "has-multiple" : ""}">
           ${cover
             .map(
