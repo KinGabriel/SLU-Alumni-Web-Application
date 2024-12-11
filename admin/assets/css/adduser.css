@@ -217,7 +217,7 @@ header img.slu-logo {
     grid-template-rows: repeat(7, 0.7fr);
 }
 
-.first-name-grid input, .last-name-grid input, .email-add-grid input, .password-grid input,
+.first-name-grid input, .last-name-grid input, .middle-name-grid input, .email-add-grid input, .password-grid input,
 .retype-pw-grid input, .id-grid input, .gradyear-grid input, .company-grid input{
     padding: 8px; 
     border: 1px solid #ccc;
@@ -228,28 +228,38 @@ header img.slu-logo {
     height: calc(100% - 2rem);
 }
 
-.last-name-grid {
+.middle-name-grid {
     grid-column-start: 1;
     grid-row-start: 2;
 }
 
-.email-add-grid {
+.middle-name-grid span {
+    font-size: small;
+    color: gray;
+}
+
+.last-name-grid {
     grid-column-start: 1;
     grid-row-start: 3;
 }
 
-.password-grid {
+.email-add-grid {
     grid-column-start: 1;
     grid-row-start: 4;
 }
 
-.retype-pw-grid {
+.password-grid {
     grid-column-start: 1;
     grid-row-start: 5;
 }
+
+.retype-pw-grid {
+    grid-column-start: 1;
+    grid-row-start: 6;
+}
 .user-roles-grid {
     grid-column-start: 1;
-    grid-row-start: 7;
+    grid-row-start: 8;
 }
 .id-grid {
     grid-column-start: 2;
@@ -432,7 +442,7 @@ select {
     margin-top: 20px;
     margin-right: 20px;
     grid-column-start: 2;
-    grid-row-start: 7;
+    grid-row-start: 8;
 }
 
 .add-button,
