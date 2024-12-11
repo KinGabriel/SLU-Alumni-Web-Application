@@ -11,7 +11,14 @@ function populateForm() {
             document.getElementById('lastName').value = user.lname || '';
             document.getElementById('email').value = user.email || '';
             document.getElementById('idNumber').value = user.school_id || '';
-            document.getElementById('jobStatus').value = user.jobStatus || '';  
+            const jobStatusSelect = document.getElementById('jobStatus');
+            if (user.jobStatus) {
+                toggleCompanyField('employed')
+                jobStatusSelect.value = 'employed'; 
+            } else {
+                toggleCompanyField('unemployed')
+                jobStatusSelect.value = 'unemployed'; 
+            }
             document.getElementById('company').value = user.company || '';  
             document.getElementById('bio').value = user.bio || '';
 
