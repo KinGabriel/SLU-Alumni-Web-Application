@@ -1,0 +1,104 @@
+<!-- Events Section: Displays upcoming events for SLU alumni -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/) -->
+<!-- Group Member Responsible:  Escaño, Nichole Jhoy -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Alumina</title>
+    <link href="../assets/css/AlumniEventsDetails.css" rel="stylesheet">
+    <link href="/../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!-- Header separator -->
+   <div class="header-separator"></div>
+
+   <!-- Header -->
+   <header>
+    <h1>
+        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <!-- Search bar -->
+        <div class="search">
+            <form id="searchForm" onsubmit="return false;">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <button type="submit">
+                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </h1>
+    
+    <ul id="searchResults"></ul>
+
+       <div class="profile-dropdown">
+           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+               <div class="dropdown-header">
+                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                   <div class="dropdown-info">
+                       <h4 name="name"></h4>
+                       <p>Web Developer at Google</p>
+                   </div>
+               </div>
+               <ul class="dropdown-links">
+                   <li><a href="#">View Profile</a></li>
+                   <li><a href="#">Manage Profile</a></li>
+                   <li><a href="#">Close Account</a></li>
+               </ul>
+               <div class="logout-btn">
+                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                   <span>Log out</span>
+               </div>
+           </div>
+       </div>     
+   </header>
+
+        <!-- Events Details -->
+        <div class="container mt-2 mb-4">
+            <!-- Back Button Above Event Details -->
+            <a href="/" class="btn btn-outline-secondary back-btn mt-4 mb-4">
+                <img src="../assets/images/events.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Events
+            </a>   
+            <div class="row">
+                <!-- Event Image -->
+                <div class="image-section">
+                    <img src="../assets/images/lantern.jpg" alt="Event Image" class="img-fluid rounded-top">
+                </div>
+                <!-- Event Details and Description in One Panel -->
+                <div class="col-12 bg-white shadow-lg rounded p-3 mt-n4">
+                    <h2 class="text-warning">Lantern Parade 2024</h2>
+                    <!-- Card for Event Details and Description -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-0">
+                                <!-- Event Details Section -->
+                                <div class="details w-40 pe-2">
+                                    <ul class="list-unstyled">
+                                        <li><strong>Date:</strong> November 28, 2024</li>
+                                        <li><strong>Time:</strong> 8:30 - 10:30 PM</li>
+                                        <li><strong>Location:</strong> SLU Main</li>
+                                    </ul>
+                                </div>
+                                <!-- Event Description Section -->
+                                <div class="description w-60 ps-2">
+                                    <p><strong>Event Description</strong></p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis dui non auctor tempus. Ut vestibulum lacus ac nisi congue venenatis. 
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis dui non auctor tempus. Ut vestibulum lacus ac nisi congue venenatis.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/handleHomefeed.js" defer>  </script>  
+    <script src="../assets/js/handleFetch.js" async>  </script> 
+</body>
+</html>
