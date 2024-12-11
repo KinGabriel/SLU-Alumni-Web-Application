@@ -1,7 +1,9 @@
-/*   Author: Vergara Carlos Miguel 
-     Used References: Codepen  */
+// Author: Vergara, Carlos Miguel
+// Code from Codepen
+// Edited with ChatGPT
+
 const renderCards = (cardsContainer, cards) => {
-  cardsContainer.innerHTML = "";
+  cardsContainer.innerHTML = ""; // Clear the container before rendering
 
   cards.forEach((card) => {
     const { title, description, cover, date, tags } = card;
@@ -10,7 +12,11 @@ const renderCards = (cardsContainer, cards) => {
     cardElement.classList.add("col");
 
     cardElement.innerHTML = `
-      <div class="card border-0 bg-transparent">
+      <div class="card border-0 bg-transparent position-relative">
+        <!-- Edit Icon -->
+        <a href="#" class="edit-icon position-absolute top-0 end-0 p-2 text-dark">
+          <i class="fas fa-edit"></i>
+        </a>
         <a href="#" class="${cover.length > 1 ? "has-multiple" : ""}">
           ${cover
             .map(
@@ -40,6 +46,7 @@ const renderCards = (cardsContainer, cards) => {
 
     cardsContainer.appendChild(cardElement);
   });
+
   const carouselItems = document.querySelectorAll(".has-multiple");
   carouselItems.forEach(initializeCarousel);
 };
@@ -85,7 +92,9 @@ const searchCards = (cards, searchTerm) => {
   });
 };
 
-const filterCardsByCategory = (cards, category) => cards.filter((card) => card.tags.includes(category));
+const filterCardsByCategory = (cards, category) => {
+  return cards.filter((card) => card.tags.some(tag => tag.toLowerCase() === category.toLowerCase()));
+};
 
 const handleSearch = (event) => {
   const searchTerm = event.target.value.toLowerCase().trim();
@@ -94,11 +103,13 @@ const handleSearch = (event) => {
     .textContent.toLowerCase()
     .trim();
 
+  // Start with the unfiltered cards
   let filteredCards =
     selectedCategory !== "all"
       ? filterCardsByCategory(data.cards, selectedCategory)
       : data.cards;
 
+  // Apply the search filter to the selected category
   filteredCards = searchCards(filteredCards, searchTerm);
 
   renderCards(cardsContainer, filteredCards);
@@ -106,49 +117,80 @@ const handleSearch = (event) => {
 
 const handleCategoryClick = (event) => {
   event.preventDefault();
+
   const category = event.target.textContent.toLowerCase();
 
+  // Remove 'active' class from all category links
   const categoryLinks = document.querySelectorAll(".categories a");
   categoryLinks.forEach((link) => link.classList.remove("active"));
 
+  // Add 'active' class to the clicked category link
   event.target.classList.add("active");
 
-  if (category === "all") {
-    renderCards(cardsContainer, data.cards);
-  } else {
-    const filteredCards = filterCardsByCategory(data.cards, category);
-    renderCards(cardsContainer, filteredCards);
-  }
+  // Filter based on selected category
+  let filteredCards = category === "all" 
+    ? data.cards 
+    : filterCardsByCategory(data.cards, category);
+
+  // Render filtered cards
+  renderCards(cardsContainer, filteredCards);
 };
 
 const data = {
   cards: [
     {
-      title: "Card Title 1",
+      title: "Event Title 1",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      tags: ["category 1", "category 2"],
+      tags: ["Ended"],
       cover: [
         "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
       ],
       date: "October 18, 2024"
     },
     {
-      title: "Card Title 2",
+      title: "Event Title 2",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      tags: ["category 3"],
+      tags: ["Upcoming"],
       cover: [
         "https://via.placeholder.com/550x225/C7B15B/D5C481?text=Placeholder",
       ],
       date: "October 16, 2024"
     },
     {
-      title: "Card Title 3",
+      title: "Event Title 3",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      tags: ["category 1", "category 3"],
+      tags: ["Upcoming"],
       cover: [
         "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
       ],
       date: "October 18, 2024"
+    },
+    {
+      title: "Event Title 4",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      tags: ["Upcoming"],
+      cover: [
+        "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
+      ],
+      date: "October 20, 2024"
+    },
+    {
+      title: "Event Title 5",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      tags: ["Ended"],
+      cover: [
+        "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
+      ],
+      date: "October 21, 2024"
+    },
+    {
+      title: "Event Title 6",
+      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      tags: ["Upcoming"],
+      cover: [
+        "https://via.placeholder.com/550x225/7D7D7D/969696?text=Placeholder"
+      ],
+      date: "October 22, 2024"
     }
   ]
 };
@@ -160,7 +202,6 @@ const categoryLinks = document.querySelectorAll(".categories a");
 renderCards(cardsContainer, data.cards);
 
 searchInput.addEventListener("input", handleSearch);
-
 categoryLinks.forEach((link) =>
   link.addEventListener("click", handleCategoryClick)
 );

@@ -1043,6 +1043,10 @@ a {
   background-color: #3300cc !important; /* Darker blue on hover */
 }
 
+input.error, textarea.error {
+  border: 2px solid red; /* Red border for missing fields */
+}
+
 /* Responsive Design */
 @media (max-width: 769px) {
   .step-content.step-3 {

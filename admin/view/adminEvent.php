@@ -4,7 +4,9 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/event.css">
     <!-- Author: Vergara Carlos Miguel -->
     <!-- Used References: Codepen and ChatGPT -->
 </head>
@@ -59,12 +61,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <span class="menu-item-text">Account Requests</span>
                 </a>
             </li>
-            <li>
-                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
-                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
-                    <span class="menu-item-text">Accounts</span>
-                </a>
-            </li>
+            <?php if ($_SESSION['user_type'] == 'admin'): ?>
+                <li>
+                    <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                        <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <?php endif; ?>
             <li>
                 <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
