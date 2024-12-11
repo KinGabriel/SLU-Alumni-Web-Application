@@ -404,23 +404,46 @@ function createCommentModal(postId) {
 // Function to set up the submit comment handler only once
 function setupSubmitCommentHandler(postId) {
     const submitCommentButton = document.getElementById(`submitComment-${postId}`);
-    if (submitCommentButton) {
-        submitCommentButton.removeEventListener('click', submitCommentHandler);
-        submitCommentButton.addEventListener('click', submitCommentHandler);
+    const commentInput = document.getElementById(`commentInput-${postId}`);
+    // Function to toggle the disabled state of the button
+    function toggleSubmitButton() {
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            submitCommentButton.classList.remove("disabled");
+            submitCommentButton.disabled = false;
+        } else {
+            submitCommentButton.classList.add("disabled");
+            submitCommentButton.disabled = true;
+        }
+    }
+
+    // Attach the toggle function to the input event
+    commentInput.addEventListener("input", toggleSubmitButton);
+    // Initialize the button state when the modal is opened
+    toggleSubmitButton();
+
+    // Add an event listener to reset the button state when the modal is shown
+    const modal = document.getElementById(`commentModal-${postId}`);
+    if (modal) {
+        modal.addEventListener("show.bs.modal", toggleSubmitButton);
     }
 
     // Comment submission handler
     function submitCommentHandler() {
-        const commentInput = document.getElementById(`commentInput-${postId}`);
         const commentText = commentInput.value.trim();
         if (commentText) {
             postComment(postId, commentText).then(success => {
                 if (success) {
-                    loadComments(postId);  
                     commentInput.value = ''; // Clear the comment input
+                    toggleSubmitButton(); // Recheck the button state
                 }
             });
         }
+    }
+    // Add event listener 
+    if (submitCommentButton) {
+        submitCommentButton.removeEventListener("click", submitCommentHandler);
+        submitCommentButton.addEventListener("click", submitCommentHandler);
     }
 }
 

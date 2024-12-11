@@ -1,3 +1,26 @@
+ // Add the 'active' class based on the current URL
+ document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname; // Get the current URL path
+    const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current path
+        if (link.href.endsWith(currentPath)) {
+            link.parentElement.classList.add('active');  // Add active class to the corresponding list item
+        }
+    });
+
+    document.querySelectorAll('nav li a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('nav li').forEach(item => {
+                item.classList.remove('active');  // Remove active class from all items
+            });
+            link.parentElement.classList.add('active');  // Add active class to the clicked item
+        });
+    });
+});
+
+
 function updateConnectionsTable(data) {
     const table = document.getElementById('connectionsTable');
     table.innerHTML = ''; 
