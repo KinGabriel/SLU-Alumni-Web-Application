@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
     $idImage = isset($_POST["schoolIdFile"]) ? $_POST["schoolIdFile"] : '';
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : ''; 
-    $school = isset($_GET["school"]) ? $_GET[$school] : ''; 
-    $program = isset($_GET["program"]) ? $_GET[$program] : ''; 
+    $school = isset($_POST["school"]) ? $_POST["school"] : ''; 
+    $program = isset($_POST["program"]) ? $_POST["program"] : ''; 
     $jobStatus = isset($_POST["job-status"]) ? $_POST["job-status"] : '';
     $company = isset($_POST["company"]) ? $_POST["company"] : '';
     $userType = isset($_POST['user-roles']) ? $_POST['user-roles'] : '';
@@ -46,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($schoolID) && $userType =='alumni') {
         $schoolID = null;
     }
-
 
     // Check if email exist
     if(isEmailExist($connection, $email)) {

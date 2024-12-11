@@ -99,31 +99,38 @@ function handleChangePassword() {
     const confirmNewPassword = document.getElementById('confirmNewPassword').value;
 
     if (newPassword !== confirmNewPassword) {
-        alert('New passwords do not match!');
+        showFailureModal('New passwords do not match!');
+        return;
+    }
+
+    if (newPassword.length < 8) {
+        showFailureModal('New password must be at least 8 characters long.');
         return;
     }
 
     fetch('/api/manage-profile/change-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, currentPassword, newPassword }),
+        body: JSON.stringify({ userId, currentPassword, newPassword })
     })
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            console.log('Password changed successfully:', data);
-            alert('Password changed successfully!');
-        })
-        .catch(error => {
-            console.error('Error changing password:', error);
-            alert('Failed to change password. Please try again.');
-        });
+    .then(response => response.json())
+    .then(data => {
+        if (data.message == 'Password updated successfully') {
+            showSuccessModal('Your password has been changed successfully!');
+        } else {
+            showFailureModal(data.error || 'Failed to change password. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error changing password:', error);
+        showFailureModal('An error occurred while changing the password. Please try again.');
+    });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     populateForm();
+    document.getElementById('changePasswordButton').addEventListener('click', handleChangePassword);
     document.getElementById('saveChangesButton').addEventListener('click', handleSaveChanges);
     document.getElementById('changePasswordButton').addEventListener('click', handleChangePassword);
 });

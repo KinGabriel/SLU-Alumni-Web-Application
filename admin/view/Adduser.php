@@ -227,7 +227,25 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                 .catch(error => console.error('Error fetching programs:', error));
         });
     </script>
-
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <img id="modal-image" src="../assets/images/addedUser.png"  alt="Infomation message" />
+            <p id="modal-message"></p>
+            <button class="accept" onclick="closeModal()">Okay!</button>
+        </div>
+    </div>  
+    
+    <script>
+        if (message) {
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+        }
+        function closeModal() {
+            message = null;
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+    <script src="../assets/js/HandleAdminAuthentication.js"></script>
     <script src="../../LogInAndRegister/assets/js/graduationYear.js"></script>
     <script src="../assets/js/toggleCompanyGrid.js"></script>
 </body>

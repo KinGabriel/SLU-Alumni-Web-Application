@@ -2,24 +2,53 @@
       event.preventDefault(); 
       const firstName = document.querySelector('input[name="first-name"]').value.trim();
       const lastName = document.querySelector('input[name="last-name"]').value.trim();
+      const middleName = document.querySelector('input[name="middle-name"]').value.trim();
       const email = document.querySelector('input[name="email"]').value.trim();
       const password = document.querySelector('input[name="password"]').value.trim();
+      const rpassword = document.querySelector('input[name="retype_password"]').value.trim();
       const schoolId = document.querySelector('input[name="school-id"]').value.trim();
-      let errorMessage = '';
-      const regex = /^\d+$/; 
-      if (!firstName || !lastName || !email || !password) {
-          errorMessage = 'Please fill out all required fields.';
-      } else if (password.length < 6) {
-          errorMessage = 'Password must be at least 6 characters long.';
-      } else if(!regex.test(schoolId)) {
-        errorMessage = 'Invalid School ID! School ID should only consist of digits.';
-      }
+      const gradyear = document.querySelector('input[name="graduationYear"]').value.trim();
+      const school = document.querySelector('select[name="school"]').value.trim();
+      const program = document.querySelector('select[name="program"]').value.trim();
+      
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modal-image');
+      const modalMessage = document.getElementById('modal-message');
 
-      if (errorMessage) {
-          document.getElementById('modal-message').textContent = errorMessage;
-          document.getElementById('modal').style.display = 'block';
-          return;
-      }
+      const regex = /^\d+$/; 
+      let errorMessages = []; // Collect all error messages
+
+        // Validation logic
+        if (!firstName) errorMessages.push('First name is required.');
+        if (!lastName) errorMessages.push('Last name is required.');
+        if (!email) errorMessages.push('Email is required.');
+        if (!password) errorMessages.push('Password is required.');
+        if (password.length < 6) errorMessages.push('Password must be at least 6 characters long.');
+        if (password !== rpassword) errorMessages.push('Passwords should match each other.');
+        if (schoolId && !regex.test(schoolId)) errorMessages.push('Invalid School ID! School ID should only consist of digits.');
+        if (!school) errorMessages.push('Please select a school.');
+        if (!program) errorMessages.push('Please select a program.');
+
+        // Display error messages
+        if (errorMessages.length > 0) {
+            modalImage.src ="../assets/images/declineUser.png";
+            const errorList = document.createElement('ul');
+                errorMessages.forEach(msg => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = msg;
+                    errorList.appendChild(listItem);
+                });
+
+            // Update modal message with the list
+            modalMessage.innerHTML = ''; // Clear previous content
+            modalMessage.appendChild(errorList);
+
+            errorList.style.textAlign = 'center';
+            errorList.style.listStyle = 'none';
+            errorList.style.fontSize = 'calc(50% + 1vw)';
+            modal.style.display = 'block';
+            return;
+        }
 
       event.target.submit();
   }
@@ -36,7 +65,7 @@
     messageContainer.innerHTML = '';  // Clear previous messages
     
     // Check for empty fields
-    if (!firstName || !lastName || !email || !schoolID || !currentOccupation) {
+    if (!firstName || !lastName || !email || !currentOccupation) {
         const createMessage = document.createElement('p');
         createMessage.innerHTML = 'Please fill out all required fields.';
         messageContainer.appendChild(createMessage);
