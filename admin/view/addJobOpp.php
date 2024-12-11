@@ -153,7 +153,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     </div>
 
           <!-- Step 2 Content -->
-          <div class="step-content step-2" style="display: none;">
+          <div class="step-content step-2" id="step2" style="display: none;">
             <h1>Upload Company Logo</h1>
             <div class="upload-container">
               <label for="image-upload" class="upload-label">Choose Image</label>

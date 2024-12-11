@@ -191,17 +191,43 @@ buttons.forEach((button) => {
 });
 
 const checkRequiredFields = () => {
-    const requiredFields = document.querySelectorAll('[required]');
     let isValid = true;
 
-    requiredFields.forEach(field => {
-        if (field.value.trim() === '') {
+    // Step 1 validation: Company Name to Company Description
+    if (currentStep === 1) {
+        const step1Fields = document.querySelectorAll('#step1 [required]');
+        step1Fields.forEach(field => {
+            if (field.value.trim() === '') {
+                isValid = false;
+                field.classList.add('error'); // Add error class for empty fields
+            } else {
+                field.classList.remove('error'); // Remove error class if the field is filled
+            }
+        });
+    }
+
+    // Step 2 validation: Job Title (only required in step 2)
+    if (currentStep === 2) {
+        const jobTitleField = document.querySelector('#step2 #job-title');
+        if (jobTitleField && jobTitleField.value.trim() === '') {
             isValid = false;
-            field.classList.add('error'); // Optionally, you can add a class to highlight the empty fields
+            jobTitleField.classList.add('error'); // Add error class for empty job title
         } else {
-            field.classList.remove('error'); // Remove the error class if the field is filled
+            jobTitleField.classList.remove('error'); // Remove error class if the field is filled
         }
-    });
+    }
+
+    if (currentStep === 3) {
+        const step3Fields = document.querySelectorAll('#step3 [required]');
+        step3Fields.forEach(field => {
+            if (field.value.trim() === '') {
+                isValid = false;
+                field.classList.add('error'); // Add error class for empty fields
+            } else {
+                field.classList.remove('error'); // Remove error class if the field is filled
+            }
+        });
+    }
 
     return isValid;
 };

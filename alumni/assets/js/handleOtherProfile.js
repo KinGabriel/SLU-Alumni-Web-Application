@@ -364,3 +364,24 @@ function updateLikeCount(likeCountElement, isLiked) {
     likeCountElement.textContent = `Like (${newLikeCount})`;
     return newLikeCount;
 }
+
+
+function changeTab(event, target) {
+    // Prevent default anchor behavior
+    event.preventDefault();
+
+    // Remove 'active' class from all nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Add 'active' class to clicked tab
+    event.target.classList.add('active');
+
+    // Hide all tab content
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => content.style.display = 'none');
+
+    // Show content for the clicked tab
+    const targetContent = document.getElementById(target);
+    targetContent.style.display = 'block';
+}
