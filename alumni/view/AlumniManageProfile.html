@@ -97,14 +97,19 @@
 
 <!-- Manage Profile Form Section -->
 <form id="manage-profile">
-    <div class="profile-section text-left mb-4">
-        <img src="../assets/images/default-profile.jpg" alt="Profile Picture" class="profile-img" id="profileImage" onclick="triggerFileInput()">
-        <div class="change-profile">
-            <label for="profileInput">Change Profile</label>
-            <input type="file" id="profileInput" class="d-none" accept="image/*" onchange="updateProfileImage(event)">
+    <div class="profile-section text-center mb-4">
+        <div class="profile-wrapper">
+            <!-- Profile Picture -->
+            <img src="../assets/images/default-profile.jpg" alt="Profile Picture" class="profile-img rounded-circle" id="profileImage" onclick="triggerFileInput()">
+            <!-- Hidden File Input -->
+            <div class="change-profile">
+                <input type="file" id="profileInput" class="d-none" accept="image/*" onchange="updateProfileImage(event)">
+            </div>
         </div>
+        <small class="text-danger d-block mt-1">Click to update profile.</small>
+        <button type="button" class="btn-change-profile mt-2" onclick="handleChangePfp()">Save Profile</button>
     </div>
-    <button type="button" class="btn-change-profile" onclick="handleChangePfp()">Change Profile</button>
+    
     <div class="container">
         <div class="row">
             <!-- Personal Information Section -->
@@ -343,7 +348,44 @@
                 </div>
             </div>
         </div>
-       
+
+        <!-- Modal for Image Selection Warning -->
+    <div class="modal fade" id="imageSelectionModal" tabindex="-1" aria-labelledby="imageSelectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageSelectionModalLabel">No Image Selected</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please select an image to update your profile picture.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal for Profile Picture Update Success -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileUpdateSuccessModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Your profile picture has been updated successfully!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="../assets/js/handleManageProfile.js" defer></script>
     <script src="../assets/js/handleManageProfileFetch.js" defer></script>

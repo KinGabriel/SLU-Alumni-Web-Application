@@ -54,11 +54,14 @@ function toggleCompanyField(jobStatus) {
         companyField.parentElement.style.display = 'none';  // Hide the company field
     }
 }
+
 function handleChangePfp() {
     const profileImage = document.getElementById('profileInput').files[0];
 
     if (!profileImage) {
-        alert('Please select an image.');
+        // Trigger the modal when no image is selected
+        const imageSelectionModal = new bootstrap.Modal(document.getElementById('imageSelectionModal'));
+        imageSelectionModal.show();
         return;
     }
 
@@ -73,7 +76,10 @@ function handleChangePfp() {
     .then(data => {
         if (data.success) {
             document.getElementById('profileImage').src = `/uploads/${data.newPfpUrl}`; // Update with the new image URL
-            alert('Profile picture updated successfully!');
+
+            // Trigger the success modal
+            const profileUpdateSuccessModal = new bootstrap.Modal(document.getElementById('profileUpdateSuccessModal'));
+            profileUpdateSuccessModal.show();
         } else {
             alert('Error updating profile picture. Please try again.');
         }
@@ -83,7 +89,6 @@ function handleChangePfp() {
         alert('Error uploading profile picture. Please try again.');
     });
 }
-
 
 function handleSaveChanges() {
     const jobStatus = document.getElementById('jobStatus').value;
