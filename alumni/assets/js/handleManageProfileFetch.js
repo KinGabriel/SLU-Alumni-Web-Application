@@ -54,22 +54,52 @@ function toggleCompanyField(jobStatus) {
         companyField.parentElement.style.display = 'none';  // Hide the company field
     }
 }
+function handleChangePfp() {
+    const profileImage = document.getElementById('profileInput').files[0];
+
+    if (!profileImage) {
+        alert('Please select an image.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('pfp', profileImage); // Attach the file directly
+
+    fetch('/api/manage-profile/upload-pfp', {
+        method: 'POST',
+        body: formData, // Send the FormData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('profileImage').src = `/uploads/${data.newPfpUrl}`; // Update with the new image URL
+            alert('Profile picture updated successfully!');
+        } else {
+            alert('Error updating profile picture. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error uploading profile picture:', error);
+        alert('Error uploading profile picture. Please try again.');
+    });
+}
+
 
 function handleSaveChanges() {
+    const jobStatus = document.getElementById('jobStatus').value;
+
     const formData = {
-        profileImage: document.getElementById('profileImage').src,
-        firstName: document.getElementById('firstName').value,
-        middleName: document.getElementById('middleName').value,
-        lastName: document.getElementById('lastName').value,
+        fname: document.getElementById('firstName').value,
+        mname: document.getElementById('middleName').value,
+        lname: document.getElementById('lastName').value,
         email: document.getElementById('email').value,
-        idNumber: document.getElementById('idNumber').value,
-        jobStatus: document.getElementById('jobStatus').value,
-        company: document.getElementById('company').value,
+        school_id: document.getElementById('idNumber').value,
+        company: jobStatus === 'unemployed' ? '' : document.getElementById('company').value,
         bio: document.getElementById('bio').value,
-        accountType: document.querySelector('input[name="accountType"]:checked')?.value,
+        access_type: document.querySelector('input[name="accountType"]:checked')?.value,
         school: document.getElementById('school').value,
-        degree: document.getElementById('degree').value,
-        gradYear: document.getElementById('gradYear').value,
+        program: document.getElementById('degree').value,
+        gradyear: document.getElementById('gradYear').value,
     };
 
     fetch('/api/manage-profile/update-details', {
@@ -83,11 +113,24 @@ function handleSaveChanges() {
         })
         .then(data => {
             console.log('Profile updated successfully:', data);
+
+            const saveChangesModal = bootstrap.Modal.getInstance(document.getElementById('saveChangesModal'));
+            saveChangesModal.hide();
+
+            const successModal = new bootstrap.Modal(document.getElementById('saveChangesSuccessModal'));
+            successModal.show();
         })
         .catch(error => {
             console.error('Error updating profile:', error);
+
+            const saveChangesModal = bootstrap.Modal.getInstance(document.getElementById('saveChangesModal'));
+            saveChangesModal.hide();
+
+            const failureModal = new bootstrap.Modal(document.getElementById('saveChangesFailureModal'));
+            failureModal.show();
         });
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     populateForm();

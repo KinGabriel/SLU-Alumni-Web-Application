@@ -1,3 +1,7 @@
+/*  Author: Vergara, Carlos Miguel
+    Code from Codepen
+    Edited with Chatgpt
+*/
 body {
   background: #F2F2F2;
 }
@@ -463,4 +467,35 @@ header img.slu-logo {
   color: #ccc;
   pointer-events: none;
 }  
+
+/* Edit Icon Styling - Smaller */
+.edit-icon {
+  position: absolute;
+  top: 12px; /* Adjust for smaller size */
+  right: 12px; /* Adjust for smaller size */
+  color: #555; /* Default icon color */
+  font-size: 1rem; /* Smaller icon size */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+  border-radius: 50%; /* Circle background */
+  padding: 3px; /* Reduce padding for smaller icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+  transition: color 0.3s ease; /* Smooth transition for the icon color */
+  z-index: 10; /* Ensure it appears above the image */
+}
+
+/* Change icon color on hover */
+.edit-icon i {
+  transition: color 0.3s ease; /* Smooth color transition for icon */
+}
+
+.edit-icon:hover i {
+  color: #003DA5; /* Icon turns blue on hover */
+}
+.edit-icon:hover {
+  background-color: transparent; /* Make background transparent on hover */
+}
+
 

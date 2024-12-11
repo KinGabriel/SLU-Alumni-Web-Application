@@ -49,12 +49,14 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                     <span class="menu-item-text">Account Requests</span>
                 </a>
             </li>
-            <li>
-                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
-                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
-                    <span class="menu-item-text">Accounts</span>
-                </a>
-            </li>
+            <?php if ($_SESSION['user_type'] == 'admin'): ?>
+                <li>
+                    <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                        <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <?php endif; ?>
             <li>
                 <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
