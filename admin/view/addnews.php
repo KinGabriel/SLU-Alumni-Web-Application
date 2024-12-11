@@ -2,15 +2,32 @@
 require("../controller/HandleSession.php");
 $message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
+
+$uploadedImagePath = '';
+$idImage = '';  // Variable to hold image binary data
+
+// Check if the file is uploaded and not empty
+if (isset($formData['newsphoto']) && !empty($formData['newsphoto'])) {
+    // Assuming the file is stored in the 'uploads' directory
+    $uploadDir = '../uploads/';
+    $uploadFile = $uploadDir . basename($formData['newsphoto']['name']);
+    
+    // Move the uploaded file to the directory
+    if (move_uploaded_file($formData['newsphoto']['tmp_name'], $uploadFile)) {
+        // Read the file contents as binary data
+        $imageData = file_get_contents($uploadFile);
+    }
+}
+
 echo "<script>var message = '$message';</script>";
-unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SLU Alumina</title>
+    <title>Add News</title>
     <link rel="stylesheet" href="../assets\css\addnews.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
@@ -65,7 +82,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
                 </a>
             </li>
             <li>
-                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                <a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
                     <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>
@@ -89,13 +106,14 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 </div>
 
 
-
+<form action ="../controller/ProcessAddNews.php" method="POST" enctype="multipart/form-data" onsubmit="validatenewsform(event)">
 <div class="upload-container">
     <h2>Upload News Photo</h2>
     <div class="upload-box">
-        <label for="company-logo" class="upload-label">Choose Image</label>
-        <input type="file" id="company-logo" class="upload-input" onchange="updateImageName()" />
+        <label for="newsphoto" class="upload-label">Choose Image</label>
+        <input type="file" id="newsphoto" name="newsphoto" class="upload-input" accept="image/*" onchange="handleFileUpload()" />
         <span id="file-name">No Image chosen</span>
+        <img id="image-preview" class="image-preview" alt="Preview will appear here" />
     </div>
 </div>
 <div class="basic-info-container">
@@ -103,25 +121,39 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <p class="info-text">This information will be displayed publicly</p>
     <div class="input-group">
         <label for="news-title">News Title</label>
-        <input type="text" id="news-title" placeholder="e.g. SLU News" />
+        <input type="text" name="news-title" id="news-title" placeholder="e.g. SLU News" value="<?= isset($formData['news-title']) ? htmlspecialchars($formData['news-title']) : '' ?>" required/>
     </div>
     <div class="input-group">
         <label for="news-description">News Description</label>
-        <textarea id="news-description" placeholder="Write a detailed description of the news..." rows="4"></textarea>
+        <textarea id="news-description" name="news-description" placeholder="Write a detailed description of the news..." rows="4" value="<?= isset($formData['news-description']) ? htmlspecialchars($formData['news-description']) : '' ?>" required></textarea>
     </div>
 
     <!-- Buttons -->
     <div class="form-actions">
         <button type="button" class="btn-cancel" onclick="cancelForm()">Cancel</button>
-        <button type="submit" class="btn-submit">Add News</button>
+        <button type="submit" id="addNewsButton" class="btn-submit">Add News</button>
     </div>
 </div>
+</form>>
 
+<div class="modal" id="modal">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <button class="accept" onclick="closeModal()">Got it</button>
+        </div>
+    </div>
     
+<script>
+        if (message) {
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+        }
 
+        function closeModal() {
+            message = null;
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 <script src="../assets/js/handleAddnews.js"></script>
-
-
-
 </body>
 </html>
