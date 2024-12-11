@@ -12,7 +12,7 @@ function populateForm() {
             document.getElementById('email').value = user.email || '';
             document.getElementById('idNumber').value = user.school_id || '';
             document.getElementById('jobStatus').value = user.jobStatus || '';  
-            document.getElementById('company').value = user.company || 'Unemployed';
+            document.getElementById('company').value = user.company || '';  
             document.getElementById('bio').value = user.bio || '';
 
             if (user.access_type) {
@@ -30,11 +30,23 @@ function populateForm() {
             document.getElementById('school').value = user.school || ''; 
             document.getElementById('degree').value = user.program || ''; 
             document.getElementById('gradYear').value = user.gradyear || ''; 
+
+            toggleCompanyField(user.jobStatus);
         })
         .catch(error => console.error('Error fetching profile data:', error));
 }
 
-
+function toggleCompanyField(jobStatus) {
+    const companyField = document.getElementById('company');
+    if (jobStatus === 'employed') {
+        companyField.disabled = false;  // Enable the company input field
+        companyField.parentElement.style.display = 'block';  
+    } else if (jobStatus === 'unemployed') {
+        companyField.disabled = true;  // Disable the company input field
+        companyField.value = '';  // Clear the company input field
+        companyField.parentElement.style.display = 'none';  // Hide the company field
+    }
+}
 
 function handleSaveChanges() {
     const formData = {
@@ -70,6 +82,14 @@ function handleSaveChanges() {
         });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    populateForm();
+    document.getElementById('saveChangesButton').addEventListener('click', handleSaveChanges);
+    document.getElementById('jobStatus').addEventListener('change', (e) => {
+        toggleCompanyField(e.target.value);  
+    });
+});
+
 function handleChangePassword() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('user_id');
@@ -101,8 +121,6 @@ function handleChangePassword() {
             alert('Failed to change password. Please try again.');
         });
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     populateForm();
