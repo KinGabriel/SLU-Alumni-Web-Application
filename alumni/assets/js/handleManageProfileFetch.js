@@ -78,7 +78,7 @@ function handleChangePassword() {
     const newPassword = document.getElementById('newPassword').value;
     const confirmNewPassword = document.getElementById('confirmNewPassword').value;
 
-    if (newPassword !== confirmNewPassword) {
+    if (newPassword !== confirmNewPassword) { // modal
         alert('New passwords do not match!');
         return;
     }

@@ -7,11 +7,15 @@ Redirects unauthenticated users to the login page
 URL Redirected To: Login page ('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php')
 Group Member Responsible:  Caparas, Joaquin Gabriel
 */
+import dotenv from 'dotenv';
 
+// Load environment variables from .env
+dotenv.config();
 const authMiddleware = (req, res, next) => {
     const userId = req.cookies.user_id;
     if (!userId) {
-        return res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
+        return res.redirect(`http://${process.env.HOST || 'localhost'}/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php`);
+
     }
     next();
 };

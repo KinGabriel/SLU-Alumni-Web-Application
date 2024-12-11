@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Use a default placeholder image or leave it empty
             $_SESSION['pfp'] = '..assets\images\default-avatar-icon.jpg'; // Adjust this path to your default image
         }
-        
+      
+
         
         // Redirect based on user type
         if ($user['user_type'] == 'admin') {
@@ -46,8 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($user['user_type'] == 'manager') {
             header("Location: ../../manager/view/managerHome.php");
         } else {
-            setcookie("user_id", $user['user_id'], time() + 3600, "/", "localhost", true, true);
-            header("Location: http://localhost:8080");
+            $host = getenv('HOST');
+            $port = getenv('PORT');
+             setcookie("user_id", $user['user_id'], time() + 3600, "/");
+             $redirectUrl = "http://{$host}:{$port}";
+             header("Location: {$redirectUrl}");
         }
         exit();
     } else {

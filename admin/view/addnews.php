@@ -11,7 +11,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLU Alumina</title>
-    <link rel="stylesheet" href="../assets\css\news.css">
+    <link rel="stylesheet" href="../assets\css\addnews.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
@@ -87,7 +87,38 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
 
 
 
-   
+<div class="upload-container">
+    <h2>Upload News Photo</h2>
+    <div class="upload-box">
+        <label for="company-logo" class="upload-label">Choose Image</label>
+        <input type="file" id="company-logo" class="upload-input" onchange="updateImageName()" />
+        <span id="file-name">No Image chosen</span>
+    </div>
+</div>
+<div class="basic-info-container">
+    <h3>Basic Information</h3>
+    <p class="info-text">This information will be displayed publicly</p>
+    <div class="input-group">
+        <label for="news-title">News Title</label>
+        <input type="text" id="news-title" placeholder="e.g. SLU News" />
+    </div>
+    <div class="input-group">
+        <label for="news-description">News Description</label>
+        <textarea id="news-description" placeholder="Write a detailed description of the news..." rows="4"></textarea>
+    </div>
+
+    <!-- Buttons -->
+    <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="cancelForm()">Cancel</button>
+        <button type="submit" class="btn-submit">Add News</button>
+    </div>
+</div>
+
+    
+
+<script src="../assets/js/handleAddnews.js"></script>
+
+
 
 </body>
 </html>

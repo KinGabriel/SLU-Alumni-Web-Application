@@ -21,7 +21,10 @@ Group Member Responsible: Caparas, Joaquin Gabriel
 */
 
 import dbConnection from '../../database/connection.js';
+import dotenv from 'dotenv';
 
+// Load environment variables from .env
+dotenv.config();
 
 export const getAlumni = (req, res) => {
     const userId = req.userId
@@ -119,7 +122,7 @@ export const handleLogout = (req,res) =>{
             return res.status(500).send('An error occurred while logging out.');
         }
         res.clearCookie('user_id');
-        res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
+        res.redirect(`http://${process.env.HOST || 'localhost'}/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php`);
     });
 }
 

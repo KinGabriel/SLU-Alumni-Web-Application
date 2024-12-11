@@ -1,0 +1,90 @@
+<!-- News Details: Displays details about a news -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/) -->
+<!-- Group Member Responsible:  Escaño, Nichole Jhoy -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Alumina</title>
+    <link href="../assets/css/AlumniNewsDetails.css" rel="stylesheet">
+    <link href="/../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!-- Header separator -->
+   <div class="header-separator"></div>
+
+   <!-- Header -->
+   <header>
+    <h1>
+        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <!-- Search bar -->
+        <div class="search">
+            <form id="searchForm" onsubmit="return false;">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <button type="submit">
+                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </h1>
+    
+    <ul id="searchResults"></ul>
+
+       <div class="profile-dropdown">
+           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+               <div class="dropdown-header">
+                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                   <div class="dropdown-info">
+                       <h4 name="name"></h4>
+                       <p>Web Developer at Google</p>
+                   </div>
+               </div>
+               <ul class="dropdown-links">
+                   <li><a href="#">View Profile</a></li>
+                   <li><a href="#">Manage Profile</a></li>
+                   <li><a href="#">Close Account</a></li>
+               </ul>
+               <div class="logout-btn">
+                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                   <span>Log out</span>
+               </div>
+           </div>
+       </div>     
+   </header>
+
+    <!-- News Details -->
+    <div class="container">
+        <a href="/" class="btn btn-outline-secondary back-btn">
+            <img src="../assets/images/news.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> News
+        </a>    
+        <div class="image-section">
+            <img src="../assets/images/navi.jpg" alt="SLU Intramural Opening">
+        </div>        
+        <div class="content-section">
+            <h1>SLU Intramural Opening</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur. Eget vulputate sociis sit urna sit aliquet. 
+                Vivamus facilisis diam libero dolor volutpat diam eu. Quis a id posuere etiam at enim vivamus. 
+                Urna nisi malesuada libero enim ornare in viverra. Nibh commodo quis tellus aliquet nibh tristique 
+                lobortis id. Consequat ultricies vulputate turpis neque viverra tempor nunc. Et amet massa tellus 
+                consequat mauris imperdiet tellus. Praesent risus magna nisl turpis egestas ultrices viverra 
+                pellentesque blandit. Rutrum consequat eu penatibus ipsum at.
+            </p>
+            <p>
+                Vestibulum a pharetra facilisis varius proin ultricies tellus. Ac viverra pharetra sit elementum magna 
+                nullam ornare in a. Egestas velit id nisi a. Elementum eget vulputate dignissim urna sed tellus felis. 
+                Tellus in et sed mattis morbi velit massa donec.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/handleHomefeed.js" defer>  </script>  
+    <script src="../assets/js/handleFetch.js" async>  </script> 
+</body>
+</html>
