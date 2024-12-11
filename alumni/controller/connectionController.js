@@ -39,19 +39,13 @@ export const connections = (req, res) => {
     let queryParams = [];
 
     // filter 
-    if (filter === 'mutual') {
+if (filter === 'followers') {
         query += `
              INNER JOIN follows f1 ON u.user_id = f1.followed_id
             INNER JOIN follows f2 ON u.user_id = f2.follower_id
             WHERE f1.follower_id = ? AND f2.followed_id = ?
         `;
-        queryParams = [userId, userId];  
-    } else if (filter === 'followers') {
-        query += `
-            INNER JOIN follows f ON u.user_id = f.follower_id
-            WHERE f.followed_id = ? AND f.is_requested = 0
-        `;
-        queryParams = [userId];  
+        queryParams = [userId,userId];  
     } else if (filter === 'following') {
         query += `
             INNER JOIN follows f ON u.user_id = f.followed_id
@@ -60,16 +54,16 @@ export const connections = (req, res) => {
         queryParams = [userId]; 
     } else if (filter === 'request') {
         query += `
-        INNER JOIN follows f1 ON u.user_id = f1.followed_id
-        INNER JOIN follows f2 ON u.user_id = f2.follower_id
-        WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 0 AND f2.is_requested = 0
+            INNER JOIN follows f1 ON u.user_id = f1.followed_id
+            INNER JOIN follows f2 ON u.user_id = f2.follower_id
+            WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 1 AND f2.is_requested = 0 
     `;
     queryParams = [userId, userId];  
     } else {
         query += `
-            INNER JOIN follows f1 ON u.user_id = f1.followed_id
-            INNER JOIN follows f2 ON u.user_id = f2.follower_id
-            WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 1 AND f2.is_requested = 0
+        INNER JOIN follows f1 ON u.user_id = f1.followed_id
+        INNER JOIN follows f2 ON u.user_id = f2.follower_id
+        WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 0 AND f2.is_requested = 0
         `;
         queryParams = [userId, userId];  
     }
