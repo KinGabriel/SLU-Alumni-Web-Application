@@ -11,11 +11,15 @@ Group Member Responsible: Caparas, Joaquin Gabriel
 */
 
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 
+// Load environment variables from .env
+dotenv.config();
 const cookieMiddleware = (req, res, next) => {
     const userId = req.cookies.user_id;
     if (!userId) {
-        return res.redirect('http://localhost/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php');
+        return res.redirect(`http://${process.env.HOST || 'localhost'}/SLU-Alumni-Web-Application/LogInAndRegister/view/Login.php`);
+
     }
     req.userId = userId; 
     next();

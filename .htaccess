@@ -1,0 +1,6 @@
+SetEnv DB_HOST localhost
+SetEnv DB_USER root
+SetEnv DB_PASSWORD ""
+SetEnv DB_NAME slu_alumina
+SetEnv PORT 8080
+SetEnv HOST localhost
