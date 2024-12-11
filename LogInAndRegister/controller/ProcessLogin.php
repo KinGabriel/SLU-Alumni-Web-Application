@@ -42,10 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         // Redirect based on user type
-        if ($user['user_type'] == 'admin') {
+        if ($user['user_type'] == 'admin' || $user['user_type'] == 'manager') {
             header("Location: ../../admin/view/adminDashboard.php");
-        } elseif ($user['user_type'] == 'manager') {
-            header("Location: ../../manager/view/managerHome.php");
         } else {
             $host = getenv('HOST');
             $port = getenv('PORT');
