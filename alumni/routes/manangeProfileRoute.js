@@ -9,6 +9,6 @@ router.use(authenticateMiddleware);
 
 router.get('/get-info', getProfileInfo);
 router.get('/update-details',updateProfile );
-router.post('change-password', updatePassword);
+router.post('/change-password', updatePassword);
 
 export default router;

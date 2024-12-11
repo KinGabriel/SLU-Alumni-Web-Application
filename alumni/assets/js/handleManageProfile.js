@@ -46,20 +46,6 @@ document.getElementById('confirmSaveChanges').addEventListener('click', function
     }
 });
 
-// Change Password Logic
-document.getElementById('changePasswordButton').addEventListener('click', function () {
-    var currentPassword = document.getElementById('currentPassword').value;
-    var newPassword = document.getElementById('newPassword').value;
-    var confirmNewPassword = document.getElementById('confirmNewPassword').value;
-
-    if (newPassword === confirmNewPassword && newPassword.length >= 8) {
-        var successModal = new bootstrap.Modal(document.getElementById('changePasswordSuccessModal'));
-        successModal.show();
-    } else {
-        var failureModal = new bootstrap.Modal(document.getElementById('changePasswordFailureModal'));
-        failureModal.show();
-    }
-});
 
 // Clear Button for Change password
 document.getElementById('clearPasswordButton').addEventListener('click', function () {
@@ -105,3 +91,16 @@ function updateProfileImage(event) {
     }
 }
 
+// Function to show success modal
+function showSuccessModal(message) {
+    const successModal = new bootstrap.Modal(document.getElementById('changePasswordSuccessModal'));
+    document.querySelector('#changePasswordSuccessModal .modal-body').textContent = message;
+    successModal.show();
+}
+
+// Function to show failure modal
+function showFailureModal(message) {
+    const failureModal = new bootstrap.Modal(document.getElementById('changePasswordFailureModal'));
+    document.querySelector('#changePasswordFailureModal .modal-body').textContent = message;
+    failureModal.show();
+}
