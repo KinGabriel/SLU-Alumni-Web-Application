@@ -816,6 +816,19 @@ a {
   background-color: #3300cc !important; /* Darker blue on hover */
 }
 
+input.error, textarea.error {
+  border: 2px solid red; /* Red border for missing fields */
+}
+
+.error-message {
+  color: red;
+  padding-left: 10px;
+  display: none; /* Hide the error message by default */
+}
+
+#email-label {
+  display: inline; /* Show the label by default */
+}
 
 /* Responsive Design */
 @media (max-width: 769px) {
