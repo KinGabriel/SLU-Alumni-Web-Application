@@ -142,35 +142,33 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   
 
     
- <!-- Pagination -->
- <div class="pagination">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">&laquo;</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next &raquo;</a>
-                    </li>
-                </ul>
-            </div>
+  <!-- Pagination -->
+  <div class="pagination">
+            <ul class="pagination">
+                <li class="page-item" id="prevPage">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                <li class="page-item active" id="page1">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item" id="page2">
+                    <span class="page-link">2</span>
+                </li>
+                <li class="page-item" id="page3">
+                    <span class="page-link">3</span>
+                </li>
+                <li class="page-item" id="nextPage">
+                    <span class="page-link">Next &raquo;</span>
+                </li>
+            </ul>
         </div>
  
 
     <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
     <!-- Link to custom JavaScript -->
-    <script src="../assets/js/javascript.js"></script>
+     <script src="../assets/js/adminEvent.js"></script>
 </body>
 
 </html>

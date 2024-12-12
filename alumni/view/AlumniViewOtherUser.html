@@ -74,52 +74,64 @@
         <div class="cover-photo">
             <img src="../assets/images/cover.jpg" class="img-fluid w-100" alt="Cover Photo">
         </div>
-
+        
         <!-- Profile Section: Contains profile photo, name, job title, location, and stats -->
         <!-- Design Inspiration: GitHub, Facebook -->
          <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
         <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
+
         <div class="profile-section d-flex align-items-center mt-4 px-4">
             <!-- Profile Photo -->
             <div class="profile-photo">
                 <img src="../assets/images/candy.jpg" alt="Profile Picture" class="rounded-circle" name="otherPfp" style="width: 100px; height: 100px;">
             </div>
-
+        
             <!-- Profile Details -->
             <div class="profile-details ms-3">
                 <h4 class="fw-bold mb-0" name="otherUserName">Taylor Swift</h4>
 
-                <!-- Stats (Followers, Following, Posts) -->
-                <div class="stats mb-3">
-                    <div class="stat-item">
-                        <strong>Followers</strong><br><p name="other_followers_count">2</p>
-                    </div>
-                    <div class="stat-item">
-                        <strong>Following</strong><br><p name="other_followed_count">2</p>
-                    </div>
-                    <div class="stat-item">
-                        <strong>Posts</strong><br><p name="other_post_count">126</p>
-                    </div>
+            <!-- Stats (Followers, Following, Posts) -->
+            <div class="stats mb-3">
+                <div class="stat-item">
+                    <strong>Followers</strong><br><p name="other_followers_count">2</p>
                 </div>
-                      <!-- Company -->
-                      <div class="d-flex align-items-center mb-1" id="job-title">
-                        <img src="../assets/images/position.png" alt="Job Icon" style="width: 16px; height: 16px; margin-right: 5px;">
-                        <p class="text-muted mb-0" style="font-size: 0.95rem;">Halal Indonesia Company</p>
-                    </div>
-    
-                   <!-- Private Label -->
+                <div class="stat-item">
+                    <strong>Following</strong><br><p name="other_followed_count">2</p>
+                </div>
+                <div class="stat-item">
+                    <strong>Posts</strong><br><p name="other_post_count">126</p>
+                </div>
+            </div>
+
+            <!-- Company -->
+            <div class="d-flex align-items-center mb-1" id="job-title">
+                <img src="../assets/images/position.png" alt="Job Icon" style="width: 16px; height: 16px; margin-right: 5px;">
+                <p class="text-muted mb-0" style="font-size: 0.95rem;">Halal Indonesia Company</p>
+            </div>
+
+            <!-- Profile Account Labels -->
+            <div class="profile-labels">
+                <!-- Private Account Label -->
                 <div class="private-label d-flex align-items-center text-muted" id="private-label" style="display: none;">
                     <img src="../assets/images/lock.png" alt="Private Icon" style="width: 16px; height: 16px; margin-right: 5px;">
                     <span>Private Account</span>
                 </div>
 
-                <!-- Follow Button -->
-                <button class="btn btn-primary d-flex align-items-center mt-3" id="follow-btn" onclick="toggleFollow()">
-                    <img src="../assets/images/follow.png" alt="Follow Icon" id="follow-icon" class="me-2" style="width: 20px; height: 20px;">
-                    <span id="follow-text">Follow</span>
-                </button>
-            </div>               
-         </div>
+                <!-- Public Account Label -->
+                <div class="public-label d-flex align-items-center text-muted" id="public-label" style="display: none;">
+                    <img src="../assets/images/public.png" alt="Public Icon" style="width: 16px; height: 16px; margin-right: 5px;">
+                    <span>Public Account</span>
+                </div>
+            </div>
+
+           <!-- Follow Button -->
+            <button class="btn btn-primary d-flex align-items-center mt-5" id="follow-btn" onclick="toggleFollow()">
+                <img src="../assets/images/follow.png" alt="Follow Icon" id="follow-icon" class="me-2" style="width: 20px; height: 20px;">
+                <span id="follow-text">Follow</span>
+            </button>
+
+        </div>
+
         <!-- Bio Section -->
         <div class="row mt-4">
             <div class="col-lg-3 ms-auto" id="bio-section" name="other_bio">
@@ -131,6 +143,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- Navigation Tabs: Provides navigation between Feed, Connections, Media, and Videos -->
         <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
@@ -326,37 +339,6 @@
                 </div>
               </div>
               </div>
-
-<!--Inlined the style for the back button due to difficulty in calling it in the css-->
-<style> 
-/* Back button */
-.back-btn {
-    position: absolute; 
-    left: 5%; 
-    top: 14%; 
-    z-index: 1000; 
-    padding: 8px 16px; 
-    color: #007bff;
-    display: flex; 
-    align-items: center; 
-    border-radius: 5px; 
-    text-decoration: none; 
-    font-size: 14px; 
-}
-
-.back-btn:hover {
-    background-color: #f1f1f1; 
-    color: #0056b3;
-    border-color: #0056b3; 
-}
-
-.back-btn img {
-    width: 20px; 
-    height: 20px; 
-    margin-right: 8px; 
-}
-
-</style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/handleOtherProfile.js" defer>  </script>

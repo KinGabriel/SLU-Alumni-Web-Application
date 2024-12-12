@@ -66,9 +66,6 @@ export const getOtherUserInfo = (req, res) => {
 };
 
 
-
-
-
 export const follow = (req, res) => {
     const targetUserId = req.query.user_id; 
     const user_id = req.userId; 
