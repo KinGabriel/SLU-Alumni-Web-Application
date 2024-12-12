@@ -41,7 +41,7 @@ export const getAlumni = (req, res) => {
             COUNT(DISTINCT CASE WHEN f.followed_id = ? AND f.is_requested = 0 THEN f.follower_id END) AS follower_count, 
             COUNT(DISTINCT p.post_id) AS post_count,
             EXISTS (
-                SELECT 1 
+                SELECT * 
                 FROM follows 
                 WHERE follower_id = ? AND followed_id = u.user_id AND is_requested = 1
             ) AS is_requested

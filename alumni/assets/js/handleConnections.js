@@ -63,7 +63,7 @@ function updateConnectionsTable(data) {
                 const declineBtn = document.createElement('button');
                 declineBtn.classList.add('decline-btn', 'btn'); 
                 declineBtn.textContent = 'Decline';
-                declineBtn.onclick = () => declineRequest(connection.user_id, connection.name);
+                declineBtn.onclick = () => removeFollower(connection.user_id, connection.name);
                 actionsDiv.appendChild(declineBtn);
             } else if (filterValue !== 'mutuals') {
                 // Remove button for other filters

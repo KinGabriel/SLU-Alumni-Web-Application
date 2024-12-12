@@ -37,21 +37,21 @@ export const connections = (req, res) => {
         FROM user u
     `;
     let queryParams = [];
-
+   
     // filter 
 if (filter === 'followers') {
         query += `
-             INNER JOIN follows f1 ON u.user_id = f1.followed_id
-            INNER JOIN follows f2 ON u.user_id = f2.follower_id
-            WHERE f1.follower_id = ? AND f2.followed_id = ?
+           INNER JOIN follows f1 ON u.user_id = f1.followed_id
+        INNER JOIN follows f2 ON u.user_id = f2.follower_id
+        WHERE f1.follower_id = ? AND f2.followed_id = ?  AND f1.is_requested = 0 or  f2.is_requested = 0 and not u.user_id = ?
         `;
-        queryParams = [userId,userId];  
+        queryParams = [userId,userId,userId]; 
+      
     } else if (filter === 'following') {
         query += `
-            INNER JOIN follows f ON u.user_id = f.followed_id
-            WHERE f.follower_id = ? AND f.is_requested = 0
+        INNER JOIN follows f ON u.user_id = f.followed_id WHERE f.follower_id = ? AND f.is_requested = 0
         `;
-        queryParams = [userId]; 
+        queryParams = [userId];  
     } else if (filter === 'request') {
         query += `
             INNER JOIN follows f1 ON u.user_id = f1.followed_id
@@ -111,7 +111,7 @@ if (filter === 'followers') {
 
 
 export const removeFollowing = (req, res) => {
-    const userId = req.cookies.user_id;
+    const userId = req.userId;
       const followedId = req.params.user_id;  
 
     if (!followedId) {
@@ -135,7 +135,7 @@ export const removeFollowing = (req, res) => {
 
 
 export const removeFollower = (req, res) => {
-    const userId = req.cookies.user_id;  
+    const userId = req.userId;  
     const followerId = req.params.user_id;  
     if (!followerId) {
         return res.status(400).json({ error: "followerId is required." });
@@ -159,3 +159,40 @@ export const removeFollower = (req, res) => {
         return res.status(200).json({ message: "Successfully removed follower." });
     });
 };
+export const acceptFollower = (req, res) => {
+    const userId = req.userId;  
+    const followerId = req.params.user_id;  
+
+    console.log("Accepting follower:", { userId, followerId });
+
+    if (!userId) {
+        return res.status(401).json({ error: "Unauthorized. User ID is missing." });
+    }
+
+    if (!followerId) {
+        return res.status(400).json({ error: "Follower ID is required." });
+    }
+
+    const query = `
+        UPDATE follows 
+        SET is_requested = 0
+        WHERE follower_id = ? AND followed_id = ?
+    `;
+    
+    dbConnection.query(query, [userId, followerId], (err, result) => {
+        if (err) {
+            console.error("Database error while accepting follower:", err);
+            return res.status(500).json({ error: "A database error occurred while accepting a follower." });
+        }
+
+        // Check if any rows were updated
+        if (result.affectedRows === 0) {
+            console.warn("No follower found for the given IDs.");
+            return res.status(404).json({ error: "Follower not found or already accepted." });
+        }
+
+        console.log("Follower successfully accepted:", { userId, followerId });
+        return res.status(200).json({ message: "Follower successfully accepted." });
+    });
+};
+

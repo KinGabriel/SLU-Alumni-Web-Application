@@ -1,4 +1,4 @@
-function fetchConnections() {
+async function fetchConnections() {
     const activeButton = document.querySelector('.filter-button.active');
     const searchQuery = document.querySelector('input[name="searchConnection"]').value;
     const filterValue = activeButton ? activeButton.innerText.toLowerCase() : 'mutual';
@@ -22,7 +22,9 @@ fetchConnections()
 
 // TODO Modal
 // Handle removal of follower
-async function removeFollower(user_id, name, confirmModal) {
+async function removeFollower(user_id, name) {
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmRemoveFollowerModal'));
+    confirmModal.show();
     try {
         const response = await fetch(`/api/connections/remove-follower/${user_id}`, {
             method: 'DELETE',
@@ -57,7 +59,8 @@ async function removeFollower(user_id, name, confirmModal) {
 }
 
 // Handle removal of following
-async function removeFollowing(user_id, name, confirmModal) {
+async function removeFollowing(user_id, name,confirmModal) {
+    
     try {
         const response = await fetch(`/api/connections/remove-following/${user_id}`, {
             method: 'DELETE',
@@ -92,11 +95,38 @@ async function removeFollowing(user_id, name, confirmModal) {
 }
 
 // handle accept
-function acceptRequest(userId, userName) {
-    console.log(`Accepted request from ${userName} (User ID: ${userId})`);
+async function acceptRequest(user_id, name) {
+    console.log(user_id)
+    try {
+        const response = await fetch(`/api/connections/acceptRequest/${user_id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            // Close the confirmation modal
+
+            // Show success modal for follower removal
+            const successModal = new bootstrap.Modal(document.getElementById('successfulAccept'));
+            const removedFollowerNameElement = document.getElementById('removedFollowerName');
+            removedFollowerNameElement.textContent = name;
+            successModal.show();
+
+            // Remove the follower item from the DOM
+            const connectionItem = document.querySelector(`[data-user-id="${user_id}"]`);
+            if (connectionItem) {
+                connectionItem.remove();
+            }
+
+            // Refresh the connections list
+            fetchConnections();
+        } else {
+            alert('Failed to remove follower.');
+        }
+    } catch (error) {
+        console.error('Error removing follower:', error);
+        alert('An error occurred while removing the follower.');
+    }
 }
 
-// handle decline
-function declineRequest(userId, userName) {
-    console.log(`Declined request from ${userName} (User ID: ${userId})`);
-}
+

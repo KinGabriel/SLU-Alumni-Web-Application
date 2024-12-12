@@ -16,12 +16,12 @@ export const getOtherUserInfo = (req, res) => {
             (SELECT COUNT(*) FROM follows WHERE followed_id = u.user_id AND is_requested = 0) AS follower_count,  -- Exclude requested followers
             (SELECT COUNT(*) FROM posts WHERE user_id = u.user_id) AS post_count,
             EXISTS (
-                SELECT 1
+                SELECT *
                 FROM follows
                 WHERE follower_id = ? AND followed_id = u.user_id
             ) AS is_follower,
             EXISTS (
-                SELECT 1
+                SELECT *
                 FROM follows
                 WHERE follower_id = ? AND followed_id = u.user_id AND is_requested = 1
             ) AS is_requested,  -- Checks if the current user has a pending follow request
