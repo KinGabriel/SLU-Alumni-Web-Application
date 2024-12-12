@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             return [ 
                 'user_id'=> $user['user_id'],
                 'name' => $user['Name'], 
-                'email' => $user['email'], 
+                'email' => $user['email'],  
                 'id_number' => $user['school_id'] ?? "N/A", 
                 'gradyear' => $user['gradyear'] ?? "N/A", 
                 'status' => $user['is_employed'] ? 'employed' : 'unemployed', 
