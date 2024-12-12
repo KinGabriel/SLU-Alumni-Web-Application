@@ -8,13 +8,18 @@ require '../../database/Configuration.php';
 
 header('Content-Type: application/json');
 
+// Get the page number from the query string, default to 1 if not provided
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$itemsPerPage = 6; // Number of job opportunities per page
+$offset = ($page - 1) * $itemsPerPage;
+
 try {
     // Create a new database connection
     $db = new dbConnection();
     $connection = $db->getConnection();
 
-    // Query to fetch the job opportunities
-    $query = "SELECT job_title, employment_type, company_name, address, image_data FROM opportunity ORDER BY created_at DESC";
+    // Query to fetch the job opportunities with limit and offset for pagination
+    $query = "SELECT job_title, employment_type, company_name, address, image_data FROM opportunity ORDER BY created_at DESC LIMIT $itemsPerPage OFFSET $offset";
     $result = $connection->query($query);
 
     $opportunity = [];  // Correct array for storing job opportunities
@@ -33,6 +38,7 @@ try {
             'address' => htmlspecialchars($row['address'], ENT_QUOTES, 'UTF-8') // Address
         ];
     }
+
     // Return a success response with the job opportunities data
     echo json_encode(['status' => 'success', 'opportunity' => $opportunity ?: []]);
 
