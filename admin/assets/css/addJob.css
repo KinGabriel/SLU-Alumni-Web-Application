@@ -18,6 +18,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .main-wrapper {
   height: 100dvh;
   display: grid;
@@ -546,11 +547,10 @@ a {
 
 /* Start of Wrapper Section */
 .wrapper {
-  margin-top: 20px;
-  width: min(600px, 70vw); /* Increased max width and adjusted the percentage */
-  display: flex; /* Use flexbox to align content */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+    margin-top: 20px;
+    width: min(600px, 70vw); /* Increased max width and adjusted the percentage */
+    display: grid;
+  align-items: center;
   padding: 10px; /* Reduced padding to bring elements closer */
   height: auto; /* Adjusted to auto to make it more flexible */
 }
