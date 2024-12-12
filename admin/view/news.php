@@ -13,6 +13,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     <title>SLU Alumina</title>
     <link rel="stylesheet" href="../assets\css\news.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header separator -->
@@ -94,36 +95,21 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     </button>
 </form>
 
+<!-- News Container -->
 <div class="news-container">
-    <h2 class="news-title">SLU News</h2>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <!-- Edit Icon -->
-                <a href="#" class="edit-icon">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <img src="../assets/images/lantern.jpg" class="card-img-top" alt="Lantern Parade">
-                <div class="card-body d-flex align-items-center">
-                    <!-- News Info -->
-                    <div class="news-info">
-                        <h5 class="card-title">SLU Intramural Opening</h5>
-                        <p class="card-text">Lorem ipsum odor amet, consectetuer adipiscing elit. Praesent praesent egestas adipiscing euismod nibh quis diam interdum.</p>
-                    </div>
-                </div>
-                <!-- Card Footer -->
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-read-more">
-                        Read More
-                    </button>
-                </div>
-            </div>
+        <h2 class="news-title">SLU News</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- News items will be dynamically injected here by news.js -->
         </div>
     </div>
-</div>
 
-
-   
-
+    <!-- JavaScript -->
+    <script src="../assets/js/news.js"></script>
+    <script>
+        // Display confirmation message if available
+        if (message) {
+            alert(message); // Replace with styled notification if necessary
+        }
+    </script>
 </body>
 </html>
