@@ -1,10 +1,14 @@
+let currentPage = 1;
+const usersPerPage = 10;
+let allUsers = [];
+
 function populateUserTable(userData) {
     const tableBody = document.getElementById('userTableBody');
-    tableBody.innerHTML = ''; 
+    tableBody.innerHTML = '';
 
     userData.forEach(user => {
         const row = document.createElement('tr');
-        // Create row
+
         const nameCell = document.createElement('td');
         const emailCell = document.createElement('td');
         const idNumberCell = document.createElement('td');
@@ -12,23 +16,23 @@ function populateUserTable(userData) {
         const statusCell = document.createElement('td');
         const roleCell = document.createElement('td');
         const actionCell = document.createElement('td');
-        // Populate by name and pfp
+
         const userNameDiv = document.createElement('div');
         userNameDiv.classList.add('user-name');
         const profilePic = document.createElement('img');
-       profilePic.src = user.pfp || '../assets/images/default-avatar-icon.jpg';
+        profilePic.src = user.pfp || '../assets/images/default-avatar-icon.jpg';
         profilePic.alt = user.name;
         profilePic.classList.add('profile-pic');
         userNameDiv.appendChild(profilePic);
         userNameDiv.appendChild(document.createTextNode(user.name));
         nameCell.appendChild(userNameDiv);
-        // Populate the table with the data from the server
+
         emailCell.textContent = user.email;
         idNumberCell.textContent = user.id_number;
         gradYearCell.textContent = user.gradyear;
         statusCell.textContent = user.status === 'employed' ? 'Employed' : 'Unemployed';
         roleCell.textContent = user.role;
-        // Create action buttons which will be used on for edit and delete
+
         const editButton = document.createElement('button');
         editButton.classList.add('edit-button');
         const editIcon = document.createElement('img');
@@ -38,45 +42,81 @@ function populateUserTable(userData) {
         editButton.appendChild(editIcon);
         editButton.addEventListener('click', () => {
             const editUrl = new URL('SLU-Alumni-Web-Application/admin/view/EditUser.php', window.location.origin);
-            editUrl.searchParams.append('user_id', user.user_id);  
-            console.log("Redirecting to:", editUrl.toString()); 
+            editUrl.searchParams.append('user_id', user.user_id);
             window.location.href = editUrl.toString();
         });
-        
-        
+
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('delete-button');
         const deleteIcon = document.createElement('img');
         deleteIcon.src = '../assets/images/delete.png';
         deleteIcon.alt = 'Delete';
         deleteIcon.classList.add('action-icon');
-        deleteButton.addEventListener('click',  () =>  showConfirmationModal(user));
         deleteButton.appendChild(deleteIcon);
-        // Append as a row
+        deleteButton.addEventListener('click', () => showConfirmationModal(user));
+
+        actionCell.appendChild(editButton);
+        actionCell.appendChild(deleteButton);
+
         row.appendChild(nameCell);
         row.appendChild(emailCell);
         row.appendChild(idNumberCell);
         row.appendChild(gradYearCell);
         row.appendChild(statusCell);
         row.appendChild(roleCell);
-        actionCell.appendChild(editButton);
-        actionCell.appendChild(deleteButton);
         row.appendChild(actionCell);
-        // Appent it to the table
+
         tableBody.appendChild(row);
     });
 }
 
+function updatePaginationButtons() {
+    const pagination = document.querySelector('.pagination ul');
+    pagination.innerHTML = '';
+
+    const totalPages = Math.ceil(allUsers.length / usersPerPage);
+
+    const createPageItem = (label, isDisabled, isActive, pageNumber) => {
+        const li = document.createElement('li');
+        li.className = `page-item ${isDisabled ? 'disabled' : ''} ${isActive ? 'active' : ''}`;
+        const link = document.createElement('a');
+        link.className = 'page-link';
+        link.textContent = label;
+        if (!isDisabled) {
+            link.addEventListener('click', () => {
+                currentPage = pageNumber;
+                renderCurrentPage();
+            });
+        }
+        li.appendChild(link);
+        return li;
+    };
+
+    pagination.appendChild(createPageItem('«', currentPage === 1, false, currentPage - 1));
+
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.appendChild(createPageItem(i, false, currentPage === i, i));
+    }
+
+    pagination.appendChild(createPageItem('»', currentPage === totalPages, false, currentPage + 1));
+}
+
+function renderCurrentPage() {
+    const start = (currentPage - 1) * usersPerPage;
+    const end = start + usersPerPage;
+    populateUserTable(allUsers.slice(start, end));
+    updatePaginationButtons();
+}
 
 function fetchUserData() {
     const urlParams = new URLSearchParams(window.location.search);
     const jobStatus = document.getElementById('jobStatusFilter').value;
     const role = document.getElementById('roleFilter').value;
     const queryString = new URLSearchParams({
-        search: urlParams.get('search') || '', 
+        search: urlParams.get('search') || '',
         jobStatus,
         role,
-        sort: new URLSearchParams(window.location.search).get('sort') || 'name ASC' 
+        sort: urlParams.get('sort') || 'name ASC',
     }).toString();
 
     fetch(`../controller/GetUserAccounts.php?${queryString}`)
@@ -88,7 +128,9 @@ function fetchUserData() {
         })
         .then(data => {
             if (Array.isArray(data)) {
-                populateUserTable(data);
+                allUsers = data;
+                currentPage = 1;
+                renderCurrentPage();
             } else {
                 console.error('Invalid data format received.');
             }
@@ -96,11 +138,14 @@ function fetchUserData() {
         .catch(error => console.error('Error fetching user data:', error));
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     fetchUserData();
-    document.querySelector('.search form').addEventListener('submit', function(event) {
-        event.preventDefault(); 
+
+    document.getElementById('jobStatusFilter').addEventListener('change', fetchUserData);
+    document.getElementById('roleFilter').addEventListener('change', fetchUserData);
+
+    document.querySelector('.search form').addEventListener('submit', function (event) {
+        event.preventDefault();
         const searchValue = document.querySelector('input[name="search"]').value;
         const queryString = new URLSearchParams(window.location.search);
         queryString.set('search', searchValue);
