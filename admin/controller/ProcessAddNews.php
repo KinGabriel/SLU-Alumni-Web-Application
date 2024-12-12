@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['confirmation_message'] = "Error occurred! Please try again later... " . $stmt->error;
     }
     $stmt->close();
-    header("Location: ../view/addnews.php");
+    header("Location: ../view/news.php");
     exit();
 }
 ?>
