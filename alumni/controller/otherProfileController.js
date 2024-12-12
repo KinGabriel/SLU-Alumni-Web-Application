@@ -51,6 +51,7 @@ export const getOtherUserInfo = (req, res) => {
             bio: user.bio,
             post_count: user.post_count,
             pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
+            access_type: user.access_type
         };
         if (user.is_requested === 0) {
             responseData.follower_count = user.follower_count;
