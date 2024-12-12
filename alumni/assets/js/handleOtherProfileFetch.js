@@ -6,7 +6,7 @@ function getOtherUserInfo() {
         fetch(`/api/profile-other/get-profile?user_id=${userId}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+        
                 // Populate user profile data
                 const pfpElements = document.querySelectorAll('[name="otherPfp"]');
                 pfpElements.forEach((element) => {
@@ -21,14 +21,23 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
 
-                 // Toggle "Private Account" visibility
-                 const privateLabel = document.getElementById("private-label");
-                 if (data.access_type == 'private') {
-                     privateLabel.style.display = "flex"; 
-                 } else {
-                     privateLabel.style.display = "none"; 
-                 }
-                 
+                // Get the labels
+                const privateLabel = document.getElementById("private-label");
+                const publicLabel = document.getElementById("public-label");
+
+                // Hide both labels initially
+                privateLabel.style.display = "none";
+                publicLabel.style.display = "none";
+
+                if (data.access_type === 'private') {
+                    privateLabel.classList.add("show");
+                    publicLabel.classList.remove("show");
+                } else if (data.access_type === 'public') {
+                    publicLabel.classList.add("show");
+                    privateLabel.classList.remove("show");
+                }
+
+                // Check if the user is following
                 checkIfFollowing(userId); 
             })
             .catch(error => console.error('Error fetching data:', error));
@@ -36,6 +45,11 @@ function getOtherUserInfo() {
         console.error("User ID not provided in URL.");
     }
 }
+
+// Call the function when the page loads
+window.onload = function() {
+    getOtherUserInfo();
+};
 
 function checkIfFollowing(targetUserId) {
     fetch(`/api/profile-other/is-following?user_id=${targetUserId}`, {
@@ -66,6 +80,7 @@ function checkIfFollowing(targetUserId) {
     })
     .catch(error => console.error('Error:', error));
 }
+
 function toggleFollow() {
     const followButton = document.getElementById("follow-btn");
     const followText = document.getElementById("follow-text");
@@ -166,10 +181,6 @@ function toggleFollow() {
         console.error('Error checking follow status:', error);
     });
 }
-
-
-
-
 
 function getOtherPosts() {
     const urlParams = new URLSearchParams(window.location.search);
