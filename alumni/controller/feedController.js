@@ -53,7 +53,8 @@ export const handleUserPost = (req, res) => {
         return res.status(200).json({ message: 'Post created successfully' });
     });
 };
-export const getPost = (req, res) => {
+
+export const getPost = async (req, res) => {
     const userId = req.userId; 
     const offset = parseInt(req.query.offset) || 0; 
 
@@ -76,7 +77,7 @@ export const getPost = (req, res) => {
     LEFT JOIN follows f ON f.followed_id = p.user_id
     JOIN user u ON u.user_id = p.user_id
     WHERE 
-        p.user_id = ?
+        p.user_id = ? 
         OR f.follower_id = ? 
         AND (
             (u.access_type = 'public') 
@@ -94,11 +95,8 @@ export const getPost = (req, res) => {
     ORDER BY p.post_id DESC
     LIMIT 10 OFFSET ?
     `;
-    dbConnection.query(query, [userId, userId, userId, userId, userId, offset], (error, results) => {
-        if (error) {
-            console.error('Database error:', error);
-            return res.status(500).json({ error: 'Failed to fetch posts.' });
-        }
+    try {
+        const [results] = await dbConnection.promise().query(query, [userId, userId, userId, userId, userId, offset]);
 
         const posts = results.map(post => {
             if (post.banner) {
@@ -115,9 +113,11 @@ export const getPost = (req, res) => {
         });
 
         res.status(200).json({ posts });
-    });
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Failed to fetch posts.' });
+    }
 };
-
 
 
 // Helper method for handling images and videos
