@@ -6,6 +6,7 @@ function getOtherUserInfo() {
         fetch(`/api/profile-other/get-profile?user_id=${userId}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 // Populate user profile data
                 const pfpElements = document.querySelectorAll('[name="otherPfp"]');
                 pfpElements.forEach((element) => {
@@ -20,6 +21,14 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
 
+                 // Toggle "Private Account" visibility
+                 const privateLabel = document.getElementById("private-label");
+                 if (data.access_type == 'private') {
+                     privateLabel.style.display = "flex"; 
+                 } else {
+                     privateLabel.style.display = "none"; 
+                 }
+                 
                 checkIfFollowing(userId); 
             })
             .catch(error => console.error('Error fetching data:', error));

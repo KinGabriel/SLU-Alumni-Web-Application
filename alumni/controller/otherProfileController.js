@@ -24,7 +24,7 @@ export const getOtherUserInfo = (req, res) => {
                 SELECT *
                 FROM follows
                 WHERE follower_id = ? AND followed_id = u.user_id AND is_requested = 1
-            ) AS is_requested,  -- Checks if the current user has a pending follow request
+            ) AS is_requested, 
             u.access_type
         FROM 
             user u
@@ -51,6 +51,7 @@ export const getOtherUserInfo = (req, res) => {
             bio: user.bio,
             post_count: user.post_count,
             pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
+            access_type: user.access_type
         };
         if (user.is_requested === 0) {
             responseData.follower_count = user.follower_count;
