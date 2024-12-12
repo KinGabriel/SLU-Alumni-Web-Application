@@ -9,7 +9,7 @@ function getOwnPosts() {
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
-                postElement.classList.add('post', 'card', 'mt-4'); 
+                postElement.classList.add('post', 'card', 'mt-4');
 
                 // Call helper methods
                 const postHeader = createPostHeader(post);
@@ -26,11 +26,143 @@ function getOwnPosts() {
                 postElement.appendChild(postActions);
                 feedContainer.appendChild(postElement);
             });
+
+            showMedia(data);  // Pass data to showMedia to update the media tab
         })
         .catch(err => console.error('Error fetching posts:', err));
 }
 
+async function showMedia(data) {
+    const mediaContainer = document.querySelector('#media .container .row');
+    mediaContainer.innerHTML = '';  // Clear previous media content
 
+    // Loop through the posts to check for images
+    for (const post of data.posts) {
+
+        // Check if the banner exists and is a valid image URL
+        if (post.banner && await isValidImage(post.banner)) {
+            console.log("Image found:", post.banner);
+
+            //  a new column div for the image card
+            const imageCard = document.createElement('div');
+            imageCard.classList.add('col-md-4', 'mb-4');  
+            
+            //  card element
+            const card = document.createElement('div');
+            card.classList.add('image-card', 'card');
+            card.style.width = '100%';
+            card.style.maxWidth = '350px';
+            card.style.borderRadius = '8px';
+            card.style.overflow = 'hidden';
+            card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            card.style.marginBottom = '1rem';
+            
+            card.addEventListener('mouseover', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            });
+            card.addEventListener('mouseout', () => {
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            });
+            
+            // image element
+            const img = document.createElement('img');
+            img.src = post.banner;
+            img.alt = 'Post Image';
+            img.style.width = '100%';
+            img.style.height = '350px';  
+            img.style.objectFit = 'cover'; 
+            img.style.borderBottom = '2px solid #ddd';  
+            
+            // append the image to the card
+            card.appendChild(img);
+            
+            // card body
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+            cardBody.style.padding = '1rem';
+            cardBody.style.backgroundColor = '#f8f8f8';
+            cardBody.style.flexGrow = '1';  
+            
+            // buttons container
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('d-flex', 'justify-content-between');
+            
+            //  createPostActionButton helper for Like and Comment buttons
+            const likeButton = createPostActionButton('Like', post.is_liked ? 'like.png' : 'grayLike.png', post.likesCount || 0);
+            const commentButton = createPostActionButton('Comment', 'comment.png', post.commentsCount || 0);
+
+            // append buttons to the button container
+            buttonContainer.appendChild(likeButton);
+            buttonContainer.appendChild(commentButton);
+            
+            // append the button container to the card body
+            cardBody.appendChild(buttonContainer);
+            
+            // append the card body to the card
+            card.appendChild(cardBody);
+            
+            // append the card to the column
+            imageCard.appendChild(card);
+
+            // append the column to the media container
+            mediaContainer.appendChild(imageCard);
+
+            // add event listeners for dynamic actions (like and comment)
+            const likeCountElement = likeButton.querySelector('span');
+            
+            // Like button functionality
+            likeButton.addEventListener('click', function() {
+                const isLiked = post.is_liked;
+                post.is_liked = !isLiked;  // Toggle like state
+                
+                // Update the like button image based on the new state
+                const likeImage = post.is_liked ? 'like.png' : 'grayLike.png';
+                likeButton.querySelector('img').src = likeImage;
+
+                // Update the like count text
+                const updatedLikesCount = post.is_liked ? (post.likesCount + 1) : (post.likesCount - 1);
+                likeCountElement.textContent = updatedLikesCount;
+
+                // Call the function to handle backend logic (e.g., saving the like state)
+                handleLike(post.post_id, likeButton, post.is_liked, likeCountElement);
+            });
+
+            // Comment button functionality
+            commentButton.addEventListener('click', function() {
+                const postId = post.post_id;
+
+                let commentModal = document.getElementById(`commentModal-${postId}`);
+                if (!commentModal) {
+                    commentModal = createCommentModal(postId);
+                    document.body.appendChild(commentModal);
+                }
+
+                loadComments(postId); // Load existing comments for the post
+                const modal = new bootstrap.Modal(commentModal);
+                modal.show();
+
+                // Ensure the submit comment handler is set only once
+                setupSubmitCommentHandler(postId);
+            });
+        } else {
+            console.log("No valid image found or banner is missing:", post.banner); 
+        }
+    }
+}
+
+// Function to validate if the URL is an actual image
+function isValidImage(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(true);  // Image loaded successfully
+        img.onerror = () => resolve(false); // Error loading image, resolve as false
+
+        img.src = url;
+    });
+}
 
 function handleLike(postId, likeButton, isLiked, likeCountElement) {
     fetch(`/api/viewProfile/like/${postId}`, {

@@ -464,4 +464,48 @@ nav a:hover {
     background-color: #e0e0e0;  
 }
 
+
+/*Pagination */
+.pagination {
+    display: flex;
+    justify-content: center; 
+    gap: 5px; 
+    margin: 20px 0; 
+    margin-right: 1.5vw; 
+}
+
+/* Style for individual page items */
+.page-item {
+    margin: 0; 
+}
+
+/* Style for page links */
+.page-link {
+    padding: 5px 10px; 
+    font-size: 14px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    color: #007bff; 
+    text-decoration: none; 
+}
+
+
+.page-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Active page link */
+.page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Disable links (for next/prev) */
+.page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+}
+
   
