@@ -3,10 +3,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const itemsPerPage = 6; // Number of jobs per page
     let totalJobs = 0; // Track total number of jobs
     const jobListContainer = document.querySelector('#job-list'); // Get the job list container
+    const filterButtons = document.querySelectorAll('.filter-bubble'); // Get all filter buttons
 
-    // Function to fetch job opportunities for the current page
-    function fetchJobs(page) {
-        fetch(`../controller/fetchJobOpps.php?page=${page}`)
+    // Current filter
+    let currentFilter = 'all'; // Default filter is 'all'
+
+    // Function to fetch job opportunities based on current filter and page
+    function fetchJobs(page, filter) {
+        fetch(`../controller/fetchJobOpps.php?page=${page}&filter=${filter}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -109,16 +113,46 @@ document.addEventListener("DOMContentLoaded", function() {
     function handlePrevClick() {
         if (currentPage > 1) {
             currentPage--;
-            fetchJobs(currentPage);  // Fetch jobs for the new page
+            fetchJobs(currentPage, currentFilter);  // Fetch jobs for the new page
         }
     }
 
     // Handle the Next button click
     function handleNextClick() {
         currentPage++;
-        fetchJobs(currentPage);  // Fetch jobs for the new page
+        fetchJobs(currentPage, currentFilter);  // Fetch jobs for the new page
     }
 
-    // Initial fetch of jobs for the first page
-    fetchJobs(currentPage);
+    // Set the default filter to 'all' and make sure it's visually selected
+    document.querySelector('.filter-bubble[data-filter="all"]').classList.add('active');
+    
+    // Fetch the jobs for the first page with the 'all' filter when the page loads
+    fetchJobs(currentPage, currentFilter);
+
+    // Handle filter button clicks
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to the clicked button
+            this.classList.add('active');
+    
+            // Get the selected filter type, map it to exact values expected by the database
+            let selectedFilter = this.getAttribute('data-filter');
+            let filterMap = {
+                'full-time': 'Full Time',
+                'part-time': 'Part Time',
+                'internship': 'Internship',
+                'all': 'all'
+            };
+    
+            // Set the current filter to the mapped value
+            currentFilter = filterMap[selectedFilter] || 'all';  // Default to 'all' if no match
+    
+            // Reset the current page to 1 and fetch jobs with the selected filter
+            currentPage = 1;
+            fetchJobs(currentPage, currentFilter);
+        });
+    });    
 });
