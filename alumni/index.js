@@ -7,6 +7,9 @@ import connectionRoutes from './routes/connectionRoute.js';
 import useProfileRoute from './routes/userProfileRoute.js';
 import otherProfileRoute from './routes/otherProfileRoute.js';
 import manangeProfileRoute from './routes/manangeProfileRoute.js';
+import newsRoute from './routes/newsRoute.js';
+import eventsRoute from './routes/eventsRoutes.js';
+import jobsRoute from './routes/jobsRoute.js';
 import { cookieMiddleware, cookieParser } from './middleware/cookieMiddleware.js';
 import sessionMiddleware from './middleware/sessionMiddleware.js';
 import staticMiddleware from './middleware/staticMiddleware.js';
@@ -41,6 +44,9 @@ app.use('/api/connections', connectionRoutes);
 app.use('/api/viewProfile', useProfileRoute);
 app.use('/api/profile-other', otherProfileRoute);
 app.use('/api/manage-profile', manangeProfileRoute);
+app.use('/api/news', newsRoute);
+app.use('/api/events', eventsRoute);
+app.use('/api/jobs', jobsRoute);
 
 // Start the Server
 const port = process.env.PORT;
