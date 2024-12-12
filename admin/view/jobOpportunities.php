@@ -53,8 +53,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </ul>
         </nav>
 
-
-
         <!-- Sticky Log Out Button -->
         <div class="sidebar-logout">
             <a href="../controller/ProcessLogOut.php">
@@ -66,8 +64,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     
     <h1 style="text-align: center; margin-top: 10px">Job Opportunities</h1>
 
-
-
     <!-- Jobs Section Title -->
     <div class="row mb-5 pt-4">
         <form action="addJobOpp.php" method="POST">
@@ -75,95 +71,94 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <span>Add Job</span>
             </button>
         </form>
-      
     </div>
 
-<!-- Filter Buttons -->
-<div class="filter-container">
-    <span class="filter-bubble active" data-filter="all">All</span>
-    <span class="filter-bubble" data-filter="full-time">Full-time</span>
-    <span class="filter-bubble" data-filter="part-time">Part-time</span>
-    <span class="filter-bubble" data-filter="internship">Internship</span>
-</div>
+    <!-- Filter Buttons -->
+    <div class="filter-container">
+        <span class="filter-bubble active" data-filter="all">All</span>
+        <span class="filter-bubble" data-filter="full-time">Full-time</span>
+        <span class="filter-bubble" data-filter="part-time">Part-time</span>
+        <span class="filter-bubble" data-filter="internship">Internship</span>
+    </div>
 
-<!-- Job Cards -->
-<div class="row row-cols-1 row-cols-md-3 g-4" id="job-list">
-    <div class="col" data-type="full-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Software Engineer</h5>
-                <span class="badge bg-success mb-2">FULL TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+    <!-- Job Cards -->
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="job-list">
+        <div class="col job-card" data-type="full-time">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Software Engineer</h5>
+                    <span class="badge bg-success mb-2">FULL TIME</span>
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                        <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col job-card" data-type="part-time">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Visual Designer</h5>
+                    <span class="badge bg-warning mb-2">PART TIME</span>
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                        <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col job-card" data-type="internship">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Marketing Manager</h5>
+                    <span class="badge bg-info mb-2">INTERNSHIP</span>
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                        <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col job-card" data-type="internship">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Marketing Manager</h5>
+                    <span class="badge bg-info mb-2">INTERNSHIP</span>
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
+                        <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col" data-type="part-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Visual Designer</h5>
-                <span class="badge bg-warning mb-2">PART TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="internship">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Marketing Manager</h5>
-                <span class="badge bg-info mb-2">INTERNSHIP</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="internship">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Marketing Manager</h5>
-                <span class="badge bg-info mb-2">INTERNSHIP</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Dhaka, Bangladesh</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
     <!-- Pagination -->
     <div class="pagination">
         <ul class="pagination">
-            <li class="page-item disabled">
+            <li class="page-item disabled" id="prevPage">
                 <span class="page-link">&laquo;</span>
             </li>
             <li class="page-item active">
-                <span class="page-link">1</span>
+                <span class="page-link" id="page1">1</span>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">2</a>
+                <a class="page-link" href="#" id="page2">2</a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">3</a>
+                <a class="page-link" href="#" id="page3">3</a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="#">Next &raquo;</a>
+                <a class="page-link" href="#" id="nextPage">Next &raquo;</a>
             </li>
         </ul>
     </div>
 
-
-    <!-- Link to custom JavaScript -->
     <script src="../assets/js/jobOpportunity.js"></script>
 
+
+      </div>
+    </div>
 
 
 </body>

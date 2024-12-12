@@ -168,14 +168,29 @@ $currentPage = basename($_SERVER['PHP_SELF']);
               <h2>Basic Information</h2>
               <p class="info-text">This information will be displayed publicly</p>
 
-              <!-- Job Title Card -->
-              <div class="card">
-                <label for="job-title">Job Title</label>
-                <input type="text" id="job-title" name="job-title" placeholder="e.g. Software Engineer" maxlength="80" required/>
-              </div>
-            </div>
-          </div>
-        
+             <!-- Job Title Card -->
+    <div class="card">
+      <label for="job-title">Job Title</label>
+      <input type="text" id="job-title" name="job-title" placeholder="e.g. Software Engineer" maxlength="80" required/>
+    </div>
+
+    <!-- Employment Type Radio Buttons -->
+    <div class="card">
+      <h2>Employment Type</h2>
+      <br>
+<input type="radio" id="full_time" name="employment_type" value="Full Time">
+<label for="full_time">Full Time</label><br>
+
+<input type="radio" id="part_time" name="employment_type" value="Part Time">
+<label for="part_time">Part Time</label><br>
+
+<input type="radio" id="internship" name="employment_type" value="Internship">
+<label for="internship">Internship</label><br>
+
+      </div>
+    </div>
+  </div>
+</div>
         <div class="step-content step-3" id="step3" style="display: none;">
           
           <!-- Job Description Section -->
@@ -192,6 +207,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
               <textarea name= "requirements" id="requirements" placeholder="Outline the key qualifications and requirements for the position." required></textarea>
             </div>
           </div>
+          
         </div>
 
           <!-- Navigation Buttons -->
