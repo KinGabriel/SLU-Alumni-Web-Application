@@ -101,24 +101,25 @@ if (filter === 'followers') {
         }
     } 
 
-    // Execute the query
     dbConnection.query(query, queryParams, (err, results) => {
         if (err) {
             console.error('Error fetching connections:', err);
-            return res.status(500).json({ error: 'Database error occurred while fetching connections.' });
+            return res.status(500).json({
+                error: 'Database error occurred while fetching connections.'
+            });
         }
 
-        if (results.length > 0) {
-            return res.status(200).json({
-                message: 'Connections found.',
-                data: results,
-            });
-        } else {
-            return res.status(200).json({
-                message: 'No connections found.',
-                data: [],
-            });
-        }
+        const processedResults = results.map(connection => {
+            if (connection.pfp) {
+                connection.pfp = `data:image/png;base64,${Buffer.from(connection.pfp).toString('base64')}`;
+            }
+            return connection;
+        });
+
+        return res.status(200).json({
+            message: processedResults.length > 0 ? 'Connections found.' : 'No connections found.',
+            data: processedResults,
+        });
     });
 };
 

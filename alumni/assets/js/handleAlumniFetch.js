@@ -12,7 +12,10 @@ function getUserInfo() {
         console.log(data);
         const pfpElements = document.querySelectorAll('[name="pfp"]');
         pfpElements.forEach((element) => {
-            element.src = data.pfp;
+            element.src = data.pfp || '../assets/images/default-profile.jpg';
+            element.onerror = () => {
+                element.src = '../assets/images/default-profile.jpg';
+            };
         });
         const nameElements = document.querySelectorAll('[name="name"]');
         for (let i = 0; i < nameElements.length; i++) {

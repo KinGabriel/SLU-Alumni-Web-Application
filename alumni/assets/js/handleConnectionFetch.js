@@ -2,21 +2,21 @@ async function fetchConnections() {
     const activeButton = document.querySelector('.filter-button.active');
     const searchQuery = document.querySelector('input[name="searchConnection"]').value;
     const filterValue = activeButton ? activeButton.innerText.toLowerCase() : 'mutual';
-    
-    // Get the selected sort option
     const sortValue = document.querySelector('.sort-option.active')?.dataset.sort || '';
-    const sortQuery = sortValue ? `&sort=${sortValue}` : '';
-    const searchQueryString = searchQuery ? `&search=${searchQuery}` : '';
-    const filterQueryString = filterValue ? `&filter=${filterValue}` : '';
 
-    fetch(`/api/connections/get-connection?${searchQueryString}${filterQueryString}${sortQuery}`)
-        .then(response => response.json())
-        .then(data => {
-            updateConnectionsTable(data);  
-        })
-        .catch(error => {
-            console.error('Error fetching mutual connections:', error);
-        });
+    const queryParams = new URLSearchParams({
+        search: searchQuery || '',
+        filter: filterValue || '',
+        sort: sortValue || ''
+    });
+
+    try {
+        const response = await fetch(`/api/connections/get-connection?${queryParams.toString()}`);
+        const data = await response.json();
+        updateConnectionsTable(data);
+    } catch (error) {
+        console.error('Error fetching connections:', error);
+    }
 }
 fetchConnections()
 

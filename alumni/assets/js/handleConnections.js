@@ -38,7 +38,7 @@ function updateConnectionsTable(data) {
             
             // Profile picture
             const profilePic = document.createElement('img');
-            profilePic.src = connection.pfp;
+            profilePic.src = connection.pfp || '../assets/images/default-profile.jpg';
             profilePic.alt = 'Profile Picture';
             profilePic.classList.add('profile-pic');
             

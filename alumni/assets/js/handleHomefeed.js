@@ -89,7 +89,7 @@ function createPostHeader(post) {
 
     const profileImg = document.createElement('img');
     profileImg.classList.add('user-pic');
-    profileImg.src = post.pfp || '../assets/images//default-avatar-icon.jpg';
+    profileImg.src = post.pfp ||  '../assets/images/default-profile.jpg';
     profileImg.alt = 'User Profile';
 
     const userInfo = document.createElement('div');

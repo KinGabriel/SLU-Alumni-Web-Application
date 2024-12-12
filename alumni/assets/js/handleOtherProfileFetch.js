@@ -10,7 +10,10 @@ function getOtherUserInfo() {
                 // Populate user profile data
                 const pfpElements = document.querySelectorAll('[name="otherPfp"]');
                 pfpElements.forEach((element) => {
-                    element.src = data.pfp;
+                    element.src = data.pfp || '../assets/images/default-profile.jpg';
+                    element.onerror = () => {
+                        element.src = '../assets/images/default-profile.jpg';
+                    };
                 });
                 const nameElements = document.querySelectorAll('[name="otherUserName"]');
                 nameElements.forEach((element) => {
