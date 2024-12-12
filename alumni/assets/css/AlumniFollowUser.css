@@ -633,3 +633,19 @@ textarea {
 .search-result-item:active {
   background-color: #e0e0e0;  
 }
+
+/* private and public account labels */
+.private-label, .public-label {
+  position: absolute;
+  display: none; 
+  visibility: hidden;  
+  align-items: center; 
+  justify-content: flex-start; 
+    z-index: 10;        
+}
+
+.private-label.show, .public-label.show {
+  display: flex;  
+  visibility: visible;
+}
+
