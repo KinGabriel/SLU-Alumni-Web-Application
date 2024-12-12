@@ -20,6 +20,14 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
 
+                 // Toggle "Private Account" visibility
+                 const privateLabel = document.getElementById("private-label");
+                 if (data.isPrivate) {
+                     privateLabel.style.display = "flex"; 
+                 } else {
+                     privateLabel.style.display = "none"; 
+                 }
+                 
                 checkIfFollowing(userId); 
             })
             .catch(error => console.error('Error fetching data:', error));

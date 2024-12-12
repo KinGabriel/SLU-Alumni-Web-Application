@@ -1,7 +1,7 @@
 {
   "name": "slu-alumni-web-application",
   "version": "1.0.0",
-  "description": "- Caparas, Joaquin Gabriel\r - Cariño, Mark Lorenz\r - Escaño, Nichole Jhoy\r - Razo, Ma. Lourdes Shaine\r - Vergara, Carlos Miguel",
+  "description": "- Caparas, Joaquin Gabriel\r - Cariño, Mark Lorenz\r - Escaño, Nichole Jhoy\r - Mandac, Minette Victoria\r - Razo, Ma. Lourdes Shaine\r - Vergara, Carlos Miguel",
   "main": "alumni/index.js",
   "type": "module",
   "scripts": {
