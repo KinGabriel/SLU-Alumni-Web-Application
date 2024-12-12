@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($gradYear) || empty($jobStatus)) {
             $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "Please insert all fields... ";
+            $_SESSION['modalImage'] = "../assets/images/declineUser.png";
             header("Location: ../view/AddUser.php");
             return;
         }    
@@ -31,12 +32,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if(isAlumniExist($connection,$schoolID)) {
             $_SESSION['formData'] = $_POST;
             $_SESSION['confirmationMessage'] = "Alumni already exist... ";
+            $_SESSION['modalImage'] = "../assets/images/declineUser.png";
             header("Location: ../view/AddUser.php");
             return;
         }
     }
-    // set the admin automatically into employed and also set the employed and unemployed to 1 as employed and 0 as unemployed
-    // jobStatus will not be stored anymore in the database
+
+    if ($jobStatus == 'employed') {
+        $jobStatus = '1';
+    }
     if($jobStatus == 'employed' && $userType == 'admin' ) {
         $company = 'SLU Alumina';
     } else if($jobStatus == 'unemployed') {
@@ -51,11 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isEmailExist($connection, $email)) {
         $_SESSION['formData'] = $_POST;
         $_SESSION['confirmationMessage'] = "The email already exist";
+        $_SESSION['modalImage'] = "../assets/images/declineUser.png";
         header("Location: ../view/AddUser.php");
         exit();
     }
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT INTO user (email, pword, fname, lname, mname, pfp, user_type, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO user (email, pword, fname, lname, mname, pfp, user_type, is_employed, company) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = $connection->prepare($query);
     if ($stmt === false) {
@@ -64,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("ssssssss", $email, $hashedPassword, $firstName, $lastName, $middleName, $idImage, $userType, $company);
+    $stmt->bind_param("sssssssis", $email, $hashedPassword, $firstName, $lastName, $middleName, $idImage, $userType, $jobStatus, $company);
     
     if ($stmt->execute()) {
         $_SESSION['confirmationMessage'] = "Successfully added an account!";

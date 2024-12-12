@@ -2,8 +2,9 @@
 require("../controller/HandleSession.php");
 $message = isset($_SESSION['confirmationMessage']) ? addslashes($_SESSION['confirmationMessage']) : '';
 $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : [];
-echo "<script>var message = '$message';</script>";
-unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
+$modalImage = isset($_SESSION['modalImage']) ? $_SESSION['modalImage'] : "../assets/images/addedUser.png";
+echo "<script>var message = '$message'; var modalImage = '$modalImage';</script>";
+unset($_SESSION['confirmationMessage'], $_SESSION['formData'], $_SESSION['modalImage']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -229,17 +230,25 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
     </script>
     <div class="modal" id="modal">
         <div class="modal-content">
-            <img id="modal-image" src="../assets/images/addedUser.png"  alt="Infomation message" />
+            <img id="modal-image" src="<?php echo $modalImage; ?> alt="Information message/>
             <p id="modal-message"></p>
             <button class="accept" onclick="closeModal()">Okay!</button>
         </div>
     </div>  
     
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        // If there is a message, show the modal
         if (message) {
-            document.getElementById('modal-message').textContent = message;
-            document.getElementById('modal').style.display = 'block';
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalMessage = document.getElementById('modal-message');
+
+            modalImage.src = window.modalImage; // Set the image dynamically
+            modalMessage.textContent = message; // Set the message
+            modal.style.display = 'block';
         }
+    });
         function closeModal() {
             message = null;
             document.getElementById('modal').style.display = 'none';

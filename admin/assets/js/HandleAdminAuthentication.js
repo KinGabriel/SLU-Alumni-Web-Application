@@ -10,6 +10,7 @@
       const gradyear = document.querySelector('input[name="graduationYear"]').value.trim();
       const school = document.querySelector('select[name="school"]').value.trim();
       const program = document.querySelector('select[name="program"]').value.trim();
+      const userRole = document.querySelector('select[name="user-roles"]').value.trim();
       
       const modal = document.getElementById('modal');
       const modalImage = document.getElementById('modal-image');
@@ -28,6 +29,7 @@
         if (schoolId && !regex.test(schoolId)) errorMessages.push('Invalid School ID! School ID should only consist of digits.');
         if (!school) errorMessages.push('Please select a school.');
         if (!program) errorMessages.push('Please select a program.');
+        if (!userRole) errorMessages.push('Choose the role of the user.');
 
         // Display error messages
         if (errorMessages.length > 0) {
@@ -48,6 +50,10 @@
             errorList.style.fontSize = 'calc(50% + 1vw)';
             modal.style.display = 'block';
             return;
+        }
+
+        if (errorMessages.length == 0) {
+            modalImage.src = "../assets/images/addedUser.png";
         }
 
       event.target.submit();
