@@ -609,15 +609,16 @@ textarea {
   cursor: pointer;
 }
 .video-section h2 {
-  color: blue;
+  color: #003DA5;
   font-size: 2rem; 
   font-weight: bold; 
   text-align: left; 
   margin-bottom: 20px; 
 }
 
-.media-section h2 {
-  color: blue;
+.container .image-section h2 {
+  color: #003DA5;
+  margin-top: 30px;
   font-size: 2rem; 
   font-weight: bold; 
   text-align: left; 
