@@ -20,6 +20,7 @@ let jobDetails = {
     contactNumber: '',
     description: '',
     jobTitle: '',
+    employmentType: '',
     skills: '',
     requirements: ''
 };
@@ -39,6 +40,13 @@ const captureJobDetails = () => {
         jobDetails.description = document.getElementById("company-description").value;
     } else if (currentStep === 2) {
         jobDetails.jobTitle = document.getElementById("job-title").value;
+        const employmentTypeRadioButtons = document.getElementsByName("employment_type");
+        for (let i = 0; i < employmentTypeRadioButtons.length; i++) {
+            if (employmentTypeRadioButtons[i].checked) {
+                jobDetails.employmentType = employmentTypeRadioButtons[i].value;
+                break; // Exit the loop once the checked radio button is found
+            }
+        }
     } else if (currentStep === 3) {
         jobDetails.skills = document.getElementById("skills").value;
         jobDetails.requirements = document.getElementById("requirements").value;
@@ -57,6 +65,9 @@ document.getElementById("company-description").addEventListener("input", capture
 document.getElementById("job-title").addEventListener("input", captureJobDetails);
 document.getElementById("skills").addEventListener("input", captureJobDetails);
 document.getElementById("requirements").addEventListener("input", captureJobDetails);
+document.getElementsByName("employment_type").forEach(radioButton => {
+    radioButton.addEventListener("change", captureJobDetails);
+});
 
 // Update steps and manage DOM visibility
 const updateSteps = (e) => {
@@ -226,11 +237,30 @@ const checkRequiredFields = () => {
     // Step 2 validation: Job Title (only required in step 2)
     if (currentStep === 2) {
         const jobTitleField = document.querySelector('#step2 #job-title');
+        const employmentTypeRadioButtons = document.getElementsByName('employment_type');
+        let employmentTypeSelected = false;
+
         if (jobTitleField && jobTitleField.value.trim() === '') {
             isValid = false;
             jobTitleField.classList.add('error'); // Add error class for empty job title
         } else {
             jobTitleField.classList.remove('error'); // Remove error class if the field is filled
+        }
+
+        for (let i = 0; i < employmentTypeRadioButtons.length; i++) {
+            if (employmentTypeRadioButtons[i].checked) {
+                employmentTypeSelected = true;
+                break; // Exit the loop once a radio button is selected
+            }
+        }
+    
+        // If no employment type is selected, set validation to false
+        const employmentTypeContainer = document.querySelector('#step2 .employment-type-container');
+        if (!employmentTypeSelected) {
+            isValid = false;
+            employmentTypeContainer.classList.add('error'); // Add error class to the container
+        } else {
+            employmentTypeContainer.classList.remove('error'); // Remove error class if selected
         }
     }
 

@@ -443,9 +443,9 @@ header img.slu-logo {
 
 .news-container {
     width: 100%; /* Ensure it takes full available width */
-    max-width: 1200px; /* Set a max-width if you want to limit how wide it gets */
+    max-width: 100%; /* Set a max-width if you want to limit how wide it gets */
     margin: 0 auto; /* Center it horizontally */
-    padding: 20px;
+    padding-left: 20px;
 }
 
 .news-title {
@@ -459,20 +459,23 @@ header img.slu-logo {
     display: grid; /* Use grid instead of flex for column-based layout */
     grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
     gap: 20px;  /* Space between the items */
+    padding-left: 20%;
+    row-gap: 20px;
 }
 
 .news-container .card {
-    width: 370%;/* Each card will fill its column */
+    width: 300%;/* Each card will fill its column */
     border: 1px solid #ddd;  /* Optional: Add a border to cards for better visual separation */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: Add a shadow effect */
 }
 
 .news-container .card-img-top {
-    width: 100%;
-    height: auto;  /* Ensure the image scales properly */
+    max-height: 80%; /* Adjust the height proportionally */
+    width: 100%; /* Make the image span the full width of the card */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    object-fit: cover; /* Ensures the image covers its container without stretching */
 }
 
 .news-container .card-body {
@@ -486,7 +489,7 @@ header img.slu-logo {
 
 .news-container .card-text {
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .news-container .text-muted {

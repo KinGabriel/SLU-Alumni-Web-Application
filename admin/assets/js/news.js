@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Create the image for the news item (if any)
                     const img = document.createElement('img');
                     img.classList.add('card-img-top');
-                    img.src = item.photo ? `data:image/jpeg;base64,${item.photo}` : '../assets/images/default-news-image.jpg'; // Use default image if no photo
+                    img.src = item.photo ? `data:image/jpeg;base64,${item.photo}` : '../assets/images/default-event-image.png'; // Use default image if no photo
                     img.alt = item.title;
                 
                     // Create the card body

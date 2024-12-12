@@ -178,15 +178,16 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <div class="card">
       <h2>Employment Type</h2>
       <br>
-<input type="radio" id="full_time" name="employment_type" value="Full Time">
-<label for="full_time">Full Time</label><br>
+        <div class="employment-type-container">
+        <input type="radio" id="full_time" name="employment_type" value="Full Time" required>
+        <label for="full_time">Full Time</label><br>
 
-<input type="radio" id="part_time" name="employment_type" value="Part Time">
-<label for="part_time">Part Time</label><br>
+        <input type="radio" id="part_time" name="employment_type" value="Part Time" required>
+        <label for="part_time">Part Time</label><br>
 
-<input type="radio" id="internship" name="employment_type" value="Internship">
-<label for="internship">Internship</label><br>
-
+        <input type="radio" id="internship" name="employment_type" value="Internship" required>
+        <label for="internship">Internship</label><br>
+        </div>
       </div>
     </div>
   </div>
