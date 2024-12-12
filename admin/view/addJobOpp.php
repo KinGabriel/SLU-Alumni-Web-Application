@@ -162,6 +162,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </div>
             <p>Valid file formats: JPG, GIF, PNG.</p>
             <img src="" alt="Company Logo" class="company-logo" style="display: none; width: 200px; height: 200px; object-fit: cover;"/>
+            <input type="hidden" name="defaultImage" value="../assets/images/default-event-image.png" />
+
             <div class="form-container">
               <h2>Basic Information</h2>
               <p class="info-text">This information will be displayed publicly</p>

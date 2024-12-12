@@ -20,30 +20,23 @@ try {
         $skills = $conn->real_escape_string($_POST['skills']);
         $requirements = $conn->real_escape_string($_POST['requirements']);
 
-        $image_data = null; // Default value if no image is uploaded
+        // $image_data = NULL;
 
+        // Check if an image was uploaded and process it
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            // Get image details
+            // User uploaded an image
             $image_tmp = $_FILES['image']['tmp_name'];
             $image_data = file_get_contents($image_tmp);
-
-            if ($image_data === false) {
-                echo "<script>alert('Failed to read image data.'); window.location.href = '../view/addJobOpp.php';</script>";
-                exit; // Stop further execution
-            }
         } else {
-            // Check for specific error codes
-            if (isset($_FILES['image'])) {
-                $upload_error = $_FILES['image']['error'];
-                if ($upload_error != UPLOAD_ERR_OK) {
-                    echo "<script>alert('Image upload error: $upload_error'); window.location.href = '../view/addJobOpp.php';</script>";
-                    exit;
-                }
+            // Use the default image if no image is uploaded
+            $default_image_path = $_POST['defaultImage'] ?? null;
+            if ($default_image_path && file_exists($default_image_path)) {
+                $image_data = file_get_contents($default_image_path);
             } else {
-                echo "<script>alert('No image uploaded.'); window.location.href = '../view/addJobOpp.php';</script>";
-                exit;
+                $image_data = null; // Or handle as needed
             }
         }
+              
 
         // Prepare the SQL statement with placeholders
         $sql = "INSERT INTO opportunity (company_name, country, zip_code, address, email, contact_number, description, job_title, skills, requirements, image_data) 
