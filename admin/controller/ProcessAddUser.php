@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($jobStatus == 'employed') {
         $jobStatus = '1';
     }
-    if($jobStatus == 'employed' && $userType == 'admin' ) {
+    if($jobStatus == 'employed' && $userType == 'admin' || $userType == 'manager' ) {
         $company = 'SLU Alumina';
     } else if($jobStatus == 'unemployed') {
         $company = 'N/A';
