@@ -1,12 +1,21 @@
+let offset = 0;
+let isLoading = false;
+let hasMorePosts = true;
+
 function getOwnPosts() {
-    fetch('/api/viewProfile/getOwnFeed')
+    if (isLoading || !hasMorePosts) return;
+
+    isLoading = true;
+
+    fetch(`/api/viewProfile/getOwnFeed?offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             const posts = data.posts;
             const feedContainer = document.querySelector('#feed');
-
-            feedContainer.innerHTML = ''; // Clear existing posts
-
+            if (posts.length === 0) {
+                hasMorePosts = false;
+                return;
+            }
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post', 'card', 'mt-4');
@@ -16,12 +25,13 @@ function getOwnPosts() {
                 const postContent = createPostContent(post);
                 const postActions = createPostActions(post);
 
-                // Append components to the post container
+                // Create a card body for styling
                 const cardBody = document.createElement('div');
                 cardBody.classList.add('card-body');
                 cardBody.appendChild(postHeader);
                 cardBody.appendChild(postContent);
 
+                // Append all components to the post container
                 postElement.appendChild(cardBody);
                 postElement.appendChild(postActions);
                 feedContainer.appendChild(postElement);
@@ -29,7 +39,10 @@ function getOwnPosts() {
 
             showMedia(data);  // Pass data to showMedia to update the media tab
         })
-        .catch(err => console.error('Error fetching posts:', err));
+        .catch(err => {
+            console.error('Error fetching posts:', err);
+            isLoading = false;
+        });
 }
 
 async function showMedia(data) {

@@ -199,10 +199,13 @@ export const isFollowing = (req, res) => {
         }
     });
 };
-
-export const getOtherPost = (req, res) => {
+export const getOtherPost = async (req, res) => {
     const targetUserId = req.query.user_id;
     const userId = req.userId;
+
+
+    const limit =  10;  
+    const offset = parseInt(req.query.offset) || 0; 
 
     const query = `
         SELECT 
@@ -244,13 +247,13 @@ export const getOtherPost = (req, res) => {
         GROUP BY 
             p.post_id
         ORDER BY p.post_id DESC
+        LIMIT ? OFFSET ?
     `;
 
-    dbConnection.query(query, [userId, userId, userId, userId, userId, targetUserId], (error, results) => {
-        if (error) {
-            console.error('Database error:', error);
-            return res.status(500).json({ error: 'Failed to fetch posts.' });
-        }
+    try {
+        const [results] = await dbConnection.promise().query(query, [
+            userId, userId, userId, userId, userId, targetUserId, limit, offset
+        ]);
 
         const posts = results.map(post => {
             if (post.banner) {
@@ -259,13 +262,17 @@ export const getOtherPost = (req, res) => {
             if (post.pfp) {
                 post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
             }
-            post.is_liked = post.is_liked > 0; 
+            post.is_liked = post.is_liked > 0;  
             return post;
         });
 
         res.status(200).json({ posts });
-    });
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Failed to fetch posts.' });
+    }
 };
+
 
 const handleMediaPost = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {

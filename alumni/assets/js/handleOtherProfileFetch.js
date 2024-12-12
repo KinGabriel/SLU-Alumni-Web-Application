@@ -185,19 +185,22 @@ function toggleFollow() {
         console.error('Error checking follow status:', error);
     });
 }
+let offset = 0;
+let isLoading = false;
+let hasMorePosts = true;
 
 function getOtherPosts() {
     const urlParams = new URLSearchParams(window.location.search);
     const targetUserId = urlParams.get('user_id');
 
-    fetch(`/api/profile-other/get-post?user_id=${targetUserId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
+    if (isLoading || !hasMorePosts) return;
+
+    isLoading = true;
+
+    fetch(`/api/profile-other/get-post?user_id=${targetUserId}&offset=${offset}`)
+        .then(response => response.json())
         .then(data => {
+            const posts = data.posts;
             const feedContainer = document.querySelector('#feed');
 
             if (!feedContainer) {
@@ -205,9 +208,11 @@ function getOtherPosts() {
                 return;
             }
 
-            feedContainer.innerHTML = ''; // Clear existing posts
+            if (posts.length === 0) {
+                hasMorePosts = false; 
+                return;
+            }
 
-            const posts = data.posts;
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post', 'card', 'mt-4');
@@ -225,11 +230,27 @@ function getOtherPosts() {
                 postElement.appendChild(postActions);
                 feedContainer.appendChild(postElement);
             });
+
+            offset += posts.length;
+            isLoading = false;
         })
         .catch(err => {
             console.error('Error fetching posts:', err);
+            isLoading = false;
         });
 }
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const clientHeight = window.innerHeight;
+
+    if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
+        getOtherPosts();
+    }
+});
+;
+
 
 
 function handleLike(postId, likeButton, isLiked, likeCountElement) {

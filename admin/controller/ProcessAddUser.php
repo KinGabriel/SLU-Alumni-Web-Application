@@ -121,6 +121,10 @@ function isEmailExist($connection, $email) {
 }
 
 function isAlumniExist($connection, $schoolID) {
+    if (empty($schoolID)) {
+        // If school ID is empty, do not check for its existence
+        return false;
+    }
     $query = "SELECT * FROM alumni WHERE school_id = ?"; 
     $stmt = $connection->prepare($query);
     $stmt->bind_param("s", $schoolID);
