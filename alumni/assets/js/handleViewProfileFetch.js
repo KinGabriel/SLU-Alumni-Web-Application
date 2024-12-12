@@ -25,11 +25,12 @@ function getOwnPosts() {
                 postElement.appendChild(cardBody);
                 postElement.appendChild(postActions);
                 feedContainer.appendChild(postElement);
+
+        
             });
         })
         .catch(err => console.error('Error fetching posts:', err));
 }
-
 
 
 function handleLike(postId, likeButton, isLiked, likeCountElement) {

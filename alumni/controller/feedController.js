@@ -54,44 +54,47 @@ export const handleUserPost = (req, res) => {
     });
 };
 export const getPost = (req, res) => {
-    const userId = req.userId;
+    const userId = req.userId; 
+    const offset = parseInt(req.query.offset) || 0; 
+
     const query = `
-   SELECT 
-            p.post_id,
-            p.banner,
-            p.post_type,
-            p.datetime,
-            p.description,
-            COUNT(DISTINCT l.like_id) AS like_count,
-            COUNT(DISTINCT c.comm_id) AS comment_count,
-            u.user_id AS poster_id,
-            u.pfp,
-            CONCAT(u.fname, ' ', u.lname) AS name,
-            (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
-        FROM posts p
-        LEFT JOIN likes l ON p.post_id = l.post_id
-        LEFT JOIN comments c ON p.post_id = c.post_id
-        LEFT JOIN follows f ON f.followed_id = p.user_id
-        JOIN user u ON u.user_id = p.user_id
-        WHERE 
+    SELECT 
+        p.post_id,
+        p.banner,
+        p.post_type,
+        p.datetime,
+        p.description,
+        COUNT(DISTINCT l.like_id) AS like_count,
+        COUNT(DISTINCT c.comm_id) AS comment_count,
+        u.user_id AS poster_id,
+        u.pfp,
+        CONCAT(u.fname, ' ', u.lname) AS name,
+        (SELECT COUNT(*) FROM likes WHERE post_id = p.post_id AND user_id = ?) > 0 AS is_liked  
+    FROM posts p
+    LEFT JOIN likes l ON p.post_id = l.post_id
+    LEFT JOIN comments c ON p.post_id = c.post_id
+    LEFT JOIN follows f ON f.followed_id = p.user_id
+    JOIN user u ON u.user_id = p.user_id
+    WHERE 
         p.user_id = ?
-        OR f.follower_id = ? and (
-            (u.access_type = 'public') OR
-            (u.access_type = 'private' AND (
-                u.user_id = ? OR 
-                (f.is_requested = 0 AND EXISTS (
+        OR f.follower_id = ? 
+        AND (
+            (u.access_type = 'public') 
+            OR (u.access_type = 'private' AND (
+                u.user_id = ? 
+                OR (f.is_requested = 0 AND EXISTS (
                     SELECT 1
                     FROM follows
-                    WHERE follower_id = ? AND followed_id = u.user_id
+                    WHERE follower_id = ? 
+                    AND followed_id = u.user_id
                 ))
             ))
         )
-GROUP BY 
-    p.post_id
+    GROUP BY p.post_id
     ORDER BY p.post_id DESC
-`;
-
-    dbConnection.query(query, [userId, userId,userId,userId,userId], (error, results) => {
+    LIMIT 10 OFFSET ?
+    `;
+    dbConnection.query(query, [userId, userId, userId, userId, userId, offset], (error, results) => {
         if (error) {
             console.error('Database error:', error);
             return res.status(500).json({ error: 'Failed to fetch posts.' });
@@ -99,17 +102,24 @@ GROUP BY
 
         const posts = results.map(post => {
             if (post.banner) {
-                post.banner = handleMedia(post.banner);
+                post.banner = handleMedia(post.banner); 
             }
+
             if (post.pfp) {
                 post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
             }
-            post.is_liked = post.is_liked > 0; // Convert to boolean
+
+            post.is_liked = post.is_liked > 0;
+
             return post;
         });
+
         res.status(200).json({ posts });
     });
 };
+
+
+
 // Helper method for handling images and videos
 const handleMedia = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {
