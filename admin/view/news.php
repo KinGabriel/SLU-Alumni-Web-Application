@@ -103,6 +103,8 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </div>
     </div>
 
+    
+
     <!-- JavaScript -->
     <script src="../assets/js/news.js"></script>
     <script>

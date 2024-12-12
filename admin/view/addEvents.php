@@ -192,9 +192,6 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           </form>
       </div>
   </main>
-
   <script src="../assets/js/addEvents.js"></script>
 </body>
-
-
 </html>
