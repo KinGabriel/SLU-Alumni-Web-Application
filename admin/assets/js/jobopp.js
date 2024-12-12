@@ -115,8 +115,13 @@ const updateSteps = (e) => {
     }
 
     // Ensure the image preview is shown if the file is already selected
-    if (currentStep === 2 && uploadedImageFile) {
-        imagePreview.style.display = "block";
+    if (currentStep === 2) {
+        if (uploadedImageFile) {
+            imagePreview.style.display = "block"; // Show uploaded image preview
+        } else {
+            imagePreview.src = "../assets/images/default-event-image.png"; // Use default image if no upload
+            imagePreview.style.display = "block"; // Show the default image
+        }
     }
 };
 
@@ -160,29 +165,41 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
     e.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(e.target); // Create FormData object
+    console.log("Uploaded Image File:", uploadedImageFile); // Log to check if the file is set
+
     if (uploadedImageFile) {
         console.log("Uploading file:", uploadedImageFile); // Log the file to check it's available
         formData.append("image", uploadedImageFile); // Add the image file to the form data
     } else {
-        console.log("No image uploaded in step 2.");
+        console.log("No image uploaded. Using default image.");
+        formData.append("defaultImage", "../assets/images/default-event-image.png"); // Append the default image URL
     }
 
     fetch("../controller/saveJobOpp.php", {
         method: "POST",
         body: formData,
     })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                alert("Job Opportunity added successfully!");
-                window.location.href = "../view/addJobOpp.php";
-            } else {
-                alert("Error: " + data.error);
-            }
-        })
-        .catch((error) => {
-            alert("An error occurred: " + error);
-        });
+    .then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json(); // Parse the response as JSON
+        } else {
+            throw new Error("Invalid response format from server.");
+        }
+    })
+    .then((data) => {
+        if (data.success) {
+            alert("Job Opportunity added successfully!");
+            window.location.href = "../view/addJobOpp.php"; // Redirect after success
+        } else {
+            console.error("Server Error:", data.error);
+            alert("Error: " + (data.error || "An unknown error occurred."));
+        }
+    })
+    .catch((error) => {
+        console.error("Fetch Error:", error); // Log the error for debugging
+        alert("An unexpected error occurred. Please try again later.");
+    });
 });
 
 // Add event listeners to buttons
@@ -312,3 +329,25 @@ const handleContactNumberValidation = (event) => {
 // Add event listener to the zip code field
 const contactNumberField = document.getElementById('contact-number');
 contactNumberField.addEventListener('input', handleContactNumberValidation);
+
+document.getElementById('image-upload').addEventListener('change', function () {
+    const file = this.files[0];
+    const fileNameSpan = document.getElementById('file-name');
+    const previewImage = document.querySelector('.company-logo');
+    
+    if (file) {
+      fileNameSpan.textContent = file.name;
+  
+      // Display image preview
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewImage.src = e.target.result;
+        previewImage.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      fileNameSpan.textContent = 'No Image chosen';
+      previewImage.style.display = 'none';
+    }
+  });
+  

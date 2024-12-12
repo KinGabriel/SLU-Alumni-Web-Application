@@ -90,3 +90,13 @@ async function removeFollowing(user_id, name, confirmModal) {
         alert('An error occurred while removing the following.');
     }
 }
+
+// handle accept
+function acceptRequest(userId, userName) {
+    console.log(`Accepted request from ${userName} (User ID: ${userId})`);
+}
+
+// handle decline
+function declineRequest(userId, userName) {
+    console.log(`Declined request from ${userName} (User ID: ${userId})`);
+}

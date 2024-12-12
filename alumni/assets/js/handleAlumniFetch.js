@@ -101,7 +101,7 @@ function searchUsers() {
         })
         .catch(error => {
             console.error('Error fetching search results:', error);
-            document.getElementById('searchResults').innerHTML = "Error fetching results.";
+            document.getElementById('searchResults').innerHTML = "No results found.";
         });
 }
 

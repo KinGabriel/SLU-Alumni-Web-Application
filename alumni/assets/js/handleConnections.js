@@ -20,7 +20,6 @@
     });
 });
 
-
 function updateConnectionsTable(data) {
     const table = document.getElementById('connectionsTable');
     table.innerHTML = ''; 
@@ -36,41 +35,56 @@ function updateConnectionsTable(data) {
             const connectionItem = document.createElement('div');
             connectionItem.classList.add('connection-item');
             connectionItem.setAttribute('data-user-id', connection.user_id); // unique user ID attribute
+            
             // Profile picture
             const profilePic = document.createElement('img');
             profilePic.src = connection.pfp;
             profilePic.alt = 'Profile Picture';
             profilePic.classList.add('profile-pic');
+            
             // Name 
             const nameDiv = document.createElement('div');
             nameDiv.classList.add('name');
             nameDiv.textContent = connection.name;
-            // Actions (Message and Remove buttons)
+            
+            // Actions (Accept and Decline buttons for requests, Remove for others)
             const actionsDiv = document.createElement('div');
             actionsDiv.classList.add('actions');
-            const messageBtn = document.createElement('button');
-            messageBtn.classList.add('message-btn');
-            messageBtn.textContent = 'Message';
-            messageBtn.onclick = () => sendMessage(connection.user_id);
-            // Conditionally show the "Remove" button based on the filter
-            if (filterValue !== 'mutuals') {
+            
+            if (filterValue === 'request') {
+                // Accept button
+                const acceptBtn = document.createElement('button');
+                acceptBtn.classList.add('accept-btn', 'btn'); 
+                acceptBtn.textContent = 'Accept';
+                acceptBtn.onclick = () => acceptRequest(connection.user_id, connection.name);
+                actionsDiv.appendChild(acceptBtn);
+                
+                // Decline button
+                const declineBtn = document.createElement('button');
+                declineBtn.classList.add('decline-btn', 'btn'); 
+                declineBtn.textContent = 'Decline';
+                declineBtn.onclick = () => declineRequest(connection.user_id, connection.name);
+                actionsDiv.appendChild(declineBtn);
+            } else if (filterValue !== 'mutuals') {
+                // Remove button for other filters
                 const removeBtn = document.createElement('button');
-                removeBtn.classList.add('remove-btn');
+                removeBtn.classList.add('remove-btn', 'btn');
                 removeBtn.textContent = 'Remove';
-                removeBtn.onclick = () => removeConnection(connection.user_id, connection.name);       
+                removeBtn.onclick = () => removeConnection(connection.user_id, connection.name);
                 actionsDiv.appendChild(removeBtn);
             }
-            // Append elements to actionsDiv
-            actionsDiv.appendChild(messageBtn);
+            
             // Append elements to connectionItem
             connectionItem.appendChild(profilePic);
             connectionItem.appendChild(nameDiv);
             connectionItem.appendChild(actionsDiv);
+            
             // Append connectionItem to the table
             table.appendChild(connectionItem);
         });
     }
 }
+
 
 document.querySelectorAll('.filter-button').forEach(button => {
     button.addEventListener('click', () => {
@@ -158,3 +172,4 @@ function removeConnection(user_id, name) {
        console.warn('Remove operation is not allowed for this filter.');
    }
 }
+

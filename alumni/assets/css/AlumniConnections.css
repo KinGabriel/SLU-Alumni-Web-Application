@@ -703,3 +703,38 @@ color: white;
 .search-result-item:active {
     background-color: #e0e0e0;  
 }
+
+/* Accept and Decline */
+.connections-table .accept-btn {
+    background-color: #28a745; 
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.connections-table .accept-btn:hover {
+    background-color: #218838; 
+    color: white;
+}
+
+.connections-table .decline-btn,
+.connections-table .remove-btn {
+    background-color: #dc3545; 
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.connections-table .decline-btn:hover,
+.connections-table .remove-btn:hover {
+    background-color: #c82333; 
+    color: white;
+}
