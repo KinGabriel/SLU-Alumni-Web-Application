@@ -33,7 +33,7 @@ export const connections = (req, res) => {
     const userId = req.userId;
     const { search = '', filter, sort } = req.query;  
     let query = `
-        SELECT u.user_id, CONCAT(u.fname, ' ', u.lname) AS name, u.pfp
+        SELECT DISTINCT u.user_id, CONCAT(u.fname, ' ', u.lname) AS name, u.pfp
         FROM user u
     `;
     let queryParams = [];
@@ -41,22 +41,36 @@ export const connections = (req, res) => {
     // filter 
 if (filter === 'followers') {
         query += `
-           INNER JOIN follows f1 ON u.user_id = f1.followed_id
-        INNER JOIN follows f2 ON u.user_id = f2.follower_id
-        WHERE f1.follower_id = ? AND f2.followed_id = ?  AND f1.is_requested = 0 or  f2.is_requested = 0 and not u.user_id = ?
+              INNER JOIN 
+            follows f1 
+            ON u.user_id = f1.follower_id 
+        INNER JOIN 
+            follows f2 
+            ON f1.follower_id = f2.followed_id 
+        WHERE 
+            f1.followed_id = ? 
+            AND f1.is_requested = 0
+       AND not u.user_id = ?
         `;
-        queryParams = [userId,userId,userId]; 
+        queryParams = [userId,userId]; 
       
     } else if (filter === 'following') {
         query += `
-        INNER JOIN follows f ON u.user_id = f.followed_id WHERE f.follower_id = ? AND f.is_requested = 0
+        INNER JOIN follows f ON u.user_id = f.followed_id WHERE f.follower_id = ? AND f.is_requested = 0  AND not u.user_id = ?
         `;
-        queryParams = [userId];  
+        queryParams = [userId,userId];  
     } else if (filter === 'request') {
         query += `
-            INNER JOIN follows f1 ON u.user_id = f1.followed_id
-            INNER JOIN follows f2 ON u.user_id = f2.follower_id
-            WHERE f1.follower_id = ? AND f2.followed_id = ? AND f1.is_requested = 1 AND f2.is_requested = 0 
+            INNER JOIN 
+            follows f1 
+            ON u.user_id = f1.follower_id 
+        INNER JOIN 
+            follows f2 
+            ON f1.follower_id = f2.followed_id 
+        WHERE 
+            f1.followed_id = ? 
+            AND f1.is_requested = 1
+            AND f2.is_requested = 0 AND not u.user_id = ?
     `;
     queryParams = [userId, userId];  
     } else {
@@ -179,7 +193,7 @@ export const acceptFollower = (req, res) => {
         WHERE follower_id = ? AND followed_id = ?
     `;
     
-    dbConnection.query(query, [userId, followerId], (err, result) => {
+    dbConnection.query(query, [followerId, userId], (err, result) => {
         if (err) {
             console.error("Database error while accepting follower:", err);
             return res.status(500).json({ error: "A database error occurred while accepting a follower." });
