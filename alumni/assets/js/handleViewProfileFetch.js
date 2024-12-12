@@ -38,6 +38,7 @@ function getOwnPosts() {
             });
 
             showMedia(data);  // Pass data to showMedia to update the media tab
+            showVideos(data); // Pass data to showVideo to update the video tab
         })
         .catch(err => {
             console.error('Error fetching posts:', err);
@@ -164,6 +165,124 @@ function isValidImage(url) {
         img.onerror = () => resolve(false); // Error loading image, resolve as false
 
         img.src = url;
+    });
+}
+
+async function showVideos(data) {
+    const videoContainer = document.querySelector('#videos-row'); // Updated selector
+    videoContainer.innerHTML = ''; // Clear previous video content
+
+    // Loop through the posts to check for video URLs
+    for (const post of data.posts) {
+        // Check if the post has a valid video URL
+        if (post.banner && await isValidVideo(post.banner)) {
+            console.log("Video found:", post.banner);
+
+            // Create a new column div for the video card
+            const videoCard = document.createElement('div');
+            videoCard.classList.add('col-md-4', 'mb-4');
+
+            // Card element
+            const card = document.createElement('div');
+            card.classList.add('video-card', 'card');
+            card.style.width = '100%';
+            card.style.maxWidth = '350px';
+            card.style.borderRadius = '8px';
+            card.style.overflow = 'hidden';
+            card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+            card.style.marginBottom = '1rem';
+
+            card.addEventListener('mouseover', () => {
+                card.style.transform = 'scale(1.05)';
+                card.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            });
+            card.addEventListener('mouseout', () => {
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            });
+
+            // Video element
+            const video = document.createElement('video');
+            video.src = post.banner;
+            video.controls = true;
+            video.style.width = '100%';
+            video.style.height = '350px';
+            video.style.objectFit = 'cover';
+
+            // Append the video to the card
+            card.appendChild(video);
+
+            // Card body
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+            cardBody.style.padding = '1rem';
+            cardBody.style.backgroundColor = '#f8f8f8';
+            cardBody.style.flexGrow = '1';
+
+            // Buttons container
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('d-flex', 'justify-content-between');
+
+            const likeImage = post.is_liked ? 'like.png' : 'grayLike.png';
+            const likeButton = createPostActionButton('Like', likeImage, post.like_count);
+            const commentButton = createPostActionButton('Comment', 'comment.png', post.comment_count);
+
+            const likeCountElement = likeButton.querySelector('span');
+
+            // Like button functionality
+            likeButton.addEventListener('click', function() {
+                const isLiked = post.is_liked;
+                post.is_liked = !isLiked;
+                handleLike(post.post_id, likeButton, isLiked, likeCountElement);
+            });
+
+            // Append buttons to the button container
+            buttonContainer.appendChild(likeButton);
+            buttonContainer.appendChild(commentButton);
+
+            // Append the button container to the card body
+            cardBody.appendChild(buttonContainer);
+
+            // Append the card body to the card
+            card.appendChild(cardBody);
+
+            // Append the card to the column
+            videoCard.appendChild(card);
+
+            // Append the column to the media container
+            videoContainer.appendChild(videoCard);
+
+            // Comment button functionality
+            commentButton.addEventListener('click', function() {
+                const postId = post.post_id;
+
+                let commentModal = document.getElementById(`commentModal-${postId}`);
+                if (!commentModal) {
+                    commentModal = createCommentModal(postId);
+                    document.body.appendChild(commentModal);
+                }
+
+                loadComments(postId); // Load existing comments for the post
+                const modal = new bootstrap.Modal(commentModal);
+                modal.show();
+
+                // Ensure the submit comment handler is set only once
+                setupSubmitCommentHandler(postId);
+            });
+        } else {
+            console.log("No valid image found or banner is missing:", post.banner); 
+        }
+    }
+}
+// Function to validate if the URL is an actual video
+function isValidVideo(url) {
+    return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.oncanplay = () => resolve(true);  // Video loaded successfully
+        video.onerror = () => resolve(false); // Error loading video, resolve as false
+
+        video.src = url;
     });
 }
 
