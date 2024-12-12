@@ -1,23 +1,39 @@
-import dbConnection from '../../database/connection.js';
+import dbConnection from '../../database/connection.js'; 
 
-export const getNews = async (req, res) => {
-    try {
-      const [rows] = await dbConnection.execute(
-        'SELECT news_id, photo, title, description, datetime FROM news ORDER BY datetime DESC'
-      );
-  
-      const news = rows.map((row) => {
-        return {
-          news_id: row.news_id,
-          photo: row.photo ? Buffer.from(row.photo).toString('base64') : null,
-          title: row.title ? row.title : '',
-          description: row.description ? row.description : '', 
-          datetime: row.datetime,
-        };
+export const getNews = (req, res) => {
+    const query = `SELECT news_id, photo, title, description, datetime FROM news ORDER BY datetime DESC`;
+
+    dbConnection.query(query, (err, results) => {
+        if (err) {
+            console.error('Error fetching news:', err);
+            return res.status(500).json({ status: 'error', message: 'An error occurred while fetching news.' });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            news: results
+        });
+    });
+};
+
+export const getNewsDetails = (req, res) => {
+  const { news_id } = req.params;
+
+  const query = `SELECT news_id, photo, title, description, datetime FROM news WHERE news_id = ?`;
+
+  dbConnection.query(query, [news_id], (err, results) => {
+      if (err) {
+          console.error('Error fetching news details:', err);
+          return res.status(500).json({ status: 'error', message: 'An error occurred while fetching news details.' });
+      }
+
+      if (results.length === 0) {
+          return res.status(404).json({ status: 'error', message: 'News not found.' });
+      }
+
+      res.status(200).json({
+          status: 'success',
+          news: results[0],
       });
-      res.json({ status: 'success', news });
-    } catch (error) {
-      console.error('Error fetching news:', error);
-      res.status(500).json({ status: 'error', message: error.message });
-    }
-  };
+  });
+};
