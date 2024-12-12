@@ -440,3 +440,55 @@ header img.slu-logo {
   .btn-3 span:hover:after {
     width: 100%;
   }
+
+.news-container {
+    width: 100%; /* Ensure it takes full available width */
+    max-width: 1200px; /* Set a max-width if you want to limit how wide it gets */
+    margin: 0 auto; /* Center it horizontally */
+    padding: 20px;
+}
+
+.news-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.news-container .row {
+    /* Remove flex-direction: column; to allow the grid system to work */
+    display: grid; /* Use grid instead of flex for column-based layout */
+    grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+    gap: 20px;  /* Space between the items */
+}
+
+.news-container .card {
+    width: 370%;/* Each card will fill its column */
+    border: 1px solid #ddd;  /* Optional: Add a border to cards for better visual separation */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: Add a shadow effect */
+}
+
+.news-container .card-img-top {
+    width: 100%;
+    height: auto;  /* Ensure the image scales properly */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.news-container .card-body {
+    padding: 20px;
+}
+
+.news-container .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.news-container .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.news-container .text-muted {
+    font-size: 0.875rem;
+}
