@@ -364,8 +364,8 @@ header img.slu-logo {
     padding: 0;
     border: none;
     position: absolute; /* Absolute positioning to place it anywhere on the screen */
-    top: 140px; 
-    right: 1150px; 
+    top: 130px; 
+    right: 360px; 
     z-index: 9999; /* Ensure the button is on top of other elements */
   }
   
