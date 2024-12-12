@@ -201,7 +201,7 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
     .then((data) => {
         if (data.success) {
             alert("Job Opportunity added successfully!");
-            window.location.href = "../view/addJobOpp.php"; // Redirect after success
+            window.location.href = "../view/jobOpportunities.php"; // Redirect after success
         } else {
             console.error("Server Error:", data.error);
             alert("Error: " + (data.error || "An unknown error occurred."));
