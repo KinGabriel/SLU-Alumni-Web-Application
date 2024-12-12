@@ -12,16 +12,39 @@ function getUserInfo() {
         console.log(data);
         const pfpElements = document.querySelectorAll('[name="pfp"]');
         pfpElements.forEach((element) => {
-            element.src = data.pfp;
+            element.src = data.pfp || '../assets/images/default-profile.jpg';
+            element.onerror = () => {
+                element.src = '../assets/images/default-profile.jpg';
+            };
         });
         const nameElements = document.querySelectorAll('[name="name"]');
         for (let i = 0; i < nameElements.length; i++) {
             nameElements[i].innerText = data.name || 'Unknown';
         }
+        const company = document.querySelectorAll('[name="company"]');
+        for (let i = 0; i < company.length; i++) {
+            company[i].innerText = data.company || 'Unemployed';
+        }
         document.querySelector('[name="bio"]').innerText = data.bio || '';
         document.querySelector('[name="post_count"]').innerText = data.post_count || 0;
         document.querySelector('[name="followers_count"]').innerText = data.follower_count || 0;
         document.querySelector('[name="followed_count"]').innerText = data.followed_count || 0;
+        
+         // Get the labels
+         const privateLabel = document.getElementById("private-label");
+         const publicLabel = document.getElementById("public-label");
+
+         // Hide both labels initially
+         privateLabel.style.display = "none";
+         publicLabel.style.display = "none";
+
+         if (data.access_type === 'private') {
+             privateLabel.classList.add("show");
+             publicLabel.classList.remove("show");
+         } else if (data.access_type === 'public') {
+             publicLabel.classList.add("show");
+             privateLabel.classList.remove("show");
+         }
     })
     .catch(error => console.error('Error fetching data:', error));
 }

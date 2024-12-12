@@ -10,7 +10,10 @@ function getOtherUserInfo() {
                 // Populate user profile data
                 const pfpElements = document.querySelectorAll('[name="otherPfp"]');
                 pfpElements.forEach((element) => {
-                    element.src = data.pfp;
+                    element.src = data.pfp || '../assets/images/default-profile.jpg';
+                    element.onerror = () => {
+                        element.src = '../assets/images/default-profile.jpg';
+                    };
                 });
                 const nameElements = document.querySelectorAll('[name="otherUserName"]');
                 nameElements.forEach((element) => {
@@ -20,11 +23,12 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_post_count"]').innerText = data.post_count || 0;
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
-
+                document.querySelector('[name="otherCompany"]').innerText = data.company || 'Unemployed';
                 // Get the labels
                 const privateLabel = document.getElementById("private-label");
                 const publicLabel = document.getElementById("public-label");
-
+                
+                
                 // Hide both labels initially
                 privateLabel.style.display = "none";
                 publicLabel.style.display = "none";
@@ -181,19 +185,22 @@ function toggleFollow() {
         console.error('Error checking follow status:', error);
     });
 }
+let offset = 0;
+let isLoading = false;
+let hasMorePosts = true;
 
 function getOtherPosts() {
     const urlParams = new URLSearchParams(window.location.search);
     const targetUserId = urlParams.get('user_id');
 
-    fetch(`/api/profile-other/get-post?user_id=${targetUserId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
+    if (isLoading || !hasMorePosts) return;
+
+    isLoading = true;
+
+    fetch(`/api/profile-other/get-post?user_id=${targetUserId}&offset=${offset}`)
+        .then(response => response.json())
         .then(data => {
+            const posts = data.posts;
             const feedContainer = document.querySelector('#feed');
 
             if (!feedContainer) {
@@ -201,9 +208,11 @@ function getOtherPosts() {
                 return;
             }
 
-            feedContainer.innerHTML = ''; // Clear existing posts
+            if (posts.length === 0) {
+                hasMorePosts = false; 
+                return;
+            }
 
-            const posts = data.posts;
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post', 'card', 'mt-4');
@@ -221,11 +230,27 @@ function getOtherPosts() {
                 postElement.appendChild(postActions);
                 feedContainer.appendChild(postElement);
             });
+
+            offset += posts.length;
+            isLoading = false;
         })
         .catch(err => {
             console.error('Error fetching posts:', err);
+            isLoading = false;
         });
 }
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const clientHeight = window.innerHeight;
+
+    if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
+        getOtherPosts();
+    }
+});
+;
+
 
 
 function handleLike(postId, likeButton, isLiked, likeCountElement) {

@@ -368,18 +368,22 @@ header img.slu-logo {
 
 /* Button 3 Style */
 .btn-3 {
-  background: rgb(0,172,238);
-  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-  width: 130px;
-  height: 40px;
-  line-height: 42px;
-  padding: 0;
-  border: none;
-  position: absolute; /* Absolute positioning to place it anywhere on the screen */
-  top: 245px; /* Position 10px from the top */
-  right: 340px; /* Position 10px from the right */
-  z-index: 9999; /* Ensure the button is on top of other elements */
-}
+    background: rgb(0,172,238);
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    position: absolute; /* Absolute positioning to place it anywhere on the screen */
+    top: 245px; /* Position 10px from the top */
+    right: 340px; /* Position 10px from the right */
+    z-index: 9999; /* Ensure the button is on top of other elements */
+    
+    /* Make the edges rounded */
+    border-radius: 20px; /* Adjust this value for more or less rounded corners */
+  }
+  
 
 .btn-3 span {
   position: relative;
@@ -528,4 +532,32 @@ header img.slu-logo {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
+}
+
+/* Apply margin for smaller screen sizes */
+.row-cols-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem; /* Space between cards */
+}
+
+/* Apply grid layout with 3 columns for medium screens and above */
+.row-cols-md-3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
+    gap: 1rem; /* Space between cards */
+}
+
+/* Ensure card container is centered */
+.row {
+    max-width: 1200px; /* Limit width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 1rem; /* Padding around the container */
+    margin-left: 52%;
+}
+
+/* Ensure cards are responsive and do not overflow */
+.card {
+    width: 100%; /* Make sure cards take full width in each column */
+    box-sizing: border-box; /* Include padding and border in width calculation */
 }

@@ -17,6 +17,7 @@ try {
         $contact_number = $conn->real_escape_string($_POST['contact-number']);
         $description = $conn->real_escape_string($_POST['company-description']);
         $job_title = $conn->real_escape_string($_POST['job-title']);
+        $employment_type = $conn->real_escape_string($_POST['employment_type']);
         $skills = $conn->real_escape_string($_POST['skills']);
         $requirements = $conn->real_escape_string($_POST['requirements']);
 
@@ -39,13 +40,13 @@ try {
               
 
         // Prepare the SQL statement with placeholders
-        $sql = "INSERT INTO opportunity (company_name, country, zip_code, address, email, contact_number, description, job_title, skills, requirements, image_data) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO opportunity (company_name, country, zip_code, address, email, contact_number, description, job_title, skills, requirements, image_data, employment_type) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Prepare the statement
         if ($stmt = $conn->prepare($sql)) {
             // Bind parameters to the statement (s = string, b = blob)
-            $stmt->bind_param("sssssssssss", $company_name, $country, $zip_code, $address, $email, $contact_number, $description, $job_title, $skills, $requirements, $image_data);
+            $stmt->bind_param("ssssssssssss", $company_name, $country, $zip_code, $address, $email, $contact_number, $description, $job_title, $skills, $requirements, $image_data, $employment_type);
 
             // Execute the statement
             if ($stmt->execute()) {

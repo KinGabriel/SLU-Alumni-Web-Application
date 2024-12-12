@@ -1,20 +1,29 @@
-// handle get posts of users
+let offset = 0;
+let isLoading = false;
+let hasMorePosts = true;
+
 function getUserPosts() {
-    fetch('/api/feed/getfeed')
+    if (isLoading || !hasMorePosts) return; 
+
+    isLoading = true; 
+
+    fetch(`/api/feed/getfeed?offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             const posts = data.posts;
             const feedContainer = document.querySelector('.feed');
-            feedContainer.innerHTML = '';
+
+            if (posts.length === 0) {
+                hasMorePosts = false;
+                return;
+            }
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
-                // call the helper method which are located in handleHomefeed.js
                 const postHeader = createPostHeader(post); 
                 const postContent = createPostContent(post); 
                 const postActions = createPostActions(post);
-                // append
                 postElement.appendChild(postHeader);
                 postElement.appendChild(postContent);
                 postElement.appendChild(document.createElement('hr'));
@@ -22,9 +31,25 @@ function getUserPosts() {
 
                 feedContainer.appendChild(postElement);
             });
+
+            offset += posts.length;
+            isLoading = false; 
         })
-        .catch(err => console.error('Error fetching posts:', err));
+        .catch(err => {
+            console.error('Error fetching posts:', err);
+            isLoading = false; 
+        });
 }
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight; 
+    const scrollTop = window.scrollY || window.pageYOffset; 
+    const clientHeight = window.innerHeight; 
+    if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
+        getUserPosts();
+    }
+    
+});
 
 
 
@@ -59,13 +84,12 @@ function handlePostSubmit() {
         const submitPostButton = document.querySelector('#submitPost');
         if (submitPostButton) {
             submitPostButton.addEventListener('click', () => {
-                const description = document.querySelector('.modal-body textarea').value;
-                const post_type = 'normal';
-                const datetime = new Date().toISOString();  
+                const description = document.querySelector('#postForm textarea').value.trim();
+                const post_type = 'normal'; 
                 const formData = new FormData();
+                console.log(description)
                 formData.append('description', description);
                 formData.append('post_type', post_type);
-                formData.append('datetime', datetime);
             
                 const imageInput = document.getElementById('photoInput');
                 if (imageInput && imageInput.files.length > 0) {
@@ -243,6 +267,8 @@ async function postComment(postId, commentText) {
 }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    getUserPosts();
+    handlePostSubmit();
+});
 
-getUserPosts();
-handlePostSubmit();

@@ -8,7 +8,7 @@ function createPostHeader(post) {
 
     const profileImg = document.createElement('img');
     profileImg.classList.add('rounded-circle', 'me-3', 'feed-profile-img');
-    profileImg.src = post.pfp || '../assets/images/default-avatar-icon.jpg';
+    profileImg.src = post.pfp || '../assets/images/default-profile.jpg';
     profileImg.alt = 'User Profile';
 
     const userInfo = document.createElement('div');

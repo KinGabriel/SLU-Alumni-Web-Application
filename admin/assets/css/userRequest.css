@@ -318,6 +318,81 @@ header img.slu-logo {
     background-color: #1E88E5; 
 }
 
+/*Pagination */
+.pagination {
+    display: flex;
+    justify-content: center; 
+    gap: 5px; 
+    margin: 20px 0; 
+    margin-right: 1.5vw; 
+    list-style-type: none;
+  }
+  
+  /* Style for individual page items */
+  .page-item {
+    margin: 0; 
+  }
+  
+  /* Style for page links */
+  .page-link {
+    padding: 5px 10px; 
+    font-size: 14px; 
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    color: #007bff; 
+    text-decoration: none; 
+  }
+  
+  
+  .page-link:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Active page link */
+  .page-item.active .page-link {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  /* Disable links (for next/prev) */
+  .page-item.disabled .page-link {
+    color: #ccc;
+    pointer-events: none;
+  }  
+  
+
+/* Edit Icon Styling - Smaller */
+.edit-icon {
+    position: absolute;
+    top: 12px; /* Adjust for smaller size */
+    right: 12px; /* Adjust for smaller size */
+    color: #555; /* Default icon color */
+    font-size: 1rem; /* Smaller icon size */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    border-radius: 50%; /* Circle background */
+    padding: 3px; /* Reduce padding for smaller icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+    transition: color 0.3s ease; /* Smooth transition for the icon color */
+    z-index: 10; /* Ensure it appears above the image */
+  }
+  
+  /* Change icon color on hover */
+  .edit-icon i {
+    transition: color 0.3s ease; /* Smooth color transition for icon */
+  }
+  
+  .edit-icon:hover i {
+    color: #003DA5; /* Icon turns blue on hover */
+  }
+  .edit-icon:hover {
+    background-color: transparent; /* Make background transparent on hover */
+  }
+
 /* Style for the user name and profile pic */
 .user-name {
     display: flex;
