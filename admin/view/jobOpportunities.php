@@ -87,105 +87,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 </div>
 
 <!-- Job Cards -->
-<div class="row row-cols-1 row-cols-md-3 g-4" id="job-list">
-    <div class="col" data-type="full-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Frontend Developer</h5>
-                <span class="badge bg-success mb-2">FULL TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="part-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">UX/UI Designer</h5>
-                <span class="badge bg-warning mb-2">PART TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="full-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Data Scientist</h5>
-                <span class="badge bg-success mb-2">FULL TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="internship">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Marketing Intern</h5>
-                <span class="badge bg-info mb-2">INTERNSHIP</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="part-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Graphic Designer</h5>
-                <span class="badge bg-warning mb-2">PART TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="full-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Backend Developer</h5>
-                <span class="badge bg-success mb-2">FULL TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="part-time">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Content Writer</h5>
-                <span class="badge bg-warning mb-2">PART TIME</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col" data-type="internship">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Product Management Intern</h5>
-                <span class="badge bg-info mb-2">INTERNSHIP</span>
-                <div class="d-flex align-items-center">
-                    <img src="../assets/images/google-logo.png" alt="Google Logo" class="me-2" style="width: 40px; height: 40px;">
-                    <p class="mb-0">Google Inc.<br><small>@ Mountain View, USA</small></p>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4" id="job-list">
+        <!-- Job opportunities will be injected here dynamically via JavaScript -->
     </div>
 </div>
-
 
 <div class="pagination">
     <button id="prevPage" class="pagination-button" disabled>Previous</button>
@@ -195,6 +101,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 
 <!-- Link to custom JavaScript -->
+<script src="../assets/js/fetchJobOpps.js"></script>
 <script src="../assets/js/jobOppor.js"></script> 
 
 </body>
