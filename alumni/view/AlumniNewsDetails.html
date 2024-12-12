@@ -108,9 +108,7 @@
 
                 const { title, photo, description } = data.news;
 
-                document.querySelector('.image-section img').src = photo
-                    ? `data:image/jpeg;base64,${photo}`
-                    : '../../assets/images/default-news.jpg';
+                document.querySelector('.image-section img').src = photo || '';
                 document.querySelector('.content-section h1').textContent = title;
                 document.querySelector('.content-section').querySelectorAll('p')[0].textContent = description;
             } catch (error) {

@@ -27,7 +27,7 @@ async function getNews() {
             cardDiv.classList.add('card', 'h-100');
             
             const img = document.createElement('img');
-            img.src = newsItem.photo ? `data:image/jpeg;base64,${newsItem.photo}` : '../assets/images/default-news.jpg';
+            img.src = newsItem.photo || '../assets/images/default-news.jpg';
             img.classList.add('card-img-top');
             img.alt = newsItem.title;
 
