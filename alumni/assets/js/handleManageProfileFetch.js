@@ -12,12 +12,16 @@ function populateForm() {
             document.getElementById('email').value = user.email || '';
             document.getElementById('idNumber').value = user.school_id || '';
             const jobStatusSelect = document.getElementById('jobStatus');
-            if (user.jobStatus) {
-                toggleCompanyField('employed')
-                jobStatusSelect.value = 'employed'; 
+            const companyField = document.getElementById('company');
+
+            if (user.company) {
+                jobStatusSelect.value = 'employed';
+                companyField.value = user.company || '';
+                companyField.parentElement.style.display = 'block'; 
             } else {
-                toggleCompanyField('unemployed')
-                jobStatusSelect.value = 'unemployed'; 
+                jobStatusSelect.value = 'unemployed';
+                companyField.value = '';
+                companyField.parentElement.style.display = 'none'
             }
             document.getElementById('company').value = user.company || '';  
             document.getElementById('bio').value = user.bio || '';
@@ -46,7 +50,7 @@ function populateForm() {
 function toggleCompanyField(jobStatus) {
     const companyField = document.getElementById('company');
     if (jobStatus === 'employed') {
-        companyField.disabled = false;  // Enable the company input field
+        companyField.disabled = false;  
         companyField.parentElement.style.display = 'block';  
     } else if (jobStatus === 'unemployed') {
         companyField.disabled = true;  // Disable the company input field
@@ -102,9 +106,6 @@ function handleSaveChanges() {
         company: jobStatus === 'unemployed' ? '' : document.getElementById('company').value,
         bio: document.getElementById('bio').value,
         access_type: document.querySelector('input[name="accountType"]:checked')?.value,
-        school: document.getElementById('school').value,
-        program: document.getElementById('degree').value,
-        gradyear: document.getElementById('gradYear').value,
     };
 
     fetch('/api/manage-profile/update-details', {

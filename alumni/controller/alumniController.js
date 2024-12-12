@@ -37,6 +37,8 @@ export const getAlumni = (req, res) => {
             CONCAT(u.fname, ' ', u.lname) AS Name, 
             u.pfp,
             a.bio, 
+            u.company,
+            u.access_type,
             COUNT(DISTINCT CASE WHEN f.follower_id = ? AND f.is_requested = 0 THEN f.followed_id END) AS followed_count, 
             COUNT(DISTINCT CASE WHEN f.followed_id = ? AND f.is_requested = 0 THEN f.follower_id END) AS follower_count, 
             COUNT(DISTINCT p.post_id) AS post_count,
@@ -76,6 +78,8 @@ export const getAlumni = (req, res) => {
             bio: user.bio,
             post_count: user.post_count,
             pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
+            access_type: user.access_type,
+            company: user.company
         };
         if (user.is_requested === 0) {
             responseData.follower_count = user.follower_count;
@@ -87,6 +91,7 @@ export const getAlumni = (req, res) => {
 
 export const searchUsers = async (req, res) => {
     const searchTerm = req.query.query || "";  
+    const userId = req.userId;
 
     if (!searchTerm) {
         return res.status(400).json({ error: 'Search term is required' });  
@@ -95,10 +100,10 @@ export const searchUsers = async (req, res) => {
     try {
         const query = `SELECT user_id, CONCAT(fname, ' ', lname) AS name 
                        FROM user 
-                       WHERE CONCAT(fname, ' ', lname) LIKE ?`;
+                       WHERE CONCAT(fname, ' ', lname) LIKE ? AND NOT user_id = ? `;
 
 
-        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`]);
+        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`,userId]);
 
         // If no users were found
         if (users.length === 0) {

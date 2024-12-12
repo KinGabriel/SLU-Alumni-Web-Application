@@ -23,11 +23,12 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_post_count"]').innerText = data.post_count || 0;
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
-
+                document.querySelector('[name="otherCompany"]').innerText = data.company || 'Unemployed';
                 // Get the labels
                 const privateLabel = document.getElementById("private-label");
                 const publicLabel = document.getElementById("public-label");
-
+                
+                
                 // Hide both labels initially
                 privateLabel.style.display = "none";
                 publicLabel.style.display = "none";

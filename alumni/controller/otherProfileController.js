@@ -1,4 +1,6 @@
 import dbConnection from '../../database/connection.js';
+import fs from 'fs';
+import path from 'path';
 
 export const getOtherUserInfo = (req, res) => {
     const userId = req.query.user_id; 
@@ -12,6 +14,7 @@ export const getOtherUserInfo = (req, res) => {
             CONCAT(u.fname, ' ', u.lname) AS Name, 
             u.pfp,
             a.bio,
+            u.company,
             (SELECT COUNT(*) FROM follows WHERE follower_id = u.user_id AND is_requested = 0) AS followed_count,  -- Exclude requested followers
             (SELECT COUNT(*) FROM follows WHERE followed_id = u.user_id AND is_requested = 0) AS follower_count,  -- Exclude requested followers
             (SELECT COUNT(*) FROM posts WHERE user_id = u.user_id) AS post_count,
@@ -51,7 +54,8 @@ export const getOtherUserInfo = (req, res) => {
             bio: user.bio,
             post_count: user.post_count,
             pfp: user.pfp ? 'data:image/jpeg;base64,' + Buffer.from(user.pfp).toString('base64') : '/assets/images/default-avatar-icon.jpg',
-            access_type: user.access_type
+            access_type: user.access_type,
+            company: user.company
         };
         if (user.is_requested === 0) {
             responseData.follower_count = user.follower_count;
@@ -250,7 +254,7 @@ export const getOtherPost = (req, res) => {
 
         const posts = results.map(post => {
             if (post.banner) {
-                post.banner = handleMedia(post.banner);
+                post.banner = handleMediaPost(post.banner);
             }
             if (post.pfp) {
                 post.pfp = `data:image/jpeg;base64,${post.pfp.toString('base64')}`;
@@ -261,6 +265,28 @@ export const getOtherPost = (req, res) => {
 
         res.status(200).json({ posts });
     });
+};
+
+const handleMediaPost = (bannerPath) => {
+    if (Buffer.isBuffer(bannerPath)) {
+        bannerPath = bannerPath.toString('utf-8').trim();
+    }
+    if (typeof bannerPath === 'string' && fs.existsSync(bannerPath)) {
+        const ext = path.extname(bannerPath).toLowerCase();
+        
+        // Handle image files
+        if (['.jpg', '.jpeg', '.png', '.gif'].includes(ext)) {
+            const imageBuffer = fs.readFileSync(bannerPath);
+            return `data:image/${ext.slice(1)};base64,${imageBuffer.toString('base64')}`;
+        }
+        
+        // Handle video files
+        if (['.mp4', '.mkv', '.mov'].includes(ext)) {
+            const videoBuffer = fs.readFileSync(bannerPath);
+            return `data:video/${ext.slice(1)};base64,${videoBuffer.toString('base64')}`;
+        }
+    }
+    return ''; // if empty
 };
 
 const handleMedia = (media) => {

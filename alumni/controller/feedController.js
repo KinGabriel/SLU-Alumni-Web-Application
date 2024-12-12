@@ -56,7 +56,7 @@ export const handleUserPost = (req, res) => {
 export const getPost = (req, res) => {
     const userId = req.userId;
     const query = `
-    SELECT 
+   SELECT 
             p.post_id,
             p.banner,
             p.post_type,
@@ -74,14 +74,24 @@ export const getPost = (req, res) => {
         LEFT JOIN follows f ON f.followed_id = p.user_id
         JOIN user u ON u.user_id = p.user_id
         WHERE 
-        p.user_id = ?  
-        OR f.follower_id = ?  
+        p.user_id = ?
+        OR f.follower_id = ? and (
+            (u.access_type = 'public') OR
+            (u.access_type = 'private' AND (
+                u.user_id = ? OR 
+                (f.is_requested = 0 AND EXISTS (
+                    SELECT 1
+                    FROM follows
+                    WHERE follower_id = ? AND followed_id = u.user_id
+                ))
+            ))
+        )
 GROUP BY 
     p.post_id
     ORDER BY p.post_id DESC
 `;
 
-    dbConnection.query(query, [userId, userId,userId], (error, results) => {
+    dbConnection.query(query, [userId, userId,userId,userId,userId], (error, results) => {
         if (error) {
             console.error('Database error:', error);
             return res.status(500).json({ error: 'Failed to fetch posts.' });
