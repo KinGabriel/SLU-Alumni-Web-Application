@@ -543,59 +543,21 @@ textarea {
   cursor: pointer;
 }
 .video-section h2 {
-  color: blue;
+  color: #003DA5;
   font-size: 2rem; 
   font-weight: bold; 
   text-align: left; 
   margin-bottom: 20px; 
 }
 
-/* Media styling */
-.image-section {
+.container .image-section h2 {
+  color: #003DA5;
   margin-top: 30px;
-}
-.image-card {
-  position: relative;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 10px;
-  background-color: #f9f9f9;
-  text-align: center;
-}
-.image-card img {
-  width: 100%;
-  border-radius: 10px;
-  height: auto;
-}
-.play-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  cursor: pointer;
-}
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  align-items: center;
-}
-.actions img {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
-
-.image-section h2 {
-  color: blue;
   font-size: 2rem; 
   font-weight: bold; 
   text-align: left; 
-  margin-bottom: 20px; 
+  margin-bottom: 20px;  
 }
-
 
 /* Styling for individual search result items */
 #searchResults {

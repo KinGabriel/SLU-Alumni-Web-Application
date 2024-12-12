@@ -149,21 +149,21 @@
         <!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
         <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
        <!-- Navigation Tabs: Provides navigation between Feed, Connections, Media, and Videos -->
-        <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" data-target="feed" onclick="changeTab(event, 'feed')">Feed</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-target="connections" onclick="changeTab(event, 'connections')">Connections</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-target="media" onclick="changeTab(event, 'media')">Media</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-target="videos" onclick="changeTab(event, 'videos')">Videos</a>
-            </li>
-        </ul>
-    </div>
+       <ul class="nav nav-tabs mt-4 px-4" id="nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#" data-target="feed" onclick="changeTab(event, 'feed')">Feed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-target="connections" onclick="changeTab(event, 'connections')">Connections</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-target="media" onclick="changeTab(event, 'media')">Media</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" data-target="videos" onclick="changeTab(event, 'videos')">Videos</a>
+        </li>
+    </ul>
+</div>
         <!-- Tab Content -->
         <div id="feed" class="tab-content" style="display: block;">
             <!-- Feed Section -->
@@ -206,139 +206,30 @@
         </div>
 
         <div id="connections" class="tab-content" style="display: none;">
-             <!-- Connections Table -->
-             <div class="connections-table" id="connectionsTable">
+            <!-- Connections Table -->
+            <div class="connections-table" id="connectionsTable">
                 <!-- DOM generated -->
             </div>
         </div>
-
+        
         <div id="media" class="tab-content" style="display: none;">
-        <div class="container image-section">
-            <h2>Media</h2>
-            <div class="row g-4">
-              <!-- Image Card 1 -->
-              <div class="col-md-4">
-                <div class="image-card">
-                  <img src="../assets/images/navi.jpg" alt="Image 1">
-                  <div class="actions">
-                    <div class="post-actions card-footer d-flex align-items-center">
-                        <div class="d-flex">
-                            <button class="btn btn-outline-primary me-2">
-                                <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                            </button>
-                            <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                            </button>
-                        </div>
-                    </div>
-                  </div>
+            <div class="container image-section">
+                <h2>Media</h2>
+                <div class="row g-4" id="media-images">
+                    <!-- Dynamically populated image cards will go here -->
                 </div>
-              </div>
-        
-              <!-- Image Card 2 -->
-              <div class="col-md-4">
-                <div class="image-card">
-                  <img src="../assets/images/navi.jpg" alt="Image 2">
-                  <div class="actions">
-                    <div class="post-actions card-footer d-flex align-items-center">
-                        <div class="d-flex">
-                            <button class="btn btn-outline-primary me-2">
-                                <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                            </button>
-                            <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                            </button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        
-              <!-- Image Card 3 -->
-              <div class="col-md-4">
-                <div class="image-card">
-                  <img src="../assets/images/navi.jpg" alt="Image 3">
-                  <div class="actions">
-                    <div class="post-actions card-footer d-flex align-items-center">
-                        <div class="d-flex">
-                            <button class="btn btn-outline-primary me-2">
-                                <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                            </button>
-                            <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                            </button>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          </div>
-
+        </div>
+        
         <div id="videos" class="tab-content" style="display: none;">
             <div class="container video-section">
-                <h2>Videos</h2>
-                <div class="row g-4">
-                  <!-- Video Card 1 -->
-                  <div class="col-md-4">
-                    <div class="video-card">
-                      <video src="../assets/images/vidsample.mp4" controls></video>
-                      <div class="actions">
-                        <div class="post-actions card-footer d-flex align-items-center">
-                            <div class="d-flex">
-                                <button class="btn btn-outline-primary me-2">
-                                    <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                                </button>
-                                <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                    <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                                </button>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            
-                  <!-- Video Card 2 -->
-                  <div class="col-md-4">
-                    <div class="video-card">
-                      <video src="../assets/images/vidsample.mp4" controls></video>
-                      <div class="actions">
-                        <div class="post-actions card-footer d-flex align-items-center">
-                            <div class="d-flex">
-                                <button class="btn btn-outline-primary me-2">
-                                    <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                                </button>
-                                <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                    <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                                </button>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            
-                  <!-- Video Card 3 -->
-                  <div class="col-md-4">
-                    <div class="video-card">
-                      <video src="../assets/images/vidsample.mp4" controls></video>
-                      <div class="actions">
-                        <div class="post-actions card-footer d-flex align-items-center">
-                            <div class="d-flex">
-                                <button class="btn btn-outline-primary me-2">
-                                    <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                                </button>
-                                <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                                    <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                                </button>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <h2>Video</h2>
+                <div class="row g-4" id="videos-row">
+                    <!-- Dynamically populated video cards will go here -->
                 </div>
-              </div>
-              </div>
+            </div>
+        </div>
+        
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/handleOtherProfile.js" defer>  </script>
