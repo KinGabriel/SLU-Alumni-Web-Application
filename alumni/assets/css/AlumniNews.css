@@ -508,4 +508,22 @@ nav a:hover {
     pointer-events: none;
 }
 
+/* news image */
+.news-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-footer {
+    max-height: 300px;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+.card-footer .btn-read-more {
+    margin-top: auto; 
+}
+
   

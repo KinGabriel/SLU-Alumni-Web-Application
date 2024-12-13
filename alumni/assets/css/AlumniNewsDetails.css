@@ -426,3 +426,18 @@ nav a:hover {
 .search-result-item:active {
     background-color: #e0e0e0;  
 }
+
+/* Image News Details */
+.image-section {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.image-section img {
+    width: 100%; 
+    max-width: 1000px; 
+    height: auto; 
+    display: block; 
+    border-radius: 10px; 
+    object-fit: cover; 
+}
