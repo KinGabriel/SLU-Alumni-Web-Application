@@ -24,11 +24,19 @@ function getOtherUserInfo() {
                 document.querySelector('[name="other_followers_count"]').innerText = data.follower_count || 0;
                 document.querySelector('[name="other_followed_count"]').innerText = data.followed_count || 0;
                 document.querySelector('[name="otherCompany"]').innerText = data.company || 'Unemployed';
+
+                // Handle privacy status
+                const accountLockedMessage = document.querySelector('.account-locked-message');
+                if (data.access_type === 'private') {
+                    accountLockedMessage.style.display = 'block'; // Show account locked message
+                } else {
+                    accountLockedMessage.style.display = 'none'; // Hide message if public
+                }
+
                 // Get the labels
                 const privateLabel = document.getElementById("private-label");
                 const publicLabel = document.getElementById("public-label");
-                
-                
+
                 // Hide both labels initially
                 privateLabel.style.display = "none";
                 publicLabel.style.display = "none";
@@ -65,7 +73,12 @@ function checkIfFollowing(targetUserId) {
         const followText = document.getElementById("follow-text");
         const followIcon = document.getElementById("follow-icon");
 
+        const accountLockedMessage = document.querySelector('.account-locked-message'); // Get the account locked message
+
         if (data.isFollowing) {
+            // If following, hide the locked message
+            accountLockedMessage.style.display = 'none';
+
             followText.textContent = "Unfollow";
             followIcon.src = "../assets/images/unfollow.png"; 
             followButton.classList.add("following");
@@ -82,13 +95,15 @@ function checkIfFollowing(targetUserId) {
             followButton.classList.remove("requested");
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error('Error checking follow status:', error));
 }
 
 function toggleFollow() {
     const followButton = document.getElementById("follow-btn");
     const followText = document.getElementById("follow-text");
     const followIcon = document.getElementById("follow-icon");
+
+    const accountLockedMessage = document.querySelector('.account-locked-message'); // account locked message element
 
     // Element for followers count
     const followersCountElement = document.querySelector('p[name="other_followers_count"]');
@@ -129,10 +144,14 @@ function toggleFollow() {
         }
 
         if (data.isPrivate) {
+            // Show locked message if the account is private
+            accountLockedMessage.style.display = 'block';
+
             followText.textContent = "Requested";
             followIcon.src = "../assets/images/requested.png"; 
             followButton.classList.add("requested");
             followButton.classList.remove("following");
+
             followersCountElement.textContent = followersCount;
             fetch(`/api/profile-other/follow?user_id=${targetUserId}`, {
                 method: 'POST', 
@@ -484,17 +503,16 @@ function isValidVideo(url) {
     });
 }
 
-window.addEventListener('scroll', () => {
-    const scrollHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.scrollY || window.pageYOffset;
-    const clientHeight = window.innerHeight;
+// window.addEventListener('scroll', () => {
+//     const scrollHeight = document.documentElement.scrollHeight;
+//     const scrollTop = window.scrollY || window.pageYOffset;
+//     const clientHeight = window.innerHeight;
 
-    if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
-        getOtherPosts();
-    }
-});
-;
-
+//     if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
+//         getOtherPosts();
+//     }
+// });
+// ;
 
 
 function handleLike(postId, likeButton, isLiked, likeCountElement) {
