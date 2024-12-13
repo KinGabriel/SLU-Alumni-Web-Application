@@ -92,6 +92,7 @@ require("../controller/HandleSession.php");
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <td ">Hidden Data</td> <!-- Hidden Cell -->
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>
