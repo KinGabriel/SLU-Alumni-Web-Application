@@ -32,31 +32,10 @@
     </h1>
     
     <ul id="searchResults"></ul>
-
-       <div class="profile-dropdown">
-           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
-               <div class="dropdown-header">
-                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                   <div class="dropdown-info">
-                       <h4 name="name"></h4>
-                       <p>Web Developer at Google</p>
-                   </div>
-               </div>
-               <ul class="dropdown-links">
-                   <li><a href="#">View Profile</a></li>
-                   <li><a href="#">Manage Profile</a></li>
-                   <li><a href="#">Close Account</a></li>
-               </ul>
-               <div class="logout-btn">
-                   <img src="../../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                   <span>Log out</span>
-               </div>
-           </div>
-       </div>     
+      
    </header>
 
-        <!-- Events Details -->
+        <!-- Job Details -->
         <div class="container mt-2 mb-4">
             <!-- Back Button Above Event Details -->
             <a href="/api/jobs" class="btn btn-outline-secondary back-btn mt-4 mb-4">
@@ -118,6 +97,7 @@
     <!-- Bootstrap JavaScript -->
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="../../assets/js/handleAlumniFetch.js" defer>  </script> 
+
     <script async>
         async function fetchJobDetails(jobs_id) {
             try {
