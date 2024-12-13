@@ -82,7 +82,6 @@ require("../controller/HandleSession.php");
         </a>
     </div>
 </div>
-
       
     <!-- User Requests table -->
     <div class="user-content" id="userContent">
@@ -92,6 +91,7 @@ require("../controller/HandleSession.php");
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>School Id</th>
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>
