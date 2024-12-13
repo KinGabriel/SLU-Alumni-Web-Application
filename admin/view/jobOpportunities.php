@@ -46,7 +46,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <ul>
                 <li><a href="../view/adminDashboard.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminDashboard.php' ? 'active' : ''; ?>" id="dashboardLink"><img src="../assets/images/dashboard.png" alt="Dashboard" class="sidebar-icon"><span class="menu-item-text">Dashboard</span></a></li>
                 <li><a href="../view/UserRequest.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'UserRequest.php' ? 'active' : ''; ?>" id="userRequestLink"><img src="../assets/images/userRequest.png" alt="User Request" class="sidebar-icon"><span class="menu-item-text">Account Requests</span></a></li>
-                <li><a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink"><img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon"><span class="menu-item-text">Accounts</span></a></li>
+                <?php if ($_SESSION['user_type'] == 'admin'): ?>
+                <li>
+                    <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                        <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <?php endif; ?>
                 <li><a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink"><img src="../assets/images/events.png" alt="Events" class="sidebar-icon"><span class="menu-item-text">Events</span></a></li>
                 <li><a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink"><img src="../assets/images/news.png" alt="News" class="sidebar-icon"><span class="menu-item-text">News</span></a></li>
                 <li><a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink"><img src="../assets/images/job.png" alt="Job" class="sidebar-icon"><span class="menu-item-text">Job Opportunities</span></a></li>
