@@ -150,7 +150,8 @@ function removeConnection(user_id, name) {
        confirmModal.show();
        
        // Handle removal on confirm button
-       document.getElementById('confirmRemoveFollowerButton').onclick = async () => {
+       const confirmRemoveFollowerButton = document.getElementById('confirmRemoveFollowerButton');
+       confirmRemoveFollowerButton.onclick = async () => {
            await removeFollower(user_id, name, confirmModal);
        };
     } else if (filterValue === 'following') {
@@ -165,11 +166,11 @@ function removeConnection(user_id, name) {
        confirmModal.show();
        
        // Handle removal on confirm button
-       document.getElementById('confirmRemoveFollowingButton').onclick = async () => {
+       const confirmRemoveFollowingButton = document.getElementById('confirmRemoveFollowingButton');
+       confirmRemoveFollowingButton.onclick = async () => {
            await removeFollowing(user_id, name, confirmModal);
        };
    } else {
        console.warn('Remove operation is not allowed for this filter.');
    }
 }
-
