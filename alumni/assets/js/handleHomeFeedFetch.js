@@ -47,6 +47,7 @@ window.addEventListener('scroll', () => {
     const clientHeight = window.innerHeight; 
     if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
         getUserPosts();
+        getUserInfo();
     }
     
 });
