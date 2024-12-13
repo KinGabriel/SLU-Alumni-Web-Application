@@ -93,4 +93,35 @@ export const getJobs = async (req, res) => {
     } catch (err) {
         return res.status(500).json({ status: 'error', message: err.message });
     }
+}
+export const getJobsDetails = (req, res) => {
+    const { jobs_id } = req.params;
+
+    if (!jobs_id) {
+        return res.status(400).json({ error: 'Missing jobs_id parameter.' });
+    }
+
+    const query = 'SELECT * FROM opportunity WHERE opportunity_id = ?';
+    
+    dbConnection.query(query, [jobs_id], (err, rows) => {
+        if (err) {
+            console.error('Database query failed:', err);
+            return res.status(500).json({ error: 'An error occurred while fetching job details.' });
+        }
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Opportunity not found.' });
+        }
+
+        const jobDetails = rows[0];
+
+        if (jobDetails.image_data) {
+            const imageData = Buffer.from(jobDetails.image_data).toString('base64');
+            jobDetails.image_data = `data:image/jpeg;base64,${imageData}`;
+        }
+
+        res.status(200).json({ data: jobDetails });
+    });
 };
+
+

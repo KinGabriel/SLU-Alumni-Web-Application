@@ -19,13 +19,13 @@
    <!-- Header -->
    <header>
     <h1>
-        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <img src="../../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
         <!-- Search bar -->
         <div class="search">
             <form id="searchForm" onsubmit="return false;">
                 <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
                 <button type="submit">
-                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                    <img src="../../assets/images/search.png" alt="Search" class="search-icon">
                 </button>
             </form>
         </div>
@@ -49,7 +49,7 @@
                    <li><a href="#">Close Account</a></li>
                </ul>
                <div class="logout-btn">
-                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                   <img src="../../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
                    <span>Log out</span>
                </div>
            </div>
@@ -59,8 +59,8 @@
         <!-- Events Details -->
         <div class="container mt-2 mb-4">
             <!-- Back Button Above Event Details -->
-            <a href="/" class="btn btn-outline-secondary back-btn mt-4 mb-4">
-                <img src="../assets/images/job.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Jobs
+            <a href="/api/jobs" class="btn btn-outline-secondary back-btn mt-4 mb-4">
+                <img src="../../assets/images/job.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> Jobs
             </a>   
             <div class="container mt-4">
                 <div class="job-header d-flex align-items-center">
@@ -73,11 +73,7 @@
                             <small class="d-block"><strong>Full Time</strong> | Posted 3 days ago | London, UK</small>
                         </div>
                     </div>                    
-                   <!-- Apply Button-->
-                   <button class="job-apply-btn d-flex align-items-center">
-                    <span class="me-2">Apply</span>
-                    <img src="../assets/images/direct.png" alt="Direct Company btn" style="width: 30px; height: 30px; object-fit: cover;">
-                </button>
+                   
             </div>
                 </div>                
                 <div class="job-details">
@@ -121,8 +117,66 @@
             
     <!-- Bootstrap JavaScript -->
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="../assets/js/handleHomefeed.js" defer>  </script>  
-    <script src="../assets/js/handleFetch.js" async>  </script> 
-    <script src="../assets/js/handleAlumniFetch.js" defer>  </script> 
+    <script src="../../assets/js/handleAlumniFetch.js" defer>  </script> 
+    <script async>
+        async function fetchJobDetails(jobs_id) {
+            try {
+                console.log('Fetching job details for ID:', jobs_id);
+    
+                const response = await fetch(`/api/jobs/details/${jobs_id}`);
+                console.log('Response Status:', response.status);
+    
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+    
+                const job = await response.json();
+                console.log('Job Details:', job);
+    
+                populateJobDetails(job.data);
+            } catch (error) {
+                console.error('Error fetching job details:', error);
+                displayErrorMessage('Unable to load job details at the moment.');
+            }
+        }
+    
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const jobs_id = params.get('jobs_id');
+    
+            if (jobs_id) {
+                fetchJobDetails(jobs_id);  
+            } else {
+                alert('No job ID provided.');
+            }
+        });
+    
+        // Function to populate job details on the page
+        function populateJobDetails(job) {
+            document.querySelector('.job-header img').src = job.image_data ? job.image_data : '../assets/images/company.jpg';
+            document.querySelector('.job-header h1').textContent = job.job_title;
+            document.querySelector('.job-header h2').textContent = job.company_name;
+            document.querySelector('.job-header small').textContent = `${job.employment_type} | Posted ${formatDate(job.created_at)} | ${job.country}`;
+        
+            // About the Job Section
+            const aboutSection = document.querySelector('.job-section:nth-of-type(1) p:last-child');
+            aboutSection.textContent = job.description;
+        
+            // Essential Skills Section
+            const skillsList = document.querySelector('.job-section:nth-of-type(2) ul');
+            skillsList.innerHTML = job.skills.split(',').map(skill => `<li>${skill.trim()}</li>`).join('');
+        
+            // Requirements Section
+            const requirementsList = document.querySelector('.job-section:nth-of-type(3) ul');
+            requirementsList.innerHTML = job.requirements.split(',').map(requirement => `<li>${requirement.trim()}</li>`).join('');
+        }
+    
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+    </script>
+    
 </body>
 </html>
