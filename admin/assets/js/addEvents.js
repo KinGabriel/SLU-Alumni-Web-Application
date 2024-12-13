@@ -42,13 +42,78 @@ document.getElementById("end-time").addEventListener("input", captureEventDetail
 document.getElementById("event-location-input").addEventListener("input", captureEventDetails);
 document.getElementById("event-description-input").addEventListener("input", captureEventDetails);
 
+const validateDatesAndTimes = () => {
+    const currentDate = new Date();
+    const startDateInput = document.getElementById("start-date").value;
+    const startTimeInput = document.getElementById("start-time").value;
+    const endTimeInput = document.getElementById("end-time").value;
+  
+    // Parse the start and end dates and times
+    const startDate = new Date(startDateInput);
+    const startTime = new Date(`${startDateInput}T${startTimeInput}`);
+    const endTime = new Date(`${startDateInput}T${endTimeInput}`);
+  
+    // Validate the clicked date
+    if (startDate.getTime() === currentDate.getTime() && startTime <= currentDate) {
+      alert("The selected time cannot be earlier than the current time.");
+      return false;
+    } else if (startDate <= currentDate) {
+      alert("The selected date cannot be earlier than the current date.");
+      return false;
+    }
+  
+    // Validate start and end times
+    if (endTime < startTime) {
+      alert("The end time cannot be earlier than the start time.");
+      return false;
+    } 
+  
+    return true;
+  };
+
+const checkRequiredFields = () => {
+    const requiredFields = document.querySelectorAll('[required]'); // Select all fields with "required" attribute
+    let allValid = true; // Flag to track if all fields are valid
+
+    // Loop through each required field
+    requiredFields.forEach((field) => {
+        if (!field.value.trim()) { // Check if the field is empty
+            field.classList.add('error'); // Optionally, add an error class for styling
+            allValid = false; // Mark validation as failed
+        } else {
+            field.classList.remove('error'); // Remove error class if field is not empty
+        }
+    });
+
+    // Validate the dates and times
+    if (allValid) {
+        allValid = validateDatesAndTimes();
+    }
+
+    return allValid; // Return true if all fields are valid, otherwise false
+};
+
+const handleInputValidation = (event) => {
+    const field = event.target;
+
+    if (field.value.trim() === '') {
+        field.classList.add('error'); // Add error class if the field is empty
+    } else {
+        field.classList.remove('error'); // Remove error class if the field is filled
+    }
+};
+
+const requiredFields = document.querySelectorAll('[required]');
+requiredFields.forEach(field => {
+    field.addEventListener('input', handleInputValidation);
+});
+
 // Update the current step and DOM  
 const updateSteps = (e) => {
     console.log("Upload file:", uploadedImageFile);
 
     if (e.target.id === "btn-next" && !checkRequiredFields()) {
         e.preventDefault(); // Prevent moving to the next step
-        alert("Please fill in all required fields.");
         return;
     }
     
@@ -211,42 +276,6 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
         throw new Error("An unexpected error occurred. Please try again later.");
     });
 });
-
-
-
-function checkRequiredFields() {
-    const requiredFields = document.querySelectorAll('[required]'); // Select all fields with "required" attribute
-    let allValid = true; // Flag to track if all fields are valid
-
-    // Loop through each required field
-    requiredFields.forEach((field) => {
-        if (!field.value.trim()) { // Check if the field is empty
-            field.classList.add('error'); // Optionally, add an error class for styling
-            allValid = false; // Mark validation as failed
-        } else {
-            field.classList.remove('error'); // Remove error class if field is not empty
-        }
-    });
-
-    return allValid; // Return true if all fields are valid, otherwise false
-}
-
-
-const handleInputValidation = (event) => {
-    const field = event.target;
-
-    if (field.value.trim() === '') {
-        field.classList.add('error'); // Add error class if the field is empty
-    } else {
-        field.classList.remove('error'); // Remove error class if the field is filled
-    }
-};
-
-const requiredFields = document.querySelectorAll('[required]');
-requiredFields.forEach(field => {
-    field.addEventListener('input', handleInputValidation);
-});
-
 
 // Show the first step initially
 // updateSteps({ target: { id: "btn-next" } });
