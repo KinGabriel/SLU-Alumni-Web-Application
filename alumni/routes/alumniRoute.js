@@ -21,6 +21,7 @@ router.get('/search', searchUsers);
 router.get('/events', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniEvents.html')));
 router.get('/connections', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniConnections.html')));
 router.get('/jobs', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniJobOpp.html')));
+router.get('/jobs/details', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniJobDetails.html')));
 router.get('/manageProfile', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniManageProfile.html')));
 router.get('/news', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniNews.html')));
 router.get('/news/details', (req, res) => res.sendFile(path.join(__dirname, '../view/AlumniNewsDetails.html')));

@@ -138,27 +138,32 @@
         <!-- Design Inspiration: ThemeForest (https://themeforest.net/), LinkedIn (https://www.linkedin.com)-->
         <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <div class="filters mb-5">
-            <div class="dropdown d-inline-block">
-                <button class="btn btn-outline-primary dropdown-toggle filter-btn" type="button" id="dropdownJobType" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #008CBA;  color: white;">
+            <div class="dropdown" id="dropdownJobType">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownJobTypeButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Job Type
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownJobType">
-                    <li><a class="dropdown-item" href="#">Full-Time</a></li>
-                    <li><a class="dropdown-item" href="#">Part-Time</a></li>
-                    <li><a class="dropdown-item" href="#">Internship</a></li>
+                <ul class="dropdown-menu" aria-labelledby="dropdownJobTypeButton">
+                    <li><a class="dropdown-item" href="#" data-value="full-time">Full-Time</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="part-time">Part-Time</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="internship">Internship</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="all">All</a></li>
                 </ul>
             </div>
-
-            <div class="dropdown d-inline-block">
-                <button class="btn btn-outline-primary dropdown-toggle filter-btn" type="button" id="dropdownDatePosted" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #008CBA;  color: white;">
+            
+            <div class="dropdown" id="dropdownDatePosted">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDatePostedButton" data-bs-toggle="dropdown" aria-expanded="false">
                     Date Posted
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownDatePosted">
-                    <li><a class="dropdown-item" href="#">Last 24 Hours</a></li>
-                    <li><a class="dropdown-item" href="#">Last Week</a></li>
-                    <li><a class="dropdown-item" href="#">Last Month</a></li>
+                <ul class="dropdown-menu" aria-labelledby="dropdownDatePostedButton">
+                    <li><a class="dropdown-item" href="#" data-value="today">Today</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="this-week">This Week</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="this-month">This Month</a></li>
+                    <li><a class="dropdown-item" href="#" data-value="all">All</a></li>
                 </ul>
             </div>
+            
+     
+        
 
             <!-- <div class="dropdown d-inline-block">
                 <button class="btn btn-outline-primary dropdown-toggle filter-btn" type="button" id="dropdownSalaryEstimate" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #008CBA;  color: white;">
@@ -301,7 +306,6 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="../assets/js/handleHomefeed.js" defer>  </script>  
     <script src="../assets/js/handleJobsFetch.js" defer>  </script> 
     <script src="../assets/js/handleAlumniFetch.js" defer>  </script> 
 </body>

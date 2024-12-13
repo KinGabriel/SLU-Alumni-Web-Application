@@ -630,3 +630,12 @@ nav a:hover {
     background-color: #e0e0e0;  
 }
 
+.job-card a {
+    text-decoration: none;
+}
+
+
+.job-card a:hover {
+    text-decoration: none;  
+    color: #007bff;  
+}
