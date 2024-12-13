@@ -92,7 +92,7 @@ export const getAlumni = (req, res) => {
 export const searchUsers = async (req, res) => {
     const searchTerm = req.query.query || "";  
     const userId = req.userId;
-
+    const userType = 'alumni'
     if (!searchTerm) {
         return res.status(400).json({ error: 'Search term is required' });  
     }
@@ -100,10 +100,10 @@ export const searchUsers = async (req, res) => {
     try {
         const query = `SELECT user_id, CONCAT(fname, ' ', lname) AS name 
                        FROM user 
-                       WHERE CONCAT(fname, ' ', lname) LIKE ? AND NOT user_id = ? `;
+                       WHERE CONCAT(fname, ' ', lname) LIKE ? AND NOT user_id = ?  AND WHERE user_type = ? `;
 
 
-        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`,userId]);
+        const [users] = await dbConnection.promise().query(query, [`%${searchTerm}%`,userId,userType]);
 
         // If no users were found
         if (users.length === 0) {
