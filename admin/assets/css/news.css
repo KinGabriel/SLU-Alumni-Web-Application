@@ -8,7 +8,7 @@
 @font-face {
     font-family: Readex_Pro;
     src: url('../fonts/font-families/Readex_Pro/ReadexPro-Regular.ttf');
-  }
+}
 
 /* Header */
 header {
@@ -181,12 +181,6 @@ header img.slu-logo {
     margin-left: 5px;
 }
 
-/* Hover effect on sidebar items */
-/* .sidebar-menu li:hover a {
-    color: #fff;
-    background-color: rgba(0, 61, 165, 0.4);
-} */
-
 /* Sticky Log Out Section */
 .sidebar-logout {
     position: absolute;
@@ -207,9 +201,6 @@ header img.slu-logo {
     /* transition: background-color 0.2s ease, color 0.2s ease; */
 }
 
-/* .sidebar-logout a:hover {
-    background-color:rgba(255, 178, 0, 1);;
-} */
 
 .menu-item-logout {
     color: black;
@@ -218,141 +209,6 @@ header img.slu-logo {
     font-weight: bold;
 }
 
-/* News Styling */
-.news-title {
-    font-size: 2.5vw;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 20px;
-    color: #FEAF00;
-}
-
-.news-container {
-    flex: 1;
-    margin-left: 350px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-}
-
-.news-table {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Align cards evenly */
-}
-
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%; /* Ensure cards stretch to their maximum height */
-    width: calc(33% - 20px); /* Make cards responsive to screen size */
-    max-width: 5000px; /* Optional: Set a maximum width for cards */
-    background-color: white; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden; /* Hide overflowing content */
-}
-
-.card-img-top {
-    height: 300px; /* Ensure consistent height for all images */
-    object-fit: cover; /* Ensure images scale without stretching */
-    width: 100%; /* Ensure images cover the full width */
-}
-
-.card-body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1; /* Ensures content grows proportionally */
-}
-
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #003DA5;
-    margin-bottom: 10px;
-}
-
-.card-text {
-    color: #555;
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    flex: 3; /* Allows the text area to grow as needed */
-    display: -webkit-box;
-    -webkit-line-clamp: 7; /* Limits text to 3 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-footer {
-    padding: 10px 15px;
-    background-color: #f1f1f1;
-    text-align: center;
-    border-top: 1px solid #e5e5e5;
-}
-
-.card-footer .btn-read-more {
-    display: block;
-    width: 100%;
-    background-color: #003DA5;
-    color: #ffffff;
-    padding: 10px 15px;
-    font-size: 1rem;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 5px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.card-footer .btn-read-more:hover {
-    background-color: #6281b6;
-}
-
-/* Edit Icon Styling */
-.edit-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #555; /* Default icon color */
-    font-size: 1.2rem;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-    border-radius: 50%; /* Circle background */
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: color 0.3s ease, background-color 0.3s ease;
-    z-index: 10; /* Ensure it appears above the image */
-}
-
-.edit-icon:hover {
-    color: #003DA5; /* Change color to blue on hover */
-    background-color: rgba(0, 61, 165, 0.1); /* Slight blue background on hover */
-}
-
-.card {
-    position: relative; /* To position the edit icon within the card */
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .card {
-        width: calc(50% - 15px); /* Adjust width for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        width: 100%; /* Full width on very small screens */
-    }
-}
 /* Button 3 Style */
 .btn-3 {
     background: rgb(0,172,238);
@@ -439,60 +295,137 @@ header img.slu-logo {
   .btn-3 span:hover:after {
     width: 100%;
   }
-  .news-container {
-    width: 100%; /* Ensure it takes full available width */
-    max-width: 100%; /* Set a max-width if you want to limit how wide it gets */
-    margin: 0 auto; /* Center it horizontally */
-    padding-left: 20px;
+
+  .news-title {
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #FEAF00;
+}
+.news-container {
+    flex: 1;
+    margin-left: 350px;
+    padding: 20px;
+    background-color: #f9f9f9;
     display: flex;
-    justify-content: center; /* Ensure the content is centered horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: column; /* Stack items vertically if needed */
+    flex-direction: column;
 }
+.news-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Align cards evenly */
+}/* News Container */
+.news-container {
+    flex: 1;
+    margin-left: 350px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+/* News Title */
 .news-title {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 3rem;
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #FEAF00;
 }
 
-.news-container .row {
-    /* Remove flex-direction: column; to allow the grid system to work */
-    display: grid; /* Use grid instead of flex for column-based layout */
-    grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
-    gap: 5px;  /* Reduced space between the items to bring them closer */
-    padding-left: 10%; /* Adjust padding for alignment */
-    row-gap: 5px; /* Reduced row gap */
+/* News Table */
+.news-table {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 20px; /* Consistent spacing */
+    justify-content: space-between; /* Align cards */
+    align-items: flex-start; /* Align items to the top */
+    width: 100%; /* Prevent over-expansion */
+    box-sizing: border-box;
+    max-height: 600px; /* Set a maximum height */
+    overflow-y: auto; /* Add vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
 }
-.news-container .card {
-    width: 310%;  /* Each card should take the full width of its column */
-    border: 1px solid #ddd;  /* Optional: Add a border to cards for better visual separation */
+
+/* Individual News Item */
+.news-item {
+    width: 300px; /* Fixed width */
+    height: 250px; /* Fixed height */
+    padding: 15px;
+    border: 1px solid #ddd; /* Consistent border */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Optional: Add a shadow effect */
+    background-color: #f9f9f9;
+    position: relative;
+    overflow: hidden; /* Prevent content overflow */
+    box-sizing: border-box; /* Include padding in width/height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space content inside evenly */
+    flex-shrink: 0; /* Prevent shrinking */
+    flex-grow: 0; /* Prevent growing */
 }
 
 
+/* News Container */
+.news-container {
+    flex: 1;
+    margin-left: 350px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Consistent spacing */
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Prevent text or content from stretching card */
+.news-item .news-text {
+    flex: 1; /* Take up remaining space */
+    overflow-y: auto; /* Enable scrolling if content exceeds the height */
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+    padding: 5px;
+    max-height: calc(100% - 30px); /* Adjust to leave space for other elements */
+}
+
+
+/* Hover effect on news item */
+.news-item:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(1.01); /* Optional: Slight scaling effect */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Edit Icon inside News Item */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #003DA5;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+    color: #cf1b1b;
+}
 .news-container .card-img-top {
     max-height: 80%; /* Adjust the height proportionally */
     width: 100%; /* Make the image span the full width of the card */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     object-fit: cover; /* Ensures the image covers its container without stretching */
-}
-
-.news-container .card-body {
-    padding: 20px;
-}
-
-.news-container .card-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.news-container .card-text {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-.news-container .text-muted {
-    font-size: 1rem;
 }
