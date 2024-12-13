@@ -8,6 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : ''; 
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : ''; 
     $middleName = isset($_POST["middle-name"]) ? $_POST["middle-name"] : ''; 
+    $pfp_path = '../assets/images/default-avatar-icon.jpg';
+    $pfp = base64_encode($pfp_path);
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
     $idImage = isset($_POST["schoolIdFile"]) ? $_POST["schoolIdFile"] : '';
     $gradYear = isset($_POST["graduationYear"]) ? $_POST["graduationYear"] : ''; 
@@ -69,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmt->bind_param("sssssssis", $email, $hashedPassword, $firstName, $lastName, $middleName, $idImage, $userType, $jobStatus, $company);
+    $stmt->bind_param("sssssssis", $email, $hashedPassword, $firstName, $lastName, $middleName, $pfp, $userType, $jobStatus, $company);
     
     if ($stmt->execute()) {
         $_SESSION['confirmationMessage'] = "Successfully added an account!";

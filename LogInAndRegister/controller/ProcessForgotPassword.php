@@ -11,7 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $newPassword = trim($_POST["password"]);
-
+    // Validate password length
+            if (strlen($newPassword) < 8) {
+                $_SESSION['error_message'] = "Password must be at least 8 characters long.";
+                header("Location: ../view/ForgotPassword.php");
+                exit();
+            }
         // Create database connection
         $db = new dbConnection();
         $connection = $db->getConnection();
@@ -29,6 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../view/ForgotPassword.php");
             exit();
         }
+
+
+         
 
         // Hash the new password
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);

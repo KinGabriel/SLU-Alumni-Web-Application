@@ -8,7 +8,6 @@ function populateApplicantsTable(applicantData) {
         // Create row  
         const nameCell = document.createElement('td');
         const emailCell = document.createElement('td');
-        const idNumberCell = document.createElement('td');
         const gradYearCell = document.createElement('td');
         const actionCell = document.createElement('td');
 
@@ -20,7 +19,6 @@ function populateApplicantsTable(applicantData) {
         
         // Populate the table with the data from the server
         emailCell.textContent = applicant.email;
-        idNumberCell.textContent = applicant.id_number;
         gradYearCell.textContent = applicant.gradyear;
 
         // Create Accept and Decline buttons
@@ -38,7 +36,8 @@ function populateApplicantsTable(applicantData) {
 
         const viewButton = document.createElement('button');
         viewButton.classList.add('btn-view-profile');
-        viewButton.textContent = 'View Image';
+        viewButton.textContent = 'View Alumni Proof';
+        viewButton.textContent = 'View Alumni Proof';
         viewButton.addEventListener('click', () => viewImage(applicant.school_id_pic));
 
         // Append buttons
@@ -49,7 +48,6 @@ function populateApplicantsTable(applicantData) {
         // Append all 
         row.appendChild(nameCell);
         row.appendChild(emailCell);
-        row.appendChild(idNumberCell);
         row.appendChild(gradYearCell);
         row.appendChild(actionCell);
         appTableBody.appendChild(row);
@@ -189,7 +187,8 @@ function viewImage(imageUrl) {
     // Create an image element to display the school ID picture
     const imgElement = document.createElement('img');
     imgElement.src = imageUrl; 
-    imgElement.alt = 'School ID Picture';
+    imgElement.alt = 'Alumni Proof';
+    imgElement.alt = 'Alumni Proof';
     imgElement.style.width = '100%'; 
 
     // Create a modal to display the image

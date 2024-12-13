@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['pfp'] = 'data:image/jpeg;base64,' . base64_encode($user['pfp']);
         } else {
             // Use a default placeholder image or leave it empty
-            $_SESSION['pfp'] = '..assets\images\default-avatar-icon.jpg'; // Adjust this path to your default image
+            $_SESSION['pfp'] = '../assets/images/default-avatar-icon.jpg'; // Adjust this path to your default image
         }
       
 

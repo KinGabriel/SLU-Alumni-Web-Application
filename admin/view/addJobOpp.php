@@ -8,7 +8,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <title>Add Job Opportunities</title>
 
     <!-- Link to compiled custom styles (CSS) -->
     <link rel="stylesheet" href="../assets/css/addJob.css">
@@ -70,7 +70,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li>
-                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                <a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
                     <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>

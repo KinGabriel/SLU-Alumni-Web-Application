@@ -31,22 +31,25 @@ function acceptUser($app_id, $connection) {
 }
 
 function addUser($connection, $applicantData) {
-    $query = "INSERT INTO user (email, lname, fname, pword, user_type, mname)
-              VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO user (email, lname, fname, pword, user_type, mname, pfp)
+              VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $connection->prepare($query);
     if (!$stmt) {
         error_log("Failed to prepare addUser query: " . $connection->error);
         return false;
     }
     $userType = 'alumni';
+    $pfp_path = '../assets/images/default-avatar-icon.jpg';
+    $pfp = base64_encode($pfp_path);
     $stmt->bind_param(
-        'ssssss',
+        'sssssss',
         $applicantData['email'],
         $applicantData['lname'],
         $applicantData['fname'],
         $applicantData['pword'],
         $userType,
-        $applicantData['mname']
+        $applicantData['mname'],
+        $pfp
     );
     if (!$stmt->execute()) {
         error_log("Failed to execute addUser query: " . $stmt->error);

@@ -7,7 +7,7 @@ require("../controller/HandleSession.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SLU Alumina</title>
+    <title>Applicants</title>
     <link href="../assets/css/userRequest.css" rel="stylesheet">
 </head>
 <body>
