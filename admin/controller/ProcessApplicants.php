@@ -4,128 +4,138 @@ $db = new dbConnection();
 $connection = $db->getConnection();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
-        $schoolID = $input['schoolID'];
-        $action = $input['action'];
-        if ($action === 'accept') {
-            $result = acceptUser($schoolID, $connection);
-            return;
-          
-        } elseif ($action === 'decline') {
-            $result = updateRequest($schoolID, $connection);
-           return ;
-        } 
+    $app_id = $input['app_id'];
+    $action = $input['action'];
+    if ($action === 'accept') {
+        $result = acceptUser($app_id, $connection);
+        echo json_encode(['success' => $result]);
+    } elseif ($action === 'decline') {
+        $result = updateRequest($app_id, $connection);
+        echo json_encode(['success' => $result]);
+    }
 }
 
-function acceptUser($schoolID, $connection) {
-    // Check if already in alumni
-    $query = "SELECT * FROM alumni WHERE school_id = ?";
-    $stmt = $connection->prepare($query);
-    $stmt->bind_param('i', $schoolID);
-    $stmt->execute();
-    $checkResult = $stmt->get_result();
-    $alreadyAnAlumni = $checkResult->fetch_assoc();
-    $stmt->close();
-    if ($alreadyAnAlumni) {
-        return false; 
+function acceptUser($app_id, $connection) {
+    $applicantData = getApplicantData($app_id, $connection);
+    if (!$applicantData) {
+        error_log("No applicant data found for app_id: $app_id");
+        return false;
+    }
+    if (addUser($connection, $applicantData)) {
+        if (addAlumni($connection, $applicantData)) {
+            return updateRequest($app_id, $connection);
+        }
     }
 
-    // Fetch applicant data from the db
-    $applicantData = getApplicantData($schoolID, $connection);
-
-    // Add user to tables if applicant data exists
-    if ($applicantData && addUser($schoolID, $connection, $applicantData)) {
-        if (addAlumni($schoolID, $connection, $applicantData)) {
-            return updateRequest($schoolID, $connection); 
-        }  
-    }
     return false;
 }
 
-function addUser($schoolID, $connection, $applicantData) {
-    // check if the data is not empty
-    if ($applicantData) {
-        $query = "INSERT INTO user (email,lname, fname, pword, user_type, is_employed)
-                  VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $connection->prepare($query);
-        // default values
-        $userType = 'alumni';
-        $isEmployed = 0;     
-        $stmt->bind_param(
-            'sssssi',
-            $applicantData['email'],
-            $applicantData['lname'],
-            $applicantData['fname'],
-            $applicantData['pword'],
-            $userType,
-            $isEmployed
-        );
-
-        $result = $stmt->execute();
-        $stmt->close();
-        return $result;
-    } else {
-        return false;
-    }
-}
-
-function addAlumni($schoolID, $connection, $applicantData) {
-     // check if the data is not empty
-    if ($applicantData) {
-        $userID = getID($connection, $applicantData['email']); // get id from the user table
-        if ($userID) {
-            $query = "INSERT INTO alumni (user_id, school_id, gradyear, program) VALUES (?, ?, ?, ?)";
-            $stmt = $connection->prepare($query);
-            if (!$stmt) {
-                error_log("Failed to prepare statement in addAlumni: " . $connection->error);
-                return false;
-            }
-            $stmt->bind_param('ssis', $userID, $applicantData['school_id'], $applicantData['gradyear'], $applicantData['program']);
-            $result = $stmt->execute();
-            if (!$result) {
-                error_log("Execute failed in addAlumni: " . $stmt->error);
-            }
-            $stmt->close();
-            return $result;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-}
-
-function getApplicantData($schoolID, $connection) {
-    $query = "SELECT lname, fname, email, program, gradyear, school_id, pword, school_id_pic 
-              FROM applicants 
-              WHERE school_id = ? AND is_verified = '0'";
+function addUser($connection, $applicantData) {
+    $query = "INSERT INTO user (email, lname, fname, pword, user_type, mname)
+              VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $connection->prepare($query);
-    $stmt->bind_param('s', $schoolID);
+    if (!$stmt) {
+        error_log("Failed to prepare addUser query: " . $connection->error);
+        return false;
+    }
+    $userType = 'alumni';
+    $stmt->bind_param(
+        'ssssss',
+        $applicantData['email'],
+        $applicantData['lname'],
+        $applicantData['fname'],
+        $applicantData['pword'],
+        $userType,
+        $applicantData['mname']
+    );
+    if (!$stmt->execute()) {
+        error_log("Failed to execute addUser query: " . $stmt->error);
+        $stmt->close();
+        return false;
+    }
+
+    $stmt->close();
+    return true;
+}
+
+function addAlumni($connection, $applicantData) {
+    $userID = getID($connection, $applicantData['email']);
+
+    if (!$userID) {
+        error_log("Failed to fetch user_id for email: " . $applicantData['email']);
+        return false;
+    }
+
+    $query = "INSERT INTO alumni (user_id, gradyear, program, school) VALUES (?, ?, ?, ?)";
+    $stmt = $connection->prepare($query);
+
+    if (!$stmt) {
+        error_log("Failed to prepare addAlumni query: " . $connection->error);
+        return false;
+    }
+
+    $stmt->bind_param('isss', $userID, $applicantData['gradyear'], $applicantData['program'], $applicantData['school']);
+
+    if (!$stmt->execute()) {
+        error_log("Failed to execute addAlumni query: " . $stmt->error);
+        $stmt->close();
+        return false;
+    }
+
+    $stmt->close();
+    return true;
+}
+
+function getApplicantData($app_id, $connection) {
+    $query = "SELECT * FROM applicants WHERE app_id = ? AND is_verified = '0'";
+    $stmt = $connection->prepare($query);
+
+    if (!$stmt) {
+        error_log("Failed to prepare getApplicantData query: " . $connection->error);
+        return null;
+    }
+
+    $stmt->bind_param('s', $app_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $applicantData = $result->fetch_assoc();
     $stmt->close();
+
     return $applicantData;
 }
 
 function getID($connection, $email) {
     $query = "SELECT user_id FROM user WHERE email = ?";
     $stmt = $connection->prepare($query);
+
+    if (!$stmt) {
+        error_log("Failed to prepare getID query: " . $connection->error);
+        return null;
+    }
+
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($data = $result->fetch_assoc()) {
-        return $data['user_id']; 
-    } else {
-        return null;
-    }
+    $data = $result->fetch_assoc();
+    $stmt->close();
+
+    return $data['user_id'] ?? null;
 }
 
-function updateRequest($schoolID, $connection) {
-    $query = "UPDATE applicants SET is_verified = '1' WHERE school_id = ?";
+function updateRequest($app_id, $connection) {
+    $query = "UPDATE applicants SET is_verified = '1' WHERE app_id = ?";
     $stmt = $connection->prepare($query);
-    $stmt->bind_param('s', $schoolID);
-    $result = $stmt->execute();  
+    if (!$stmt) {
+        error_log("Failed to prepare updateRequest query: " . $connection->error);
+        return false;
+    }
+    $stmt->bind_param('s', $app_id);
+    if (!$stmt->execute()) {
+        error_log("Failed to execute updateRequest query: " . $stmt->error);
+        $stmt->close();
+        return false;
+    }
     $stmt->close();
-    return $result; 
+    return true;
 }
 ?>
