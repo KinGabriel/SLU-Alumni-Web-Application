@@ -82,7 +82,6 @@ require("../controller/HandleSession.php");
         </a>
     </div>
 </div>
-
       
     <!-- User Requests table -->
     <div class="user-content" id="userContent">
@@ -92,6 +91,7 @@ require("../controller/HandleSession.php");
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>School Id</th>
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>
@@ -100,29 +100,7 @@ require("../controller/HandleSession.php");
             <tbody id="applicantTableBody">
                
             </tbody>
-        </table>
-
-
-         <!-- Pagination -->
-         <div class="pagination">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">&laquo;</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next &raquo;</a>
-                    </li>
-                </ul>
-            </div>
+        </table>    
         </div>
 
     </div>

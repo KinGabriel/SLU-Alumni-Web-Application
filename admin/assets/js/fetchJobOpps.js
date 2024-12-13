@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1; // Start on the first page
     const itemsPerPage = 6; // Number of jobs per page
     let totalJobs = 0; // Track total number of jobs
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
                         const employmentTypeBadge = document.createElement('span');
                         employmentTypeBadge.classList.add('badge');
-                        if (item.employment_type === 'Full Time') {
+                        if (item.employment_type === 'full-time') {
                             employmentTypeBadge.classList.add('bg-success');
-                        } else if (item.employment_type === 'Part Time') {
+                        } else if (item.employment_type === 'part-time') {
                             employmentTypeBadge.classList.add('bg-warning');
-                        } else {
+                        } else if (item.employment_type === 'internship') {
                             employmentTypeBadge.classList.add('bg-info');
                         }
                         employmentTypeBadge.textContent = item.employment_type.toUpperCase();
@@ -55,7 +55,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         companyInfo.classList.add('d-flex', 'align-items-center');
 
                         const companyLogo = document.createElement('img');
-                        companyLogo.src = item.image_data ? `data:image/jpeg;base64,${item.image_data}` : '../assets/images/default-event-image.png';
+                        companyLogo.src = item.image_data
+                            ? `data:image/jpeg;base64,${item.image_data}`
+                            : '../assets/images/default-event-image.png';
                         companyLogo.alt = item.company_name;
                         companyLogo.classList.add('me-2');
                         companyLogo.style.width = '40px';
@@ -79,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
 
                     // Update total jobs count and page navigation
-                    totalJobs = opportunities.length;  // Number of jobs returned for the current page
+                    totalJobs = opportunities.length; // Number of jobs returned for the current page
                     updatePaginationControls();
                 } else {
                     console.error('Error fetching job opportunities data or invalid response format');
@@ -96,10 +98,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const nextButton = document.querySelector('#nextPage');
 
         // Disable/Enable Previous button based on current page
-        prevButton.disabled = (currentPage === 1);
+        prevButton.disabled = currentPage === 1;
 
         // Disable/Enable Next button based on the total number of jobs
-        nextButton.disabled = (totalJobs < itemsPerPage);  // Disable Next if there are fewer jobs than items per page
+        nextButton.disabled = totalJobs < itemsPerPage; // Disable Next if there are fewer jobs than items per page
 
         // Event listeners for pagination buttons
         prevButton.removeEventListener('click', handlePrevClick);
@@ -113,46 +115,46 @@ document.addEventListener("DOMContentLoaded", function() {
     function handlePrevClick() {
         if (currentPage > 1) {
             currentPage--;
-            fetchJobs(currentPage, currentFilter);  // Fetch jobs for the new page
+            fetchJobs(currentPage, currentFilter); // Fetch jobs for the new page
         }
     }
 
     // Handle the Next button click
     function handleNextClick() {
         currentPage++;
-        fetchJobs(currentPage, currentFilter);  // Fetch jobs for the new page
+        fetchJobs(currentPage, currentFilter); // Fetch jobs for the new page
     }
 
     // Set the default filter to 'all' and make sure it's visually selected
     document.querySelector('.filter-bubble[data-filter="all"]').classList.add('active');
-    
+
     // Fetch the jobs for the first page with the 'all' filter when the page loads
     fetchJobs(currentPage, currentFilter);
 
     // Handle filter button clicks
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Remove active class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            
+
             // Add active class to the clicked button
             this.classList.add('active');
-    
+
             // Get the selected filter type, map it to exact values expected by the database
             let selectedFilter = this.getAttribute('data-filter');
             let filterMap = {
-                'full-time': 'Full Time',
-                'part-time': 'Part Time',
-                'internship': 'Internship',
+                'full-time': 'full-time',
+                'part-time': 'part-time',
+                'internship': 'internship',
                 'all': 'all'
             };
-    
+
             // Set the current filter to the mapped value
-            currentFilter = filterMap[selectedFilter] || 'all';  // Default to 'all' if no match
-    
+            currentFilter = filterMap[selectedFilter] || 'all'; // Default to 'all' if no match
+
             // Reset the current page to 1 and fetch jobs with the selected filter
             currentPage = 1;
             fetchJobs(currentPage, currentFilter);
         });
-    });    
+    });
 });

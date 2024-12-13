@@ -321,3 +321,78 @@ canvas {
     height: 20vw !important; /* Set your desired height */
     
 }
+
+/* Blue Themed Style for the Recently Added Table */
+.recently-added-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f0f8ff; /* Light blue background for the table */
+}
+
+/* Table Title (Make it bigger and center it) */
+.recently-added-table-title {
+    text-align: center; /* Center the title */
+    font-size: 24px; /* Make the title bigger */
+    font-weight: bold;
+    color: #4682b4; /* Steel blue color for the title */
+    margin-bottom: 15px; /* Space below the title */
+}
+
+/* Table Style */
+.recently-added-table th, .recently-added-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #b0e0e6; /* Light blue border */
+}
+
+.recently-added-table th {
+    background-color: #4682b4; /* Steel blue background for the header */
+    font-weight: bold;
+    color: #ffffff; /* White text color */
+}
+
+.recently-added-table td {
+    background-color: #ffffff; /* White background for table cells */
+    color: #4682b4; /* Steel blue text color for table data */
+}
+
+.recently-added-table tbody tr:nth-child(even) {
+    background-color: #e6f2ff; /* Light blue background for even rows */
+}
+
+.recently-added-table tbody tr:hover {
+    background-color: #cce0ff; /* Lighter blue on hover */
+    cursor: pointer;
+}
+
+.recently-added-table td, .recently-added-table th {
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.recently-added-table td {
+    word-wrap: break-word;
+}
+
+/* Responsive Design for the table */
+@media (max-width: 768px) {
+    .recently-added-table {
+        font-size: 12px;
+    }
+    
+    .recently-added-table th, .recently-added-table td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recently-added-table th, .recently-added-table td {
+        padding: 6px;
+        font-size: 10px;
+    }
+
+    .recently-added-table th {
+        font-size: 12px;
+    }
+}
