@@ -440,6 +440,10 @@ nav a:hover {
     background-color: #17a2b8;
 }
 
+.job-type.part-time {
+    background-color: #ffc107; 
+}
+
 .salary {
     font-size: 12px;
     color: #666;
@@ -450,21 +454,6 @@ nav a:hover {
     height: 40px;
     border-radius: 5px;
 }
-
-.bookmark-btn {
-    background: none;
-    border: none;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    cursor: pointer;
-}
-
-.bookmark-btn img {
-    width: 12px; 
-    height: 20px; 
-}
-
 
 .job-title {
     font-weight: bold;
@@ -630,6 +619,7 @@ nav a:hover {
     background-color: #e0e0e0;  
 }
 
+/* Job cards */
 .job-card a {
     text-decoration: none;
 }
@@ -638,4 +628,14 @@ nav a:hover {
 .job-card a:hover {
     text-decoration: none;  
     color: #007bff;  
+}
+
+/* Job cards links */
+a.col-md-4 {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.col-md-4:hover {
+    text-decoration: none;
 }
