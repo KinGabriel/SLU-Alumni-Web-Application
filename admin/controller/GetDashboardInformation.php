@@ -44,15 +44,15 @@ if ($result->num_rows > 0) {
  } else {
      $data['total_events'] = 0;
  }
-
-// $sql = "SELECT COUNT(*) AS total_news FROM news";
-// $result = $connection->query($sql);
-// if ($result->num_rows > 0) {
-//     $row = $result->fetch_assoc();
-//     $data['total_news'] = $row['total_news'];
-// } else {
-//     $data['total_news'] = 0;
-// }
+// Query and fetch the count of number of news
+$sql = "SELECT COUNT(*) AS total_news FROM news";
+$result = $connection->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $data['total_news'] = $row['total_news'];
+} else {
+    $data['total_news'] = 0;
+}
 
 echo json_encode($data);
 ?>
