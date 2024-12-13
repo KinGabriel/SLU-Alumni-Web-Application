@@ -1,3 +1,14 @@
+let debounceTimeout;
+
+document.querySelector('input[name="searchConnection"]').addEventListener('input', () => {
+    clearTimeout(debounceTimeout);
+
+    debounceTimeout = setTimeout(() => {
+        fetchConnections();
+    }, 300); 
+});
+
+
 async function fetchConnections() {
     const activeButton = document.querySelector('.filter-button.active');
     const searchQuery = document.querySelector('input[name="searchConnection"]').value;
@@ -18,6 +29,7 @@ async function fetchConnections() {
         console.error('Error fetching connections:', error);
     }
 }
+
 fetchConnections()
 
 // TODO Modal
