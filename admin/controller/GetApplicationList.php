@@ -4,7 +4,7 @@ require ("../controller/HandleSession.php");
 $applicant = []; 
 $params = [];
 $types = ''; 
-$query = "SELECT CONCAT(fname, ' ', lname) as Name, email, gradyear,school_id_pic FROM applicants WHERE is_verified = '0'"; 
+$query = "SELECT app_id,CONCAT(fname, ' ', lname) as Name, email, gradyear,school_id_pic FROM applicants WHERE is_verified = '0'"; 
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (!empty($applicant) && is_array($applicant)) {
         $applicantData = array_map(function($applicant) {
             return [
+                'app_id' => $applicant['app_id'],
                 'name' => $applicant['Name'],
                 'email' => $applicant['email'],
                 'gradyear' => $applicant['gradyear'] ?? "N/A",
