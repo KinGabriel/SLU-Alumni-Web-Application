@@ -186,7 +186,7 @@ export const getComments = (req, res) => {
         JOIN posts p ON c.post_id = p.post_id
         JOIN user u ON c.user_id = u.user_id
     WHERE
-        p.post_id = ?`;
+        p.post_id = ? ORDER BY c.date DESC`;
 
     dbConnection.execute(query, [postId], (err, results) => {
         if (err) {
@@ -200,7 +200,6 @@ export const getComments = (req, res) => {
             return comment;
         });
 
-        // Return the comments as a JSON response
         res.json(comments);
     });
 };
