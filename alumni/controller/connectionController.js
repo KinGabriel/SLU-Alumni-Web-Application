@@ -44,9 +44,6 @@ if (filter === 'followers') {
               INNER JOIN 
             follows f1 
             ON u.user_id = f1.follower_id 
-        INNER JOIN 
-            follows f2 
-            ON f1.follower_id = f2.followed_id 
         WHERE 
             f1.followed_id = ? 
             AND f1.is_requested = 0
@@ -64,13 +61,10 @@ if (filter === 'followers') {
             INNER JOIN 
             follows f1 
             ON u.user_id = f1.follower_id 
-        INNER JOIN 
-            follows f2 
-            ON f1.follower_id = f2.followed_id 
         WHERE 
             f1.followed_id = ? 
             AND f1.is_requested = 1
-            AND f2.is_requested = 0 AND not u.user_id = ?
+       AND not u.user_id = ?
     `;
     queryParams = [userId, userId];  
     } else {
