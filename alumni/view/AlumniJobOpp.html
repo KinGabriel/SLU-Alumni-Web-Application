@@ -23,7 +23,7 @@
         <!-- Search bar -->
         <div class="search">
             <form id="searchForm" onsubmit="return false;">
-                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()" autocomplete="off">
                 <button type="submit">
                     <img src="../assets/images/search.png" alt="Search" class="search-icon">
                 </button>
@@ -40,7 +40,7 @@
                    <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
                    <div class="dropdown-info">
                        <h4 name="name"></h4>
-                       <p>Web Developer at Google</p>
+                       <p name="company">Web Developer at Google</p>
                    </div>
                </div>
                <ul class="dropdown-links">

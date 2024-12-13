@@ -47,6 +47,7 @@ window.addEventListener('scroll', () => {
     const clientHeight = window.innerHeight; 
     if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
         getUserPosts();
+        getUserInfo();
     }
     
 });
@@ -204,7 +205,7 @@ function loadComments(postId) {
                 
                 // Create the profile image element
                 const profileImage = document.createElement('img');
-                profileImage.src = comment.pfp || '../assets/images/candy.jpg'; // Default image if no profile picture
+                profileImage.src = comment.pfp || '../assets/images/default-profile.jpg'; // Default image if no profile picture
                 profileImage.alt = 'Profile';
                 profileImage.classList.add('comment-pic');
                 
@@ -253,7 +254,7 @@ async function postComment(postId, commentText) {
         },
         body: JSON.stringify({
             post_id: postId,
-            comment_message: commentText, 
+            comment_message: commentText,
         })
     });
 
@@ -263,12 +264,16 @@ async function postComment(postId, commentText) {
     }
 
     const result = await response.json();
-    return result.success; // Assuming the response contains { success: true/false }
+    if (result.success) {
+        loadComments(postId);
+    }
+    return result.success;
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    getUserPosts();
-    handlePostSubmit();
-});
+
+getUserPosts();
+handlePostSubmit();
+
+
 

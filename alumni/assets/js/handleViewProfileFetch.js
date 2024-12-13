@@ -376,7 +376,7 @@ function loadComments(postId) {
                 
                 // Create the profile image element
                 const profileImage = document.createElement('img');
-                profileImage.src = comment.pfp || '../assets/images/candy.jpg'; // Default image if no profile picture
+                profileImage.src = comment.pfp || '../assets/images/default-profile.jpg'; // Default image if no profile picture
                 profileImage.alt = 'Profile';
                 profileImage.classList.add('comment-pic');
                 

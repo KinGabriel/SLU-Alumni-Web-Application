@@ -16,44 +16,45 @@
    <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
    <!-- Purpose: Provide branding, search functionality, and quick access to user profile actions. -->
    <!-- Libraries Used: Bootstrap (https://getbootstrap.com/) -->
-   <header>
-    <h1>
-        <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
-        <!-- Search bar -->
-        <div class="search">
-            <form id="searchForm" onsubmit="return false;">
-                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
-                <button type="submit">
-                    <img src="../assets/images/search.png" alt="Search" class="search-icon">
-                </button>
-            </form>
-        </div>
-    </h1>
+     <!-- Header -->
+     <header>
+        <h1>
+            <img src="../../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+            <!-- Search bar -->
+            <div class="search">
+                <form id="searchForm" onsubmit="return false;">
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
+                    <button type="submit">
+                        <img src="../../assets/images/search.png" alt="Search" class="search-icon">
+                    </button>
+                </form>
+            </div>
+        </h1>
+        
+        <ul id="searchResults"></ul>
     
-    <ul id="searchResults"></ul>
-
-       <div class="profile-dropdown">
-           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
-               <div class="dropdown-header">
-                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                   <div class="dropdown-info">
-                       <h4 name="name"></h4>
-                       <p>Web Developer at Google</p>
+           <div class="profile-dropdown">
+               <img src="../../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+               <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+                   <div class="dropdown-header">
+                       <img src="../../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                       <div class="dropdown-info">
+                           <h4 name="name"></h4>
+                           <p name="company">Web Developer at Google</p>
+                       </div>
+                   </div>
+                   <ul class="dropdown-links">
+                    <li><a href="/api/profile">View Profile</a></li>
+                    <li><a href="/api/manage-profile">Manage Profile</a></li>
+                    <li><a href="#">Close Account</a></li>
+                   </ul>
+                   <div class="logout-btn">
+                       <img src="../../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                       <span>Log out</span>
                    </div>
                </div>
-               <ul class="dropdown-links">
-                <li><a href="/api/profile">View Profile</a></li>
-                <li><a href="/api/manage-profile">Manage Profile</a></li>
-                <li><a href="#">Close Account</a></li>
-               </ul>
-               <div class="logout-btn">
-                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                   <span>Log out</span>
-               </div>
-           </div>
-       </div>
-   </header>
+           </div>     
+       </header>
 
    <!-- Sidebar Section: Displays user profile details, stats, and a navigation menu with links to different sections. -->
    <!-- Group Member Responsible:Escaño, Nichole Jhoy -->

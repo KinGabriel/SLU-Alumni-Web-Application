@@ -24,7 +24,7 @@
         <!-- Search bar -->
         <div class="search">
             <form id="searchForm" onsubmit="return false;">
-                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
                 <button type="submit">
                     <img src="../assets/images/search.png" alt="Search" class="search-icon">
                 </button>
@@ -33,30 +33,31 @@
     </h1>
     
     <ul id="searchResults"></ul>
+        
+        <div class="profile-dropdown">
+            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+            <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+                <div class="dropdown-header">
+                    <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                    <div class="dropdown-info">
+                        <h4 name="name"></h4>
+                        <p name="company">Web Developer at Google</p>
+                    </div>
+                </div>
+                <ul class="dropdown-links">
+                    <li><a href="/api/profile">View Profile</a></li>
+                    <li><a href="/api/manage-profile">Manage Profile</a></li>
+                    <li><a href="#">Close Account</a></li>
+                </ul>
+                <div class="logout-btn">
+                    <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                    <span>Log out</span>
+                </div>
+            </div>
+        </div>
+            
+    </header>
 
-       <div class="profile-dropdown">
-           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
-               <div class="dropdown-header">
-                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                   <div class="dropdown-info">
-                       <h4 name="name"></h4>
-                       <p>Web Developer at Google</p>
-                   </div>
-               </div>
-               <ul class="dropdown-links">
-                <li><a href="/api/profile">View Profile</a></li>
-                <li><a href="/api/manage-profile">Manage Profile</a></li>
-                <li><a href="#">Close Account</a></li>
-               </ul>
-               <div class="logout-btn">
-                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                   <span>Log out</span>
-               </div>
-           </div>
-       </div>
-             
-   </header>
 
    <!-- Main Content -->
    <div class="main-content">
