@@ -91,7 +91,7 @@ require("../controller/HandleSession.php");
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>School Id</th>
+
                     <th>Graduation Year</th>
                     <th>Action</th>
                 </tr>

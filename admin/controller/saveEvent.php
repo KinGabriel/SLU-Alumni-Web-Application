@@ -53,7 +53,7 @@ try {
             if ($stmt->execute()) {
                 echo "<script>
                         alert('Event added successfully!');
-                        window.location.href = '../view/addEvents.php'; 
+                        window.location.href = '../view/adminEvent.php'; 
                       </script>";
             } else {
                 echo "<script>
@@ -67,14 +67,14 @@ try {
         } else {
             echo "<script>
                     alert('Error preparing the query');
-                    window.location.href = 'addEventPage.php'; 
+                    window.location.href = '../view/addEvents.php'; 
                   </script>";
         }
     }
 } catch (Exception $e) {
     echo "<script>
             alert('Connection failed: " . $e->getMessage() . "');
-            window.location.href = 'addEventPage.php'; 
+            window.location.href = '../view/addEvents.php'; 
           </script>";
 } finally {
     $conn->close();
