@@ -1,3 +1,8 @@
+/**
+ * JS class for fetching the job opportunity information.
+ * 
+ * Author: [Carino, Mark]
+ */
 document.addEventListener("DOMContentLoaded", function () {
     let currentPage = 1; // Start on the first page
     const itemsPerPage = 6; // Number of jobs per page

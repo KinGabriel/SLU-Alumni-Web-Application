@@ -1,3 +1,8 @@
+/**
+ * JavaScript class for fetching and displaying dashboard information and generating a chart.
+ * 
+ * Author: [Carino, Mark]
+ */
 // To fetch the information from the php file
 document.addEventListener("DOMContentLoaded", () => {
     fetch("../controller/GetDashboardInformation.php")

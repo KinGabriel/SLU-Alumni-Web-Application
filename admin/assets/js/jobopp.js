@@ -1,3 +1,8 @@
+/**
+ * JS class for adding the job opportunity information.
+ * 
+ * Author: [Carino, Mark]
+ */
 // DOM elements
 const steps = document.querySelectorAll(".step"),
       progress = document.querySelector(".progress-bar .progress"),

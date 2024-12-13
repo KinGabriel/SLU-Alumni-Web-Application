@@ -1,3 +1,8 @@
+/**
+ * PhP class for saving the job opportunity information.
+ * 
+ * Author: [Carino, Mark]
+ */
 <?php
 require '../../database/Configuration.php'; 
 require("../controller/HandleSession.php");

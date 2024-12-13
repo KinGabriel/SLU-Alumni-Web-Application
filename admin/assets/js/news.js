@@ -1,3 +1,8 @@
+/**
+ * JS class for displaying the fetched news information.
+ * 
+ * Author: [Carino, Mark]
+ */
 document.addEventListener("DOMContentLoaded", function() {
     // Fetch the news data from the PHP script
     fetch('../controller/fetchNews.php')

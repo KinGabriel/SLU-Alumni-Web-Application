@@ -1,3 +1,8 @@
+/**
+ * PhP class for fetching the Job Opportunity information.
+ * 
+ * Author: [Carino, Mark]
+ */
 <?php
 // Enable error reporting for debugging
 ini_set('display_errors', 1);

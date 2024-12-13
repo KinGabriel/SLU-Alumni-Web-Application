@@ -1,3 +1,8 @@
+/**
+ * JS class for adding the events information.
+ * 
+ * Author: [Carino, Mark]
+ */
 // DOM elements
 const steps = document.querySelectorAll(".step"),
       progress = document.querySelector(".progress-bar .progress"),
