@@ -42,13 +42,12 @@ async function getNews(page = 1) {
 
             const cardFooterDiv = document.createElement('div');
             cardFooterDiv.classList.add('card-footer', 'd-flex', 'flex-column', 'justify-content-between');
-            cardFooterDiv.style.maxHeight = '300px'; // Set the maximum height for the footer
+            cardFooterDiv.style.maxHeight = '300px'; 
 
             const newsDescription = document.createElement('p');
             newsDescription.classList.add('card-text');
             newsDescription.textContent = newsItem.description;
-            newsDescription.style.overflowY = 'auto'; // Add a scrollbar for lengthy content if needed
-           
+            newsDescription.style.overflowY = 'auto'; 
             const readMoreBtn = document.createElement('button');
             readMoreBtn.classList.add('btn', 'btn-primary', 'btn-read-more');
             readMoreBtn.textContent = 'Read More';
