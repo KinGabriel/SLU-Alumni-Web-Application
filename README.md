@@ -6,7 +6,7 @@
 - Razo, Ma. Lourdes Shaine
 - Vergara, Carlos Miguel
 
-- SLU Alumina Website (Environment and Project Set up)
+ SLU Alumina Website (Environment and Project Set up)
 
 This project is a web application designed to manage alumni records, events, job opportunities, and user accounts. It is built using a combination of PHP, MySQL (WAMP server), and Node.js for additional functionalities.
 
