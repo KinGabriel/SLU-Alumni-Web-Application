@@ -1,5 +1,5 @@
 //  get user info
-function getUserInfo() {
+async function getUserInfo() {
     fetch('/api/homefeed', {
         method: 'GET',
         headers: {

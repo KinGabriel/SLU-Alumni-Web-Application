@@ -22,13 +22,13 @@ export const getJobs = async (req, res) => {
     if (datePosted !== 'all') {
         let dateCondition;
         switch (datePosted) {
-            case 'last24Hours':
+            case 'today':
                 dateCondition = 'created_at >= NOW() - INTERVAL 1 DAY';
                 break;
-            case 'lastWeek':
+            case 'this-week':
                 dateCondition = 'created_at >= NOW() - INTERVAL 1 WEEK';
                 break;
-            case 'lastMonth':
+            case 'this-month':
                 dateCondition = 'created_at >= NOW() - INTERVAL 1 MONTH';
                 break;
             default:
