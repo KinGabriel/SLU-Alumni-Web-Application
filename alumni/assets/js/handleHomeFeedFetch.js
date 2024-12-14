@@ -1,20 +1,29 @@
-// handle get posts of users
+let offset = 0;
+let isLoading = false;
+let hasMorePosts = true;
+
 function getUserPosts() {
-    fetch('/api/feed/getfeed')
+    if (isLoading || !hasMorePosts) return; 
+
+    isLoading = true; 
+
+    fetch(`/api/feed/getfeed?offset=${offset}`)
         .then(response => response.json())
         .then(data => {
             const posts = data.posts;
             const feedContainer = document.querySelector('.feed');
-            feedContainer.innerHTML = '';
+
+            if (posts.length === 0) {
+                hasMorePosts = false;
+                return;
+            }
 
             posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('post');
-                // call the helper method which are located in handleHomefeed.js
                 const postHeader = createPostHeader(post); 
                 const postContent = createPostContent(post); 
                 const postActions = createPostActions(post);
-                // append
                 postElement.appendChild(postHeader);
                 postElement.appendChild(postContent);
                 postElement.appendChild(document.createElement('hr'));
@@ -22,9 +31,26 @@ function getUserPosts() {
 
                 feedContainer.appendChild(postElement);
             });
+
+            offset += posts.length;
+            isLoading = false; 
         })
-        .catch(err => console.error('Error fetching posts:', err));
+        .catch(err => {
+            console.error('Error fetching posts:', err);
+            isLoading = false; 
+        });
 }
+
+window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight; 
+    const scrollTop = window.scrollY || window.pageYOffset; 
+    const clientHeight = window.innerHeight; 
+    if (scrollHeight - scrollTop - clientHeight <= 50 && hasMorePosts && !isLoading) {
+        getUserPosts();
+        getUserInfo();
+    }
+    
+});
 
 
 
@@ -54,58 +80,66 @@ function handlePostSubmit() {
             }
         });
 
+        const postTextarea = document.querySelector('#postForm textarea');
+        if (postTextarea) {
+            characterValidation(postTextarea, 1000);
+        }
 
-        // Handle form submission
         const submitPostButton = document.querySelector('#submitPost');
         if (submitPostButton) {
             submitPostButton.addEventListener('click', () => {
-                const description = document.querySelector('.modal-body textarea').value;
+                const description = postTextarea.value.trim();
+
+                // Validation for character limit
+                if (!characterLimit(description, 1000)) {
+                    showValidationModal("Character Limit Exceeded", "The description cannot exceed 1000 characters. Please shorten your text.");
+                    return;
+                }
+
                 const post_type = 'normal';
-                const datetime = new Date().toISOString();  
                 const formData = new FormData();
                 formData.append('description', description);
                 formData.append('post_type', post_type);
-                formData.append('datetime', datetime);
-            
+
                 const imageInput = document.getElementById('photoInput');
                 if (imageInput && imageInput.files.length > 0) {
                     Array.from(imageInput.files).forEach(file => {
-                        formData.append('images[]', file);  
+                        formData.append('images[]', file);
                     });
                 }
-            
-               
+
                 const videoInput = document.getElementById('videoInput');
                 if (videoInput && videoInput.files.length > 0) {
                     Array.from(videoInput.files).forEach(file => {
-                        formData.append('videos[]', file); 
+                        formData.append('videos[]', file);
                     });
                 }
-            
+
                 // Send data via fetch
                 fetch('/api/feed/postfeed', {
                     method: 'POST',
-                    body: formData,  
-                    credentials: 'include'  
+                    body: formData,
+                    credentials: 'include'
                 })
                 .then(response => response.json())
                 .then(data => {
-                    postModal.hide();  
-            
-                    if (data.message === 'Post created successfully') {
-                        successModal.show(); 
+                    if (data.message && data.message.startsWith('The file')) {
+                        showValidationErrorModal("File size too large",data.message);
                     } else {
-                        errorModal.show(); 
-                    }
-            
+                        postModal.hide();  
+                        if (data.message === 'Post created successfully') {
+                            successModal.show(); 
+                        } else {
+                            errorModal.show(); 
+                        }
 
-                    getUserInfo();
-                    getUserPosts();
+                        getUserInfo();
+                        getUserPosts();
+                    }
                 })
                 .catch(error => {
-                    console.error('Error posting data:', error);
-                    postModal.hide(); 
-                    errorModal.show();  
+                    showValidationModal("Error occured","Failed to handle the post!");
+                    postModal.hide();
                 });
             });
         }
@@ -127,9 +161,12 @@ function handlePostSubmit() {
 
         // Reset form and hide all modals when any modal is hidden
         const resetPage = () => {
-            const postTextarea = document.querySelector('.modal-body textarea');
             if (postTextarea) {
-                postTextarea.value = '';  // Reset the textarea value
+                postTextarea.value = ''; // Reset the textarea value
+                const charCounter = document.getElementById('charCounter');
+                if (charCounter) {
+                    charCounter.textContent = '300 characters remaining';
+                }
             }
 
             // Hide all modals (post, success, error)
@@ -142,6 +179,8 @@ function handlePostSubmit() {
         errorModalElement.addEventListener('hidden.bs.modal', resetPage);
     }
 }
+
+
 function handleLike(postId, likeButton, isLiked, likeCountElement) {
     fetch(`/api/feed/like/${postId}`, {
         method: 'POST',
@@ -162,7 +201,6 @@ function handleLike(postId, likeButton, isLiked, likeCountElement) {
     });
 }
 
-
 function loadComments(postId) {
     const commentsList = document.getElementById(`commentsList-${postId}`);
     commentsList.innerHTML = ''; // Clear previous comments
@@ -181,7 +219,7 @@ function loadComments(postId) {
                 
                 // Create the profile image element
                 const profileImage = document.createElement('img');
-                profileImage.src = comment.pfp || '../assets/images/candy.jpg'; // Default image if no profile picture
+                profileImage.src = comment.pfp || '../assets/images/default-profile.jpg'; // Default image if no profile picture
                 profileImage.alt = 'Profile';
                 profileImage.classList.add('comment-pic');
                 
@@ -189,17 +227,23 @@ function loadComments(postId) {
                 const commentText = document.createElement('p');
                 commentText.classList.add('comment-text');
                 
-                // Create the strong tag for name and date
-                const strongTag = document.createElement('strong');
-                const formattedDate = formatDate(comment.date);  // Assuming formatDate is defined elsewhere
-                strongTag.textContent = `${comment.name}: ${formattedDate}`;
+                // Create the strong tag for name
+                const nameTag = document.createElement('strong');
+                nameTag.textContent = comment.name;
                 
                 // Create the comment message text
-                const commentMessageText = document.createTextNode(` ${comment.comment_message}`);
-
-                // Append strong tag and message to the comment text
-                commentText.appendChild(strongTag);
+                const commentMessageText = document.createTextNode(`: ${comment.comment_message} `);
+                
+                // Create the span for the date
+                const dateTag = document.createElement('span');
+                dateTag.classList.add('comment-date');
+                const formattedDate = formatDate(comment.date);  // Assuming formatDate is defined elsewhere
+                dateTag.textContent = `(${formattedDate})`;  // Adding parentheses around the date
+                
+                // Append name, comment, and date to the comment text
+                commentText.appendChild(nameTag);
                 commentText.appendChild(commentMessageText);
+                commentText.appendChild(dateTag);
 
                 // Append the profile image and comment text to the comment div
                 commentDiv.appendChild(profileImage);
@@ -216,7 +260,6 @@ function loadComments(postId) {
 }
 
 
-
 async function postComment(postId, commentText) {
     const response = await fetch('/api/feed/send-comment', {
         method: 'POST',
@@ -225,7 +268,7 @@ async function postComment(postId, commentText) {
         },
         body: JSON.stringify({
             post_id: postId,
-            comment_message: commentText, 
+            comment_message: commentText,
         })
     });
 
@@ -235,10 +278,16 @@ async function postComment(postId, commentText) {
     }
 
     const result = await response.json();
-    return result.success; // Assuming the response contains { success: true/false }
+    if (result.success) {
+        loadComments(postId);
+    }
+    return result.success;
 }
 
 
 
 getUserPosts();
 handlePostSubmit();
+
+
+

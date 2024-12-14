@@ -30,7 +30,7 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
         <!-- Search bar -->
         <div class="search">
             <form id="searchForm" onsubmit="return false;">
-                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
                 <button type="submit">
                     <img src="../assets/images/search.png" alt="Search" class="search-icon">
                 </button>
@@ -39,31 +39,33 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
     </h1>
     
     <ul id="searchResults"></ul>
+    
 
-       <div class="profile-dropdown">
-           <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
-               <div class="dropdown-header">
-                   <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                   <div class="dropdown-info">
-                       <h4 name="name"></h4>
-                       <p>Web Developer at Google</p>
-                   </div>
-               </div>
-               <ul class="dropdown-links">
-                   <li><a href="#">View Profile</a></li>
-                   <li><a href="#">Manage Profile</a></li>
-                   <li><a href="#">Close Account</a></li>
-               </ul>
-               <div class="logout-btn">
-                   <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                   <span>Log out</span>
-               </div>
-           </div>
-       </div>
-   </header>
+    <div class="profile-dropdown">
+        <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+        <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+            <div class="dropdown-header">
+                <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                <div class="dropdown-info">
+                    <h4 name="name"></h4>
+                    <p name="company">Web Developer at Google</p>
+                </div>
+            </div>
+            <ul class="dropdown-links">
+                <li><a href="/api/profile">View Profile</a></li>
+                <li><a href="/api/manage-profile">Manage Profile</a></li>
+                <li><a href="#">Close Account</a></li>
+                </ul>
+                <div class="logout-btn">
+                    <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                    <span>Log out</span>
+                </div>
+            </div>
+        </div>
+            
+    </header>
 
-   <!-- Main Content -->
+    <!-- Main Content  -->
     <div class="main-content">
         <!-- Sidebar -->
         <aside>
@@ -79,10 +81,10 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
                         <div class="stat-item">
                             <strong>Posts</strong><br><p name="post_count"></p>
                         </div>
-                        <div class="stat-item">
-                            <strong>Followers</strong><br><p name="followers_count"></p>
+                        <div class="stat-item" >
+                            <strong>Followers</strong><br><p  name="followers_count"></p>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" >
                             <strong>Following</strong><br><p name="followed_count"></p>
                         </div>
                     </div>
@@ -142,6 +144,7 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
                 <button class="filter-button active" onclick="filterEvents('mutual')">Mutuals</button>
                 <button class="filter-button" onclick="filterEvents('followers')">Followers</button>
                 <button class="filter-button" onclick="filterEvents('following')">Following</button>
+                <button class="filter-button" onclick="filterEvents('request')">Request</button>
             </div>
         
             <!-- Connections Table -->
@@ -150,7 +153,7 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
             </div>
 
             <!-- Confirmation Modal: Removing Following -->
-            <div class="modal fade" id="confirmRemoveFollowingModal" tabindex="-1" aria-labelledby="confirmRemoveFollowingModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal fade" id="confirmRemoveFollowingModal" tabindex="-1" aria-labelledby="confirmRemoveFollowingModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -222,6 +225,26 @@ Alumni can filter connections by name (A-Z, Z-A) and search for specific names.
                     </div>
                 </div>
             </div>
+
+             <!-- Success Modal: accepted -->
+             <div class="modal fade" id="successfulAccept" tabindex="-1" aria-labelledby="successRemoveFollowingModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="successRemoveFollowingModalLabel">Success</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            You have successfully Accepted the follower! <span id="removedFollowingName" class="fw-bold"></span>.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
 
     <!-- Bootstrap JavaScript -->
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>

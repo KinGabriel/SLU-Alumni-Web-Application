@@ -52,15 +52,13 @@ header img.slu-logo {
     top: 0;
     bottom: 0;
     height: 100%;
-    width: 60px;
+    width: 250px; 
     margin-top: 9.6vh;
-    transition: width 0.3s ease;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    z-index: 100;
+    z-index: 1000; 
 }
-
 .sidebar-container:hover {
     width: 250px;
 }
@@ -139,15 +137,17 @@ header img.slu-logo {
     font-weight: bold;
 }
 
-/* Main content */
+/* Main Content */
 .main-content {
-    margin-left: 60px;
+    margin-left: 250px; 
     padding: 20px;
     transition: margin-left 0.3s ease;
+    z-index: 1; 
+    position: relative; 
 }
 
 .sidebar-container:hover ~ .main-content {
-    margin-left: 250px;
+    margin-left: 250px; 
 }
 
 .form-container {

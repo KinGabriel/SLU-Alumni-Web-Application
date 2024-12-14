@@ -8,7 +8,7 @@ function populateApplicantsTable(applicantData) {
         // Create row  
         const nameCell = document.createElement('td');
         const emailCell = document.createElement('td');
-        const idNumberCell = document.createElement('td');
+        
         const gradYearCell = document.createElement('td');
         const actionCell = document.createElement('td');
 
@@ -20,7 +20,7 @@ function populateApplicantsTable(applicantData) {
         
         // Populate the table with the data from the server
         emailCell.textContent = applicant.email;
-        idNumberCell.textContent = applicant.id_number;
+
         gradYearCell.textContent = applicant.gradyear;
 
         // Create Accept and Decline buttons
@@ -49,7 +49,7 @@ function populateApplicantsTable(applicantData) {
         // Append all 
         row.appendChild(nameCell);
         row.appendChild(emailCell);
-        row.appendChild(idNumberCell);
+
         row.appendChild(gradYearCell);
         row.appendChild(actionCell);
         appTableBody.appendChild(row);
@@ -112,14 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function acceptUser(schoolID) {
+async function acceptUser(app_id) {
+    console.log(app_id)
     try {
         const response = await fetch(`../controller/ProcessApplicants.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ schoolID, action: 'accept' }), 
+            body: JSON.stringify({ app_id, action: 'accept' }), 
         });
         if (!response.ok) throw new Error('Failed to accept user');
         fetchUserData(); 
@@ -128,14 +129,14 @@ async function acceptUser(schoolID) {
     }
 }
 
-async function declineUser(schoolID) {
+async function declineUser(app_id) {
     try {
         const response = await fetch(`../controller/ProcessApplicants.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ schoolID, action: 'decline' }), 
+            body: JSON.stringify({ app_id, action: 'decline' }), 
         });
         if (!response.ok) throw new Error('Failed to decline user');
         fetchUserData(); 
@@ -224,7 +225,7 @@ function showConfirmationModal(applicant) {
     confirmModal.style.display = 'flex';
 
     document.getElementById('confirmYes').onclick = function() {
-        acceptUser(applicant.id_number);
+        acceptUser(applicant.app_id);
         closeConfirmationModal();
     };
 
@@ -242,7 +243,7 @@ function showDeclineConfirmationModal(applicant) {
     confirmModal.style.display = 'flex';
 
     document.getElementById('confirmYes').onclick = function() {
-        declineUser(applicant.id_number);
+        declineUser(applicant.app_id);
         closeConfirmationModal();
     };
 

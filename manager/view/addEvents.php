@@ -714,6 +714,11 @@ a {
   line-height: 1.8;  /* Increased line height for readability */
 }
 
+input.error, textarea.error {
+    border: 2px solid red; /* Red border for missing fields */
+}
+
+
 </style>
 
 <head>
@@ -805,10 +810,9 @@ a {
           </div>
 
           <!-- Step 1 Content -->
-          <div class="step-content" id="step1">
+          <form id="event-form" action="../controller/saveEvent.php" method="POST" enctype="multipart/form-data">
+          <div class="step-content step-1" id="step1">
               <h1>Event Description</h1>
-
-              <form id="event-form" action="../controller/saveEvent.php" method="POST" enctype="multipart/form-data">
                 <main class='wrapper'>
                     <!-- Event Title -->
                     <input type='text' id="event-title-input" name="event_title" placeholder='' required> 

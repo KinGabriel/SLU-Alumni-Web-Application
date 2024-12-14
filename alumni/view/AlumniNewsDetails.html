@@ -1,0 +1,113 @@
+<!-- News Details: Displays details about a news -->
+<!-- Library Used: Bootstrap (https://getbootstrap.com/) -->
+<!-- Design Inspiration: ThemeForest (https://themeforest.net/) -->
+<!-- Group Member Responsible:  Escaño, Nichole Jhoy -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLU Alumina</title>
+    <link href="../../assets/css/AlumniNewsDetails.css" rel="stylesheet">
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+   <!-- Header separator -->
+   <div class="header-separator"></div>
+
+   <!-- Header -->
+   <header>
+    <h1>
+        <img src="../../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+        <!-- Search bar -->
+        <div class="search">
+            <form id="searchForm" onsubmit="return false;">
+                <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
+                <button type="submit">
+                    <img src="../../assets/images/search.png" alt="Search" class="search-icon">
+                </button>
+            </form>
+        </div>
+    </h1>
+    
+    <ul id="searchResults"></ul>
+
+       <div class="profile-dropdown">
+           <img src="../../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+           <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+               <div class="dropdown-header">
+                   <img src="../../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                   <div class="dropdown-info">
+                       <h4 name="name"></h4>
+                       <p name="company">Web Developer at Google</p>
+                   </div>
+               </div>
+               <ul class="dropdown-links">
+                <li><a href="/api/profile">View Profile</a></li>
+                <li><a href="/api/manage-profile">Manage Profile</a></li>
+                <li><a href="#">Close Account</a></li>
+               </ul>
+               <div class="logout-btn">
+                   <img src="../../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                   <span>Log out</span>
+               </div>
+           </div>
+       </div>     
+   </header>
+   
+    <!-- News Details -->
+    <div class="container">
+        <a href="/api/news" class="btn btn-outline-secondary back-btn">
+            <img src="../../assets/images/news.png" alt="Back" class="me-2" style="width: 20px; height: 20px;"> News
+        </a>    
+        <div class="image-section">
+            <img src="../../assets/images/navi.jpg" alt="SLU Intramural Opening">
+        </div>        
+        <div class="content-section">
+            <h1></h1>
+            <p>
+              
+            </p>
+            <p>
+               
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../assets/js/handleHomefeed.js" defer>  </script>  
+    <script src="../assets/js/handleFetch.js" async>  </script> 
+    <script src="../../assets/js/handleAlumniFetch.js" defer>  </script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const newsId = urlParams.get('news_id');
+
+                if (!newsId) {
+                    console.error('No news ID found in URL.');
+                    return;
+                }
+
+                const response = await fetch(`/api/news/details/${newsId}`);
+                const data = await response.json();
+
+                if (data.status !== 'success') {
+                    console.error('Failed to fetch news details:', data.message);
+                    return;
+                }
+
+                const { title, photo, description } = data.news;
+
+                document.querySelector('.image-section img').src = photo || '';
+                document.querySelector('.content-section h1').textContent = title;
+                document.querySelector('.content-section').querySelectorAll('p')[0].textContent = description;
+            } catch (error) {
+                console.error('Error fetching news details:', error);
+            }
+        });
+    </script>
+</body>
+</html>

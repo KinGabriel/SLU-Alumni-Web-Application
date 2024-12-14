@@ -15,49 +15,49 @@
     <!-- Purpose: Provide quick access to profile settings and search functionality. -->
     <header>
         <h1>
-            <img src="../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
+            <img src="../../assets/images/logo.png" alt="SLU Alumina Logo" class="slu-logo">
             <!-- Search bar -->
             <div class="search">
                 <form id="searchForm" onsubmit="return false;">
-                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
                     <button type="submit">
-                        <img src="../assets/images/search.png" alt="Search" class="search-icon">
+                        <img src="../../assets/images/search.png" alt="Search" class="search-icon">
                     </button>
                 </form>
             </div>
         </h1>
         
         <ul id="searchResults"></ul>
-
-        <!-- Profile Dropdown -->
-        <div class="profile-dropdown">
-            <img src="../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
-            <div class="dropdown-menu" id="dropdownMenu" style="display: none;">
-                <div class="dropdown-header">
-                    <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
-                    <div class="dropdown-info">
-                        <h4 name="name"></h4>
-                        <p>Web Developer at Google</p>
-                    </div>
-                </div>
-                <ul class="dropdown-links">
-                    <li><a href="#">View Profile</a></li>
-                    <li><a href="#">Manage Profile</a></li>
+    
+           <div class="profile-dropdown">
+               <img src="../../assets/images/candy.jpg" alt="Profile" class="profile-avatar" name="pfp" onclick="toggleDropdown()">
+               <div class="dropdown-menu" id="dropdownMenu"  style="display: none;">
+                   <div class="dropdown-header">
+                       <img src="../../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
+                       <div class="dropdown-info">
+                           <h4 name="name"></h4>
+                           <p name="company">Web Developer at Google</p>
+                       </div>
+                   </div>
+                   <ul class="dropdown-links">
+                    <li><a href="/api/profile">View Profile</a></li>
+                    <li><a href="/api/manage-profile">Manage Profile</a></li>
                     <li><a href="#">Close Account</a></li>
-                </ul>
-                <div class="logout-btn">
-                    <img src="../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
-                    <span>Log out</span>
-                </div>
-            </div>
-        </div>
-    </header>
+                   </ul>
+                   <div class="logout-btn">
+                       <img src="../../assets/images/logout.png" alt="Log out Icon" class="logout-icon">
+                       <span>Log out</span>
+                   </div>
+               </div>
+           </div>     
+       </header>
 
     <!-- Main Content Section: Contains the sidebar navigation and manage profile form. -->
     <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
     <!-- Design Inspiration: LinkedIn, Facebook -->
     <!-- Purpose: Provide navigation and allow alumni to update their personal information. -->
     <div class="main-content">
+        
         <!-- Sidebar Section -->
         <aside>
             <!-- Sidebar Navigation: Links to various sections such as Feed, News, Events, etc. -->
@@ -93,91 +93,303 @@
         <!-- Group Member Responsible: Escaño, Nichole Jhoy -->
         <!-- Purpose: Enable alumni to edit their personal, education, and job-related information. -->
         <!-- Libraries Used: Bootstrap (https://getbootstrap.com/) -->
-        <form id="manage-profile">
-            <div class="container">
-                <div class="row">
-                    <!-- Personal Information Section -->
-                    <div class="col-md-6 mb-4">
-                        <div class="rounded p-4 shadow-sm bg-light">
-                            <h3>Personal Information</h3>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" id="firstName" name="firstName" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" id="lastName" name="lastName" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="idNumber">ID Number</label>
-                                    <input type="text" id="idNumber" name="idNumber" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="jobStatus">Job Status</label>
-                                    <input type="text" id="jobStatus" name="jobStatus" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="company">Company</label>
-                                    <input type="text" id="company" name="company" class="form-control">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="bio" class="form-label">Bio</label>
-                                <textarea class="form-control" id="bio" rows="3" placeholder="Bio"></textarea>
-                            </div>
+
+<!-- Manage Profile Form Section -->
+<form id="manage-profile">
+    <div class="profile-section text-center mb-4">
+        <div class="profile-wrapper">
+            <!-- Profile Picture -->
+            <img src="../assets/images/default-profile.jpg" alt="Profile Picture" class="profile-img rounded-circle" id="profileImage" onclick="triggerFileInput()">
+            <!-- Hidden File Input -->
+            <div class="change-profile">
+                <input type="file" id="profileInput" class="d-none" accept="image/*" onchange="updateProfileImage(event)">
+            </div>
+        </div>
+        <small class="text-danger d-block mt-1">Click to update profile.</small>
+        <button type="button" class="btn-change-profile mt-2" onclick="handleChangePfp()">Save Profile</button>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <!-- Personal Information Section -->
+            <div class="col-md-6 mb-4">
+                <div class="rounded p-4 shadow-sm bg-light">
+                    <h3>Personal Information</h3>
+                    <!-- Personal Info Fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" id="middleName" name="middleName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control">
                         </div>
                     </div>
-                
-                    <!-- Education Section -->
-                    <div class="col-md-6 mb-4">
-                        <div class="rounded p-4 shadow-sm bg-light">
-                            <h3>Education</h3>
-                            <div class="mb-3">
-                                <label for="school" class="form-label">School</label>
-                                <select class="form-select" id="school">
-                                    <option disabled selected>Choose...</option>
-                                    <option value="1">Saint Louis University</option>
-                                    <option value="2">University of Baguio</option>
-                                    <option value="3">Other</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="degree" class="form-label">Degree</label>
-                                <select class="form-select" id="degree">
-                                    <option disabled selected>Choose...</option>
-                                    <option value="1">BS Information Technology</option>
-                                    <option value="2">BS Computer Science</option>
-                                    <option value="3">Other</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="gradYear" class="form-label">Graduation Year</label>
-                                <select class="form-select" id="gradYear">
-                                    <option disabled selected>Choose...</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                </select>
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label for="idNumber">ID Number</label>
+                            <input type="text" id="idNumber" name="idNumber" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jobStatus">Job Status</label>
+                            <select id="jobStatus" name="jobStatus" class="form-select">
+                                <option value="" disabled selected>Select Job Status</option>
+                                <option value="employed">Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company" class="form-control">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea class="form-control" id="bio" rows="3" placeholder="Bio"></textarea>
                     </div>
                 </div>
             </div>
-        </form>
+
+            <!-- Account Type and Education Section -->
+            <div class="col-md-6 mb-4">
+                <div class="rounded p-4 shadow-sm bg-light">
+                      <!-- Account Type -->
+                    <div class="col-md-6 mb-5">
+                        <h3>Account Type</h3>
+                        <div class="d-flex justify-content-start gap-5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypePrivate" value="private">
+                            <label class="form-check-label" for="accountTypePrivate">
+                                Private
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="accountType" id="accountTypePublic" value="public">
+                            <label class="form-check-label" for="accountTypePublic">
+                                Public
+                            </label>
+                        </div>                        
+                    </div>
+                    
+                       <!-- Education -->
+                    <div class="col-md-8 mb-4 mt-4">
+                        <h3>Education</h3>
+                        
+                        <label for="school" class="form-label">School</label>
+                        <input type="text" class="form-control" id="school" placeholder="Enter your school" style="min-width: 400px;" readonly  />
+
+                        <label for="degree" class="form-label mt-2">Degree</label>
+                        <input type="text" class="form-control" id="degree" placeholder="Enter your degree" style="min-width: 400px;" readonly />
+                        
+                        <label for="gradYear" class="form-label mt-2">Graduation Year</label>
+                        <input type="number" class="form-control" id="gradYear" placeholder="Enter your graduation year" style="min-width: 400px;"  readonly />
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Changes and Clear Buttons -->
+        <div class="d-flex justify-content-end move-top gap-2 mt-2 mb-5">
+            <button type="button" class="btn btn-secondary me-2" id="clearInfoButton">Clear</button>
+            <button type="button" class="btn btn-primary" id="saveChangesButton">Save Changes</button>
+        </div>
+
+        <!-- Change Password Section -->
+        <div class="col-md-12 mb-4">
+            <div class="rounded p-4 shadow-sm bg-light">
+                <h3>Change Password</h3>
+                <div class="mb-3">
+                    <label for="currentPassword" class="form-label">Current Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="currentPassword" class="form-control" aria-describedby="currentPasswordHelpBlock">
+                        <span class="eye-icon" id="toggleCurrentPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <small id="currentPasswordHelpBlock" class="form-text text-muted">
+                        Enter your current password.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="newPassword" class="form-label">New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="newPassword" class="form-control" aria-describedby="newPasswordHelpBlock">
+                        <span class="eye-icon" id="toggleNewPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                    <small id="newPasswordHelpBlock" class="form-text text-muted">
+                        Your new password must be at least 8 characters long.
+                    </small>
+                </div>
+                <div class="mb-3">
+                    <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirmNewPassword" class="form-control">
+                        <span class="eye-icon" id="toggleConfirmNewPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!-- Change password and Clear Buttons -->
+        <div class="d-flex justify-content-end move-top mt-2 mb-5">
+            <button type="button" class="btn btn-secondary me-2" id="clearPasswordButton">Clear</button>
+            <button type="button" class="btn btn-warning" id="changePasswordButton">Change Password</button>
+        </div>
+    </div>
+</form>
+
+        <!-- Success Modal for Change Password -->
+        <div class="modal" id="changePasswordSuccessModal" tabindex="-1" aria-labelledby="changePasswordSuccessModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordSuccessModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Your password has been changed successfully!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Failure Modal for Change Password -->
+        <div class="modal" id="changePasswordFailureModal" tabindex="-1" aria-labelledby="changePasswordFailureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordFailureModalLabel">Failed</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        There was an error changing your password. Please try again.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Changes Modal -->
+        <div class="modal" id="saveChangesModal" tabindex="-1" aria-labelledby="saveChangesModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="saveChangesModalLabel">Save Changes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to save the changes?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="confirmSaveChanges">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal for Save Changes -->
+        <div class="modal" id="saveChangesSuccessModal" tabindex="-1" aria-labelledby="saveChangesSuccessModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="saveChangesSuccessModalLabel">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Your changes have been saved successfully!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Failure Modal for Save Changes -->
+        <div class="modal" id="saveChangesFailureModal" tabindex="-1" aria-labelledby="saveChangesFailureModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="saveChangesFailureModalLabel">Failed</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        There was an error saving your changes. Please try again.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Image Selection Warning -->
+    <div class="modal fade" id="imageSelectionModal" tabindex="-1" aria-labelledby="imageSelectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageSelectionModalLabel">No Image Selected</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please select an image to update your profile picture.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
+        <!-- Modal for Profile Picture Update Success -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileUpdateSuccessModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Your profile picture has been updated successfully!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="../assets/js/handleHomefeed.js" defer></script>
-    <script src="../assets/js/handleFetch.js" async></script>
+    <script src="../assets/js/handleManageProfile.js" defer></script>
+    <script src="../assets/js/handleManageProfileFetch.js" defer></script>
+    <script src="../assets/js/handleAlumniFetch.js" defer>  </script>  
+    <!-- Eye icon-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </body>
 </html>

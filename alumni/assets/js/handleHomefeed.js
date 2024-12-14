@@ -1,3 +1,25 @@
+ // Add the 'active' class based on the current URL
+ document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname; // Get the current URL path
+    const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
+
+    navLinks.forEach(link => {
+        // Check if the link's href matches the current path
+        if (link.href.endsWith(currentPath)) {
+            link.parentElement.classList.add('active');  // Add active class to the corresponding list item
+        }
+    });
+
+    document.querySelectorAll('nav li a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('nav li').forEach(item => {
+                item.classList.remove('active');  // Remove active class from all items
+            });
+            link.parentElement.classList.add('active');  // Add active class to the clicked item
+        });
+    });
+});
+
 
 // hanlde the scroll of the homefeed
 window.onscroll = function () {
@@ -17,25 +39,46 @@ window.onscroll = function () {
     }
 };
 
+// Handle the show of modal for post
+document.addEventListener("DOMContentLoaded", () => {
+    const modalTriggerElements = [
+        document.querySelector(".post-content textarea"),
+        document.querySelector(".post-actions .add-photo"),
+        document.querySelector(".post-actions .add-video")
+    ];
 
+    modalTriggerElements.forEach(element => {
+        if (element) {
+            element.addEventListener("click", () => {
+                const postModal = new bootstrap.Modal(document.getElementById("postModal"));
+                postModal.show();
+            });
+        }
+    });
 
-    // Handle the show of modal for post
-      document.addEventListener("DOMContentLoaded", () => {
-          const modalTriggerElements = [
-              document.querySelector(".post-content textarea"),
-              document.querySelector(".post-actions .add-photo"),
-              document.querySelector(".post-actions .add-video")
-          ];
-  
-          modalTriggerElements.forEach(element => {
-              if (element) {
-                  element.addEventListener("click", () => {
-                      const postModal = new bootstrap.Modal(document.getElementById("postModal"));
-                      postModal.show();
-                  });
-              }
-          });
-      });
+    // Get the modal form elements
+    const textArea = document.querySelector("#postForm textarea");
+    const photoInput = document.querySelector("#photoInput");
+    const videoInput = document.querySelector("#videoInput");
+    const submitButton = document.getElementById("submitPost");
+
+    // Function to check if the "Post" button should be enabled
+    function checkPostButton() {
+        const hasText = textArea.value.trim() !== "";
+        const hasImage = photoInput.files.length > 0;
+        const hasVideo = videoInput.files.length > 0;
+
+        submitButton.disabled = !(hasText || hasImage || hasVideo);
+    }
+
+    // Add event listeners to trigger the check
+    textArea.addEventListener("input", checkPostButton); // Check when text is entered
+    photoInput.addEventListener("change", checkPostButton); // Check when a photo is selected
+    videoInput.addEventListener("change", checkPostButton); // Check when a video is selected
+
+    // Initially check if the button should be enabled or not
+    checkPostButton();
+});
 
 
 // helper methods for showin the post
@@ -46,7 +89,7 @@ function createPostHeader(post) {
 
     const profileImg = document.createElement('img');
     profileImg.classList.add('user-pic');
-    profileImg.src = post.pfp || '../assets/images//default-avatar-icon.jpg';
+    profileImg.src = post.pfp ||  '../assets/images/default-profile.jpg';
     profileImg.alt = 'User Profile';
 
     const userInfo = document.createElement('div');
@@ -56,7 +99,7 @@ function createPostHeader(post) {
 
     const postTime = document.createElement('span');
     postTime.classList.add('post-time');
-    
+
     // verify the time
     if (post.datetime && !isNaN(new Date(post.datetime))) {
         const formattedDate = formatDate(post.datetime);
@@ -72,6 +115,7 @@ function createPostHeader(post) {
 
     return postHeader;
 }
+
 // TO DO: adjust the size of the image based on the image size and how many images are on it and the image is clickable and downloadable
 //  create post content
 function createPostContent(post) {
@@ -88,11 +132,13 @@ function createPostContent(post) {
             postBanner = document.createElement('video');
             postBanner.classList.add('post-video');
             postBanner.controls = true;
+
             const videoSource = document.createElement('source');
-            videoSource.src = post.banner; 
-            // vid
+            videoSource.src = post.banner;
+
+            // Set video type
             if (post.banner.startsWith('data:video/')) {
-                videoSource.type = post.banner.split(';')[0].split(':')[1]; 
+                videoSource.type = post.banner.split(';')[0].split(':')[1];
             } else {
                 if (post.banner.endsWith('.mp4')) {
                     videoSource.type = 'video/mp4';
@@ -103,12 +149,18 @@ function createPostContent(post) {
                 }
             }
             postBanner.appendChild(videoSource);
-            //image
+
+            // No click event for videos
         } else {
             postBanner = document.createElement('img');
             postBanner.classList.add('post-image');
             postBanner.src = post.banner;
             postBanner.alt = 'Post Image';
+
+            // Click event to trigger view and download option for images 
+            postBanner.addEventListener('click', function () {
+                openMediaModal(post.banner, `image-${post.post_id}.jpg`);
+            });
         }
 
         postContent.appendChild(postBanner);
@@ -116,6 +168,94 @@ function createPostContent(post) {
 
     return postContent;
 }
+
+// Function to open the media in a modal
+function openMediaModal(mediaUrl, filename) {
+    const modal = document.createElement('div');
+    modal.classList.add('media-modal');
+    modal.style.display = 'block'; // Show modal
+
+    // Modal content
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('media-modal-content');
+
+    // Determine if media is an image or video and append accordingly
+    let mediaElement;
+    if (mediaUrl.startsWith('data:video/') || mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.mov') || mediaUrl.endsWith('.avi')) {
+        mediaElement = document.createElement('video');
+        mediaElement.classList.add('modal-video');
+        mediaElement.controls = true;
+
+        const videoSource = document.createElement('source');
+        videoSource.src = mediaUrl;
+
+        // Set video type
+        if (mediaUrl.startsWith('data:video/')) {
+            videoSource.type = mediaUrl.split(';')[0].split(':')[1];
+        } else {
+            if (mediaUrl.endsWith('.mp4')) {
+                videoSource.type = 'video/mp4';
+            } else if (mediaUrl.endsWith('.mov')) {
+                videoSource.type = 'video/quicktime';
+            } else if (mediaUrl.endsWith('.avi')) {
+                videoSource.type = 'video/x-msvideo';
+            }
+        }
+        mediaElement.appendChild(videoSource);
+
+       
+    } else {
+        mediaElement = document.createElement('img');
+        mediaElement.classList.add('modal-image');
+        mediaElement.src = mediaUrl;
+        mediaElement.alt = 'Post Image';
+
+        
+        const downloadButton = document.createElement('button');
+        downloadButton.classList.add('dlbutton');
+
+        // Create an image element to be inside the button
+        const img = document.createElement('img');
+        img.src = '../assets/images/dl.png';
+        img.alt = 'Download Icon';
+        const text = document.createTextNode('Download');
+
+        downloadButton.appendChild(img);
+        downloadButton.appendChild(text);
+
+        downloadButton.addEventListener('click', function () {
+            const a = document.createElement('a');
+            a.href = mediaUrl;
+            a.download = filename; // Customize download filename
+            a.click();
+        });
+
+        modalContent.appendChild(downloadButton);
+    }
+
+    modalContent.appendChild(mediaElement);
+
+    // Create close button for modal with "X"
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button');
+
+    // Create image element for the close button
+    const closeImage = document.createElement('img');
+    closeImage.src = '../assets/images/close.png';
+    closeImage.alt = 'Close';
+    closeButton.appendChild(closeImage);
+
+    closeButton.addEventListener('click', function () {
+        modal.style.display = 'none'; // Close modal
+    });
+
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+
+    // Append modal to the body
+    document.body.appendChild(modal);
+}
+
 
 // Handle image input preview
 document.getElementById("photoInput").addEventListener("change", function (event) {
@@ -182,6 +322,7 @@ function addPreviewMedia(src, container, type) {
     previewWrapper.appendChild(closeButton);
     container.appendChild(previewWrapper);
 }
+
 // Function to create the post actions section
 function createPostActions(post) {
     const postActions = document.createElement('div');
@@ -263,37 +404,53 @@ function createCommentModal(postId) {
 // Function to set up the submit comment handler only once
 function setupSubmitCommentHandler(postId) {
     const submitCommentButton = document.getElementById(`submitComment-${postId}`);
-    if (submitCommentButton) {
-        submitCommentButton.removeEventListener('click', submitCommentHandler);
-        submitCommentButton.addEventListener('click', submitCommentHandler);
+    const commentInput = document.getElementById(`commentInput-${postId}`);
+    // Function to toggle the disabled state of the button
+    function toggleSubmitButton() {
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            submitCommentButton.classList.remove("disabled");
+            submitCommentButton.disabled = false;
+        } else {
+            submitCommentButton.classList.add("disabled");
+            submitCommentButton.disabled = true;
+        }
+    }
+
+    // Attach the toggle function to the input event
+    commentInput.addEventListener("input", toggleSubmitButton);
+    // Initialize the button state when the modal is opened
+    toggleSubmitButton();
+
+    // Add an event listener to reset the button state when the modal is shown
+    const modal = document.getElementById(`commentModal-${postId}`);
+    if (modal) {
+        modal.addEventListener("show.bs.modal", toggleSubmitButton);
     }
 
     // Comment submission handler
     function submitCommentHandler() {
-        const commentInput = document.getElementById(`commentInput-${postId}`);
         const commentText = commentInput.value.trim();
+        if (commentText.length > 300) {
+            showValidationModal("Character Limit Exceeded", "Your comment cannot exceed 300 characters.");
+            return; 
+        }
+
         if (commentText) {
             postComment(postId, commentText).then(success => {
                 if (success) {
-                    loadComments(postId);  
                     commentInput.value = ''; // Clear the comment input
+                    toggleSubmitButton(); // Recheck the button state
                 }
             });
         }
     }
+    // Add event listener 
+    if (submitCommentButton) {
+        submitCommentButton.removeEventListener("click", submitCommentHandler);
+        submitCommentButton.addEventListener("click", submitCommentHandler);
+    }
 }
-
-function postComment(postId, commentText) {
-    return new Promise(resolve => {
-        handleComment(postId, commentText)
-        setTimeout(() => {
-            console.log(`Comment posted on post ${postId}: ${commentText}`);
-            resolve(true); 
-        }, 1000);
-    });
-}
-
-
 
 function createPostActionButton(type, icon, count) {
     const button = document.createElement('button');
@@ -371,22 +528,59 @@ function updateLikeCount(likeCountElement, isLiked) {
 }
 // end of helper methods for likes
 
-// Handle Image Click to View in Modal
-document.addEventListener("DOMContentLoaded", () => {
-    const postImages = document.querySelectorAll('.post-image');
-    
-    postImages.forEach(image => {
-        image.addEventListener('click', () => {
-            const imageUrl = image.src;
-            const modalImage = document.getElementById('modalImage');
-            const downloadLink = document.getElementById('downloadLink');
-            // Set the modal image source
-            modalImage.src = imageUrl; 
-            // Set the download link
-            downloadLink.href = imageUrl; 
-          
-            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
-            imageModal.show();
-        });
+// validations
+function characterValidation(textarea, charLimit) {
+    const charCounter = document.createElement('div');
+    charCounter.id = 'charCounter';
+    charCounter.style.color = '#666';
+    charCounter.style.fontSize = '0.9em';
+    charCounter.style.marginTop = '5px';
+    textarea.parentElement.appendChild(charCounter);
+
+    const updateCharCounter = () => {
+        const remaining = charLimit - textarea.value.length;
+        charCounter.textContent = `${remaining} characters remaining`;
+        charCounter.style.color = remaining < 0 ? 'red' : '#666';
+    };
+
+    textarea.addEventListener('input', updateCharCounter);
+    updateCharCounter(); 
+}
+
+//validate character limit
+function characterLimit(text, charLimit) {
+    return text.length <= charLimit;
+}
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
     });
-});
+}

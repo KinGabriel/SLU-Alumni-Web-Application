@@ -51,19 +51,19 @@ require("../controller/HandleSession.php");
                 </a>
             </li>
             <li>
-                <a href="#events" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'events.php') ? 'active' : ''; ?>">
+                <a href="../view/adminEvent.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'events.php') ? 'active' : ''; ?>">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
                     <span class="menu-item-text">Events</span>
                 </a>
             </li>
             <li>
-                <a href="#news" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'news.php') ? 'active' : ''; ?>">
+                <a href="../view/news.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'news.php') ? 'active' : ''; ?>">
                     <img src="../assets/images/news.png" alt="Events" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>
             </li>
             <li>
-                <a href="#job-opportunities" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'job-opportunities.php') ? 'active' : ''; ?>">
+                <a href="../view/jobOpportunities.php" class="<?php echo (basename($_SERVER['PHP_SELF']) == 'job-opportunities.php') ? 'active' : ''; ?>">
                     <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
                     <span class="menu-item-text">Job Opportunities</span>
                 </a>
@@ -118,6 +118,10 @@ require("../controller/HandleSession.php");
             </thead>
             <tbody id="userTableBody"></tbody>
         </table>
+
+        
+        </div>
+        
     </div>
 
     <!-- Search bar -->

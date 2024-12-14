@@ -8,7 +8,7 @@ function createPostHeader(post) {
 
     const profileImg = document.createElement('img');
     profileImg.classList.add('rounded-circle', 'me-3', 'feed-profile-img');
-    profileImg.src = post.pfp || '../assets/images/default-avatar-icon.jpg';
+    profileImg.src = post.pfp || '../assets/images/default-profile.jpg';
     profileImg.alt = 'User Profile';
 
     const userInfo = document.createElement('div');
@@ -47,42 +47,147 @@ function createPostHeader(post) {
 
 
 // Post Content
+//  create post content
 function createPostContent(post) {
     const postContent = document.createElement('div');
-    postContent.classList.add('post-content', 'mt-3');
+    postContent.classList.add('post-content');
 
     const postDescription = document.createElement('p');
     postDescription.textContent = post.description;
     postContent.appendChild(postDescription);
 
+    let postBanner;
     if (post.banner) {
-        const isVideo = /\.(mp4|mov|avi)$/i.test(post.banner) || post.banner.startsWith('data:video/');
-        if (isVideo) {
-            const videoElement = document.createElement('video');
-            videoElement.classList.add('img-fluid', 'post-video');
-            videoElement.controls = true;
+        if (post.banner.startsWith('data:video/') || post.banner.endsWith('.mp4') || post.banner.endsWith('.mov') || post.banner.endsWith('.avi')) {
+            postBanner = document.createElement('video');
+            postBanner.classList.add('post-video');
+            postBanner.controls = true;
 
             const videoSource = document.createElement('source');
             videoSource.src = post.banner;
-            videoSource.type = post.banner.startsWith('data:video/')
-                ? post.banner.split(';')[0].split(':')[1]
-                : 'video/mp4';
 
-            videoElement.appendChild(videoSource);
-            postContent.appendChild(videoElement);
+            // Set video type
+            if (post.banner.startsWith('data:video/')) {
+                videoSource.type = post.banner.split(';')[0].split(':')[1];
+            } else {
+                if (post.banner.endsWith('.mp4')) {
+                    videoSource.type = 'video/mp4';
+                } else if (post.banner.endsWith('.mov')) {
+                    videoSource.type = 'video/quicktime';
+                } else if (post.banner.endsWith('.avi')) {
+                    videoSource.type = 'video/x-msvideo';
+                }
+            }
+            postBanner.appendChild(videoSource);
+
+            // No click event for videos
         } else {
-            const imageElement = document.createElement('img');
-            imageElement.classList.add('img-fluid', 'post-image');
-            imageElement.src = post.banner;
-            imageElement.alt = 'Post Image';
-            postContent.appendChild(imageElement);
+            postBanner = document.createElement('img');
+            postBanner.classList.add('post-image');
+            postBanner.src = post.banner;
+            postBanner.alt = 'Post Image';
+
+            // Click event to trigger view and download option for images 
+            postBanner.addEventListener('click', function () {
+                openMediaModal(post.banner, `image-${post.post_id}.jpg`);
+            });
         }
+
+        postContent.appendChild(postBanner);
     }
 
     return postContent;
 }
 
-// Post Actions
+// Function to open the media in a modal
+function openMediaModal(mediaUrl, filename) {
+    const modal = document.createElement('div');
+    modal.classList.add('media-modal');
+    modal.style.display = 'block'; // Show modal
+
+    // Modal content
+    const modalContent = document.createElement('div');
+    modalContent.classList.add('media-modal-content');
+
+    // Determine if media is an image or video and append accordingly
+    let mediaElement;
+    if (mediaUrl.startsWith('data:video/') || mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.mov') || mediaUrl.endsWith('.avi')) {
+        mediaElement = document.createElement('video');
+        mediaElement.classList.add('modal-video');
+        mediaElement.controls = true;
+
+        const videoSource = document.createElement('source');
+        videoSource.src = mediaUrl;
+
+        // Set video type
+        if (mediaUrl.startsWith('data:video/')) {
+            videoSource.type = mediaUrl.split(';')[0].split(':')[1];
+        } else {
+            if (mediaUrl.endsWith('.mp4')) {
+                videoSource.type = 'video/mp4';
+            } else if (mediaUrl.endsWith('.mov')) {
+                videoSource.type = 'video/quicktime';
+            } else if (mediaUrl.endsWith('.avi')) {
+                videoSource.type = 'video/x-msvideo';
+            }
+        }
+        mediaElement.appendChild(videoSource);
+
+       
+    } else {
+        mediaElement = document.createElement('img');
+        mediaElement.classList.add('modal-image');
+        mediaElement.src = mediaUrl;
+        mediaElement.alt = 'Post Image';
+
+        
+        const downloadButton = document.createElement('button');
+        downloadButton.classList.add('dlbutton');
+
+        // Create an image element to be inside the button
+        const img = document.createElement('img');
+        img.src = '../assets/images/dl.png';
+        img.alt = 'Download Icon';
+        const text = document.createTextNode('Download');
+
+        downloadButton.appendChild(img);
+        downloadButton.appendChild(text);
+
+        downloadButton.addEventListener('click', function () {
+            const a = document.createElement('a');
+            a.href = mediaUrl;
+            a.download = filename; // Customize download filename
+            a.click();
+        });
+
+        modalContent.appendChild(downloadButton);
+    }
+
+    modalContent.appendChild(mediaElement);
+
+    // Create close button for modal with "X"
+    const closeButton = document.createElement('button');
+    closeButton.classList.add('close-button');
+
+    // Create image element for the close button
+    const closeImage = document.createElement('img');
+    closeImage.src = '../assets/images/close.png';
+    closeImage.alt = 'Close';
+    closeButton.appendChild(closeImage);
+
+    closeButton.addEventListener('click', function () {
+        modal.style.display = 'none'; // Close modal
+    });
+
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+
+    // Append modal to the body
+    document.body.appendChild(modal);
+}
+
+
+// Function to create the post actions section
 function createPostActions(post) {
     const postActions = document.createElement('div');
     postActions.classList.add('post-actions', 'card-footer', 'd-flex', 'align-items-center');
@@ -96,10 +201,29 @@ function createPostActions(post) {
 
     const likeCountElement = likeButton.querySelector('span');
 
-    likeButton.addEventListener('click', function () {
+    // Like button functionality
+    likeButton.addEventListener('click', function() {
         const isLiked = post.is_liked;
         post.is_liked = !isLiked;
         handleLike(post.post_id, likeButton, isLiked, likeCountElement);
+    });
+
+    // Comment button functionality
+    commentButton.addEventListener('click', function() {
+        const postId = post.post_id;
+
+        let commentModal = document.getElementById(`commentModal-${postId}`);
+        if (!commentModal) {
+            commentModal = createCommentModal(postId);
+            document.body.appendChild(commentModal);
+        }
+
+        loadComments(postId); // Load existing comments for the post
+        const modal = new bootstrap.Modal(commentModal);
+        modal.show();
+
+        // Ensure the submit comment handler is set only once
+        setupSubmitCommentHandler(postId);
     });
 
     actionsContainer.appendChild(likeButton);
@@ -108,6 +232,87 @@ function createPostActions(post) {
     postActions.appendChild(actionsContainer);
 
     return postActions;
+}
+
+// Function to create a comment modal dynamically
+function createCommentModal(postId) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.id = `commentModal-${postId}`;
+    modal.setAttribute('data-post-id', postId);
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'commentModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="commentsList-${postId}">
+                        <!-- Comments will be dynamically loaded here -->
+                    </div>
+                    <textarea id="commentInput-${postId}" class="form-control" rows="3" placeholder="Add a comment..."></textarea>
+                    <button class="btn btn-primary mt-2" id="submitComment-${postId}">Submit</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    return modal;
+}
+
+// Function to set up the submit comment handler only once
+function setupSubmitCommentHandler(postId) {
+    const submitCommentButton = document.getElementById(`submitComment-${postId}`);
+    const commentInput = document.getElementById(`commentInput-${postId}`);
+    // Function to toggle the disabled state of the button
+    function toggleSubmitButton() {
+        const commentText = commentInput.value.trim();
+        if (commentText) {
+            submitCommentButton.classList.remove("disabled");
+            submitCommentButton.disabled = false;
+        } else {
+            submitCommentButton.classList.add("disabled");
+            submitCommentButton.disabled = true;
+        }
+    }
+
+    // Attach the toggle function to the input event
+    commentInput.addEventListener("input", toggleSubmitButton);
+    // Initialize the button state when the modal is opened
+    toggleSubmitButton();
+
+    // Add an event listener to reset the button state when the modal is shown
+    const modal = document.getElementById(`commentModal-${postId}`);
+    if (modal) {
+        modal.addEventListener("show.bs.modal", toggleSubmitButton);
+    }
+
+    // Comment submission handler
+    function submitCommentHandler() {
+        const commentText = commentInput.value.trim();
+        if (commentText.length > 300) {
+            showValidationModal("Character Limit Exceeded", "Your comment cannot exceed 300 characters.");
+            return; 
+        }
+        if (commentText) {
+            postComment(postId, commentText).then(success => {
+                if (success) {
+                    commentInput.value = ''; // Clear the comment input
+                    toggleSubmitButton(); // Recheck the button state
+                }
+            });
+        }
+    }
+    // Add event listener 
+    if (submitCommentButton) {
+        submitCommentButton.removeEventListener("click", submitCommentHandler);
+        submitCommentButton.addEventListener("click", submitCommentHandler);
+    }
 }
 
 // Utility for creating action buttons
@@ -330,7 +535,7 @@ document.addEventListener("click", (event) => {
         deleteModal.show();
     }
 });
-
+ 
 // Confirm Delete Post
 document.getElementById("confirmDeletePost").addEventListener("click", (event) => {
     const postId = event.target.getAttribute("data-post-id");
@@ -342,11 +547,21 @@ document.getElementById("confirmDeletePost").addEventListener("click", (event) =
 
     if (currentPostElement) {
         currentPostElement.remove(); // Remove post from the DOM
+        try {
+            const result = deletePost(postId);
+            console.log("Post deleted successfully:", result);
 
-        // Call the function to delete the post (send the postId to the backend or server)
-        deletePost(postId);
+            // Show success modal
+            const successModal = new bootstrap.Modal(document.getElementById("deleteSuccessModal"));
+            successModal.show();
+        } catch (error) {
+            // An error occurred during deletion
+            console.error("Failed to delete the post:", error);
 
-        console.log("Post deleted");
+            // Show failure modal
+            const errorModal = new bootstrap.Modal(document.getElementById("deleteFailureModal"));
+            errorModal.show();
+        }
 
         // Close the delete modal
         const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deletePostModal"));
@@ -354,3 +569,56 @@ document.getElementById("confirmDeletePost").addEventListener("click", (event) =
     }
 });
 
+function changeTab(event, target) {
+    // Prevent default anchor behavior
+    event.preventDefault();
+
+    // Remove 'active' class from all nav links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Add 'active' class to clicked tab
+    event.target.classList.add('active');
+
+    // Hide all tab content
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => content.style.display = 'none');
+
+    // Show content for the clicked tab
+    const targetContent = document.getElementById(target);
+    targetContent.style.display = 'block';
+}
+
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
+}

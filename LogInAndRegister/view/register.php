@@ -45,6 +45,9 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                             <input type="text" name="firstName" class="input-field" placeholder="First Name" value="<?= isset($formData['firstName']) ? htmlspecialchars($formData['firstName']) : '' ?>"required />
                         </div>
                         <div class="input-wrapper half-width">
+                            <input type="text" name="middleName" class="input-field" placeholder="Middle Name" value="<?= isset($formData['middleName']) ? htmlspecialchars($formData['middleName']) : '' ?>"/>
+                        </div>
+                        <div class="input-wrapper half-width">
                             <input type="text" name="lastName" class="input-field" placeholder="Last Name" value="<?= isset($formData['lastName']) ? htmlspecialchars($formData['lastName']) : '' ?>" required />
                         </div>
                     </div>
@@ -70,20 +73,25 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                                 </datalist>
                         </div>
                         <div class="input-wrapper half-width">
-                            <select name="program" class="input-field" required> 
-                                <option value="" disabled selected> Programs</option>
+                            <select name="school" class="input-field" required id="schoolDropdown"> 
+                                <option value="" disabled selected> Schools</option>
                                 <?php
-                                    $filePath = '../assets/programs.txt'; 
+                                    $filePath = '../assets/schools.txt'; 
                                     if (file_exists($filePath)) {
-                                        $programs = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-                                        foreach ($programs as $program) {
-                                            $selected = isset($formData['program']) && $formData['program'] == $program ? 'selected' : '';
-                                            echo "<option value=\"$program\" $selected>$program</option>";
+                                        $schools = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                        foreach ($schools as $school) {
+                                            $selected = isset($formData['school']) && $formData['school'] == $school ? 'selected' : '';
+                                            echo "<option value=\"$school\" $selected>$school</option>";
                                         }
                                     } else {
                                         echo "<option value=\"\">N/A</option>"; 
                                     }
                                ?>
+                            </select>
+                        </div>
+                        <div class="input-wrapper half-width">
+                            <select name="program" class="input-field" id="programDropdown" required> 
+                                <option value="" disabled selected> Programs</option>
                             </select>
                         </div>
                     </div>
@@ -113,13 +121,35 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
                             <img id="image-preview" class="image-preview">
                         </label>
                     </div>
-                    <button type="submit" class="login-button">Register</button>
+                    <div class="input-wrapper">
+                        <label>
+                            <input type="checkbox" id="termsCheckbox" onclick="toggleRegisterButton()"> 
+                            I agree to the 
+                            <a href="#" onclick="openTermsModal(event)">Terms and Conditions</a>.
+                        </label>
+                    </div>
+                    <button type="submit" id="registerButton" class="login-button" disabled>Register</button>
                     <div class="signup-wrapper">
                         <span class="signup-text">Already have an account? <a href="Login.php" class="signup-link">Log in</a></span>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
+
+    <!-- Modal for Terms and Conditions -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-terms" id="termsModal">
+        <div class="modal-header">Terms and Conditions</div>
+        <div class="modal-body">
+            <p>Please read and agree to the Terms and Conditions before proceeding.</p>
+            <ul>
+                <li>You must be at least 18 years old.</li>
+                <li>Your information must be accurate.</li>
+                <li>You must not use the services provided to promote wrongdoings.</li>
+            </ul>
+        </div>
+        <button class="close-modal" onclick="closeTermsModal()">Close</button>
     </div>
 
     <div class="modal" id="modal">
@@ -141,6 +171,60 @@ unset($_SESSION['confirmation_message'], $_SESSION['formData']);;
             document.getElementById('modal').style.display = 'none';
         }
     </script>
+
+    <script>
+        document.getElementById('schoolDropdown').addEventListener('change', function() {
+            const school = this.value;
+            const programDropdown = document.getElementById('programDropdown');
+
+            // Clear current options
+            programDropdown.innerHTML = '<option value="" disabled selected> Select Program</option>';
+
+            if (!school) return;
+
+            // Fetch programs for the selected school
+            fetch(`../../admin/controller/getPrograms.php?school=${encodeURIComponent(school)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    // Populate the programDropdown with fetched programs
+                    data.forEach(program => {
+                        const option = document.createElement('option');
+                        option.value = program;
+                        option.textContent = program;
+                        programDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching programs:', error));
+        });
+    </script>
+
+    <script>
+        // Disable/Enable Register Button
+        function toggleRegisterButton() {
+            const checkbox = document.getElementById('termsCheckbox');
+            const button = document.getElementById('registerButton');
+            button.disabled = !checkbox.checked;
+        }
+
+        // Open Terms Modal
+        function openTermsModal(event) {
+            event.preventDefault();
+            document.getElementById('termsModal').classList.add('active');
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        // Close Terms Modal
+        function closeTermsModal() {
+            document.getElementById('termsModal').classList.remove('active');
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+    </script>
+
     <script src="../assets/js/passwordToggle.js"></script>
     <script src="../assets/js/graduationYear.js"></script>
     <script src="../assets/js/HandleAuthentication.js"></script>

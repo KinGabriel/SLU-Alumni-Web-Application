@@ -4,11 +4,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<style>
+    
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <title>Events</title>
 
     <!-- Link to Bootstrap CSS (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -16,12 +18,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Link to compiled custom styles (CSS) -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/event.css">
+    <!-- Author: Vergara Carlos Miguel -->
+    <!-- Used References: Codepen and ChatGPT -->
 </head>
 
-<head>
 
-</head>
 <body>
     <!-- Header separator -->
     <div class="header-separator"> </div>
@@ -41,6 +43,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </div>
     </header>
 
+    
+
 <!-- Sidebar -->
 <div class="sidebar-container">
     <nav class="sidebar-menu">
@@ -57,12 +61,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                     <span class="menu-item-text">Account Requests</span>
                 </a>
             </li>
-            <li>
-                <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
-                    <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
-                    <span class="menu-item-text">Accounts</span>
-                </a>
-            </li>
+            <?php if ($_SESSION['user_type'] == 'admin'): ?>
+                <li>
+                    <a href="../view/Account.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'Account.php' ? 'active' : ''; ?>" id="accountLink">
+                        <img src="../assets/images/userAccounts.png" alt="User Accounts" class="sidebar-icon">
+                        <span class="menu-item-text">Accounts</span>
+                    </a>
+                </li>
+                <?php endif; ?>
             <li>
                 <a href="../view/adminEvent.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'adminEvent.php' ? 'active' : ''; ?>" id="eventsLink">
                     <img src="../assets/images/events.png" alt="Events" class="sidebar-icon">
@@ -70,19 +76,20 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 </a>
             </li>
             <li>
-                <a href="#news" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
+                <a href="../view/news.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : ''; ?>" id="newsLink">
                     <img src="../assets/images/news.png" alt="News" class="sidebar-icon">
                     <span class="menu-item-text">News</span>
                 </a>
             </li>
             <li>
-                <a href="#job-opportunities" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
-                    <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
+            <a href="../view/jobOpportunities.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'jobOpportunities.php' ? 'active' : ''; ?>" id="jobOpportunitiesLink">
+            <img src="../assets/images/job.png" alt="Job" class="sidebar-icon">
                     <span class="menu-item-text">Job Opportunities</span>
                 </a>
             </li>
         </ul>
     </nav>
+
 
     <!-- Sticky Log Out Button -->
     <div class="sidebar-logout">
@@ -98,6 +105,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <div class="col">
                 </div>
             </div>
+
+           <!-- Add Event Button (Form Method) -->
+<form action="addEvents.php" method="POST">
+    <button type="submit" class="custom-btn btn-3">
+        <span>Add Events</span>
+    </button>
+</form>
+
 
             <div class="container py-5">
                 <!-- Search and Categories Section Events -->
@@ -127,35 +142,33 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   
 
     
- <!-- Pagination -->
- <div class="pagination">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <span class="page-link">&laquo;</span>
-                    </li>
-                    <li class="page-item active">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next &raquo;</a>
-                    </li>
-                </ul>
-            </div>
+  <!-- Pagination -->
+  <div class="pagination">
+            <ul class="pagination">
+                <li class="page-item" id="prevPage">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                <li class="page-item active" id="page1">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item" id="page2">
+                    <span class="page-link">2</span>
+                </li>
+                <li class="page-item" id="page3">
+                    <span class="page-link">3</span>
+                </li>
+                <li class="page-item" id="nextPage">
+                    <span class="page-link">Next &raquo;</span>
+                </li>
+            </ul>
         </div>
  
 
     <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
     <!-- Link to custom JavaScript -->
-    <script src="../assets/js/javascript.js"></script>
+     <script src="../assets/js/adminEvent.js"></script>
 </body>
 
 </html>

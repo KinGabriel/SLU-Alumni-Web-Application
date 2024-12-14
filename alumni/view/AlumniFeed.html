@@ -30,7 +30,7 @@ Profile Dropdown -->
             <!-- Search bar -->
             <div class="search">
                 <form id="searchForm" onsubmit="return false;">
-                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()">
+                    <input type="text" name="search" id="searchInput" placeholder="Search..." onkeyup="searchUsers()"  autocomplete="off">
                     <button type="submit">
                         <img src="../assets/images/search.png" alt="Search" class="search-icon">
                     </button>
@@ -48,12 +48,12 @@ Profile Dropdown -->
                     <img src="../assets/images/candy.jpg" name="pfp" alt="Profile" class="dropdown-avatar">
                     <div class="dropdown-info">
                         <h4 name="name"></h4>
-                        <p>Web Developer at Google</p>
+                        <p name="company">Web Developer at Google</p>
                     </div>
                 </div>
                 <ul class="dropdown-links">
                     <li><a href="/api/profile">View Profile</a></li>
-                    <li><a href="#">Manage Profile</a></li>
+                    <li><a href="/api/manage-profile">Manage Profile</a></li>
                     <li><a href="#">Close Account</a></li>
                 </ul>
                 <div class="logout-btn">
@@ -116,29 +116,6 @@ Profile Dropdown -->
                     </li>
                 </ul>
             </nav>
-            <script>
-            // Add the 'active' class based on the current URL
-            document.addEventListener('DOMContentLoaded', () => {
-                const currentPath = window.location.pathname; // Get the current URL path
-                const navLinks = document.querySelectorAll('nav li a'); // Get all navigation links
-
-                navLinks.forEach(link => {
-                    // Check if the link's href matches the current path
-                    if (link.href.endsWith(currentPath)) {
-                        link.parentElement.classList.add('active');  // Add active class to the corresponding list item
-                    }
-                });
-
-                document.querySelectorAll('nav li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        document.querySelectorAll('nav li').forEach(item => {
-                            item.classList.remove('active');  // Remove active class from all items
-                        });
-                        link.parentElement.classList.add('active');  // Add active class to the clicked item
-                    });
-                });
-            });
-            </script>
         </aside>
 
         <!-- Feed Content -->
@@ -166,62 +143,9 @@ Profile Dropdown -->
         
         <!-- Feed  -->
         <div class="feed">
-            <!-- Post 1 -->
-            <div class="post">
-                <div class="post-header d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img src="../assets/images/asta.jpg" alt="User Profile" class="user-pic">
-                        <div>
-                            <h4 class="user-name">Asta Staria</h4>
-                            <span class="post-time">2 hours ago</span>
-                        </div>
-                    </div>
-                    <!-- Three-dot menu -->
-                    <div class="dropdown">
-                        <button class="btn btn-link p-0 text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../assets/images/dots.png" alt="Options" style="width: 40px; height: 40px;">
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
-                            <li><button class="dropdown-item edit-post-btn style=">Report Post</button></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="post-content">
-                    <p>Enjoying the beautiful weather today!</p>
-                    <img src="../assets/images/blackclover.jpg" alt="Post Image" class="post-image">
-                </div>
-                <hr>
-                <div class="post-actions card-footer d-flex align-items-center">
-                    <div class="d-flex">
-                        <button class="btn btn-outline-primary me-2">
-                            <img src="../assets/images/like.png" alt="Like Icon" class="button-icon me-2"> Likes (22)
-                        </button>
-                        <button class="btn btn-outline-secondary comment-btn" data-bs-toggle="modal" data-bs-target="#commentModal">
-                            <img src="../assets/images/comment.png" alt="Comment Icon" class="button-icon me-2"> Comments (23)
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- View Image Modal -->
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="imageModalLabel">View Image</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <img id="modalImage" src="" class="img-fluid" alt="Large Image">
-                            <!-- Image acting as download link -->
-                            <a id="downloadLink" href="#" download class="download-icon">
-                                <img src="../assets/images/download.png" alt="Download Icon" class="img-fluid">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+          <!-- Dynamic content will appear here-->
+         </div>
+            
             <!-- Comment Modal -->
             <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -250,7 +174,6 @@ Profile Dropdown -->
         </div>
     </div>
 </div>
-
 <!--TO DO: show the uploaded image in the input then handle multiple image--> 
 <!-- Modal - Post Modal -->
 <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
@@ -285,7 +208,7 @@ Profile Dropdown -->
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="submitPost">Post</button>
+                <button type="button" class="btn btn-primary" id="submitPost" disabled>Post</button>
             </div>
         </div>
     </div>
@@ -331,58 +254,6 @@ Profile Dropdown -->
 
 
 
-
-
-
-<script>
-// Handles Comments
-    document.addEventListener('DOMContentLoaded', () => {
-    
-});
-
-// Function to handle submitting a new comment
-function submitComment(postId, commentText) {
-    // implement API request to save the comment the database
-    const newComment = {
-        username: 'You', // replace with logged-in user's name
-        text: commentText
-    };
-
-    // dynamically append the new comment to the modal
-     // replace with logged-in user's profile
-    const commentDiv = document.createElement('div');
-    commentDiv.classList.add('comment');
-    commentDiv.innerHTML = `
-        <img src="../assets/images/candy.jpg" alt="Profile" class="comment-pic">
-        <p class="comment-text"><strong>${newComment.username}:</strong> ${newComment.text}</p>
-    `;
-    const commentsList = document.getElementById('commentsList');
-    commentsList.appendChild(commentDiv);
-}
-
-// hides comment modal 
-document.addEventListener('DOMContentLoaded', () => {
-    const commentModal = document.getElementById('commentModal');
-
-    commentModal.addEventListener('hidden.bs.modal', () => {
-        // remove any backdrops
-        const backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.parentNode.removeChild(backdrop);
-        }
-
-        // ensure the body class is reset
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-    });
-});
-
-// Handles Report 
-
-// TO DO: Report JS
-
-
-</script>
     
     <!-- Bootstrap JavaScript -->
   <script src="/../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>

@@ -39,7 +39,7 @@ echo "<script> var errorMessage = '$errorMessage';</script>";
                 </button>
               </div>
           </div>  
-          <a href="#" class="forgot-password">Forgot Password</a>
+          <a href="ForgotPassword.php" class="forgot-password">Forgot Password</a>
           <button type="submit" class="login-button">Login Now</button>
         </form>
         <div class="signup-wrapper">

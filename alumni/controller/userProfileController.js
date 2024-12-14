@@ -1,9 +1,32 @@
+/* 
+User Profile Controller: Provides functionalities for retrieving, liking, editing, and deleting posts in the SLU Alumni Web Application.
+    - getOwnPost: Fetches posts created by the authenticated user, along with likes, comments, and user details.
+        - Handles media (images/videos) and user profile picture formatting for proper display.
+    - handleLikes: Enables liking and unliking posts, with real-time updates to the database.
+    - editPost: Allows authenticated users to edit their posts, including updating the description and media files.
+    - deletePost: Deletes the specified post based on the provided post ID.
+Dependencies:
+    - dbConnection: Handles MySQL database interactions.
+    - fs: Provides file system access for handling images and videos.
+    - path: Resolves file paths for media handling.
+Helper Functions:
+    - handleMedia: Converts media files to base64 format for secure inline usage in web views.
+Error Handling:
+    - Comprehensive error logging for database and file system issues.
+    - Returns appropriate HTTP status codes and error messages.
+Group Member Responsible: Caparas, Joaquin Gabriel
+*/
+
+
+
 import dbConnection from '../../database/connection.js';
 import fs from 'fs';
 import path from 'path';
-
-export const getOwnPost =(req, res) =>{
+export const getOwnPost = async (req, res) => {
     const userId = req.userId;
+    const offset = parseInt(req.query.offset) || 0; 
+    const limit = 10;  
+
     const query = `
     SELECT 
         p.post_id,
@@ -23,21 +46,18 @@ export const getOwnPost =(req, res) =>{
     LEFT JOIN comments c ON p.post_id = c.post_id
     LEFT JOIN follows f ON f.followed_id = p.user_id 
     JOIN user u ON u.user_id = p.user_id
-    WHERE  (
-            ( f.followed_id IS NOT NULL) 
+    WHERE (
+            (f.followed_id IS NOT NULL) 
             OR (p.user_id = ?)
         ) AND p.user_id = ?
     GROUP BY 
         p.post_id
     ORDER BY p.post_id DESC
-`;
+    LIMIT ? OFFSET ?
+    `;
 
-
-    dbConnection.query(query, [userId, userId,userId], (error, results) => {
-        if (error) {
-            console.error('Database error:', error);
-            return res.status(500).json({ error: 'Failed to fetch posts.' });
-        }
+    try {
+        const [results] = await dbConnection.promise().query(query, [userId, userId, userId, limit, offset]);
 
         const posts = results.map(post => {
             if (post.banner) {
@@ -49,9 +69,15 @@ export const getOwnPost =(req, res) =>{
             post.is_liked = post.is_liked > 0; // Convert to boolean
             return post;
         });
+
         res.status(200).json({ posts });
-    });
-}
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Failed to fetch posts.' });
+    }
+};
+
+
 // Helper method for handling images and videos
 const handleMedia = (bannerPath) => {
     if (Buffer.isBuffer(bannerPath)) {

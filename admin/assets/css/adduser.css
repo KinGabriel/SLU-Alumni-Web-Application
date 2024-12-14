@@ -207,10 +207,85 @@ header img.slu-logo {
 
 /* Main Content */
 .main-content {
-    margin-left: 250px;
+    margin-left: 15rem;
     padding: 20px;
-    transition: margin-left 0.3s ease;
 }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(7, 0.7fr);
+}
+
+.first-name-grid input, .last-name-grid input, .middle-name-grid input, .email-add-grid input, .password-grid input,
+.retype-pw-grid input, .id-grid input, .gradyear-grid input, .company-grid input{
+    padding: 8px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 2rem);
+}
+
+.middle-name-grid {
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.middle-name-grid span {
+    font-size: small;
+    color: gray;
+}
+
+.last-name-grid {
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.email-add-grid {
+    grid-column-start: 1;
+    grid-row-start: 4;
+}
+
+.password-grid {
+    grid-column-start: 1;
+    grid-row-start: 5;
+}
+
+.retype-pw-grid {
+    grid-column-start: 1;
+    grid-row-start: 6;
+}
+.user-roles-grid {
+    grid-column-start: 1;
+    grid-row-start: 8;
+}
+.id-grid {
+    grid-column-start: 2;
+    grid-row-start: 1;
+}
+.gradyear-grid {
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+.school-grid {
+    grid-column-start: 2;
+    grid-row-start: 3;
+}
+.program-grid {
+    grid-column-start: 2;
+    grid-row-start: 4;
+}
+.jobstatus-grid {
+    grid-column-start: 2;
+    grid-row-start: 5;
+}
+.company-grid {
+    grid-column-start: 2;
+    grid-row-start: 6;
+}
+
 
 .sidebar-container:hover ~ .main-content {
     margin-left: 250px;
@@ -228,6 +303,10 @@ header img.slu-logo {
     grid-template-columns: 1fr 1fr; 
     gap: 20px; 
 }
+.form-container > form {
+    grid-column: span 2 / span 2;
+    grid-row: span 5 / span 5;
+}
 
 /* Header Title */
 .form-container .form-title {
@@ -243,11 +322,40 @@ header img.slu-logo {
 .section-title {
     font-size: 1.2em;
     font-weight: bold;
-    color: #333;
+    color: #0056b3; 
     margin-bottom: 10px;
 }
+.info-titles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+}
 
-/* Form Input Groups */
+.info-titles > * {
+    padding: 1rem;
+}
+
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+}
+
+/*Form Input Groups
 .form-group {
     display: flex;
     flex-direction: column;
@@ -260,27 +368,88 @@ header img.slu-logo {
     color: #555;
 }
 
-.form-group input,
-.form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    background-color: #fff;
+
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Reduce the gap between fields 
+    flex-wrap: wrap;*/ /* Allow wrapping on smaller screens 
 }
 
-/* Buttons Section */
+.form-group#first-name input {
+    width: 35%; 
+}
+
+.form-group#last-name input {
+    width: 35%;
+    margin-left: -280px;
+}
+
+.form-group#last-name label {
+    margin-left: -280px;
+}
+
+.form-group#email input  {
+    width: 17%;
+}
+
+.form-group#school-id input {
+    width: 55%; 
+}
+
+.form-group#graduation-year select {
+    width: 60%; 
+    margin-left: -90px;
+}
+
+.form-group#graduation-year label {
+    margin-left: -90px;
+}
+
+.form-group#degree select {
+    width: 110%; 
+    margin-left: -185px;
+}
+
+.form-group#degree label {
+    margin-left: -185px;
+}
+
+.form-group#job-status select {
+    width: 50%; 
+    margin-left: -90px;
+}
+
+.form-group#job-status label {
+    margin-left: -90px;
+}
+
+.form-group#user-roles select {
+    width: 15%; 
+}
+
+.form-group.password input {
+    width: 17%; 
+}*/
+
+
+/* Action buttons */
 .form-actions {
-    grid-column: span 2; 
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 15px;
     margin-top: 20px;
+    margin-right: 20px;
+    grid-column-start: 2;
+    grid-row-start: 8;
 }
 
 .add-button,
 .clear-button {
     padding: 12px 25px;
+    height: calc(100% - 2rem);
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -291,25 +460,72 @@ header img.slu-logo {
 
 /* Add Button */
 .add-button {
-    background-color: #ffc107; 
+    background-color: #003DA5; 
     color: #fff;
 }
 
 .add-button:hover {
-    background-color: #e0a800;
+    background-color:#00276a;
     transform: scale(1.05);
 }
 
 /* Clear Button */
 .clear-button {
-    background-color: #007bff; 
+    background-color: #7b7b7b; 
     color: #fff;
 }
 
 .clear-button:hover {
-    background-color: #0056b3;
+    background-color: #676767;
     transform: scale(1.05);
 }
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+  }
+  
+  .modal-content {
+    width: 320px; 
+    max-width: 90%; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    flex-direction: column; 
+    align-items: center; 
+    background-color: #fff; 
+    color: #000; 
+    text-align: center; 
+    border-radius: 20px; 
+    padding: 30px 30px 70px; 
+  }
+  
+  .modal img {
+    width: 82px;
+    margin-bottom: 15px;
+  }
+  .modal p {
+    margin-bottom: 40px;
+    font-size: 18px;
+  }
+  button.accept {
+    background-color: #003DA5;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    padding: 14px;
+    font-size: 16px;
+    color: #000;
+    box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
+  }
 
 /* Responsive Design */
 @media (max-width: 768px) {
