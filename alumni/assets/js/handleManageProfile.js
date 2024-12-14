@@ -99,7 +99,6 @@ function showSuccessModal(message) {
 
 
 function checkValidations(formData, jobStatus) {
-    // Trim all form data fields
     formData.fname = formData.fname.trim();
     formData.lname = formData.lname.trim();
     formData.email = formData.email.trim();
