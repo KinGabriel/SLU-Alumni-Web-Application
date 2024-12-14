@@ -31,21 +31,28 @@ import fs from 'fs';
 import path from 'path';
 
 export const handleUserPost = (req, res) => {
-    const userId = req.userId
+    const userId = req.userId;
     const { description, post_type } = req.body;
 
     const uploadedImages = req.files['images[]'] || [];
     const uploadedVideos = req.files['videos[]'] || [];
     const bannerFiles = [...uploadedImages, ...uploadedVideos];
 
+    const MAX_FILE_SIZE = 16 * 1024 * 1024; 
+
+    for (let file of bannerFiles) {
+        if (file.size > MAX_FILE_SIZE) {
+            return res.status(400).json({ message: `The file ${file.originalname} exceeds the maximum size of 16 MB.` });
+        }
+    }
 
     const banner = bannerFiles.map(file => file.path).join(',');
 
     console.log('Received data:', req.body);
     console.log('Uploaded files:', bannerFiles);
 
-    const query = "INSERT INTO posts (description, banner,  post_type, datetime, user_id) VALUES (?,  ?, ?, NOW(), ?)";
-    dbConnection.query(query, [description, banner,  post_type, userId], (err, result) => {
+    const query = "INSERT INTO posts (description, banner, post_type, datetime, user_id) VALUES (?, ?, ?, NOW(), ?)";
+    dbConnection.query(query, [description, banner, post_type, userId], (err, result) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ message: 'Error creating post', error: err });
@@ -53,6 +60,7 @@ export const handleUserPost = (req, res) => {
         return res.status(200).json({ message: 'Post created successfully' });
     });
 };
+
 
 export const getPost = async (req, res) => {
     const userId = req.userId; 

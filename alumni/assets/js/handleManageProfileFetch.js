@@ -105,8 +105,12 @@ function handleSaveChanges() {
         school_id: document.getElementById('idNumber').value,
         company: jobStatus === 'unemployed' ? '' : document.getElementById('company').value,
         bio: document.getElementById('bio').value,
-        access_type: document.querySelector('input[name="accountType"]:checked')?.value,
+        access_type: document.querySelector('input[name="accountType"]:checked').value,
     };
+
+    if (!checkValidations(formData,jobStatus)){
+        return
+    }
 
     fetch('/api/manage-profile/update-details', {
         method: 'POST',
@@ -119,18 +123,12 @@ function handleSaveChanges() {
         })
         .then(data => {
             console.log('Profile updated successfully:', data);
-
-            const saveChangesModal = bootstrap.Modal.getInstance(document.getElementById('saveChangesModal'));
-            saveChangesModal.hide();
-
             const successModal = new bootstrap.Modal(document.getElementById('saveChangesSuccessModal'));
             successModal.show();
         })
         .catch(error => {
             console.error('Error updating profile:', error);
 
-            const saveChangesModal = bootstrap.Modal.getInstance(document.getElementById('saveChangesModal'));
-            saveChangesModal.hide();
 
             const failureModal = new bootstrap.Modal(document.getElementById('saveChangesFailureModal'));
             failureModal.show();
@@ -190,3 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('saveChangesButton').addEventListener('click', handleSaveChanges);
     document.getElementById('changePasswordButton').addEventListener('click', handleChangePassword);
 });
+

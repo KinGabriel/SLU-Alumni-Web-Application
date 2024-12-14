@@ -27,8 +27,7 @@ document.getElementById('toggleConfirmNewPassword').addEventListener('click', fu
 
 // Save Changes Logic
 document.getElementById('saveChangesButton').addEventListener('click', function () {
-    var saveChangesModal = new bootstrap.Modal(document.getElementById('saveChangesModal'));
-    saveChangesModal.show();
+
 });
 
 // TODO: replace with actual logic -- for simulation only
@@ -98,9 +97,113 @@ function showSuccessModal(message) {
     successModal.show();
 }
 
-// Function to show failure modal
-function showFailureModal(message) {
-    const failureModal = new bootstrap.Modal(document.getElementById('changePasswordFailureModal'));
-    document.querySelector('#changePasswordFailureModal .modal-body').textContent = message;
-    failureModal.show();
+
+function checkValidations(formData, jobStatus) {
+    // Trim all form data fields
+    formData.fname = formData.fname.trim();
+    formData.lname = formData.lname.trim();
+    formData.email = formData.email.trim();
+    formData.mname = formData.mname.trim()
+    formData.bio = formData.bio.trim();
+    formData.school_id = formData.school_id.trim(); 
+    formData.company = formData.company.trim();
+
+    if (formData.fname === '') {
+        showValidationModal('Empty Field', 'First name cannot be empty');
+        return false; 
+    }
+
+    const nameRegex = /^[A-Za-z]+$/;
+    if (!nameRegex.test(formData.fname)) {
+        showValidationModal('Invalid Name', 'First name should only contain letters');
+        return false;
+    }
+
+    if (!nameRegex.test(formData.lname)) {
+        showValidationModal('Invalid Name', 'Last name should only contain letters');
+        return false;
+    }
+
+    if (formData.lname === '') {
+        showValidationModal('Empty Field', 'Last name cannot be empty');
+        return false;
+    }
+
+    if (formData.lname === '') {
+        showValidationModal('Empty Field', 'Last name cannot be empty');
+        return false;
+    }
+
+    if (formData.mname !== '') {
+        if (!nameRegex.test(formData.mname)) {
+            showValidationModal('Invalid Name', 'Middle name should only contain letters');
+            return false;
+        }
+    }
+    
+    if (formData.email === '') {
+        showValidationModal('Empty Field', 'Email cannot be empty');
+        return false;
+    }
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailRegex.test(formData.email)) {
+        showValidationModal('Invalid Email Format', 'Please enter a valid email address');
+        return false;
+    }
+
+    if (formData.bio.length > 200) {
+        showValidationModal('Character Limit Exceeded', 'Bio cannot exceed 200 characters');
+        return false; 
+    }
+    if (!formData.access_type) {
+        showValidationModal('Empty Field', 'Please select an account type');
+        return false;
+    }
+
+    if (formData.school_id && !/^\d+$/.test(formData.school_id)) {
+        showValidationModal('Invalid Input', 'School ID must be a number');
+        return false;
+    }
+
+
+    if (jobStatus === 'employed' && formData.company === '') {
+        showValidationModal('Empty Field', 'Company name cannot be empty if employed');
+        return false;
+    }
+    return true;
+}
+
+
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
 }

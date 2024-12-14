@@ -431,6 +431,11 @@ function setupSubmitCommentHandler(postId) {
     // Comment submission handler
     function submitCommentHandler() {
         const commentText = commentInput.value.trim();
+        if (commentText.length > 300) {
+            showValidationModal("Character Limit Exceeded", "Your comment cannot exceed 300 characters.");
+            return; 
+        }
+
         if (commentText) {
             postComment(postId, commentText).then(success => {
                 if (success) {
@@ -523,3 +528,59 @@ function updateLikeCount(likeCountElement, isLiked) {
 }
 // end of helper methods for likes
 
+// validations
+function characterValidation(textarea, charLimit) {
+    const charCounter = document.createElement('div');
+    charCounter.id = 'charCounter';
+    charCounter.style.color = '#666';
+    charCounter.style.fontSize = '0.9em';
+    charCounter.style.marginTop = '5px';
+    textarea.parentElement.appendChild(charCounter);
+
+    const updateCharCounter = () => {
+        const remaining = charLimit - textarea.value.length;
+        charCounter.textContent = `${remaining} characters remaining`;
+        charCounter.style.color = remaining < 0 ? 'red' : '#666';
+    };
+
+    textarea.addEventListener('input', updateCharCounter);
+    updateCharCounter(); 
+}
+
+//validate character limit
+function characterLimit(text, charLimit) {
+    return text.length <= charLimit;
+}
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
+}

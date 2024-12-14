@@ -80,57 +80,66 @@ function handlePostSubmit() {
             }
         });
 
+        const postTextarea = document.querySelector('#postForm textarea');
+        if (postTextarea) {
+            characterValidation(postTextarea, 1000);
+        }
 
-        // Handle form submission
         const submitPostButton = document.querySelector('#submitPost');
         if (submitPostButton) {
             submitPostButton.addEventListener('click', () => {
-                const description = document.querySelector('#postForm textarea').value.trim();
-                const post_type = 'normal'; 
+                const description = postTextarea.value.trim();
+
+                // Validation for character limit
+                if (!characterLimit(description, 1000)) {
+                    showValidationModal("Character Limit Exceeded", "The description cannot exceed 1000 characters. Please shorten your text.");
+                    return;
+                }
+
+                const post_type = 'normal';
                 const formData = new FormData();
-                console.log(description)
                 formData.append('description', description);
                 formData.append('post_type', post_type);
-            
+
                 const imageInput = document.getElementById('photoInput');
                 if (imageInput && imageInput.files.length > 0) {
                     Array.from(imageInput.files).forEach(file => {
-                        formData.append('images[]', file);  
+                        formData.append('images[]', file);
                     });
                 }
-            
-               
+
                 const videoInput = document.getElementById('videoInput');
                 if (videoInput && videoInput.files.length > 0) {
                     Array.from(videoInput.files).forEach(file => {
-                        formData.append('videos[]', file); 
+                        formData.append('videos[]', file);
                     });
                 }
-            
+
                 // Send data via fetch
                 fetch('/api/feed/postfeed', {
                     method: 'POST',
-                    body: formData,  
-                    credentials: 'include'  
+                    body: formData,
+                    credentials: 'include'
                 })
                 .then(response => response.json())
                 .then(data => {
-                    postModal.hide();  
-            
-                    if (data.message === 'Post created successfully') {
-                        successModal.show(); 
+                    if (data.message && data.message.startsWith('The file')) {
+                        showValidationErrorModal("File size too large",data.message);
                     } else {
-                        errorModal.show(); 
-                    }
-            
+                        postModal.hide();  
+                        if (data.message === 'Post created successfully') {
+                            successModal.show(); 
+                        } else {
+                            errorModal.show(); 
+                        }
 
-                    getUserInfo();
-                    getUserPosts();
+                        getUserInfo();
+                        getUserPosts();
+                    }
                 })
                 .catch(error => {
-                    console.error('Error posting data:', error);
-                    postModal.hide(); 
-                    errorModal.show();  
+                    showValidationModal("Error occured","Failed to handle the post!");
+                    postModal.hide();
                 });
             });
         }
@@ -152,9 +161,12 @@ function handlePostSubmit() {
 
         // Reset form and hide all modals when any modal is hidden
         const resetPage = () => {
-            const postTextarea = document.querySelector('.modal-body textarea');
             if (postTextarea) {
-                postTextarea.value = '';  // Reset the textarea value
+                postTextarea.value = ''; // Reset the textarea value
+                const charCounter = document.getElementById('charCounter');
+                if (charCounter) {
+                    charCounter.textContent = '300 characters remaining';
+                }
             }
 
             // Hide all modals (post, success, error)
@@ -167,6 +179,8 @@ function handlePostSubmit() {
         errorModalElement.addEventListener('hidden.bs.modal', resetPage);
     }
 }
+
+
 function handleLike(postId, likeButton, isLiked, likeCountElement) {
     fetch(`/api/feed/like/${postId}`, {
         method: 'POST',
