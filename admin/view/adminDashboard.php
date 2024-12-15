@@ -87,12 +87,12 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </a>
     </div>
 </div>
-    /**
-    * Admin dashboard informations.
-    * 
-    * Author: [Carino, Mark]
-    */
-    <!-- stats -->
+    
+
+    <!-- 
+     Admin dashboard informations.
+     Author: [Carino, Mark]
+    -->
     <div class="card-container">
     <div class="card" id="totalMembersCard">
         <h3>Total Members</h3>

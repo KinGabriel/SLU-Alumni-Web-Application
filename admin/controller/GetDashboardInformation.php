@@ -1,8 +1,4 @@
-/**
- * PhP class for fetching the dashboard information using queries.
- * 
- * Author: [Carino, Mark]
- */
+
 <?php
 require '../../database/Configuration.php'; 
 require("../controller/HandleSession.php");

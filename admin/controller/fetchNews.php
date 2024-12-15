@@ -1,8 +1,4 @@
-/**
- * PhP class for fetching the news information.
- * 
- * Author: [Carino, Mark]
- */
+
 <?php
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
