@@ -76,7 +76,13 @@ const populateEvents = (events) => {
         
         const description = document.createElement('p');
         description.classList.add('card-text');
-        description.textContent = event.event_description;
+        
+       
+        const truncatedDescription = event.event_description.length > 200
+            ? event.event_description.substring(0, 200) + '...'
+            : event.event_description;
+        
+        description.textContent = truncatedDescription;
         eventInfo.appendChild(description);
         
         const dateText = document.createElement('p');

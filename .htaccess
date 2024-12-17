@@ -3,7 +3,7 @@ SetEnv DB_USER root
 SetEnv DB_PASSWORD ""
 SetEnv DB_NAME slu_alumina
 SetEnv PORT 8080
-SetEnv HOST 192.168.22.3
+SetEnv HOST localhost
 
 SetEnv GMAIL_EMAIL slualumina@gmail.com
 SetEnv GMAIL_PASSWORD webtechnologies

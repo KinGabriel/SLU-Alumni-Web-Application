@@ -408,10 +408,13 @@ h2.text-warning {
 }
 
 /* Event description section */
-.description {
-    flex: 0 0 70%; 
-    padding-left: 5px; 
+#eventDescription {
+    white-space: pre-line; 
+    text-align: justify; 
+    line-height: 1.5;    
+    margin-top: 10px;      
 }
+
 
 /* Event details list */
 .details ul {
@@ -421,12 +424,6 @@ h2.text-warning {
 
 .details li {
     font-size: 1.1em;
-}
-
-/* Event description */
-.description p {
-    font-size: 1em;
-    line-height: 1.6;
 }
 
 .d-flex.mb-0 {

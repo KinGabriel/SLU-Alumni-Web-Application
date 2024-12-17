@@ -369,10 +369,10 @@ nav a:hover {
 }
 
 .content-section p {
-    font-size: 1em;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 10px;
+    white-space: pre-wrap; 
+    text-align: justify;  
+    margin-bottom: 15px;  
+    line-height: 1.6;      
 }
 
 .image-section {
@@ -434,10 +434,10 @@ nav a:hover {
 }
 
 .image-section img {
-    width: 100%; 
-    max-width: 1000px; 
-    height: auto; 
-    display: block; 
-    border-radius: 10px; 
-    object-fit: cover; 
+    max-width: 100%;       
+    max-height: 1000px;     
+    object-fit: cover;      
+    display: block;       
+    margin: 0 auto;        
+    border-radius: 10px;   
 }

@@ -15,58 +15,65 @@ async function getNews(page = 1) {
             console.error('News container not found in DOM');
             return;
         }
-
-        newsContainer.innerHTML = ''; 
+        newsContainer.innerHTML = '';
 
         data.news.forEach(newsItem => {
             const colDiv = document.createElement('div');
             colDiv.classList.add('col');
-
+        
             const cardDiv = document.createElement('div');
             cardDiv.classList.add('card', 'h-100');
-
+        
             const img = document.createElement('img');
             img.src = newsItem.photo || '../assets/images/default-news.jpg';
             img.classList.add('card-img-top', 'news-img');
             img.alt = newsItem.title;
-
+        
             const cardBodyDiv = document.createElement('div');
             cardBodyDiv.classList.add('card-body', 'd-flex', 'flex-column', 'justify-content-between');
-
+        
             const newsInfoDiv = document.createElement('div');
             newsInfoDiv.classList.add('news-info');
-
+        
             const newsTitle = document.createElement('h5');
             newsTitle.classList.add('card-title');
             newsTitle.textContent = newsItem.title;
-
+        
             const cardFooterDiv = document.createElement('div');
             cardFooterDiv.classList.add('card-footer', 'd-flex', 'flex-column', 'justify-content-between');
             cardFooterDiv.style.maxHeight = '300px'; 
-
+        
             const newsDescription = document.createElement('p');
             newsDescription.classList.add('card-text');
-            newsDescription.textContent = newsItem.description;
-            newsDescription.style.overflowY = 'auto'; 
+        
+            // truncation logic for the description
+            const maxLength = 200; 
+            const fullDescription = newsItem.description || "";
+            if (fullDescription.length > maxLength) {
+                newsDescription.textContent = fullDescription.substring(0, maxLength) + '...';
+            } else {
+                newsDescription.textContent = fullDescription;
+            }
+        
             const readMoreBtn = document.createElement('button');
             readMoreBtn.classList.add('btn', 'btn-primary', 'btn-read-more');
             readMoreBtn.textContent = 'Read More';
             readMoreBtn.onclick = () => window.location.href = `news/details?news_id=${newsItem.news_id}`;
-
-
+        
             newsInfoDiv.appendChild(newsTitle);
             cardBodyDiv.appendChild(newsInfoDiv);
-
+        
             cardFooterDiv.appendChild(newsDescription);
             cardFooterDiv.appendChild(readMoreBtn);
-
+        
             cardDiv.appendChild(img);
             cardDiv.appendChild(cardBodyDiv);
             cardDiv.appendChild(cardFooterDiv);
             colDiv.appendChild(cardDiv);
-
+        
             newsContainer.appendChild(colDiv);
         });
+        
 
         // Pagination controls
         const paginationContainer = document.querySelector('.pagination ul');
