@@ -160,17 +160,31 @@
             document.querySelector('.job-header h2').textContent = job.company_name;
             document.querySelector('.job-header small').textContent = `${job.employment_type} | Posted ${formatDate(job.created_at)} | ${job.country}`;
         
-            // About the Job Section
-            const aboutSection = document.querySelector('.job-section:nth-of-type(1) p:last-child');
-            aboutSection.textContent = job.description;
-        
-            // Essential Skills Section
-            const skillsList = document.querySelector('.job-section:nth-of-type(2) ul');
-            skillsList.innerHTML = job.skills.split(',').map(skill => `<li>${skill.trim()}</li>`).join('');
-        
-            // Requirements Section
-            const requirementsList = document.querySelector('.job-section:nth-of-type(3) ul');
-            requirementsList.innerHTML = job.requirements.split(',').map(requirement => `<li>${requirement.trim()}</li>`).join('');
+          // About the Job Section
+        const aboutSection = document.querySelector('.job-section:nth-of-type(1) p:last-child');
+        aboutSection.innerHTML = job.description.replace(/\n/g, '<br>');
+
+         // Essential Skills Section
+        const skillsList = document.querySelector('.job-section:nth-of-type(2) ul');
+        skillsList.innerHTML = job.skills
+            .replace(/\\r\\n|\\n|\\r/g, '\n') // Clean up escaped newline characters
+            .replace(/\\'/g, "'")            // Fix escaped single quotes
+            .split('\n')                     // Split into lines
+            .map(skill => skill.trim())      // Trim whitespace
+            .filter(skill => skill !== '')   // Remove empty lines
+            .map(skill => `<li>${skill}</li>`)
+            .join('');
+
+        // Requirements Section
+        const requirementsList = document.querySelector('.job-section:nth-of-type(3) ul');
+        requirementsList.innerHTML = job.requirements
+            .replace(/\\r\\n|\\n|\\r/g, '\n') // Clean up escaped newline characters
+            .replace(/\\'/g, "'")            // Fix escaped single quotes
+            .split('\n')                     // Split into lines
+            .map(requirement => requirement.trim()) 
+            .filter(requirement => requirement !== '') 
+            .map(requirement => `<li>${requirement}</li>`)
+            .join('');
         }
     
         function formatDate(dateString) {

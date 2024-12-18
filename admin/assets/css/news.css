@@ -173,6 +173,10 @@ header img.slu-logo {
     color: #000;
 }
 
+.sidebar-menu a.active {
+    background-color:  rgba(150, 182, 247, 0.4);  
+}
+
 /* Sidebar Icon */
 .sidebar-icon {
     width: 30px; 
