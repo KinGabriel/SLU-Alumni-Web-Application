@@ -181,11 +181,9 @@ header img.slu-logo {
     margin-left: 5px;
 }
 
-/* Hover effect on sidebar items */
-/* .sidebar-menu li:hover a {
-    color: #fff;
-    background-color: rgba(0, 61, 165, 0.4);
-} */
+.sidebar-menu a.active {
+    background-color:  rgba(150, 182, 247, 0.4);  
+}
 
 /* Sticky Log Out Section */
 .sidebar-logout {

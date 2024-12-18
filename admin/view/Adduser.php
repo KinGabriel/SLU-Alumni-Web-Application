@@ -116,7 +116,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData'], $_SESSION['modalI
                     </div>
 
                     <div class="id-grid">
-                        <label for="school-id">School ID</label>
+                        <label for="school-id">School ID  <span>(optional)</span> </label>
                         <input type="text" id="school-id" name="school-id" value="<?= isset($formData['school-id']) ? htmlspecialchars($formData['school-id']) : '' ?>" >
                     </div>
 
@@ -232,7 +232,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData'], $_SESSION['modalI
         <div class="modal-content">
             <img id="modal-image" src="<?php echo $modalImage; ?> alt="Information message/>
             <p id="modal-message"></p>
-            <button class="accept" onclick="closeModal()">Okay!</button>
+            <button class="accept" onclick="closeModal()">Got it!</button>
         </div>
     </div>  
     

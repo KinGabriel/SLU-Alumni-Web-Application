@@ -101,8 +101,7 @@ header img.slu-logo {
 
 /* Sidebar active link styling */
 .sidebar-menu a.active {
-    background-color:  rgba(0, 61, 165, 0.4);  
-    color: #007bff;  
+    background-color:  rgba(150, 182, 247, 0.4);  
 }
 
 

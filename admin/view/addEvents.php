@@ -26,7 +26,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </h1>
         <div class="header-profile">
             <!-- <i class="fa-regular fa-bell"></i> -->
-            <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" >
+            <!-- <img src="../assets\images\notification-bell.svg" alt="notification bell" class="notif-bell" > -->
             <img src="<?php echo $_SESSION['pfp'] ?: '../assets/images/alumni.jpg'; ?>" alt="Admin Profile" class="profile-pic">
             <div class="account-details">
                 <span class="user-name"><?php echo $_SESSION['user_name']; ?></span>
