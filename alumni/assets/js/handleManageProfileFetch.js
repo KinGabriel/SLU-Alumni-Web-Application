@@ -80,7 +80,6 @@ function handleChangePfp() {
     .then(data => {
         if (data.success) {
             document.getElementById('profileImage').src = `/uploads/${data.newPfpUrl}`; // Update with the new image URL
-
             // Trigger the success modal
             const profileUpdateSuccessModal = new bootstrap.Modal(document.getElementById('profileUpdateSuccessModal'));
             profileUpdateSuccessModal.show();
@@ -107,9 +106,9 @@ function handleSaveChanges() {
         bio: document.getElementById('bio').value,
         access_type: document.querySelector('input[name="accountType"]:checked').value,
     };
-
-    if (!checkValidations(formData,jobStatus)){
-        return
+    // Client side validations
+    if (!checkValidations(formData, jobStatus)) {
+        return;
     }
 
     fetch('/api/manage-profile/update-details', {
@@ -117,18 +116,25 @@ function handleSaveChanges() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
     })
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
+        .then(async response => {
+            const data = await response.json();
+            // Server side validation
+            if (data.message === 'The email is already taken, please try another email!') {
+                showValidationModal('Invalid Email', data.message);
+                return;
+            }
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Success 
             console.log('Profile updated successfully:', data);
             const successModal = new bootstrap.Modal(document.getElementById('saveChangesSuccessModal'));
             successModal.show();
         })
         .catch(error => {
             console.error('Error updating profile:', error);
-
 
             const failureModal = new bootstrap.Modal(document.getElementById('saveChangesFailureModal'));
             failureModal.show();

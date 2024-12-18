@@ -14,7 +14,7 @@ async function getUserInfo() {
         pfpElements.forEach((element) => {
             element.src = data.pfp || '../assets/images/default-profile.jpg';
             element.onerror = () => {
-                element.src = '../assets/images/default-profile.jpg';
+                element.src = '../../assets/images/default-profile.jpg';
             };
         });
         const nameElements = document.querySelectorAll('[name="name"]');

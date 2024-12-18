@@ -53,6 +53,21 @@ export const updateProfile = async (req, res) => {
     const userId = req.userId;
     const { fname, mname, lname, email, access_type, company, school_id, bio } = req.body;
     try {
+
+        const checkEmailQuery = `
+        SELECT user_id FROM user WHERE email = ? AND user_id != ?
+    `;
+
+    dbConnection.query(checkEmailQuery, [email, userId], (err, results) => {
+        if (err) {
+            console.error('Database error in checking email:', err);
+            return res.status(500).json({ error: 'Failed to validate email.' });
+        }
+
+        if (results.length > 0) {
+            return res.status(200).json({ message: 'The email is already taken, please try another email!' });
+        }
+
         const updateUserQuery = `
             UPDATE user
             SET fname = ?, mname = ?, lname = ?, email = ?, access_type = ?, company = ?
@@ -106,6 +121,7 @@ export const updateProfile = async (req, res) => {
                 );
             }
         );
+     });
     } catch (err) {
         console.error('Unexpected error:', err);
         res.status(500).json({ error: 'An unexpected error occurred.' });
