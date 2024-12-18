@@ -554,3 +554,14 @@ input[type="file"] {
 .search-result-item:active {
     background-color: #e0e0e0;  
 }
+
+label[for="idNumber"] span {
+    font-size: small;
+    color: #777;
+}
+
+label[for="middleName"] span {
+    font-size: small;
+    color: #777;
+}
+
