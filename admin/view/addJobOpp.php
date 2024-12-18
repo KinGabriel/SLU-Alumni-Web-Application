@@ -14,6 +14,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <link rel="stylesheet" href="../assets/css/addJob.css">
     <!-- Author: Vergara Carlos Miguel -->
     <!-- Used References: Codepen and ChatGPT -->
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 

@@ -32,7 +32,6 @@ async function fetchConnections() {
 
 fetchConnections()
 
-// TODO Modal
 async function removeFollower(user_id, name, confirmModal) {
     try {
         const response = await fetch(`/api/connections/remove-follower/${user_id}`, {

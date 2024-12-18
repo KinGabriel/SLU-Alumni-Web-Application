@@ -60,16 +60,16 @@ const validateDatesAndTimes = () => {
   
     // Validate the clicked date
     if (startDate.getTime() === currentDate.getTime() && startTime <= currentDate) {
-      alert("The selected time cannot be earlier than the current time.");
+      showValidationModal('Time mismatch','The selected time cannot be earlier than the current time.')
       return false;
     } else if (startDate <= currentDate) {
-      alert("The selected date cannot be earlier than the current date.");
+      showValidationModal('Time mismatch',"The selected date cannot be earlier than the current date.")
       return false;
     }
   
     // Validate start and end times
     if (endTime < startTime) {
-      alert("The end time cannot be earlier than the start time.");
+      showValidationModal('Time mismatch',"The end time cannot be earlier than the start time.")
       return false;
     } 
   
@@ -269,11 +269,12 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
     })
     .then((data) => {
         if (data.success) {
-            alert("Event added successfully!");
+            showValidationModal('Success',"Event added successfully!")
             window.location.href = "../view/addEvents.php"; // Redirect after success
         } else {
             console.error("Server Error:", data.error);
-            alert("Error: " + (data.error || "An unknown error occurred."));
+            showValidationModal('Error',data.error)
+            
         }
     })
     .catch((error) => {
@@ -281,6 +282,39 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
         throw new Error("An unexpected error occurred. Please try again later.");
     });
 });
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
+}
 
 // Show the first step initially
 // updateSteps({ target: { id: "btn-next" } });

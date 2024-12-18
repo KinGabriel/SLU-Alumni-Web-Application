@@ -80,7 +80,7 @@ const updateSteps = (e) => {
 
     if (e.target.id === "btn-next" && !checkRequiredFields()) {
         e.preventDefault(); // Prevent moving to the next step
-        alert("Please fill in all required fields.");
+        showValidationModal('All fields required',"Please fill in all required fields.")
         return;
     }
 
@@ -204,17 +204,17 @@ document.getElementById("event-form").addEventListener("submit", (e) => {
         }
     })
     .then((data) => {
-        if (data.success) {
-            alert("Job Opportunity added successfully!");
+        if (data.success) {;
+            showValidationModal('Added successfully',"Job Opportunity added successfully!")
             window.location.href = "../view/jobOpportunities.php"; // Redirect after success
         } else {
             console.error("Server Error:", data.error);
-            alert("Error: " + (data.error || "An unknown error occurred."));
+            showValidationModal('Error',data.error)
         }
     })
     .catch((error) => {
         console.error("Fetch Error:", error); // Log the error for debugging
-        alert("An unexpected error occurred. Please try again later.");
+        showValidationModal('Error',"An unexpected error occurred. Please try again later.")
     });
 });
 
@@ -386,3 +386,35 @@ document.getElementById('image-upload').addEventListener('change', function () {
     }
   });
   
+  function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
+}

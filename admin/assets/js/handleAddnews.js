@@ -31,7 +31,7 @@ function validatenewsform(event) {
 
     // Display error or submit form
     if (!isValid) {
-        alert(errorMessage);
+        showValidationModal('Error adding news',errorMessage)
         return false;
     }
 
@@ -68,7 +68,7 @@ function handleFileUpload() {
 
             fileReader.readAsDataURL(file);
         } else {
-            alert('Please upload a valid image file.');
+            showValidationModal('Upload failed','Please upload a valid image file.' )
             resetFileUpload();
         }
     } else {
@@ -81,4 +81,38 @@ function resetFileUpload() {
     const imagePreview = document.getElementById('image-preview');
     uploadText.textContent = 'Upload a news photo';
     imagePreview.style.display = 'none';
+}
+
+
+function showValidationModal(title, message) {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'fade');
+    modal.setAttribute('id', 'validationErrorModal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('aria-labelledby', 'validationErrorModalLabel');
+    modal.setAttribute('aria-hidden', 'true');
+
+    modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="validationErrorModalLabel">${title}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ${message}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    const validationErrorModal = new bootstrap.Modal(modal);
+    validationErrorModal.show();
+    modal.addEventListener('hidden.bs.modal', () => {
+        modal.remove();
+    });
 }

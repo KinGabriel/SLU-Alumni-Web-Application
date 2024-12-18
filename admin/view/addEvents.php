@@ -13,6 +13,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <!-- Used References: Codepen and ChatGPT -->
     <!-- Link to compiled custom styles (CSS) -->
     <link rel="stylesheet" href="../assets/css/addevent.css">
+    <link href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 
 <body>
