@@ -6,6 +6,11 @@ $params = [];
 $types = ''; 
 $query = "SELECT app_id,CONCAT(fname, ' ', lname) as Name, email, gradyear,school_id_pic FROM applicants WHERE is_verified = '0'"; 
 
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+$offset = ($page - 1) * $limit;
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
     $sort = isset($_GET['sort']) ? $_GET['sort'] : 'name ASC';

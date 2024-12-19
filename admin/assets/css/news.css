@@ -309,7 +309,7 @@ header img.slu-logo {
 }
 .news-container {
     flex: 1;
-    margin-left: 350px;
+    margin-left: 250px;
     padding: 20px;
     background-color: #f9f9f9;
     display: flex;
@@ -322,7 +322,6 @@ header img.slu-logo {
 }/* News Container */
 .news-container {
     flex: 1;
-    margin-left: 350px;
     padding: 20px;
     background-color: #f9f9f9;
     display: flex;
@@ -374,7 +373,6 @@ header img.slu-logo {
 /* News Container */
 .news-container {
     flex: 1;
-    margin-left: 350px;
     padding: 20px;
     background-color: #f9f9f9;
     display: flex;

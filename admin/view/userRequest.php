@@ -101,10 +101,14 @@ require("../controller/HandleSession.php");
                
             </tbody>
         </table>    
+        
         </div>
-
-    </div>
-
+<!-- Pagination Section -->
+        <div class="pagination">
+            <ul>
+                <!-- Pagination buttons will be dynamically added here -->
+            </ul>
+        </div>
   <!-- Search bar -->
 <div class="search">
     <form id="searchForm">
@@ -147,7 +151,7 @@ require("../controller/HandleSession.php");
 
 
     <script src="../assets/js/HandleApplicantsTable.js"></script>
-    <script src="../assets\js\HandleAdminDashboard.js"></script>
+    <script src="../assets/js/HandleAdminDashboard.js"></script>
 
     <script>
         if (message) {

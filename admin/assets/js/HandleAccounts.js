@@ -1,5 +1,5 @@
 let currentPage = 1;
-const usersPerPage = 10;
+const usersPerPage = 5;
 let allUsers = [];
 
 function populateUserTable(userData) {

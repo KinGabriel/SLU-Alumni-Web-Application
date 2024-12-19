@@ -108,7 +108,7 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
             <p id="totalApplicants">Loading...</p>
         </div>
     </div>
-    <div class="card">
+    <div class="card" id="jobOppsAvailableCard">
         <h3>Job Opportunities Available</h3>
         <div class="card-content">
             <img src="../assets/images/jobopportunities.svg" alt="Available Job Opportunities">
@@ -116,14 +116,14 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </div>
     </div>
 
- <div class="card">
+ <div class="card" id="numOfEventsCard">
         <h3>Number of Events</h3>
         <div class="card-content">
         <img src="../assets/images/numberofevents.svg" alt="Number of events">
         <p id="totalEvents">Loading...</p>
         </div>
     </div>
-    <div class="card">
+    <div class="card" id="addedNewsCard">
         <h3>Added News</h3>
         <div class="card-content">
         <img src="../assets/images/addednews.svg" alt="Number of addednews">

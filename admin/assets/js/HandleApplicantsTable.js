@@ -1,3 +1,7 @@
+let currentPage = 1;
+const usersPerPage = 5;
+let allUsers = [];
+
 function populateApplicantsTable(applicantData) {
     const appTableBody = document.getElementById('applicantTableBody');
     appTableBody.innerHTML = ''; 
@@ -56,11 +60,51 @@ function populateApplicantsTable(applicantData) {
     });
 }
 
+function updatePaginationButtons() {
+    const pagination = document.querySelector('.pagination ul');
+    pagination.innerHTML = '';
+
+    const totalPages = Math.ceil(allUsers.length / usersPerPage);
+
+    const createPageItem = (label, isDisabled, isActive, pageNumber) => {
+        const li = document.createElement('li');
+        li.className = `page-item ${isDisabled ? 'disabled' : ''} ${isActive ? 'active' : ''}`;
+        const link = document.createElement('a');
+        link.className = 'page-link';
+        link.textContent = label;
+        if (!isDisabled) {
+            link.addEventListener('click', () => {
+                currentPage = pageNumber;
+                renderCurrentPage();
+            });
+        }
+        li.appendChild(link);
+        return li;
+    };
+
+    pagination.appendChild(createPageItem('«', currentPage === 1, false, currentPage - 1));
+
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.appendChild(createPageItem(i, false, currentPage === i, i));
+    }
+
+    pagination.appendChild(createPageItem('»', currentPage === totalPages, false, currentPage + 1));
+}
+
+function renderCurrentPage() {
+    const start = (currentPage - 1) * usersPerPage;
+    const end = start + usersPerPage;
+    populateApplicantsTable(allUsers.slice(start, end));
+    updatePaginationButtons();
+}
+
 function fetchUserData() {
     const urlParams = new URLSearchParams(window.location.search);
     const queryString = new URLSearchParams({
         search: urlParams.get('search') || '', 
-        sort: urlParams.get('sort') || 'name ASC' 
+        sort: urlParams.get('sort') || 'name ASC', 
+        page: currentPage,
+        limit: usersPerPage
     }).toString();
     fetch(`../controller/GetApplicationList.php?${queryString}`)
         .then(response => {
@@ -71,7 +115,8 @@ function fetchUserData() {
         })
         .then(data => {
             if (Array.isArray(data)) {
-                populateApplicantsTable(data);
+                allUsers = data;
+                renderCurrentPage();
             } else {
                 console.error('Invalid data format received.');
             }

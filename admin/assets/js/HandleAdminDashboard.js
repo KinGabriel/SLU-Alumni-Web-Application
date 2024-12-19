@@ -106,3 +106,12 @@ document.getElementById('totalMembersCard').addEventListener('click', function()
 document.getElementById('totalApplicantsCard').addEventListener('click', function() {
     window.location.href = '../view/UserRequest.php';
 });
+document.getElementById('jobOppsAvailableCard').addEventListener('click', function() {
+    window.location.href = '../view/jobOpportunities.php';
+});
+document.getElementById('numOfEventsCard').addEventListener('click', function() {
+    window.location.href = '../view/adminEvent.php';
+});
+document.getElementById('addedNewsCard').addEventListener('click', function() {
+    window.location.href = '../view/news.php';
+});

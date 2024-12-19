@@ -44,6 +44,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     const description = document.createElement('p');
                     description.classList.add('card-text');
                     description.textContent = item.description;
+
+                    const maxLength = 200; 
+                    const fullDescription = item.description || "";
+                    if (fullDescription.length > maxLength) {
+                        description.textContent = fullDescription.substring(0, maxLength) + '...';
+                    } else {
+                        description.textContent = fullDescription;
+                    }
                 
                     const datetime = document.createElement('small');
                     datetime.classList.add('text-muted');

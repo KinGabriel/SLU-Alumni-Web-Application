@@ -4,6 +4,7 @@
 */
 body {
   background: #F2F2F2;
+  overflow-x: hidden;
 }
 
 .bg-primary {
@@ -84,6 +85,10 @@ a {
   top: 150px;
   right: 15px;
   color: #ffffff;
+}
+body > div.container.py-100 {
+margin-left: 250px;
+overflow-x: hidden;
 }
 
 .has-multiple {

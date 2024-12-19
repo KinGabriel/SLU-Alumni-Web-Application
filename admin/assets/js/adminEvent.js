@@ -81,6 +81,10 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         const { title, description, cover, date, tags } = card;
 
+        const truncatedDescription = description.length > 200 
+        ? description.substring(0, 200) + '...' 
+        : description;
+
         const cardElement = document.createElement("div");
         cardElement.classList.add("col");
 
@@ -100,7 +104,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
                 <div class="bubble date rounded small">${date}</div>
                 <div class="card-body">
                     <h2 class="h4"><a href="#" class="text-dark">${title}</a></h2>
-                    <p class="text-muted">${description}</p>
+                    <p class="text-muted">${truncatedDescription}</p>
                     <p class="m-0">
                         ${tags
                             .map(

@@ -1,7 +1,13 @@
 <?php
-require '../../database/Configuration.php'; 
+require '../../database/Configuration.php';
+require '../../vendor/autoload.php'; 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 $db = new dbConnection();
 $connection = $db->getConnection();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $app_id = $input['app_id'];
@@ -10,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = acceptUser($app_id, $connection);
         echo json_encode(['success' => $result]);
     } elseif ($action === 'decline') {
-        $result = updateRequest($app_id, $connection);
+        $result = deleteApplicant($app_id, $connection);
         echo json_encode(['success' => $result]);
     }
 }
@@ -23,11 +29,80 @@ function acceptUser($app_id, $connection) {
     }
     if (addUser($connection, $applicantData)) {
         if (addAlumni($connection, $applicantData)) {
-            return updateRequest($app_id, $connection);
+            $updateResult = updateRequest($app_id, $connection);
+            if ($updateResult) {
+                sendEmail($applicantData['email'], 'Application Accepted', "Congratulations! Your application has been accepted.");
+            }
+            return $updateResult;
         }
     }
 
     return false;
+}
+
+function deleteApplicant($app_id, $connection) {
+    $applicantData = getApplicantData($app_id, $connection);
+    if (!$applicantData) {
+        error_log("No applicant data found for app_id: $app_id");
+        return false;
+    }
+
+    // Delete the application entry from the database
+    $query = "DELETE FROM applicants WHERE app_id = ?";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param('i', $app_id);
+    $result = $stmt->execute();
+
+    if ($result) {
+        sendEmail($applicantData['email'], 'Application Rejected', "We regret to inform you that your application has been rejected.");
+    }
+
+    return $result;
+}
+
+function sendEmail($recipient, $subject, $body) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = getenv('GMAIL_EMAIL'); // Email from .htaccess
+        $mail->Password = getenv('GMAIL_PASSWORD'); // Password from .htaccess
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom(getenv('GMAIL_EMAIL'), 'Your Application Team');
+        $mail->addAddress($recipient);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+
+        $mail->send();
+    } catch (Exception $e) {
+        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+    }
+}
+
+function updateRequest($app_id, $connection) {
+    $query = "UPDATE applicants SET is_verified = '1' WHERE app_id = ?";
+    $stmt = $connection->prepare($query);
+    if (!$stmt) {
+        error_log("Failed to prepare updateRequest query: " . $connection->error);
+        return false;
+    }
+    $stmt->bind_param('s', $app_id);
+    if (!$stmt->execute()) {
+        error_log("Failed to execute updateRequest query: " . $stmt->error);
+        $stmt->close();
+        return false;
+    }
+    $stmt->close();
+    return true;
 }
 
 function addUser($connection, $applicantData) {
@@ -125,20 +200,5 @@ function getID($connection, $email) {
     return $data['user_id'] ?? null;
 }
 
-function updateRequest($app_id, $connection) {
-    $query = "UPDATE applicants SET is_verified = '1' WHERE app_id = ?";
-    $stmt = $connection->prepare($query);
-    if (!$stmt) {
-        error_log("Failed to prepare updateRequest query: " . $connection->error);
-        return false;
-    }
-    $stmt->bind_param('s', $app_id);
-    if (!$stmt->execute()) {
-        error_log("Failed to execute updateRequest query: " . $stmt->error);
-        $stmt->close();
-        return false;
-    }
-    $stmt->close();
-    return true;
-}
+
 ?>

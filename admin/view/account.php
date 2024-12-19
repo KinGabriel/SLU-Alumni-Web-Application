@@ -119,10 +119,15 @@ require("../controller/HandleSession.php");
             <tbody id="userTableBody"></tbody>
         </table>
 
-        
+        <!-- Pagination Section -->
+        <div class="pagination">
+            <ul>
+                <!-- Pagination buttons will be dynamically added here -->
+            </ul>
         </div>
         
     </div>
+        
 
     <!-- Search bar -->
     <div class="search">
