@@ -1,8 +1,16 @@
 <?php
 session_start(); 
+if (isset($_COOKIE['user_id'])) {
+  $userId = $_COOKIE['user_id'];
+  $host = getenv('HOST');
+  $port = getenv('PORT');
+  $redirectUrl = "http://{$host}:{$port}";
+  header("Location: {$redirectUrl}");
+} else {
 $errorMessage = isset($_SESSION['error_message']) ? addslashes($_SESSION['error_message']) : '';
 unset($_SESSION['error_message']); 
 echo "<script> var errorMessage = '$errorMessage';</script>";
+}
 ?>
 
 <!DOCTYPE html>
