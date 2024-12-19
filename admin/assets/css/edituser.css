@@ -230,12 +230,22 @@ h2.form-title, h3.section-title {
     margin-left: -90px;
 }
 
-.form-group#degree select {
+.form-group#school select {
     width: 110%; 
     margin-left: -185px;
 }
 
-.form-group#degree label {
+.form-group#school label {
+    width: 60%; 
+    margin-left: -185px;
+}
+
+.form-group#program select {
+    width: 110%; 
+    margin-left: -185px;
+}
+
+.form-group#program label {
     width: 60%; 
     margin-left: -185px;
 }

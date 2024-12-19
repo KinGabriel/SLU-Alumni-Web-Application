@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = isset($_POST["email"]) ? $_POST["email"] : '';
     $firstName = isset($_POST["first-name"]) ? $_POST["first-name"] : '';
     $lastName = isset($_POST["last-name"]) ? $_POST["last-name"] : '';
+    $school = isset($_POST["school"]) ? $_POST["school"] : '';
     $program = isset($_POST["program"]) ? $_POST["program"] : ''; 
     $schoolID = isset($_POST["school-id"]) ? $_POST["school-id"] : ''; 
     $gradYear = isset($_POST["graduation-year"]) ? $_POST["graduation-year"] : '';    
@@ -79,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if the user is an alumni and update the alumni table
     if ($userType == 'alumni') {
-    $queryAlumni = "UPDATE alumni SET school_id = ?, gradyear = ?, program = ? WHERE user_id = ?";
+    $queryAlumni = "UPDATE alumni SET school_id = ?, gradyear = ?, school= ?, program = ? WHERE user_id = ?";
     $stmtAlumni = $connection->prepare($queryAlumni);
 
     if ($stmtAlumni === false) {
@@ -88,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $stmtAlumni->bind_param('sssi', $schoolID, $gradYear, $program, $user_id);
+    $stmtAlumni->bind_param('ssssi', $schoolID, $gradYear, $school, $program, $user_id);
 
     if (!$stmtAlumni->execute()) {
         $_SESSION['confirmation-message'] = "Error updating alumni information: " . $stmtAlumni->error;

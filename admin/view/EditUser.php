@@ -89,6 +89,7 @@ unset($_SESSION['confirmation-message']);
                         $email = $userDetails['email'] ?? '';
                         $schoolId = $userDetails['school_id'] ?? 'N/A';
                         $graduationYear = $userDetails['gradyear'] ?? 'N/A';
+                        $school = $userDetails['school'] ?? 'N/A';
                         $program = $userDetails['program'] ?? 'N/A';
                         $user_type = $userDetails['user_type'] ?? '';
                         $status = $userDetails['is_employed'] ?? '';
@@ -146,22 +147,33 @@ unset($_SESSION['confirmation-message']);
                         <input type="text" id="graduation-year" name="graduation-year" value="<?php echo htmlspecialchars($graduationYear); ?>">
                     </div>
 
-                    <div class="form-group" id="degree">
-                        <label for="degree">Degree</label>
-                        <select id="degree" name="program">
-                            <option value="">Program</option>
+                    <div class="form-group" id="school">
+                        <label for="school">School</label>
+                        <select id="schoolDropdown" name="school">
+                            <!-- Default placeholder -->
+                            <option value="" disabled>School</option>
+                            
+                            <!-- Dynamically populated options -->
                             <?php
-                                $filePath = '../assets/programs.txt'; 
-                                if (file_exists($filePath)) {
-                                    $programs = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-                                    foreach ($programs as $programOption) {
-                                        $selected = ($program === $programOption) ? 'selected' : '';
-                                        echo "<option value=\"$programOption\" $selected>$programOption</option>";
-                                    }
-                                } else {
-                                    echo "<option value=\"\">N/A</option>"; 
+                            $filePath = '../assets/schools.txt';
+                            if (file_exists($filePath)) {
+                                $schools = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                                foreach ($schools as $schoolOption) {
+                                    // Use the 'selected' attribute if the option matches the user's current school
+                                    $selected = ($school === $schoolOption) ? 'selected' : '';
+                                    echo "<option value=\"$schoolOption\" $selected>$schoolOption</option>";
                                 }
+                            } else {
+                                echo "<option value=\"\">N/A</option>";
+                            }
                             ?>
+                        </select>
+
+                    </div>
+                    <div class="form-group" id="program">
+                        <label for="program">Program</label>
+                        <select id="programDropdown" name="program">
+                        <option value="" disabled>Program</option>
                         </select>
                     </div>
 
@@ -191,6 +203,57 @@ unset($_SESSION['confirmation-message']);
             <button class="accept" onclick="closeModal()">Got it</button>
         </div>
     </div>
+
+
+    <script>
+    // Current program from the database
+    const currentProgram = "<?php echo htmlspecialchars($program); ?>";
+
+    // Listen for changes on the school dropdown
+    document.getElementById('schoolDropdown').addEventListener('change', function() {
+        const school = this.value;
+        const programDropdown = document.getElementById('programDropdown');
+
+        // Clear current options
+        programDropdown.innerHTML = '<option value="" disabled selected>Select Program</option>';
+
+        if (!school) return;
+
+        // Fetch programs for the selected school
+        fetch(`../controller/getPrograms.php?school=${encodeURIComponent(school)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+
+                // Populate the programDropdown with fetched programs
+                data.forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program;
+                    option.textContent = program;
+
+                    // Mark the current program from the database as selected
+                    if (program === currentProgram) {
+                        option.selected = true;
+                    }
+
+                    programDropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching programs:', error));
+    });
+
+    // Trigger the change event on page load to populate the dropdown
+    document.addEventListener('DOMContentLoaded', function () {
+        const schoolDropdown = document.getElementById('schoolDropdown');
+        if (schoolDropdown.value) {
+            schoolDropdown.dispatchEvent(new Event('change'));
+        }
+    });
+</script>
+
 
     <script>
         if (message) {
