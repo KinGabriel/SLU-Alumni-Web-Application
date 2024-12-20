@@ -163,24 +163,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             </ul>
         </div>
 
-      <!-- Confirmation Modal -->
-  <div class="confirm-modal" id="confirmModal">
-    <div class="confirm-modal-content">
-    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
-        <p id="confirmMessage"></p>
-        <button class="confirm-yes" id="confirmYes">Yes</button>
-        <button class="confirm-no" id="confirmNo">No</button>
-    </div>
-</div>
-
-  <!-- feed back Modal -->
-<div id="feedbackModal" class="feedback-modal">
-    <div class="feedback-modal-content">
-    <img id="modalImage" src="../assets/images/success.png"  alt="Information message" />
-        <p id="feedbackMessage"></p>
-        <button id="closeFeedback" onclick="closeFeedbackModal()">Close</button>
-    </div>
-</div>
+ 
 
     <!-- Link to Bootstrap JS and Popper (for Bootstrap components) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

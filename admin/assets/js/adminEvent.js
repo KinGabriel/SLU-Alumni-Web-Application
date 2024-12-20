@@ -107,7 +107,12 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
                     ${cover
                         .map(
                             (image) =>
-                                `<img src="${image}" class="shadow-sm rounded cover-image w-100" alt="${title}">`
+                                `<img 
+                                    src="${image}" 
+                                    class="shadow-sm rounded cover-image w-100" 
+                                    alt="${title}"
+                                    style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
+                                `
                         )
                         .join("")}
                 </a>
