@@ -43,7 +43,7 @@ CREATE TABLE `alumni` (
 
 LOCK TABLES `alumni` WRITE;
 /*!40000 ALTER TABLE `alumni` DISABLE KEYS */;
-INSERT INTO `alumni` VALUES (56,7428095,2004,'SEA','',NULL),(57,8524360,2008,'SOM','',NULL),(58,9625108,2018,'SEA','SAMCIS: Bachelor of Science in Accountancy, Bachelor of Science in Management Accounting, Bachelor o',NULL),(59,1047369,1995,'STELA','',NULL),(60,2156893,2012,'SONAHBS','',NULL),(61,1042856,2014,'SEA','',NULL),(62,2037461,2010,'SEA','',NULL),(63,3126497,1981,'SONAHBS','SEA: Bachelor of Science in Architecture, Bachelor of Science in Chemical Engineering, Bachelor of S','Hello, I\'m Karen! I like food.'),(64,4895721,2009,'STELA','STELA: Bachelor of Arts in Communication, Bachelor of Arts in Philosophy, Bachelor of Arts in Politi',NULL),(65,5628470,2009,'SONAHBS','',NULL),(66,6371945,2017,'SOL','','I need a job.'),(67,7043816,2011,'SOM','',NULL),(68,8091352,2009,'SOM','',NULL),(69,9124873,2021,'SEA','',NULL),(70,1057934,2013,'SEA','',NULL),(71,2354798,2024,'SAMCIS','',NULL),(72,3496821,2002,'SONAHBS','',NULL),(73,4571629,2012,'STELA','',NULL),(74,5187364,1972,'SOM','',NULL),(75,6235817,2020,'SAMCIS','',NULL);
+INSERT INTO `alumni` VALUES (56,7428095,2004,'SEA','Bachelor of Science in Architecture',NULL),(57,8524360,2008,'SOM','Doctor of Medicine',NULL),(58,9625108,2018,'SEA','Bachelor of Science in Architecture',NULL),(59,1047369,1995,'STELA','Bachelor of Arts in Communication',NULL),(60,2156893,2012,'SONAHBS','Bachelor of Science in Medical Laboratory Science',NULL),(61,1042856,2014,'SEA','Bachelor of Science in Chemical Engineering',NULL),(62,2037461,2010,'SEA','Bachelor of Science in Chemical Engineering',NULL),(63,3126497,1981,'SONAHBS','Bachelor of Science in Medical Laboratory Science','Hello, I\'m Karen! I like food.'),(64,4895721,2009,'STELA','Bachelor of Arts in Political Science',NULL),(65,5628470,2009,'SONAHBS','Bachelor of Science in Medical Laboratory Science',NULL),(66,6371945,2017,'SOL','Master of Laws (L.L.M.)','I need a job.'),(67,7043816,2011,'SOM','Doctor of Medicine',NULL),(68,8091352,2009,'SOM','Doctor of Medicine',NULL),(69,9124873,2021,'SEA','Bachelor of Science in Architecture',NULL),(70,1057934,2013,'SEA','Bachelor of Science in Architecture',NULL),(71,2354798,2024,'SAMCIS','Bachelor of Science in Tourism Management',NULL),(72,3496821,2002,'SONAHBS','Bachelor of Science in Medical Laboratory Science',NULL),(73,4571629,2012,'STELA','Bachelor of Arts in Political Science',NULL),(74,5187364,1972,'SOM','Doctor of Medicine',NULL),(75,6235817,2020,'SAMCIS','Bachelor of Science in Tourism Management',NULL);
 /*!40000 ALTER TABLE `alumni` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,4 +342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-14  2:55:29
+-- Dump completed on 2024-12-20 23:32:35
