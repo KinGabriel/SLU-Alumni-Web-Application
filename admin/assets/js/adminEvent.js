@@ -274,11 +274,9 @@ categoryLinks.forEach((link) =>
     link.addEventListener("click", (event) => handleCategoryClick(event, 1))
 );
 
-
-
-
+// delete events
 async function deleteEvents(event_id, event_title) {
-    console.log("Deleting news:", event_id);
+    console.log("Deleting event:", event_id);
     try {
         const response = await fetch(`../controller/processDeleteEvents.php`, {
             method: 'POST',
@@ -289,30 +287,35 @@ async function deleteEvents(event_id, event_title) {
         });
         const data = await response.json();
         if (data.success) {
-            showFeedbackModal(`${event_title} deleted successfully.`); 
+            showFeedbackModal(`${event_title} deleted successfully.`);
+           
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000); 
         } else {
             const errorMessage = data.error;
             showFeedbackModal(errorMessage);
         }
     } catch (error) {
-        console.error("Error deleting news:", error);
-        showFeedbackModal("An error occurred while deleting the news.");
+        console.error("Error deleting event:", error);
+        showFeedbackModal("An error occurred while deleting the event.");
     }
 }
-// delete events
-function showConfirmationDeleteModal(event_id,event_title) {
-    console.log(event_id, event_title)
+
+// Show confirmation modal for deleting event
+function showConfirmationDeleteModal(event_id, event_title) {
+    console.log(event_id, event_title);
     const confirmMessage = document.getElementById('confirmMessage');
     confirmMessage.textContent = `Are you sure you want to delete this event?: ${event_title}?`;
+
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = "../assets/images/delete.png"; 
+    modalImage.src = "../assets/images/delete.png";
 
     document.getElementById('confirmYes').onclick = function() {
-        deleteEvents(event_id,event_title);
+        deleteEvents(event_id, event_title);
         closeConfirmationModal();
-        location.reload();
     };
 
     document.getElementById('confirmNo').onclick = closeConfirmationModal;

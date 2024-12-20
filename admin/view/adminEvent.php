@@ -176,7 +176,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <!-- feed back Modal -->
 <div id="feedbackModal" class="feedback-modal">
     <div class="feedback-modal-content">
-    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
+    <img id="modalImage" src="../assets/images/success.png"  alt="Information message" />
         <p id="feedbackMessage"></p>
         <button id="closeFeedback" onclick="closeFeedbackModal()">Close</button>
     </div>

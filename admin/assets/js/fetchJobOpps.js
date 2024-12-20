@@ -190,26 +190,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
 // delete jobOps
-async function deleteNews(opportunity_id, title) {
+async function deleteJobOpp(opportunity_id, title) {
     try {
         const response = await fetch(`../controller/processDeleteJobOps.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ opportunity_id }), 
+            body: JSON.stringify({ opportunity_id }),
         });
         const data = await response.json();
         if (data.success) {
-            showFeedbackModal(`${title} deleted successfully.`); 
+            showFeedbackModal(`${title} deleted successfully.`);
+    
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000);
         } else {
             const errorMessage = data.error;
             showFeedbackModal(errorMessage);
         }
     } catch (error) {
-        console.error("Error deleting news:", error);
-        showFeedbackModal("An error occurred while deleting the news.");
+        console.error("Error deleting job opportunity:", error);
+        showFeedbackModal("An error occurred while deleting the job opportunity.");
     }
 }
 
@@ -220,12 +226,11 @@ function showConfirmationDeleteModal(item) {
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = "../assets/images/delete.png"; 
+    modalImage.src = "../assets/images/delete.png";
 
     document.getElementById('confirmYes').onclick = function() {
-        deleteNews(item.opportunity_id,item.job_title);
+        deleteJobOpp(item.opportunity_id, item.job_title);
         closeConfirmationModal();
-        location.reload();
     };
 
     document.getElementById('confirmNo').onclick = closeConfirmationModal;
