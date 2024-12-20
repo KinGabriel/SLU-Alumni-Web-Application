@@ -103,6 +103,58 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 });
 
+// delete news
+async function deleteNews(news_id, title) {
+    console.log("Deleting news:", news_id);
+    try {
+        const response = await fetch(`../controller/ProcessDeleteNews.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ news_id }),
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${title} deleted successfully.`);
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting news:", error);
+        showFeedbackModal("An error occurred while deleting the news.");
+    }
+}
+function showConfirmationDeleteModal(item) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete this news?: ${item.title}?`;
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/delete.png";
+    document.getElementById('confirmYes').onclick = function() {
+        deleteNews(item.news_id, item.title);
+        closeConfirmationModal();
+    };
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}
+
 // Function to decode HTML entities like &quot; back to "
 function decodeHtmlEntities(input) {
     const doc = new DOMParser().parseFromString(input, 'text/html');
