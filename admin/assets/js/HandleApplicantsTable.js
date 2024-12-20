@@ -42,7 +42,7 @@ function populateApplicantsTable(applicantData) {
 
         const viewButton = document.createElement('button');
         viewButton.classList.add('btn-view-profile');
-        viewButton.textContent = 'View Image';
+        viewButton.textContent = 'View Alumni Proof';
         viewButton.addEventListener('click', () => viewImage(applicant.school_id_pic));
 
         // Append buttons
