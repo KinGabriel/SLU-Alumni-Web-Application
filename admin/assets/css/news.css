@@ -409,43 +409,52 @@ header img.slu-logo {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Edit Icon inside News Item */
+/* Edit Icon and Delete icon inside News Item */
 .edit-icon {
     position: absolute;
     top: 10px;
     margin-right: 27px;
-    right: 10px;
+    right: 20px;
     font-size: 1.5rem;
     color: #003DA5;
     cursor: pointer;
     z-index: 1;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff; 
+    border-radius: 5px;        
+    padding: 5px;        
 }
 
 .edit-icon:hover {
-    color: #cf1b1b;
+    color: #FEAF00;
+    background-color: #f1f1f1; 
 }
 
 .delete-icon {
     position: absolute;
     top: 10px;
-    right: 7px;
+    right: 10px;
     font-size: 1.5rem;
     color: #003DA5;
     cursor: pointer;
     z-index: 1;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff; 
+    border-radius: 5px;      
+    padding: 5px;            
 }
 
 .delete-icon:hover {
-    color: #cf1b1b;
+    color: #FEAF00;
+    background-color: #f1f1f1; 
 }
+
 .news-container .card-img-top {
-    max-height: 80%; /* Adjust the height proportionally */
-    width: 100%; /* Make the image span the full width of the card */
+    max-height: 80%; 
+    width: 100%; 
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    object-fit: cover; /* Ensures the image covers its container without stretching */
+    object-fit: cover; 
 }
 
 /* Confirmation Modal Styles */

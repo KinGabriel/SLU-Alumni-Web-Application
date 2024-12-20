@@ -559,3 +559,50 @@ header img.slu-logo {
     width: 100%; /* Make sure cards take full width in each column */
     box-sizing: border-box; /* Include padding and border in width calculation */
 }
+
+/* Edit and Delete Icon */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 45px;
+    width: 20px;
+    height: 20px;
+    font-size: 1.5rem;
+    color: #003DA5;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-icon:hover {
+    color: #FEAF00;
+    background-color: #f1f1f1;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 1.5rem;
+    color: #003DA5;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-icon:hover {
+    color: #FEAF00;
+    background-color: #f1f1f1;
+}
