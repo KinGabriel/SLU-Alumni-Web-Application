@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Add an event listener for editing logic
                         editIcon.addEventListener('click', function (event) {
                             event.preventDefault();
-                            console.log(`Editing job: ${item.job_id}`); // Replace with appropriate logic
+                            console.log(`Editing job: ${item.job_id}`); 
                         });
 
                         // Create the Delete Icon link
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Add an event listener for delete logic
                         deleteIcon.addEventListener('click', function (event) {
                             event.preventDefault();
-                            console.log(`Deleting job: ${item.job_id}`); // Replace with appropriate logic
+                            console.log(`Deleting job: ${item.job_id}`); 
                         });
                         
                         jobCard.appendChild(editIcon);
