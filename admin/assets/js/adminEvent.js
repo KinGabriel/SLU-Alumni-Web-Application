@@ -82,8 +82,8 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         const { id,title, description, cover, date, tags } = card;
 
-        const truncatedDescription = description.length > 200 
-        ? description.substring(0, 200) + '...' 
+        const truncatedDescription = description.length > 500 
+        ? description.substring(0, 500) + '...' 
         : description;
 
         const cardElement = document.createElement("div");

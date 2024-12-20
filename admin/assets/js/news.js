@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     description.classList.add('card-text');
                     description.textContent = item.description;
 
-                    const maxLength = 200; 
+                    const maxLength = 500; 
                     const fullDescription = item.description || "";
                     if (fullDescription.length > maxLength) {
                         description.textContent = fullDescription.substring(0, maxLength) + '...';
