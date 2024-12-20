@@ -222,7 +222,7 @@ async function deleteJobOpp(opportunity_id, title) {
 
 function showConfirmationDeleteModal(item) {
     const confirmMessage = document.getElementById('confirmMessage');
-    confirmMessage.textContent = `Are you sure you want to delete this job posted?: ${item.job_title}?`;
+    confirmMessage.textContent = `Are you sure you want to delete this job posted?: ${decodeHtmlEntities(item.job_title)}?`;
 
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
