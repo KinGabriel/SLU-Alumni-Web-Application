@@ -532,3 +532,9 @@ header img.slu-logo {
     border-radius: 5px;
     background-color: #003DA5;
 }
+
+.card-img-top {
+    height: 400px;  
+    width: 100%;     
+    object-fit: cover; 
+}
