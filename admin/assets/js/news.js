@@ -63,11 +63,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     editIcon.href = '#';
                     editIcon.classList.add('edit-icon');
                     editIcon.innerHTML = '<i class="fas fa-edit"></i>'; // Font Awesome edit icon
-                
-                    // Optionally, you can add an event listener for when the edit icon is clicked
+                    // edit icon
                     editIcon.addEventListener('click', function(event) {
                         event.preventDefault();
-                        // Add logic here to handle editing the news item
                         console.log(`Editing item: ${item.news_id}`);
                     });
 
@@ -75,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     deleteIcon.href = '#';
                     deleteIcon.classList.add('delete-icon');
                     deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; 
+                    // delete icon
                     deleteIcon.addEventListener('click', function(event) {
                         event.preventDefault();
                         showConfirmationDeleteModal(item); 
@@ -104,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 });
 
-
+// delete news
 async function deleteNews(news_id, title) {
     console.log("Deleting news:", news_id);
     try {

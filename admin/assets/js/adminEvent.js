@@ -21,6 +21,7 @@ const fetchEventData = async () => {
                 }
 
                 return {
+                    id: event.event_id,
                     title: event.event_title,
                     description: event.event_description,
                     tags: [tag],
@@ -79,7 +80,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         card.tags = [tag]; // Update the tag
 
-        const { title, description, cover, date, tags } = card;
+        const { id,title, description, cover, date, tags } = card;
 
         const truncatedDescription = description.length > 200 
         ? description.substring(0, 200) + '...' 
@@ -91,9 +92,15 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
         cardElement.innerHTML = `
             <div class="card border-0 bg-transparent position-relative">
                 <a href="../view/editevents.php?id=${encodeURIComponent(card.id)}" 
-                    class="edit-icon position-absolute top-0 end-0 p-2 text-dark" 
+                    class="edit-icon position-absolute top-1 start-20 p-1 text-#003DA5" 
                     title="Edit Event">
                     <i class="fas fa-edit"></i>
+                </a>
+
+
+                <a href="#" class="delete-icon  position-absolute top-1 end-0 p-1 text-#003DA5" 
+                    title="Delete Event" onclick="showConfirmationDeleteModal(${card.id}, '${card.title}')">
+                    <i class="fas fas fa-trash"></i>
                 </a>
 
                 <a href="#" class="${cover.length > 1 ? "has-multiple" : ""}">
@@ -126,6 +133,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
     const carouselItems = document.querySelectorAll(".has-multiple");
     carouselItems.forEach(initializeCarousel);
 };
+
 
 const initializeCarousel = (carouselItem) => {
     const images = carouselItem.querySelectorAll("img");
@@ -265,3 +273,63 @@ searchInput.addEventListener("input", (event) => handleSearch(event, 1));
 categoryLinks.forEach((link) =>
     link.addEventListener("click", (event) => handleCategoryClick(event, 1))
 );
+
+
+
+
+async function deleteEvents(event_id, event_title) {
+    console.log("Deleting news:", event_id);
+    try {
+        const response = await fetch(`../controller/processDeleteEvents.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ event_id }), 
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${event_title} deleted successfully.`); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting news:", error);
+        showFeedbackModal("An error occurred while deleting the news.");
+    }
+}
+// delete events
+function showConfirmationDeleteModal(event_id,event_title) {
+    console.log(event_id, event_title)
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete event: ${event_title}?`;
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/declineUser.png"; 
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteEvents(event_id,event_title);
+        closeConfirmationModal();
+        location.reload();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}
