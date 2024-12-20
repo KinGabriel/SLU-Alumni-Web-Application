@@ -112,11 +112,14 @@ async function deleteNews(news_id, title) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ news_id }), 
+            body: JSON.stringify({ news_id }),
         });
         const data = await response.json();
         if (data.success) {
-            showFeedbackModal(`${title} deleted successfully.`); 
+            showFeedbackModal(`${title} deleted successfully.`);
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000); 
         } else {
             const errorMessage = data.error;
             showFeedbackModal(errorMessage);
@@ -134,12 +137,11 @@ function showConfirmationDeleteModal(item) {
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = "../assets/images/delete.png"; 
+    modalImage.src = "../assets/images/declineUser.png";
 
     document.getElementById('confirmYes').onclick = function() {
-        deleteNews(item.news_id,item.title);
+        deleteNews(item.news_id, item.title);
         closeConfirmationModal();
-        location.reload();
     };
 
     document.getElementById('confirmNo').onclick = closeConfirmationModal;
