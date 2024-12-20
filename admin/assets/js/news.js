@@ -134,7 +134,7 @@ function showConfirmationDeleteModal(item) {
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
     const modalImage = document.getElementById('modalImage');
-    modalImage.src = "../assets/images/declineUser.png"; 
+    modalImage.src = "../assets/images/delete.png"; 
 
     document.getElementById('confirmYes').onclick = function() {
         deleteNews(item.news_id,item.title);
