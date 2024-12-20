@@ -59,6 +59,25 @@ a {
   color: #ffffff;
 }
 
+.card img {
+  width: 100%; 
+  height: 400px;  
+  object-fit: cover; 
+  border-radius: 10px;  
+}
+
+.card {
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.card-body {
+  flex: 1;  
+}
+
 .card {
   transition: all 0.2s;
 }
@@ -476,18 +495,19 @@ header img.slu-logo {
 .edit-icon {
   position: absolute;
   top: 12px; /* Adjust for smaller size */
+  margin-right: 18px;
   right: 12px; /* Adjust for smaller size */
-  color: #555; /* Default icon color */
+  color: #003DA5; /* Default icon color */
   font-size: 1rem; /* Smaller icon size */
   background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-  border-radius: 50%; /* Circle background */
+  border-radius: 5px; 
   padding: 3px; /* Reduce padding for smaller icon */
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
   transition: color 0.3s ease; /* Smooth transition for the icon color */
-  z-index: 10; /* Ensure it appears above the image */
+  z-index: 1; /* Ensure it appears above the image */
 }
 
 /* Change icon color on hover */
@@ -496,10 +516,117 @@ header img.slu-logo {
 }
 
 .edit-icon:hover i {
-  color: #003DA5; /* Icon turns blue on hover */
+  color: #FEAF00; /* Icon turns blue on hover */
 }
 .edit-icon:hover {
   background-color: transparent; /* Make background transparent on hover */
 }
 
 
+/* Edit Icon Styling - Smaller */
+.delete-icon {
+  position: absolute;
+  top: 12px; /* Adjust for smaller size */
+  margin-right: 3px;
+  right: 12px; /* Adjust for smaller size */
+  color: #003DA5; /* Default icon color */
+  font-size: 1rem; /* Smaller icon size */
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+  border-radius: 5px; 
+  padding: 3px; /* Reduce padding for smaller icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+  transition: color 0.3s ease; /* Smooth transition for the icon color */
+  z-index: 1; /* Ensure it appears above the image */
+}
+
+/* Change icon color on hover */
+.delete-icon i {
+  transition: color 0.3s ease; /* Smooth color transition for icon */
+}
+
+.delete-icon:hover i {
+  color: #FEAF00; /* Icon turns blue on hover */
+}
+.delete-icon:hover {
+  background-color: transparent; /* Make background transparent on hover */
+}
+
+
+/* Confirmation Modal Styles */
+.confirm-modal, .feedback-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0; 
+  top: 0; 
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.confirm-modal-content,.feedback-modal-content {
+  width: 380px; 
+  max-width: 50%; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  flex-direction: column; 
+  align-items: center; 
+  background-color: #fff; 
+  color: #000; 
+  text-align: center; 
+  border-radius: 20px; 
+  padding: 30px 30px 30px; 
+}
+
+.confirm-modal img, .feedback-modal img {
+  width: 35%;
+  margin-bottom: 15px;
+}
+
+.confirm-modal p,.feedback-modal p  {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.confirm-yes, .confirm-no {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 80px;
+}
+
+.confirm-yes {
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
+ 
+}
+
+.confirm-no {
+  background-color: #f44336; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
+}
+
+#closeFeedback{
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 80px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: #003DA5;
+}

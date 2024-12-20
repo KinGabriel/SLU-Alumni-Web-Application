@@ -24,14 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $types .= 'sss';  
     }
 
-    if (in_array($sort, ['name ASC', 'name DESC', 'year ASC', 'year DESC'])) {
+    if (in_array($sort, ['name ASC', 'name DESC', 'year ASC', 'year DESC','app_id ASC','app_id DESC'])) {
         if ($sort === 'year ASC' || $sort === 'year DESC') {
             $query .= " ORDER BY gradyear " . ($sort === 'year ASC' ? 'ASC' : 'DESC');
-        } else {
+        } else if ($sort === 'name ASC' || $sort === 'name DESC') {
             $query .= " ORDER BY fname " . ($sort === 'name ASC' ? 'ASC' : 'DESC');
-        }
+        } else 
+            $query .= " ORDER BY app_id " . ($sort === 'app_id ASC' ? 'ASC':'DESC');
     } else {
-        $query .= " ORDER BY fname ASC";  
+        $query .= " ORDER BY app_id DESC";  
     }
 
     $db = new dbConnection();

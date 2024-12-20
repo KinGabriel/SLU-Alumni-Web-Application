@@ -63,22 +63,29 @@ document.addEventListener("DOMContentLoaded", function() {
                     editIcon.href = '#';
                     editIcon.classList.add('edit-icon');
                     editIcon.innerHTML = '<i class="fas fa-edit"></i>'; // Font Awesome edit icon
-                
-                    // Optionally, you can add an event listener for when the edit icon is clicked
+                    // edit icon
                     editIcon.addEventListener('click', function(event) {
                         event.preventDefault();
-                        // Add logic here to handle editing the news item
-                        console.log(`Editing item: ${item.title}`);
+                        console.log(`Editing item: ${item.news_id}`);
                     });
-                
+
+                    const deleteIcon = document.createElement('a');
+                    deleteIcon.href = '#';
+                    deleteIcon.classList.add('delete-icon');
+                    deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; 
+                    // delete icon
+                    deleteIcon.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        showConfirmationDeleteModal(item); 
+                    });
                     // Append the elements to the card body
                     cardBody.appendChild(title);
                     cardBody.appendChild(description);
                     cardBody.appendChild(datetime);
                 
-                    // Append the Edit Icon to the card body
+                    // Append the Edit and Delete Icon to the card body
                     cardBody.appendChild(editIcon);
-                
+                    cardBody.appendChild(deleteIcon);
                     // Append the card image and body to the card
                     newsContent.appendChild(img);
                     newsContent.appendChild(cardBody);
@@ -95,3 +102,63 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error fetching news data:', error);
         });
 });
+
+// delete news
+async function deleteNews(news_id, title) {
+    console.log("Deleting news:", news_id);
+    try {
+        const response = await fetch(`../controller/ProcessDeleteNews.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ news_id }),
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${title} deleted successfully.`);
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting news:", error);
+        showFeedbackModal("An error occurred while deleting the news.");
+    }
+}
+
+function showConfirmationDeleteModal(item) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete this news?: ${item.title}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/delete.png";
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteNews(item.news_id, item.title);
+        closeConfirmationModal();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}

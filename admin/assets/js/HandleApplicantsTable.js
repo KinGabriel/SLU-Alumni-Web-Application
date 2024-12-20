@@ -102,7 +102,7 @@ function fetchUserData() {
     const urlParams = new URLSearchParams(window.location.search);
     const queryString = new URLSearchParams({
         search: urlParams.get('search') || '', 
-        sort: urlParams.get('sort') || 'name ASC', 
+        sort: urlParams.get('sort') || 'app_id DESC', 
         page: currentPage,
         limit: usersPerPage
     }).toString();
@@ -149,6 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 queryString.set('sort', 'year DESC');
             } else if (sortType === 'year-oldest') {
                 queryString.set('sort', 'year ASC');
+            } else if (sortType === 'date-newest') {
+                queryString.set('sort', 'app_id DESC');
+            } else if (sortType === 'date-oldest') {
+                queryString.set('sort', 'app_id ASC');
             }
             window.location.search = queryString.toString();
         });

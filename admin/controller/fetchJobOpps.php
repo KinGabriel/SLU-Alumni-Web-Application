@@ -24,12 +24,12 @@ try {
 
     // Build the query based on the selected filter
     if ($filter === 'all') {
-        $query = "SELECT job_title, employment_type, company_name, address, image_data 
+        $query = "SELECT opportunity_id,job_title, employment_type, company_name, address, image_data 
                   FROM opportunity 
                   ORDER BY created_at DESC 
                   LIMIT $itemsPerPage OFFSET $offset";
     } else {
-        $query = "SELECT job_title, employment_type, company_name, address, image_data 
+        $query = "SELECT opportunity_id,job_title, employment_type, company_name, address, image_data 
                   FROM opportunity 
                   WHERE employment_type = '$filter' 
                   ORDER BY created_at DESC 
@@ -44,6 +44,7 @@ try {
     while ($row = $result->fetch_assoc()) {
         $imageData = $row['image_data'] ? base64_encode($row['image_data']) : null;
         $opportunity[] = [
+            'opportunity_id' => $row['opportunity_id'],
             'job_title' => $row['job_title'], 
             'image_data' => $imageData,        
             'employment_type' => htmlspecialchars($row['employment_type'], ENT_QUOTES, 'UTF-8'), 

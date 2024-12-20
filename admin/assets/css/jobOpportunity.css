@@ -559,3 +559,127 @@ header img.slu-logo {
     width: 100%; /* Make sure cards take full width in each column */
     box-sizing: border-box; /* Include padding and border in width calculation */
 }
+
+/* Edit and Delete Icon inside job opp cards */
+.edit-icon {
+    position: absolute;
+    top: 10px;
+    right: 45px;
+    width: 20px;
+    height: 20px;
+    font-size: 1.5rem;
+    color: #003DA5;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-icon:hover {
+    color: #FEAF00;
+    background-color: #f1f1f1;
+}
+
+.delete-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    font-size: 1.5rem;
+    color: #003DA5;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-icon:hover {
+    color: #FEAF00;
+    background-color: #f1f1f1;
+}
+
+
+/* Confirmation Modal Styles */
+.confirm-modal, .feedback-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.confirm-modal-content,.feedback-modal-content {
+    width: 380px; 
+    max-width: 50%; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    flex-direction: column; 
+    align-items: center; 
+    background-color: #fff; 
+    color: #000; 
+    text-align: center; 
+    border-radius: 20px; 
+    padding: 30px 30px 30px; 
+}
+
+.confirm-modal img, .feedback-modal img {
+    width: 35%;
+    margin-bottom: 15px;
+  }
+
+.confirm-modal p,.feedback-modal p  {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.confirm-yes, .confirm-no {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80px;
+}
+
+.confirm-yes {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
+   
+}
+
+.confirm-no {
+    background-color: #f44336; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 6px 18px -5px rgb(8, 7, 7);
+}
+
+#closeFeedback{
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 80px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: #003DA5;
+}

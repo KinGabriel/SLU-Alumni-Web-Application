@@ -6,7 +6,7 @@ let fetchedEvents = [];
 
 const fetchEventData = async () => {
     try {
-        const response = await fetch('../controller/fetchEvents.php'); // Replace with your PHP file path
+        const response = await fetch('../controller/fetchEvents.php'); 
         const result = await response.json();
 
         if (result.status === 'success') {
@@ -21,6 +21,7 @@ const fetchEventData = async () => {
                 }
 
                 return {
+                    id: event.event_id,
                     title: event.event_title,
                     description: event.event_description,
                     tags: [tag],
@@ -79,7 +80,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         card.tags = [tag]; // Update the tag
 
-        const { title, description, cover, date, tags } = card;
+        const { id,title, description, cover, date, tags } = card;
 
         const truncatedDescription = description.length > 200 
         ? description.substring(0, 200) + '...' 
@@ -90,14 +91,28 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         cardElement.innerHTML = `
             <div class="card border-0 bg-transparent position-relative">
-                <a href="#" class="edit-icon position-absolute top-0 end-0 p-2 text-dark">
+                <a href="../view/editevents.php?id=${encodeURIComponent(card.id)}" 
+                    class="edit-icon position-absolute top-1 start-20 p-1 text-#003DA5" 
+                    title="Edit Event">
                     <i class="fas fa-edit"></i>
                 </a>
+
+
+                <a href="#" class="delete-icon  position-absolute top-1 end-0 p-1 text-#003DA5" 
+                    title="Delete Event" onclick="showConfirmationDeleteModal(${card.id}, '${card.title}')">
+                    <i class="fas fas fa-trash"></i>
+                </a>
+
                 <a href="#" class="${cover.length > 1 ? "has-multiple" : ""}">
                     ${cover
                         .map(
                             (image) =>
-                                `<img src="${image}" class="shadow-sm rounded cover-image w-100" alt="${title}">`
+                                `<img 
+                                    src="${image}" 
+                                    class="shadow-sm rounded cover-image w-100" 
+                                    alt="${title}"
+                                    style="width: 100%; height: 100px; object-fit: cover; border-radius: 8px;">
+                                `
                         )
                         .join("")}
                 </a>
@@ -123,6 +138,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
     const carouselItems = document.querySelectorAll(".has-multiple");
     carouselItems.forEach(initializeCarousel);
 };
+
 
 const initializeCarousel = (carouselItem) => {
     const images = carouselItem.querySelectorAll("img");
@@ -262,3 +278,66 @@ searchInput.addEventListener("input", (event) => handleSearch(event, 1));
 categoryLinks.forEach((link) =>
     link.addEventListener("click", (event) => handleCategoryClick(event, 1))
 );
+
+// delete events
+async function deleteEvents(event_id, event_title) {
+    console.log("Deleting event:", event_id);
+    try {
+        const response = await fetch(`../controller/processDeleteEvents.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ event_id }), 
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${event_title} deleted successfully.`);
+           
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting event:", error);
+        showFeedbackModal("An error occurred while deleting the event.");
+    }
+}
+
+// Show confirmation modal for deleting event
+function showConfirmationDeleteModal(event_id, event_title) {
+    console.log(event_id, event_title);
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete this event?: ${event_title}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/delete.png";
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteEvents(event_id, event_title);
+        closeConfirmationModal();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}

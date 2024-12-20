@@ -3,7 +3,7 @@ const jobStatusFilter = document.getElementById('jobStatusFilter');
 const roleFilter = document.getElementById('roleFilter');
 const dropdownContentName = document.getElementById('dropdownContentName');
 const dropdownContentDate = document.getElementById('dropdownContentDate');
-
+const dropdownContentAddedDate = document.getElementById('dropdownContentAddedDate');
 // Filter function
 function filterTable() {
     const jobStatus = jobStatusFilter.value.toLowerCase();

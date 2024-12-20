@@ -20,31 +20,58 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json(); // Try to parse JSON
+                return response.json();
             })
             .then(data => {
                 if (data.status === 'success' && Array.isArray(data.opportunity)) {
                     const opportunities = data.opportunity;
-
-                    // Clear the previous job listings before adding new ones
+    
+                    // Clear the previous job listings
                     jobListContainer.innerHTML = '';
-
+    
                     // Populate the job list
                     opportunities.forEach(item => {
                         const jobItem = document.createElement('div');
                         jobItem.classList.add('col');
                         jobItem.setAttribute('data-type', item.employment_type.toLowerCase());
-
+    
                         const jobCard = document.createElement('div');
-                        jobCard.classList.add('card', 'shadow-sm');
+                        jobCard.classList.add('card', 'shadow-sm', 'position-relative');
+    
+                       // Create the Edit Icon 
+                        const editIcon = document.createElement('a');
+                        editIcon.href = '#';
+                        editIcon.classList.add('edit-icon');
+                        editIcon.innerHTML = '<i class="fas fa-edit"></i>'; 
 
+                        // Add an event listener for editing logic
+                        editIcon.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            console.log(`Editing job: ${item.job_id}`); 
+                        });
+
+                        // Create the Delete Icon 
+                        const deleteIcon = document.createElement('a');
+                        deleteIcon.href = '#';
+                        deleteIcon.classList.add('delete-icon');
+                        deleteIcon.innerHTML = '<i class="fas fa-trash"></i>'; 
+
+                        // Add an event listener for delete logic
+                        deleteIcon.addEventListener('click', function (event) {
+                            event.preventDefault();
+                            showConfirmationDeleteModal(item);
+                        });
+                        
+                        jobCard.appendChild(editIcon);
+                        jobCard.appendChild(deleteIcon);
+    
                         const cardBody = document.createElement('div');
                         cardBody.classList.add('card-body');
-
+    
                         const title = document.createElement('h5');
                         title.classList.add('card-title');
                         title.textContent = item.job_title;
-
+    
                         const employmentTypeBadge = document.createElement('span');
                         employmentTypeBadge.classList.add('badge');
                         if (item.employment_type === 'full-time') {
@@ -55,10 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             employmentTypeBadge.classList.add('bg-info');
                         }
                         employmentTypeBadge.textContent = item.employment_type.toUpperCase();
-
+    
                         const companyInfo = document.createElement('div');
                         companyInfo.classList.add('d-flex', 'align-items-center');
-
+    
                         const companyLogo = document.createElement('img');
                         companyLogo.src = item.image_data
                             ? `data:image/jpeg;base64,${item.image_data}`
@@ -67,26 +94,26 @@ document.addEventListener("DOMContentLoaded", function () {
                         companyLogo.classList.add('me-2');
                         companyLogo.style.width = '40px';
                         companyLogo.style.height = '40px';
-
+    
                         const companyDetails = document.createElement('p');
                         companyDetails.classList.add('mb-0');
                         companyDetails.innerHTML = `${item.company_name}<br><small>@ ${item.address}</small>`;
-
+    
                         companyInfo.appendChild(companyLogo);
                         companyInfo.appendChild(companyDetails);
-
+    
                         cardBody.appendChild(title);
                         cardBody.appendChild(employmentTypeBadge);
                         cardBody.appendChild(companyInfo);
-
+    
                         jobCard.appendChild(cardBody);
                         jobItem.appendChild(jobCard);
-
+    
                         jobListContainer.appendChild(jobItem);
                     });
-
-                    // Update total jobs count and page navigation
-                    totalJobs = opportunities.length; // Number of jobs returned for the current page
+    
+                    // Update pagination
+                    totalJobs = opportunities.length;
                     updatePaginationControls();
                 } else {
                     console.error('Error fetching job opportunities data or invalid response format');
@@ -95,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => {
                 console.error('Error fetching job opportunities data:', error);
             });
-    }
+    }    
 
     // Function to update the pagination controls
     function updatePaginationControls() {
@@ -163,3 +190,64 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+// delete jobOps
+async function deleteJobOpp(opportunity_id, title) {
+    try {
+        const response = await fetch(`../controller/processDeleteJobOps.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ opportunity_id }),
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${title} deleted successfully.`);
+    
+            setTimeout(() => {
+                location.reload(); // Reload after modal is displayed
+            }, 1000);
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting job opportunity:", error);
+        showFeedbackModal("An error occurred while deleting the job opportunity.");
+    }
+}
+
+function showConfirmationDeleteModal(item) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete this job posted?: ${item.job_title}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/delete.png";
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteJobOpp(item.opportunity_id, item.job_title);
+        closeConfirmationModal();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}
