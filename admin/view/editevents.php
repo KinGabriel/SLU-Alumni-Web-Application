@@ -126,7 +126,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
             <div class="form-buttons">
                 <button type="submit" class="save-btn">Save Changes</button>
-                <button type="reset" class="cancel-btn">Cancel</button>
+                <button type="reset" class="cancel-btn" onclick="location.href='../view/adminEvent.php'">Cancel</button>
             </div>
         </form>
     </div>
