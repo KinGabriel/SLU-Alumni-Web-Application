@@ -6,7 +6,7 @@ let fetchedEvents = [];
 
 const fetchEventData = async () => {
     try {
-        const response = await fetch('../controller/fetchEvents.php'); // Replace with your PHP file path
+        const response = await fetch('../controller/fetchEvents.php'); 
         const result = await response.json();
 
         if (result.status === 'success') {

@@ -103,6 +103,25 @@ unset($_SESSION['confirmationMessage'], $_SESSION['formData']);
         </div>
     </div>
 
+      <!-- Confirmation Modal -->
+  <div class="confirm-modal" id="confirmModal">
+    <div class="confirm-modal-content">
+    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
+        <p id="confirmMessage"></p>
+        <button class="confirm-yes" id="confirmYes">Yes</button>
+        <button class="confirm-no" id="confirmNo">No</button>
+    </div>
+</div>
+
+  <!-- feed back Modal -->
+<div id="feedbackModal" class="feedback-modal">
+    <div class="feedback-modal-content">
+    <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
+        <p id="feedbackMessage"></p>
+        <button id="closeFeedback" onclick="closeFeedbackModal()">Close</button>
+    </div>
+</div>
+
     <!-- JavaScript -->
     <script src="../assets/js/news.js"></script>
     <script>
