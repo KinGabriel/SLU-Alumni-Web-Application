@@ -121,6 +121,13 @@ require("../controller/HandleSession.php");
 
 <!-- Sort By Name, Sort by Year -->
 <div class="button-container">
+<div class="dropdown">
+        <button id="dropdownButtonName">Sort By Added Date ▼</button>
+        <div class="dropdown-content" id="dropdownContentAddedDate">
+            <a href="#" class="sort-option" data-sort="date-newest">Newest to Oldest</a>
+            <a href="#" class="sort-option" data-sort="date-oldest">Oldest to Newest</a>
+        </div>
+    </div>
     <div class="dropdown">
         <button id="dropdownButtonName">Sort By Name ▼</button>
         <div class="dropdown-content" id="dropdownContentName">
@@ -130,7 +137,7 @@ require("../controller/HandleSession.php");
     </div>
 
     <div class="dropdown">
-        <button id="dropdownButtonDate">Sort By Year ▼</button>
+        <button id="dropdownButtonDate">Sort By Graduation Year ▼</button>
         <div class="dropdown-content" id="dropdownContentDate">
             <a href="#" class="sort-option" data-sort="year-newest">Newest to Oldest</a>
             <a href="#" class="sort-option" data-sort="year-oldest">Oldest to Newest</a>
