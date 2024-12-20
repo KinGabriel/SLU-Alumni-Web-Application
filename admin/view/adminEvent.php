@@ -135,7 +135,24 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <div class="row row-cols-md-3 gx-3" id="cards-container">
             <!-- Cards will be inserted here via JavaScript -->
         </div>
+            <!-- Confirmation Modal -->
+            <div class="confirm-modal" id="confirmModal">
+                <div class="confirm-modal-content">
+                <img id="modalImage" src="../assets/images/addedUser.png"  alt="Information message" />
+                    <p id="confirmMessage"></p>
+                    <button class="confirm-yes" id="confirmYes">Yes</button>
+                    <button class="confirm-no" id="confirmNo">No</button>
+                </div>
+            </div>
 
+            <!-- feed back Modal -->
+            <div id="feedbackModal" class="feedback-modal">
+                <div class="feedback-modal-content">
+                <img id="modalImage" src="../assets/images/success.png"  alt="Information message" />
+                    <p id="feedbackMessage"></p>
+                    <button id="closeFeedback" onclick="closeFeedbackModal()">Close</button>
+                </div>
+            </div>
                 
             </div>
         </div>
