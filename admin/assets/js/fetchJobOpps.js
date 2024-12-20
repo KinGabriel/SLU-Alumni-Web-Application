@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Add an event listener for delete logic
                         deleteIcon.addEventListener('click', function (event) {
                             event.preventDefault();
-                            console.log(`Deleting job: ${item.job_id}`); 
+                            showConfirmationDeleteModal(item);
                         });
                         
                         jobCard.appendChild(editIcon);
@@ -190,3 +190,59 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+// delete jobOps
+async function deleteNews(opportunity_id, title) {
+    try {
+        const response = await fetch(`../controller/processDeleteJobOps.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ opportunity_id }), 
+        });
+        const data = await response.json();
+        if (data.success) {
+            showFeedbackModal(`${title} deleted successfully.`); 
+        } else {
+            const errorMessage = data.error;
+            showFeedbackModal(errorMessage);
+        }
+    } catch (error) {
+        console.error("Error deleting news:", error);
+        showFeedbackModal("An error occurred while deleting the news.");
+    }
+}
+
+function showConfirmationDeleteModal(item) {
+    const confirmMessage = document.getElementById('confirmMessage');
+    confirmMessage.textContent = `Are you sure you want to delete this job posted?: ${item.job_title}?`;
+
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.style.display = 'flex';
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = "../assets/images/delete.png"; 
+
+    document.getElementById('confirmYes').onclick = function() {
+        deleteNews(item.opportunity_id,item.job_title);
+        closeConfirmationModal();
+        location.reload();
+    };
+
+    document.getElementById('confirmNo').onclick = closeConfirmationModal;
+}
+
+function closeConfirmationModal() {
+    document.getElementById('confirmModal').style.display = 'none';
+}
+
+function showFeedbackModal(message) {
+    const feedbackMessage = document.getElementById('feedbackMessage');
+    feedbackMessage.textContent = message;
+
+    const feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.style.display = 'flex';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').style.display = 'none';
+}

@@ -303,7 +303,7 @@ async function deleteEvents(event_id, event_title) {
 function showConfirmationDeleteModal(event_id,event_title) {
     console.log(event_id, event_title)
     const confirmMessage = document.getElementById('confirmMessage');
-    confirmMessage.textContent = `Are you sure you want to delete event: ${event_title}?`;
+    confirmMessage.textContent = `Are you sure you want to delete this event?: ${event_title}?`;
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
     const modalImage = document.getElementById('modalImage');

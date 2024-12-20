@@ -129,7 +129,7 @@ async function deleteNews(news_id, title) {
 
 function showConfirmationDeleteModal(item) {
     const confirmMessage = document.getElementById('confirmMessage');
-    confirmMessage.textContent = `Are you sure you want to delete news: ${item.title}?`;
+    confirmMessage.textContent = `Are you sure you want to delete this news?: ${item.title}?`;
 
     const confirmModal = document.getElementById('confirmModal');
     confirmModal.style.display = 'flex';
