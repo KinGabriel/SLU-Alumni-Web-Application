@@ -53,7 +53,7 @@ try {
             if ($stmt->execute()) {
                 echo "<script>
                         alert('Job opportunity added successfully!');
-                        window.location.href = '../view/addJobOpp.php'; 
+                        window.location.href = '../view/jobOpportunities.php'; 
                       </script>";
             } else {
                 echo "<script>
