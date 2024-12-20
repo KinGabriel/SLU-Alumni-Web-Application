@@ -69,6 +69,10 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
     const currentDate = new Date();
 
     cardsToRender.forEach((card) => {
+        // Decode HTML entities in the title and description
+        const title = decodeHtmlEntities(card.title);
+        const description = decodeHtmlEntities(card.description);
+
         // Dynamically update the tag based on the date
         const startDate = new Date(card.date);
         const endDate = new Date(card.endDate || card.date);
@@ -80,7 +84,7 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         card.tags = [tag]; // Update the tag
 
-        const { id,title, description, cover, date, tags } = card;
+        const { id, cover, date, tags } = card;
 
         const truncatedDescription = description.length > 500 
         ? description.substring(0, 500) + '...' 
@@ -96,7 +100,6 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
                     title="Edit Event">
                     <i class="fas fa-edit"></i>
                 </a>
-
 
                 <a href="#" class="delete-icon  position-absolute top-1 end-0 p-1 text-#003DA5" 
                     title="Delete Event" onclick="showConfirmationDeleteModal(${card.id}, '${card.title}')">
@@ -138,7 +141,6 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
     const carouselItems = document.querySelectorAll(".has-multiple");
     carouselItems.forEach(initializeCarousel);
 };
-
 
 const initializeCarousel = (carouselItem) => {
     const images = carouselItem.querySelectorAll("img");
@@ -340,4 +342,11 @@ function showFeedbackModal(message) {
 
 function closeFeedbackModal() {
     document.getElementById('feedbackModal').style.display = 'none';
+}
+
+// Function to decode HTML entities like &quot; back to "
+function decodeHtmlEntities(input) {
+    const doc = new DOMParser().parseFromString(input, 'text/html');
+    const decodedString = doc.documentElement.textContent;
+    return decodedString.replace(/\\/g, ''); // Remove all backslashes
 }
