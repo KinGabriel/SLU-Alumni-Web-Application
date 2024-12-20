@@ -208,7 +208,7 @@ h2.form-title, h3.section-title {
 }
 
 .form-group#email input  {
-    width: 15%; 
+    width: 25%; 
 }
 
 .form-group#email label  {
@@ -231,7 +231,7 @@ h2.form-title, h3.section-title {
 }
 
 .form-group#school select {
-    width: 110%; 
+    width: 100%; 
     margin-left: -185px;
 }
 
@@ -242,22 +242,22 @@ h2.form-title, h3.section-title {
 
 .form-group#program select {
     width: 110%; 
-    margin-left: -185px;
+    margin-left: -165px;
 }
 
 .form-group#program label {
     width: 60%; 
-    margin-left: -185px;
+    margin-left: -165px;
 }
 
 .form-group#current-occupation select {
-    width: 50%; 
-    margin-left: -90px;
+    width: 55%; 
+    margin-left: -115px;
 }
 
 .form-group#current-occupation label {
-    width: 50%; 
-    margin-left: -90px;
+    width: 60%; 
+    margin-left: -115px;
 }
 
 .form-group#user-roles select {
