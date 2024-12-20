@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const title = document.createElement('h5');
                         title.classList.add('card-title');
                         title.textContent = item.job_title;
+                        title.textContent = decodeHtmlEntities(item.job_title);
     
                         const employmentTypeBadge = document.createElement('span');
                         employmentTypeBadge.classList.add('badge');
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
                         const companyDetails = document.createElement('p');
                         companyDetails.classList.add('mb-0');
-                        companyDetails.innerHTML = `${item.company_name}<br><small>@ ${item.address}</small>`;
+                        companyDetails.innerHTML = `${decodeHtmlEntities(item.company_name)}<br><small>@ ${decodeHtmlEntities(item.address)}</small>`; // Apply decodeHtmlEntities here                        
     
                         companyInfo.appendChild(companyLogo);
                         companyInfo.appendChild(companyDetails);
@@ -250,4 +251,10 @@ function showFeedbackModal(message) {
 
 function closeFeedbackModal() {
     document.getElementById('feedbackModal').style.display = 'none';
+}
+
+function decodeHtmlEntities(input) {
+    const doc = new DOMParser().parseFromString(input, 'text/html');
+    const decodedString = doc.documentElement.textContent;
+    return decodedString.replace(/\\/g, ''); // Remove all backslashes
 }
