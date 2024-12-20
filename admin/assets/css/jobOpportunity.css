@@ -560,7 +560,7 @@ header img.slu-logo {
     box-sizing: border-box; /* Include padding and border in width calculation */
 }
 
-/* Edit and Delete Icon */
+/* Edit and Delete Icon inside job opp cards */
 .edit-icon {
     position: absolute;
     top: 10px;

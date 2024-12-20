@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const jobCard = document.createElement('div');
                         jobCard.classList.add('card', 'shadow-sm', 'position-relative');
     
-                       // Create the Edit Icon link
+                       // Create the Edit Icon 
                         const editIcon = document.createElement('a');
                         editIcon.href = '#';
                         editIcon.classList.add('edit-icon');
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             console.log(`Editing job: ${item.job_id}`); 
                         });
 
-                        // Create the Delete Icon link
+                        // Create the Delete Icon 
                         const deleteIcon = document.createElement('a');
                         deleteIcon.href = '#';
                         deleteIcon.classList.add('delete-icon');
