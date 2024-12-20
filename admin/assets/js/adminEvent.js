@@ -90,9 +90,12 @@ const renderCards = (cardsContainer, cards, page = 1, cardsPerPage = 6) => {
 
         cardElement.innerHTML = `
             <div class="card border-0 bg-transparent position-relative">
-                <a href="#" class="edit-icon position-absolute top-0 end-0 p-2 text-dark">
+                <a href="../view/editevents.php?id=${encodeURIComponent(card.id)}" 
+                    class="edit-icon position-absolute top-0 end-0 p-2 text-dark" 
+                    title="Edit Event">
                     <i class="fas fa-edit"></i>
                 </a>
+
                 <a href="#" class="${cover.length > 1 ? "has-multiple" : ""}">
                     ${cover
                         .map(
